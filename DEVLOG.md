@@ -67,3 +67,21 @@ The project now follows a scalable architecture similar to a production React Na
 Next Lesson
 
 Build the application's theme and first navigation flow.
+
+## Lesson 4 – Design System
+
+Completed:
+
+- Created centralized color palette
+- Created spacing system
+- Created typography system
+- Created border radius constants
+- Created shadow presets
+- Created global theme exports
+- Created application configuration
+- Created route constants
+
+Result:
+
+The application now has a complete Design System.
+Future screens will use reusable styling instead of hardcoded values.
