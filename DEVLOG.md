@@ -1,87 +1,309 @@
-\---
+# Shopper Assistant Development Log
 
-# ShopperAssistant Development Log
+## Project Setup
+- Created Expo project
+- Configured Android SDK
+- Created Development Build
+- Connected physical Android device
+- Fixed Metro/Babel issues
+- Verified React Navigation
 
-## Lesson 1 - Environment Setup
+---
 
-Date:
-(Enter today's date)
+## Milestone 1 - Project Structure
 
-Completed:
-- Installed Node.js v24.16.0
-- Installed npm 11.13.0
-- Installed Git 2.54.0
-- Verified Java OpenJDK 17
-- Verified Android SDK
-- Connected Android device through ADB
-- Created project workspace
-- Created DEVLOG.md
+### Completed
+- Organized project folders
+- Created modular architecture
+- Added navigation structure
+- Added reusable components folders
+- Added theme system folders
 
-Next Goal:
-Initialize the React Native project and run the first development build.
+---
 
-# Lesson 2 - Project Initialization
+## Milestone 2 - Development Environment
 
+### Completed
+- Configured Expo Dev Client
+- Configured VS Code
+- Initialized Git repository
+- Established development workflow
 
+---
 
-Completed:
+## Milestone 3 - Navigation Foundation
 
+### Completed
+- Configured NavigationContainer
+- Configured Native Stack Navigation
+- Created Splash Screen
+- Created Home Screen
+- Created Store Selection Screen
 
+---
 
-\- Created Expo TypeScript project
+## Milestone 4 - Theme System
 
-\- Generated Android native project (prebuild)
+### Completed
+- Created Colors theme
+- Created Typography theme
+- Created Spacing theme
+- Created reusable Screen component
+- Created reusable PrimaryButton component
 
-\- Installed expo-dev-client
+---
 
-\- Successfully built Development Client
+## Milestone 5 - Store Selection UI
 
-\- Verified Fast Refresh
+### Completed
+- Created reusable Header component
+- Created reusable SearchBar component
+- Created reusable StoreGrid component
+- Converted Store Selection into a responsive 3-column grid
+- Added real-time search functionality
+- Added selected store display
+- Added multiple supported stores
+- Added store logos
 
-\- Initialized Git repository
+---
 
+## Milestone 6 - Global Store Selection
 
+### Completed
+- Created Zustand store for selected store
+- Connected Store Selection to Zustand
+- Home Screen now reflects selected store
+- Removed unnecessary navigation parameters
 
-Next Goal:
+---
 
+## Milestone 7 - Database Architecture
 
+### Completed
+- Installed expo-sqlite
+- Created database folder structure
+- Created schema, seed and database initialization
+- Created entities
+- Created repositories
+- Designed normalized database schema
 
-Create the project's architecture and folder structure.
+---
 
-## Lesson 3 — Project Architecture
+## Milestone 8 - SQLite Schema
 
-Completed
+### Completed
+- Created normalized SQLite database
+- Added foreign key relationships
+- Added indexes
+- Seeded default stores
+- Automatic database initialization
+- Added SRP column
+- Added StorePrices table
+- Added PriceHistory table
 
-- Installed React Navigation
-- Created application folder structure
-- Created navigation module
-- Created theme module
-- Created screen modules
-- Created reusable component folders
-- Prepared database architecture
+---
 
-Result
+## Milestone 9 - Repository Pattern
 
-The project now follows a scalable architecture similar to a production React Native application.
+### Completed
+- ProductRepository
+- StoreRepository
+- TransactionRepository
+- StorePriceRepository
+- Repository architecture established
 
-Next Lesson
+---
 
-Build the application's theme and first navigation flow.
+## Milestone 10 - Service Layer
 
-## Lesson 4 – Design System
+### Completed
+- ProductService
+- ShoppingService
+- TransactionService
+- ShoppingListService
+- StorePriceService
+- Business logic separated from UI
 
-Completed:
+---
 
-- Created centralized color palette
-- Created spacing system
-- Created typography system
-- Created border radius constants
-- Created shadow presets
-- Created global theme exports
-- Created application configuration
-- Created route constants
+## Milestone 11 - Shopping Cart
 
-Result:
+### Completed
+- Global cart using Zustand
+- CartItem model
+- Quantity management
+- Automatic duplicate merging
+- Subtotal calculation
+- Total calculation
+- Cart search
+- Cancel shopping confirmation
+- Checkout confirmation
+- Store price integration
 
-The application now has a complete Design System.
-Future screens will use reusable styling instead of hardcoded values.
+---
+
+## Milestone 12 - Product Module
+
+### Completed
+- Product entity
+- SQLite integration
+- ProductRepository CRUD
+- ProductService
+- Products Screen
+- Product navigation
+
+---
+
+## Milestone 13 - Product Management
+
+### Completed
+- Floating Action Button
+- Product search
+- Product filtering
+- Brand dropdown
+- Category dropdown
+- Product creation
+- Product editing
+- Product deletion
+- Form validation
+- Scrollable Product Form
+- Automatic Title Case formatting
+- Measurement and Unit support
+- SRP support
+- Store Price support
+- Edit Product improvements
+
+---
+
+## Milestone 14 - Product Table Improvements
+
+### Completed
+- Redesigned Products table
+- Category displayed below product name
+- Barcode moved below category
+- Added SRP column
+- Added Store Price column
+- Removed Price column
+- Improved Edit/Delete layout
+- Store price displayed according to selected shopping store
+
+---
+
+## Milestone 15 - Scanner Workflow
+
+### Completed
+- Barcode scanning
+- Scanner delay for improved accuracy
+- Flashlight (Torch) support
+- Unknown barcode detection
+- Scanner reset on exit
+- Scanner back navigation
+- Continue Scanning workflow
+- Scanner confirmation banner
+- Direct Add-to-Cart workflow
+- Removed separate Manual Entry workflow
+
+---
+
+## Milestone 16 - Product Registration from Scanner
+
+### Completed
+- Unknown barcode automatically opens Product Form
+- Barcode automatically populated
+- Quantity selector added
+- Product automatically added to cart after saving
+- Returns directly to Scanner
+- Continue shopping workflow
+- Store price support during registration
+
+---
+
+## Milestone 17 - Home Dashboard
+
+### Completed
+- Persistent App Header
+- Selected store display
+- Scan Now workflow
+- Cart summary
+- Search inside cart
+- Live totals
+- Store-specific pricing
+- Confirm shopping
+- Cancel shopping
+
+---
+
+## Milestone 18 - Store Price Management
+
+### Completed
+- Store Price editing
+- Bulk Edit mode
+- Bulk Save mode
+- Editable Store Price column
+- Peso prefix
+- Validation for invalid prices
+- Success notification
+- Error notification
+- Automatic success message dismissal
+- Store Price synchronization
+- Product list Store Price display
+- Cart Store Price integration
+
+---
+
+## Milestone 19 - Store Module
+
+### Completed
+- Removed Scanner from Drawer
+- Added Stores screen
+- Store listing
+- Store search
+- Store logos
+- Store Details screen
+- Store Prices List
+- Product selection
+- Selected row highlighting
+- Store comparison panel
+- Selected Shopping Store display
+- Viewed Store display
+- Product price comparison
+- Price difference indicators
+- Pagination (20 products per page)
+- Full-screen scrolling layout
+- Bulk Store Price editing
+- Previous/Next page navigation
+
+---
+
+## Upcoming Milestones
+
+### Milestone 20 - Analytics Dashboard
+- Cart comparison across stores
+- Cheapest store computation
+- Savings computation
+- Most expensive items
+- Price trends
+- Shopping analytics
+
+### Milestone 21 - Shopping Lists
+- Multiple shopping lists
+- Shopping list management
+- Quick add to cart
+
+### Milestone 22 - Transaction History
+- Checkout persistence
+- Purchase history
+- Receipt details
+
+### Milestone 23 - SRP Synchronization
+- Internet connectivity detection
+- Automatic SRP updates
+- Offline caching
+- Version checking
+- Manual sync option
+
+### Milestone 24 - Receipt & OCR
+- Receipt scanning
+- OCR extraction
+- Price verification
+- Automatic Store Price updates

@@ -1,0 +1,196 @@
+import { database } from "./database";
+
+export function createTables() {
+  database.execSync(`
+    PRAGMA foreign_keys = ON;
+
+    ----------------------------------------------------
+    -- STORES
+    ----------------------------------------------------
+
+    CREATE TABLE IF NOT EXISTS Stores (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      name TEXT NOT NULL,
+      shortName TEXT,
+      category TEXT,
+      logo TEXT
+    );
+
+    ----------------------------------------------------
+    -- PRODUCTS
+    ----------------------------------------------------
+
+    CREATE TABLE IF NOT EXISTS Products (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      barcode TEXT UNIQUE NOT NULL,
+      name TEXT NOT NULL,
+      brand TEXT,
+      category TEXT,
+      measurement REAL,
+      unit TEXT,
+      srp REAL,
+      createdAt TEXT DEFAULT CURRENT_TIMESTAMP
+    );
+
+    ----------------------------------------------------
+    -- STORE PRICES
+    ----------------------------------------------------
+
+    CREATE TABLE IF NOT EXISTS StorePrices (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      storeId INTEGER NOT NULL,
+      productId INTEGER NOT NULL,
+      price REAL NOT NULL,
+      lastUpdated TEXT DEFAULT CURRENT_TIMESTAMP,
+
+      FOREIGN KEY(storeId)
+        REFERENCES Stores(id),
+
+      FOREIGN KEY(productId)
+        REFERENCES Products(id)
+    );
+
+    ----------------------------------------------------
+    -- TRANSACTIONS
+    ----------------------------------------------------
+
+    CREATE TABLE IF NOT EXISTS Transactions (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      storeId INTEGER NOT NULL,
+      paymentMethod TEXT,
+      total REAL,
+      createdAt TEXT DEFAULT CURRENT_TIMESTAMP,
+
+      FOREIGN KEY(storeId)
+        REFERENCES Stores(id)
+    );
+
+    ----------------------------------------------------
+    -- TRANSACTION ITEMS
+    ----------------------------------------------------
+
+    CREATE TABLE IF NOT EXISTS TransactionItems (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      transactionId INTEGER NOT NULL,
+      productId INTEGER NOT NULL,
+      quantity INTEGER NOT NULL,
+      price REAL NOT NULL,
+
+      FOREIGN KEY(transactionId)
+        REFERENCES Transactions(id),
+
+      FOREIGN KEY(productId)
+        REFERENCES Products(id)
+    );
+
+    ----------------------------------------------------
+    -- SHOPPING LISTS
+    ----------------------------------------------------
+
+    CREATE TABLE IF NOT EXISTS ShoppingLists (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      name TEXT NOT NULL,
+      createdAt TEXT DEFAULT CURRENT_TIMESTAMP
+    );
+
+    ----------------------------------------------------
+    -- SHOPPING LIST ITEMS
+    ----------------------------------------------------
+
+    CREATE TABLE IF NOT EXISTS ShoppingListItems (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      shoppingListId INTEGER NOT NULL,
+      productId INTEGER,
+      itemName TEXT,
+      quantity INTEGER DEFAULT 1,
+      checked INTEGER DEFAULT 0,
+
+      FOREIGN KEY(shoppingListId)
+        REFERENCES ShoppingLists(id),
+
+      FOREIGN KEY(productId)
+        REFERENCES Products(id)
+    );
+
+    ----------------------------------------------------
+    -- PRICE HISTORY
+    ----------------------------------------------------
+
+    CREATE TABLE IF NOT EXISTS PriceHistory (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      storeId INTEGER NOT NULL,
+      productId INTEGER NOT NULL,
+      price REAL NOT NULL,
+      recordedAt TEXT DEFAULT CURRENT_TIMESTAMP,
+
+      FOREIGN KEY(storeId)
+        REFERENCES Stores(id),
+
+      FOREIGN KEY(productId)
+        REFERENCES Products(id)
+    );
+
+    ----------------------------------------------------
+    -- INDEXES
+    ----------------------------------------------------
+
+    CREATE INDEX IF NOT EXISTS idx_products_barcode
+    ON Products(barcode);
+
+    CREATE INDEX IF NOT EXISTS idx_storeprices_store
+    ON StorePrices(storeId);
+
+    CREATE INDEX IF NOT EXISTS idx_storeprices_product
+    ON StorePrices(productId);
+
+    CREATE UNIQUE INDEX IF NOT EXISTS idx_storeprices_unique
+    ON StorePrices(storeId, productId);
+
+    CREATE INDEX IF NOT EXISTS idx_transactions_date
+    ON Transactions(createdAt);
+
+    CREATE INDEX IF NOT EXISTS idx_pricehistory_product
+    ON PriceHistory(productId);
+  `);
+
+  const productColumns =
+    database.getAllSync<{ name: string }>(
+      "PRAGMA table_info(Products);"
+    );
+
+  const hasMeasurementColumn =
+    productColumns.some(
+      column => column.name === "measurement"
+    );
+
+  if (!hasMeasurementColumn) {
+    database.execSync(`
+      ALTER TABLE Products
+      ADD COLUMN measurement REAL DEFAULT 1;
+    `);
+
+    console.log(
+      "✅ Added measurement column."
+    );
+  }
+
+  const hasSrpColumn =
+    productColumns.some(
+      column => column.name === "srp"
+    );
+
+  if (!hasSrpColumn) {
+    database.execSync(`
+      ALTER TABLE Products
+      ADD COLUMN srp REAL;
+    `);
+
+    console.log(
+      "✅ Added SRP column."
+    );
+  }
+
+  console.log(
+    "✅ Database schema created."
+  );
+}

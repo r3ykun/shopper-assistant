@@ -2,16 +2,31 @@ import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 import SplashScreen from "../screens/Splash/SplashScreen";
-import ShoppingSessionScreen from "../screens/ShoppingSession/ShoppingSessionScreen";
-import HomeScreen from "../screens/Home/HomeScreen";
-
+import StoreSelectionScreen from "../screens/StoreSelection/StoreSelectionScreen";
+import ProductFormScreen from "../screens/Products/ProductFormScreen";
+import StoreDetailsScreen from "../screens/Stores/StoreDetailsScreen";
+import MainDrawer from "./MainDrawer";
+import ScannerScreen from "../screens/Scanner";
+  
 export type RootStackParamList = {
   Splash: undefined;
-  ShoppingSession: undefined;
-  Home: undefined;
-};
+  StoreSelection: undefined;
+  MainDrawer: undefined;
+  ProductForm:
+    | {
+        productId?: number;
+        barcode?: string;
+        addToCart?: boolean;
+      }
+    | undefined;
+  Scanner: undefined;
+  StoreDetails: {
+    storeId: number;
+  };
+}; 
 
-const Stack = createNativeStackNavigator<RootStackParamList>();
+const Stack =
+  createNativeStackNavigator<RootStackParamList>();
 
 export default function RootStack() {
   return (
@@ -27,13 +42,28 @@ export default function RootStack() {
       />
 
       <Stack.Screen
-        name="ShoppingSession"
-        component={ShoppingSessionScreen}
+        name="StoreSelection"
+        component={StoreSelectionScreen}
       />
 
       <Stack.Screen
-        name="Home"
-        component={HomeScreen}
+        name="MainDrawer"
+        component={MainDrawer}
+      />
+
+      <Stack.Screen
+        name="ProductForm"
+        component={ProductFormScreen}
+      />
+
+      <Stack.Screen
+        name="Scanner"
+        component={ScannerScreen}
+      />
+
+      <Stack.Screen
+        name="StoreDetails"
+        component={StoreDetailsScreen}
       />
     </Stack.Navigator>
   );

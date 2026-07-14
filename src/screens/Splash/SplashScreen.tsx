@@ -1,12 +1,7 @@
 import React, { useEffect } from "react";
 import { View, Text } from "react-native";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
-
-type RootStackParamList = {
-  Splash: undefined;
-  ShoppingSession: undefined;
-  Home: undefined;
-};
+import { RootStackParamList } from "../../navigation/RootStack";
 
 type Props = NativeStackScreenProps<
   RootStackParamList,
@@ -16,13 +11,13 @@ type Props = NativeStackScreenProps<
 export default function SplashScreen({
   navigation,
 }: Props) {
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      navigation.replace("ShoppingSession");
-    }, 2000);
+useEffect(() => {
+  const timer = setTimeout(() => {
+    navigation.replace("StoreSelection");
+  }, 2000);
 
-    return () => clearTimeout(timer);
-  }, [navigation]);
+  return () => clearTimeout(timer);
+}, [navigation]);
 
   return (
     <View

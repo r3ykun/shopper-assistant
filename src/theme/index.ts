@@ -1,5 +1,3 @@
-export * from "./colors";
-export * from "./spacing";
-export * from "./typography";
-export * from "./radius";
-export * from "./shadow";
+export { default as Colors } from "./colors";
+export { default as Spacing } from "./spacing";
+export { default as Typography } from "./typography";
