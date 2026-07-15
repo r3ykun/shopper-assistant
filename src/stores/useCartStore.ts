@@ -83,36 +83,37 @@ create<CartStore>((set, get) => ({
   },
 
   updateQuantity(productId, quantity) {
+    const validatedQuantity =
+      Math.max(1, Math.floor(quantity));
 
-    const items =
-      [...get().items];
-
-    const product =
-      items.find(
-        p =>
-          p.productId === productId
-      );
-
-    if (!product)
-      return;
-
-    product.quantity = quantity;
-
-    product.subtotal =
-      quantity * product.price;
-
-    set({ items });
-
-  },
-
-  updatePrice(productId, price) {
     set({
       items: get().items.map(item =>
         item.productId === productId
           ? {
               ...item,
-              price,
-              subtotal: item.quantity * price,
+              quantity: validatedQuantity,
+              subtotal:
+                validatedQuantity *
+                item.price,
+            }
+          : item
+      ),
+    });
+  },
+
+  updatePrice(productId, price) {
+    const validatedPrice =
+      Math.max(0, price);
+
+    set({
+      items: get().items.map(item =>
+        item.productId === productId
+          ? {
+              ...item,
+              price: validatedPrice,
+              subtotal:
+                item.quantity *
+                validatedPrice,
             }
           : item
       ),

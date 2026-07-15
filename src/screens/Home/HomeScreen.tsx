@@ -18,6 +18,7 @@ import Screen from "../../components/layout/Screen";
 import {
   useCartStore,
   useStoreStore,
+  useShoppingListStore,
 } from "../../stores";
 
 import {
@@ -35,6 +36,11 @@ export default function HomeScreen() {
 
   const { selectedStore } =
     useStoreStore();
+
+  const clearActiveList =
+    useShoppingListStore(
+      state => state.clearActiveList
+    );
 
   const {
     items,
@@ -78,7 +84,10 @@ export default function HomeScreen() {
         {
           text: "Clear Cart",
           style: "destructive",
-          onPress: clearCart,
+          onPress: () => {
+            clearCart();
+            clearActiveList();
+          },
         },
       ]
     );

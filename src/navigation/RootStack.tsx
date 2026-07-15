@@ -5,13 +5,23 @@ import SplashScreen from "../screens/Splash/SplashScreen";
 import StoreSelectionScreen from "../screens/StoreSelection/StoreSelectionScreen";
 import ProductFormScreen from "../screens/Products/ProductFormScreen";
 import StoreDetailsScreen from "../screens/Stores/StoreDetailsScreen";
-import MainDrawer from "./MainDrawer";
+import MainDrawer, { DrawerParamList } from "./MainDrawer";
+import type {
+  NavigatorScreenParams,
+} from "@react-navigation/native";
 import ScannerScreen from "../screens/Scanner";
-  
+import { ShoppingListDetailsScreen } from "../screens/ShoppingList";  
 export type RootStackParamList = {
+  Home: undefined;
   Splash: undefined;
   StoreSelection: undefined;
-  MainDrawer: undefined;
+  MainDrawer:
+    NavigatorScreenParams<
+    DrawerParamList
+    >;
+  ShoppingListDetails: {
+    shoppingListId: number;
+  };
   ProductForm:
     | {
         productId?: number;
@@ -59,6 +69,11 @@ export default function RootStack() {
       <Stack.Screen
         name="Scanner"
         component={ScannerScreen}
+      />
+
+      <Stack.Screen
+        name="ShoppingListDetails"
+        component={ShoppingListDetailsScreen}
       />
 
       <Stack.Screen

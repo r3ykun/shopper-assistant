@@ -273,10 +273,6 @@
 - Bulk Store Price editing
 - Previous/Next page navigation
 
----
-
-## Upcoming Milestones
-
 ### Milestone 20 - Analytics Dashboard
 - Cart comparison across stores
 - Cheapest store computation
@@ -284,6 +280,10 @@
 - Most expensive items
 - Price trends
 - Shopping analytics
+
+---
+
+## Upcoming Milestones
 
 ### Milestone 21 - Shopping Lists
 - Multiple shopping lists

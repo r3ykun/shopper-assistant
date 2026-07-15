@@ -18,6 +18,7 @@ import PrimaryButton from "../../components/buttons/PrimaryButton";
 import {
   ProductService,
   StorePriceService,
+  ShoppingListService,
 } from "../../services";
 import {
   Colors,
@@ -35,6 +36,7 @@ import {
   useCartStore,
   useStoreStore,
   useScannerFeedbackStore,
+  useShoppingListStore,
  } from "../../stores";
 import QuantitySelector from "../../components/forms/QuantitySelector";
 import AppHeader from "../../components/layout/AppHeader";
@@ -74,6 +76,10 @@ export default function ProductFormScreen() {
     const navigation = useNavigation<NavigationProp<RootStackParamList>>();
     const { selectedStore } =
       useStoreStore();
+    const activeListId =
+      useShoppingListStore(
+        state => state.activeListId
+      );
     const productId =
       route.params?.productId;
     const scannedBarcode =
@@ -372,19 +378,30 @@ export default function ProductFormScreen() {
         productId: savedProduct.id,
         barcode: savedProduct.barcode,
         name: savedProduct.name,
+        brand: savedProduct.brand ?? "",
         category:
           savedProduct.category ??
           "Uncategorized",
         unit: savedProduct.unit,
+        srp: savedProduct.srp ?? 0,
         price: savedStorePrice,
         quantity: selectedQuantity,
         subtotal:
-          savedStorePrice *
-          selectedQuantity,
+          savedStorePrice * selectedQuantity,
       });
 
+      const shoppingListUpdated =
+        activeListId !== null
+          ? ShoppingListService.checkProduct(
+              activeListId,
+              savedProduct.id
+            )
+          : false;
+
       showScannerSuccess(
-        `${savedProduct.name} ×${selectedQuantity} added to cart.`
+        shoppingListUpdated
+          ? `${savedProduct.name} ×${selectedQuantity} added to cart. Shopping list updated.`
+          : `${savedProduct.name} ×${selectedQuantity} added to cart.`
       );
 
       navigation.goBack();
@@ -421,7 +438,8 @@ export default function ProductFormScreen() {
             return;
           }
 
-          navigation.navigate("MainDrawer");
+          navigation.navigate("MainDrawer",{screen: "Home",}
+      );
         }}
       />
         <ScrollView

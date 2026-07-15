@@ -15,7 +15,7 @@ import {
 } from "expo-camera";
 
 import PrimaryButton from "../../components/buttons/PrimaryButton";
-import { ProductService, StorePriceService } from "../../services";
+import { ProductService, StorePriceService, ShoppingListService } from "../../services";
 import {
   RouteProp,
   useFocusEffect,
@@ -31,7 +31,8 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { 
   useCartStore, 
   useStoreStore,
-  useScannerFeedbackStore } from "../../stores";
+  useScannerFeedbackStore,
+  useShoppingListStore } from "../../stores";
 import QuantitySelector from "../../components/forms/QuantitySelector";
 
 export default function ScannerScreen() {
@@ -41,6 +42,11 @@ export default function ScannerScreen() {
 
   const addItem = useCartStore(
     state => state.addItem
+  );
+
+  const activeListId =
+    useShoppingListStore(
+      state => state.activeListId
   );
 
   const [scanned, setScanned] =
@@ -337,24 +343,36 @@ export default function ScannerScreen() {
 
     const price = storePrice;
 
-    addItem({
-      productId: product.id,
-      barcode: product.barcode,
-      name: product.name,
-      category:
-        product.category ??
-        "Uncategorized",
-      unit: product.unit,
-      price,
-      quantity: selectedQuantity,
-      subtotal:
-        price * selectedQuantity,
-    });
+  addItem({
+    productId: product.id,
+    barcode: product.barcode,
+    name: product.name,
+    brand: product.brand ?? "",
+    category:
+      product.category ??
+      "Uncategorized",
+    unit: product.unit,
+    srp: product.srp ?? 0,
+    price,
+    quantity: selectedQuantity,
+    subtotal:
+      price * selectedQuantity,
+  });
+
+  const shoppingListUpdated =
+    activeListId !== null
+      ? ShoppingListService.checkProduct(
+          activeListId,
+          product.id
+        )
+      : false;
 
   setCartMessageType("success");
 
   setCartMessage(
-    `${product.name} ×${selectedQuantity} added to cart.`
+    shoppingListUpdated
+      ? `${product.name} ×${selectedQuantity} added to cart. Shopping list updated.`
+      : `${product.name} ×${selectedQuantity} added to cart.`
   );
 
     setTimeout(() => {
