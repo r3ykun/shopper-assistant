@@ -46,13 +46,13 @@ import {
  } from "../../stores";
 import {
   PRODUCT_UNIT_DROPDOWN_ITEMS,
-  type ProductUnit,
 } from "../../constants/units";
 import {
   getSubcategoryMetadata,
 } from "../../constants/subcategoryMetadata";
 import {
   detectProductCategory,
+  type DetectedProductCategory,
 } from "../../utils/detectProductCategory";
 import QuantitySelector from "../../components/forms/QuantitySelector";
 import AppHeader from "../../components/layout/AppHeader";
@@ -71,10 +71,14 @@ function toTitleCase(value: string) {
     );
 }
 
-export default function ProductFormScreen() {
-    console.log("Metadata:", getSubcategoryMetadata);
-    console.log("Units:", PRODUCT_UNIT_DROPDOWN_ITEMS);
+function normalizeProductName(value: string) {
+  return value
+    .trim()
+    .toLowerCase()
+    .replace(/\s+/g, " ");
+}
 
+export default function ProductFormScreen() {
     const [barcode, setBarcode] = useState("");
     const [name, setName] = useState("");
     const [brand, setBrand] = useState("");
@@ -93,14 +97,27 @@ export default function ProductFormScreen() {
     const [nameError, setNameError] = useState("");
     const [successMessage, setSuccessMessage] = useState("");
     const [
-      categoryManuallySelected,
-      setCategoryManuallySelected,
-    ] = useState(false);
+      detection,
+      setDetection,
+    ] = useState<
+      DetectedProductCategory | null
+    >(null);
     const detectionTimeoutRef =
       useRef<
         ReturnType<typeof setTimeout> | null
       >(null);
-    const manuallyCategorizedNameRef =
+    const [categoryLocked, setCategoryLocked] =
+      useState(false);
+    const [subcategoryLocked, setSubcategoryLocked] =
+      useState(false);
+    const [unitLocked, setUnitLocked] =
+      useState(false);
+
+    useEffect(() => {
+      console.log("Detection state:", detection);
+    }, [detection]);
+
+    const manuallyEditedNameRef =
       useRef<string | null>(null);
     const route =
       useRoute<RouteProp<
@@ -114,44 +131,24 @@ export default function ProductFormScreen() {
     const subcategoryUnitMetadata =
       getSubcategoryMetadata(subcategory);
 
-    const recommendedUnits =
+    const commonUnits =
       subcategoryUnitMetadata?.commonUnits ?? [];
 
-    const recommendedUnitSet =
-      new Set<ProductUnit>(
-        recommendedUnits
-      );
-
-    const recommendedUnitItems =
-      recommendedUnits
-        .map(unitName =>
-          PRODUCT_UNIT_DROPDOWN_ITEMS.find(
-            item => item.value === unitName
-          )
-        )
-        .filter(
-          (
-            item
-          ): item is typeof PRODUCT_UNIT_DROPDOWN_ITEMS[number] =>
-            Boolean(item)
-        )
-        .map(item => ({
-          ...item,
-          section: "Recommended",
-        }));
-
-    const remainingUnitItems =
-      PRODUCT_UNIT_DROPDOWN_ITEMS.filter(
-        item =>
-          !recommendedUnitSet.has(
-            item.value as ProductUnit
-          )
-      );
-
-    const unitDropdownItems = [
-      ...recommendedUnitItems,
-      ...remainingUnitItems,
-    ];
+    const unitDropdownItems =
+      commonUnits.length > 0
+        ? commonUnits
+            .map(unitName =>
+              PRODUCT_UNIT_DROPDOWN_ITEMS.find(
+                item => item.value === unitName
+              )
+            )
+            .filter(
+              (
+                item
+              ): item is typeof PRODUCT_UNIT_DROPDOWN_ITEMS[number] =>
+                Boolean(item)
+            )
+        : PRODUCT_UNIT_DROPDOWN_ITEMS;
     const productId =
       route.params?.productId;
     const scannedBarcode =
@@ -200,19 +197,25 @@ export default function ProductFormScreen() {
     ] = useState<OpenDropdown>(null);
 
   useEffect(() => {
-    if (!subcategory) {
-      return;
-    }
-
     const metadata =
       getSubcategoryMetadata(subcategory);
 
-    if (!metadata?.defaultUnit) {
+    if (!subcategory || unitLocked) {
       return;
     }
 
-    setUnit(metadata.defaultUnit);
-  }, [subcategory]);
+    if (metadata?.defaultUnit) {
+      setUnit(metadata.defaultUnit);
+      return;
+    }
+
+    const firstCommonUnit =
+      metadata?.commonUnits?.[0];
+
+    if (firstCommonUnit) {
+      setUnit(firstCommonUnit);
+    }
+  }, [subcategory, unitLocked]);
 
   useEffect(() => {
     return () => {
@@ -248,8 +251,11 @@ export default function ProductFormScreen() {
           ]?.[0] ??
           ""
       );
-      setCategoryManuallySelected(false);
-      manuallyCategorizedNameRef.current = null;
+      setCategoryLocked(true);
+      setSubcategoryLocked(true);
+      setUnitLocked(true);
+      manuallyEditedNameRef.current =
+        normalizeProductName(name);      
       setMeasurement(
         existingProduct.measurement?.toString() ??
           "1"
@@ -305,8 +311,12 @@ export default function ProductFormScreen() {
         ]?.[0] ??
         ""
     );
-    setCategoryManuallySelected(false);
-    manuallyCategorizedNameRef.current = null;
+    setDetection(null);
+    setCategoryLocked(true);
+    setSubcategoryLocked(true);
+    setUnitLocked(true);
+    manuallyEditedNameRef.current =
+      normalizeProductName(name); 
     setMeasurement(
       existingProduct.measurement?.toString() ??
         "1"
@@ -335,8 +345,11 @@ export default function ProductFormScreen() {
             PRODUCT_CATEGORIES[0]
           ]?.[0] ?? ""
         );
-        setCategoryManuallySelected(false);
-        manuallyCategorizedNameRef.current = null;
+        setCategoryLocked(false);
+        setSubcategoryLocked(false);
+        setUnitLocked(false);
+        manuallyEditedNameRef.current = null;
+        setDetection(null);
         setMeasurement("1");
         setUnit(PRODUCT_UNITS[0]);
         setQuantity("1");
@@ -614,35 +627,125 @@ export default function ProductFormScreen() {
                   detectionTimeoutRef.current = null;
                 }
 
+                const normalizedName = normalizeProductName(formatted);
+
                 if (
-                  categoryManuallySelected &&
-                  manuallyCategorizedNameRef.current !==
-                    formatted.trim()
+                  manuallyEditedNameRef.current !== null &&
+                  manuallyEditedNameRef.current !== normalizedName
                 ) {
-                  setCategoryManuallySelected(false);
-                  manuallyCategorizedNameRef.current = null;
+                  setCategoryLocked(false);
+                  setSubcategoryLocked(false);
+                  setUnitLocked(false);
+                  manuallyEditedNameRef.current = null;
                 }
 
-                if (formatted.trim().length < 3) {return;}
-
-                if (
-                  categoryManuallySelected &&
-                  manuallyCategorizedNameRef.current ===
-                    formatted.trim()
-                ) {return;}
+                if (normalizedName.length < 3) {
+                  setDetection(null);
+                  return;
+                }
 
                 detectionTimeoutRef.current =
                   setTimeout(() => {
-                    const detected = detectProductCategory(formatted);
+                    const detected =
+                      detectProductCategory(formatted);
 
-                    if (!detected) {return;}
+                    console.log(
+                      "Detection result:",
+                      detected
+                    );
+
+                    setDetection(detected);
+
+                    if (!detected) {
+                      detectionTimeoutRef.current = null;
+                      return;
+                    }
 
                     setCategory(detected.category);
                     setSubcategory(detected.subcategory);
-                    detectionTimeoutRef.current = null;}, 300);
-              }}
+
+                    if (!unitLocked) {
+                      const metadata = getSubcategoryMetadata(
+                        detected.subcategory
+                      );
+
+                      if (metadata?.defaultUnit) {
+                        setUnit(metadata.defaultUnit);
+                      }
+                    }
+
+                    detectionTimeoutRef.current = null;
+                  }, 300);
+                }}
               error={nameError}
             />
+
+            {detection && detection.confidence !== "low" && (
+              <View style={styles.detectionCard}>
+                <View style={styles.detectionHeader}>
+                  <Text style={styles.detectionTitle}>
+                    ✨ Smart Detection
+                  </Text>
+
+                  <View
+                    style={[
+                      styles.confidenceBadge,
+                      detection.confidence === "high" &&
+                        styles.highConfidence,
+                      detection.confidence === "medium" &&
+                        styles.mediumConfidence,
+                    ]}
+                  >
+                    <Text style={styles.confidenceText}>
+                      {detection.confidence.toUpperCase()}
+                    </Text>
+                  </View>
+                </View>
+
+                <View style={styles.detectionRow}>
+                  <Text style={styles.detectionLabel}>
+                    Category
+                  </Text>
+
+                  <Text style={styles.detectionValue}>
+                    {detection.category}
+                  </Text>
+                </View>
+
+                <View style={styles.detectionRow}>
+                  <Text style={styles.detectionLabel}>
+                    Subcategory
+                  </Text>
+
+                  <Text style={styles.detectionValue}>
+                    {detection.subcategory}
+                  </Text>
+                </View>
+
+                <View style={styles.detectionRow}>
+                  <Text style={styles.detectionLabel}>
+                    Recommended Unit
+                  </Text>
+
+                  <Text style={styles.detectionValue}>
+                    {getSubcategoryMetadata(
+                      detection.subcategory
+                    )?.defaultUnit ?? "None"}
+                  </Text>
+                </View>
+
+                <View style={styles.detectionDivider} />
+
+                <Text style={styles.detectionMatch}>
+                  Matched “{detection.matchedTerm}” using{" "}
+                  {detection.matchedBy === "shoppingAlias"
+                    ? "shopping alias"
+                    : detection.matchedBy === "productKeyword"
+                      ? "product keyword"
+                      : "subcategory name"}
+                </Text>
+              </View>
+            )}
 
             <AppTextInput
               label="Brand"
@@ -681,19 +784,31 @@ export default function ProductFormScreen() {
                   detectionTimeoutRef.current = null;
                 }
 
-                setCategoryManuallySelected(true);
+                setCategoryLocked(true);
+                setSubcategoryLocked(false);
+                setUnitLocked(false);
 
-                manuallyCategorizedNameRef.current =
-                  name.trim();
+                manuallyEditedNameRef.current =
+                  normalizeProductName(name);
 
                 setCategory(value);
 
-                const availableSubcategories =
+                const nextSubcategories =
                   PRODUCT_SUBCATEGORIES[value] ?? [];
 
-                setSubcategory(
-                  availableSubcategories[0] ?? ""
-                );
+                const firstSubcategory =
+                  nextSubcategories[0] ?? "";
+
+                setSubcategory(firstSubcategory);
+
+                if (firstSubcategory) {
+                  const metadata =
+                    getSubcategoryMetadata(firstSubcategory);
+
+                  if (metadata?.defaultUnit) {
+                    setUnit(metadata.defaultUnit);
+                  }
+                }
 
                 setOpenDropdown(null);
               }}
@@ -726,10 +841,12 @@ export default function ProductFormScreen() {
                   detectionTimeoutRef.current = null;
                 }
 
-                setCategoryManuallySelected(true);
+                setCategoryLocked(true);
+                setSubcategoryLocked(true);
+                setUnitLocked(false);
 
-                manuallyCategorizedNameRef.current =
-                  name.trim();
+                manuallyEditedNameRef.current =
+                  normalizeProductName(name);
 
                 setSubcategory(value);
                 setOpenDropdown(null);
@@ -765,7 +882,13 @@ export default function ProductFormScreen() {
               }
               onValueChange={(value) => {
                 resetSaveStatus();
+
                 setUnit(value);
+                setUnitLocked(true);
+
+                manuallyEditedNameRef.current =
+                  normalizeProductName(name);
+
                 setOpenDropdown(null);
               }}
             />
@@ -878,6 +1001,84 @@ const styles = StyleSheet.create({
 
   srpNotice: {
     marginTop: 6,
+    fontSize: 12,
+    lineHeight: 17,
+    color: Colors.textLight,
+  },
+
+  detectionCard: {
+    marginBottom: Spacing.lg,
+    padding: Spacing.md,
+    borderWidth: 1,
+    borderColor: Colors.border,
+    borderRadius: 12,
+    backgroundColor: Colors.surface,
+  },
+
+  detectionHeader: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginBottom: Spacing.md,
+  },
+
+  detectionTitle: {
+    fontSize: 16,
+    fontWeight: "700",
+    color: Colors.text,
+  },
+
+  confidenceBadge: {
+    paddingHorizontal: 10,
+    paddingVertical: 5,
+    borderRadius: 999,
+  },
+
+  highConfidence: {
+    backgroundColor: "#DFF5E3",
+  },
+
+  mediumConfidence: {
+    backgroundColor: "#FFF3CD",
+  },
+
+  lowConfidence: {
+    backgroundColor: "#FDE2E2",
+  },
+
+  confidenceText: {
+    fontSize: 11,
+    fontWeight: "700",
+    color: Colors.text,
+  },
+
+  detectionRow: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginBottom: 8,
+  },
+
+  detectionLabel: {
+    color: Colors.textLight,
+    fontSize: 13,
+  },
+
+  detectionValue: {
+    color: Colors.text,
+    fontSize: 14,
+    fontWeight: "600",
+    textAlign: "right",
+    flexShrink: 1,
+  },
+
+  detectionDivider: {
+    height: 1,
+    backgroundColor: Colors.border,
+    marginVertical: Spacing.sm,
+  },
+
+  detectionMatch: {
     fontSize: 12,
     lineHeight: 17,
     color: Colors.textLight,

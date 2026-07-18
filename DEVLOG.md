@@ -273,37 +273,115 @@
 - Bulk Store Price editing
 - Previous/Next page navigation
 
-### Milestone 20 - Analytics Dashboard
-- Cart comparison across stores
-- Cheapest store computation
-- Savings computation
-- Most expensive items
-- Price trends
-- Shopping analytics
+## Milestone 20 - Analytics Dashboard
+
+### Completed
+- Analytics screen architecture
+- Shopping list integration planning
+- Product metadata architecture redesign
+- Unified subcategory metadata system
+- Product keyword metadata
+- Shopping alias metadata
+- Product unit metadata
+- Intelligent unit recommendations
+- Subcategory unit mappings
+- Automatic unit detection
+- Category detection improvements
+- Product Form UX improvements
+- Dynamic searchable dropdown system
+- Reusable dropdown component
+- Shared dropdown state management
+- Product metadata generation scripts
+- Refactored constants architecture
+- Metadata validation
+- Large-scale metadata dataset (1,149 subcategories)
+
+### Milestone 21 - Intelligent Product Entry
+
+### Completed
+#### Intelligent Detection
+- Auto-detect Category from product name
+- Auto-detect Subcategory from product name
+- Improve detection scoring algorithm
+- Product keyword matching
+- Shopping alias matching
+- Confidence-based matching
+
+### Completed
+#### Intelligent Unit Selection
+- Auto-select default unit from metadata
+- Filter Unit dropdown to common units
+- Fallback to all units when metadata is unavailable
+
+### Completed
+#### Smart Form Behavior
+- Lock manually selected Category
+- Lock manually selected Subcategory
+- Lock manually selected Unit
+- Prevent automatic overrides after manual edits
+- Unlock intelligent detection when appropriate
+
+### Completed
+#### Product Form UX
+- Improved searchable dropdowns
+- Faster product registration workflow
+- Better validation messages
+- Improved keyboard navigation
+- Reduced number of user taps
+- Overall Product Form polish
 
 ---
 
 ## Upcoming Milestones
 
-### Milestone 21 - Shopping Lists
+---
+
+### Milestone 22 - Shopping Lists
+
 - Multiple shopping lists
 - Shopping list management
-- Quick add to cart
+- Quick Add to Cart
+- Smart product suggestions
+- Intelligent shopping list parser
+- Automatic quantity detection
+- Automatic product matching
+- Shopping list import/export
 
-### Milestone 22 - Transaction History
+---
+
+### Milestone 23 - Transaction History
+
 - Checkout persistence
 - Purchase history
 - Receipt details
+- Search transactions
+- Transaction filtering
+- Purchase statistics
+- Favorite products
+- Frequently purchased items
 
-### Milestone 23 - SRP Synchronization
+---
+
+### Milestone 24 - SRP Synchronization
+
 - Internet connectivity detection
 - Automatic SRP updates
+- Store price synchronization
 - Offline caching
 - Version checking
-- Manual sync option
+- Manual synchronization
+- Conflict resolution
+- Background synchronization
 
-### Milestone 24 - Receipt & OCR
+---
+
+### Milestone 25 - Receipt & OCR
+
 - Receipt scanning
-- OCR extraction
+- OCR text extraction
+- Automatic product recognition
 - Price verification
-- Automatic Store Price updates
+- Store Price updates
+- Missing product detection
+- Cart vs. receipt comparison
+- Automatic purchase confirmation

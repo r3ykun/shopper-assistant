@@ -19,6 +19,4 @@ export function seedDatabase() {
       (12,'Rey-Sal Supermarket','Rey-Sal','Supermarket'),
       (13,"Uncle John's","Uncle John's",'Convenience')
   `);
-
-  console.log("✅ Seed data inserted.");
 }

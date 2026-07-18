@@ -160,11 +160,7 @@ export function createTables() {
       ALTER TABLE Products
       ADD COLUMN keywords TEXT;
     `);
-  } catch (error) {
-    console.log(
-      "Products.keywords already exists."
-    );
-  }
+  } catch (error) {}
 
   try {
     database.execSync(`
@@ -189,10 +185,6 @@ export function createTables() {
       ALTER TABLE Products
       ADD COLUMN measurement REAL DEFAULT 1;
     `);
-
-    console.log(
-      "✅ Added measurement column."
-    );
   }
 
   const hasSrpColumn =
@@ -205,13 +197,5 @@ export function createTables() {
       ALTER TABLE Products
       ADD COLUMN srp REAL;
     `);
-
-    console.log(
-      "✅ Added SRP column."
-    );
   }
-
-  console.log(
-    "✅ Database schema created."
-  );
 }

@@ -1,6 +1,9 @@
 import type {
   ProductUnit,
 } from "./units";
+import {
+  SUBCATEGORY_UNITS,
+} from "./subcategoryUnits"
 
 export interface SubcategoryMetadataItem {
   category: string;
@@ -10937,5 +10940,21 @@ export const getShoppingTerms = (
 export function getSubcategoryMetadata(
   subcategory: string
 ): SubcategoryMetadataItem | undefined {
-  return SUBCATEGORY_METADATA[subcategory];
+  const metadata =
+    SUBCATEGORY_METADATA[subcategory];
+
+  const unitMetadata =
+    SUBCATEGORY_UNITS[subcategory];
+
+  if (!metadata && !unitMetadata) {
+    return undefined;
+  }
+
+  return {
+    ...metadata,
+    defaultUnit:
+      unitMetadata?.defaultUnit,
+    commonUnits:
+      unitMetadata?.commonUnits,
+  };
 }
