@@ -56,6 +56,31 @@ import {
 } from "../../utils/detectProductCategory";
 import QuantitySelector from "../../components/forms/QuantitySelector";
 import AppHeader from "../../components/layout/AppHeader";
+import { 
+  detectProductBrand,
+  type BrandDetectionResult,
+ } from "../../utils/detectProductBrand";
+
+type SortDirection = "asc" | "desc";
+
+function sortAlphabetically(
+  values: string[],
+  direction: SortDirection
+): string[] {
+  return [...values].sort((a, b) => {
+    const comparison = a.localeCompare(
+      b,
+      undefined,
+      {
+        sensitivity: "base",
+      }
+    );
+
+    return direction === "asc"
+      ? comparison
+      : -comparison;
+  });
+}
 
 function toTitleCase(value: string) {
   return value
@@ -102,6 +127,12 @@ export default function ProductFormScreen() {
     ] = useState<
       DetectedProductCategory | null
     >(null);
+    const [
+      brandDetection,
+      setBrandDetection,
+    ] = useState<
+      BrandDetectionResult | null
+    >(null);
     const detectionTimeoutRef =
       useRef<
         ReturnType<typeof setTimeout> | null
@@ -112,10 +143,30 @@ export default function ProductFormScreen() {
       useState(false);
     const [unitLocked, setUnitLocked] =
       useState(false);
+    const [
+      brandLocked,
+      setBrandLocked,
+    ] = useState(false);
 
     useEffect(() => {
-      console.log("Detection state:", detection);
-    }, [detection]);
+      console.log(
+        detectProductBrand(
+          "Lucky Me Pancit Canton Chilimansi"
+        )
+      );
+
+      console.log(
+        detectProductBrand(
+          "Coca Cola Zero"
+        )
+      );
+
+      console.log(
+        detectProductBrand(
+          "Bear Brand Powdered Milk"
+        )
+      );
+    }, []);
 
     const manuallyEditedNameRef =
       useRef<string | null>(null);
@@ -161,6 +212,13 @@ export default function ProductFormScreen() {
           ? "Update Product"
           : "Save Product"
       );
+
+    const categorySortDirection:
+      SortDirection = "asc";
+
+    const subcategorySortDirection:
+      SortDirection = "asc";
+
     const [measurement, setMeasurement] = useState("1");
     const addItem = useCartStore(
       state => state.addItem
@@ -170,6 +228,17 @@ export default function ProductFormScreen() {
     );
     const availableSubcategories =
       PRODUCT_SUBCATEGORIES[category] ?? [];
+    const sortedCategories =
+      sortAlphabetically(
+        PRODUCT_CATEGORIES,
+        categorySortDirection
+      );
+
+    const sortedSubcategories =
+      sortAlphabetically(
+        availableSubcategories,
+        subcategorySortDirection
+      );
     const showScannerSuccess =
       useScannerFeedbackStore(
         state => state.showSuccess
@@ -636,6 +705,7 @@ export default function ProductFormScreen() {
                   setCategoryLocked(false);
                   setSubcategoryLocked(false);
                   setUnitLocked(false);
+                  setBrandLocked(false);
                   manuallyEditedNameRef.current = null;
                 }
 
@@ -649,6 +719,22 @@ export default function ProductFormScreen() {
                     const detected =
                       detectProductCategory(formatted);
 
+                    const detectedBrand =
+                      detectProductBrand(formatted);
+
+                    setBrandDetection(
+                      detectedBrand
+                    );
+
+                    if (
+                      detectedBrand &&
+                      !brandLocked
+                    ) {
+                      setBrand(
+                        detectedBrand.brand
+                      );
+                    }
+
                     console.log(
                       "Detection result:",
                       detected
@@ -661,8 +747,15 @@ export default function ProductFormScreen() {
                       return;
                     }
 
-                    setCategory(detected.category);
-                    setSubcategory(detected.subcategory);
+                    if (!categoryLocked) {
+                      setCategory(detected.category);
+                    }
+
+                    if (!subcategoryLocked) {
+                      setSubcategory(
+                        detected.subcategory
+                      );
+                    }
 
                     if (!unitLocked) {
                       const metadata = getSubcategoryMetadata(
@@ -758,6 +851,7 @@ export default function ProductFormScreen() {
                   /[^a-zA-Z0-9\s\-.'&()/]/g,
                   ""
                 );
+                setBrandLocked(true);
                 setBrand(toTitleCase(cleaned));
               }}
             />
@@ -765,7 +859,7 @@ export default function ProductFormScreen() {
             <AppDropdown
               label="Category"
               selectedValue={category}
-              items={PRODUCT_CATEGORIES}
+              items={sortedCategories}
               isOpen={openDropdown === "category"}
               onOpen={() =>
                 setOpenDropdown("category")
@@ -796,8 +890,14 @@ export default function ProductFormScreen() {
                 const nextSubcategories =
                   PRODUCT_SUBCATEGORIES[value] ?? [];
 
+                const sortedNextSubcategories =
+                  sortAlphabetically(
+                    nextSubcategories,
+                    subcategorySortDirection
+                  );
+
                 const firstSubcategory =
-                  nextSubcategories[0] ?? "";
+                  sortedNextSubcategories[0] ?? "";
 
                 setSubcategory(firstSubcategory);
 
@@ -817,9 +917,7 @@ export default function ProductFormScreen() {
             <AppDropdown
               label="Subcategory"
               selectedValue={subcategory}
-              items={
-                PRODUCT_SUBCATEGORIES[category] ?? []
-              }
+              items={sortedSubcategories}
               isOpen={
                 openDropdown === "subcategory"
               }

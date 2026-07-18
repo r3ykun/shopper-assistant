@@ -332,9 +332,21 @@
 
 ---
 
-## Upcoming Milestones
+## Ongoing Milestone
+
+### Milestone 21.5 – Product Form & User Experience Polish
+
+- Shopping List Dashboard Widget
+- Alphabetical Sorting
+- Intelligent Brand Extraction
+- Search Icon
+- Barcode Scanner Sound
+- Autofill Indicators
+- Autofill Confidence & Lock Status
 
 ---
+
+## Upcoming Milestones
 
 ### Milestone 22 - Shopping Lists
 
