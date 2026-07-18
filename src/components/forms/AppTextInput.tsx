@@ -24,6 +24,7 @@ type Props = {
   keyboardType?: KeyboardTypeOptions;
   editable?: boolean;
   autoCapitalize?: TextInputProps["autoCapitalize"];
+  onFocus?: () => void;
 };
 
 export default function AppTextInput({
@@ -36,6 +37,7 @@ export default function AppTextInput({
   keyboardType,
   editable = true,
   autoCapitalize = "sentences",
+  onFocus,
 }: Props) {
   return (
     <View style={styles.container}>
@@ -67,6 +69,7 @@ export default function AppTextInput({
           keyboardType={keyboardType}
           editable={editable}
           autoCapitalize={autoCapitalize}
+          onFocus={onFocus}
         />
       </View>
 

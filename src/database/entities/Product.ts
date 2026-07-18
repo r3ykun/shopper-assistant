@@ -4,6 +4,7 @@ export interface Product {
     name: string;
     brand?: string;
     category?: string;
+    subcategory?: string;
     measurement: number;
     unit?: string;
     srp?: number;

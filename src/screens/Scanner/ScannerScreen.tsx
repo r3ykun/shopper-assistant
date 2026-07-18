@@ -32,7 +32,7 @@ import {
   useCartStore, 
   useStoreStore,
   useScannerFeedbackStore,
-  useShoppingListStore } from "../../stores";
+  } from "../../stores";
 import QuantitySelector from "../../components/forms/QuantitySelector";
 
 export default function ScannerScreen() {
@@ -42,11 +42,6 @@ export default function ScannerScreen() {
 
   const addItem = useCartStore(
     state => state.addItem
-  );
-
-  const activeListId =
-    useShoppingListStore(
-      state => state.activeListId
   );
 
   const [scanned, setScanned] =
@@ -359,21 +354,22 @@ export default function ScannerScreen() {
       price * selectedQuantity,
   });
 
-  const shoppingListUpdated =
-    activeListId !== null
-      ? ShoppingListService.checkProduct(
-          activeListId,
-          product.id
-        )
-      : false;
+  const checkedItems =
+    ShoppingListService.checkMatchingItems({
+      id: product.id,
+      name: product.name,
+      brand: product.brand,
+      category: product.category,
+    });
 
   setCartMessageType("success");
 
-  setCartMessage(
-    shoppingListUpdated
-      ? `${product.name} ×${selectedQuantity} added to cart. Shopping list updated.`
-      : `${product.name} ×${selectedQuantity} added to cart.`
-  );
+  const message =
+    checkedItems > 0
+      ? `${product.name} ×${selectedQuantity} added to cart. ${checkedItems} shopping list item(s) checked.`
+      : `${product.name} ×${selectedQuantity} added to cart.`;
+
+  setCartMessage(message);
 
     setTimeout(() => {
       setCartMessage("");

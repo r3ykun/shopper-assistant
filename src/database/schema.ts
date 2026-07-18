@@ -26,9 +26,11 @@ export function createTables() {
       name TEXT NOT NULL,
       brand TEXT,
       category TEXT,
+      subcategory TEXT,
       measurement REAL,
       unit TEXT,
       srp REAL,
+      keywords TEXT,
       createdAt TEXT DEFAULT CURRENT_TIMESTAMP
     );
 
@@ -152,6 +154,25 @@ export function createTables() {
     CREATE INDEX IF NOT EXISTS idx_pricehistory_product
     ON PriceHistory(productId);
   `);
+
+  try {
+    database.execSync(`
+      ALTER TABLE Products
+      ADD COLUMN keywords TEXT;
+    `);
+  } catch (error) {
+    console.log(
+      "Products.keywords already exists."
+    );
+  }
+
+  try {
+    database.execSync(`
+      ALTER TABLE Products
+      ADD COLUMN subcategory TEXT;
+    `);
+  } catch {
+  }
 
   const productColumns =
     database.getAllSync<{ name: string }>(

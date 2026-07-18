@@ -11,7 +11,7 @@ import { Colors } from "../../theme";
 
 type Props = {
   product: Product;
-  storePrice: number | null;
+  storePrice?: number | null;
   onEdit: () => void;
   onDelete: () => void;
 };
@@ -39,11 +39,10 @@ export default function ProductRow({
           {product.name}
         </Text>
 
-        <Text
-          style={styles.category}
-          numberOfLines={1}
-        >
-          {product.category || "Uncategorized"}
+        <Text style={styles.category}>
+          {product.subcategory
+            ? `${product.category} › ${product.subcategory}`
+            : product.category}
         </Text>
 
         <Text
@@ -132,7 +131,7 @@ const styles = StyleSheet.create({
   category: {
     marginTop: 3,
     fontSize: 11,
-    fontWeight: "600",
+    fontWeight: "500",
     color: Colors.primary,
   },
 

@@ -1,4 +1,9 @@
-import React, { useState } from "react";
+import React, {
+  useEffect,
+  useRef,
+  useState,
+  useCallback,
+} from "react";
 import {
   Text,
   View,
@@ -29,15 +34,26 @@ import {
   PRODUCT_CATEGORIES,
 } from "../../constants/categories";
 import {
+  PRODUCT_SUBCATEGORIES,
+} from "../../constants/subcategories";
+import {
   PRODUCT_UNITS,
 } from "../../constants/units";
-import { useEffect } from "react";
 import { 
   useCartStore,
   useStoreStore,
   useScannerFeedbackStore,
-  useShoppingListStore,
  } from "../../stores";
+import {
+  PRODUCT_UNIT_DROPDOWN_ITEMS,
+  type ProductUnit,
+} from "../../constants/units";
+import {
+  getSubcategoryMetadata,
+} from "../../constants/subcategoryMetadata";
+import {
+  detectProductCategory,
+} from "../../utils/detectProductCategory";
 import QuantitySelector from "../../components/forms/QuantitySelector";
 import AppHeader from "../../components/layout/AppHeader";
 
@@ -56,18 +72,36 @@ function toTitleCase(value: string) {
 }
 
 export default function ProductFormScreen() {
+    console.log("Metadata:", getSubcategoryMetadata);
+    console.log("Units:", PRODUCT_UNIT_DROPDOWN_ITEMS);
+
     const [barcode, setBarcode] = useState("");
     const [name, setName] = useState("");
     const [brand, setBrand] = useState("");
     const [category, setCategory] = useState(
     PRODUCT_CATEGORIES[0]
     );
+    const [subcategory, setSubcategory] = useState(
+        PRODUCT_SUBCATEGORIES[
+          PRODUCT_CATEGORIES[0]
+        ]?.[0] ?? ""
+      );
     const [unit, setUnit] = useState(
     PRODUCT_UNITS[0]
     );
     const [barcodeError, setBarcodeError] = useState("");
     const [nameError, setNameError] = useState("");
     const [successMessage, setSuccessMessage] = useState("");
+    const [
+      categoryManuallySelected,
+      setCategoryManuallySelected,
+    ] = useState(false);
+    const detectionTimeoutRef =
+      useRef<
+        ReturnType<typeof setTimeout> | null
+      >(null);
+    const manuallyCategorizedNameRef =
+      useRef<string | null>(null);
     const route =
       useRoute<RouteProp<
           RootStackParamList,
@@ -76,10 +110,48 @@ export default function ProductFormScreen() {
     const navigation = useNavigation<NavigationProp<RootStackParamList>>();
     const { selectedStore } =
       useStoreStore();
-    const activeListId =
-      useShoppingListStore(
-        state => state.activeListId
+
+    const subcategoryUnitMetadata =
+      getSubcategoryMetadata(subcategory);
+
+    const recommendedUnits =
+      subcategoryUnitMetadata?.commonUnits ?? [];
+
+    const recommendedUnitSet =
+      new Set<ProductUnit>(
+        recommendedUnits
       );
+
+    const recommendedUnitItems =
+      recommendedUnits
+        .map(unitName =>
+          PRODUCT_UNIT_DROPDOWN_ITEMS.find(
+            item => item.value === unitName
+          )
+        )
+        .filter(
+          (
+            item
+          ): item is typeof PRODUCT_UNIT_DROPDOWN_ITEMS[number] =>
+            Boolean(item)
+        )
+        .map(item => ({
+          ...item,
+          section: "Recommended",
+        }));
+
+    const remainingUnitItems =
+      PRODUCT_UNIT_DROPDOWN_ITEMS.filter(
+        item =>
+          !recommendedUnitSet.has(
+            item.value as ProductUnit
+          )
+      );
+
+    const unitDropdownItems = [
+      ...recommendedUnitItems,
+      ...remainingUnitItems,
+    ];
     const productId =
       route.params?.productId;
     const scannedBarcode =
@@ -99,6 +171,8 @@ export default function ProductFormScreen() {
     const updateCartPrice = useCartStore(
       state => state.updatePrice
     );
+    const availableSubcategories =
+      PRODUCT_SUBCATEGORIES[category] ?? [];
     const showScannerSuccess =
       useScannerFeedbackStore(
         state => state.showSuccess
@@ -114,6 +188,44 @@ export default function ProductFormScreen() {
     const [storePriceError, setStorePriceError] =
       useState("");
 
+    type OpenDropdown =
+      | "category"
+      | "subcategory"
+      | "unit"
+      | null;
+
+    const [
+      openDropdown,
+      setOpenDropdown,
+    ] = useState<OpenDropdown>(null);
+
+  useEffect(() => {
+    if (!subcategory) {
+      return;
+    }
+
+    const metadata =
+      getSubcategoryMetadata(subcategory);
+
+    if (!metadata?.defaultUnit) {
+      return;
+    }
+
+    setUnit(metadata.defaultUnit);
+  }, [subcategory]);
+
+  useEffect(() => {
+    return () => {
+      if (
+        detectionTimeoutRef.current
+      ) {
+        clearTimeout(
+          detectionTimeoutRef.current
+        );
+      }
+    };
+  }, []);
+
   useEffect(() => {
     if (productId) {
       const existingProduct =
@@ -128,6 +240,16 @@ export default function ProductFormScreen() {
         existingProduct.category ??
           PRODUCT_CATEGORIES[0]
       );
+      setSubcategory(
+        existingProduct.subcategory ??
+          PRODUCT_SUBCATEGORIES[
+            existingProduct.category ??
+              PRODUCT_CATEGORIES[0]
+          ]?.[0] ??
+          ""
+      );
+      setCategoryManuallySelected(false);
+      manuallyCategorizedNameRef.current = null;
       setMeasurement(
         existingProduct.measurement?.toString() ??
           "1"
@@ -175,6 +297,16 @@ export default function ProductFormScreen() {
       existingProduct.category ??
         PRODUCT_CATEGORIES[0]
     );
+    setSubcategory(
+      existingProduct.subcategory ??
+        PRODUCT_SUBCATEGORIES[
+          existingProduct.category ??
+            PRODUCT_CATEGORIES[0]
+        ]?.[0] ??
+        ""
+    );
+    setCategoryManuallySelected(false);
+    manuallyCategorizedNameRef.current = null;
     setMeasurement(
       existingProduct.measurement?.toString() ??
         "1"
@@ -186,7 +318,7 @@ export default function ProductFormScreen() {
   }, [productId, scannedBarcode, selectedStore?.id,]);
 
   useFocusEffect(
-    React.useCallback(() => {
+    useCallback(() => {
       return () => {
         if (!shouldAddToCart) {
           return;
@@ -198,6 +330,13 @@ export default function ProductFormScreen() {
         setCategory(
           PRODUCT_CATEGORIES[0]
         );
+        setSubcategory(
+          PRODUCT_SUBCATEGORIES[
+            PRODUCT_CATEGORIES[0]
+          ]?.[0] ?? ""
+        );
+        setCategoryManuallySelected(false);
+        manuallyCategorizedNameRef.current = null;
         setMeasurement("1");
         setUnit(PRODUCT_UNITS[0]);
         setQuantity("1");
@@ -262,28 +401,13 @@ export default function ProductFormScreen() {
 
     const productData = {
       barcode: barcode.trim(),
-
-      name: toTitleCase(
-        name.trim()
-      ),
-
-      brand: brand.trim()
-        ? toTitleCase(
-            brand.trim()
-          )
-        : undefined,
-
-      category: toTitleCase(
-        category.trim()
-      ),
-
-      measurement:
-        Number(measurement),
-
-      unit: toTitleCase(
-        unit.trim()
-      ),
-
+      name: toTitleCase(name.trim()),
+      brand: brand.trim() ? toTitleCase(brand.trim()) : undefined,
+      category: toTitleCase(category.trim()),
+      subcategory: subcategory.trim()
+        ? toTitleCase(subcategory.trim()) : undefined,
+      measurement: Number(measurement),
+      unit: toTitleCase(unit.trim()),
       srp,
     };
 
@@ -390,21 +514,21 @@ export default function ProductFormScreen() {
           savedStorePrice * selectedQuantity,
       });
 
-      const shoppingListUpdated =
-        activeListId !== null
-          ? ShoppingListService.checkProduct(
-              activeListId,
-              savedProduct.id
-            )
-          : false;
+    const checkedItems =
+      ShoppingListService.checkMatchingItems({
+        id: savedProduct.id,
+        name: savedProduct.name,
+        brand: savedProduct.brand,
+        category: savedProduct.category,
+      });
 
-      showScannerSuccess(
-        shoppingListUpdated
-          ? `${savedProduct.name} ×${selectedQuantity} added to cart. Shopping list updated.`
-          : `${savedProduct.name} ×${selectedQuantity} added to cart.`
-      );
+    showScannerSuccess(
+      checkedItems > 0
+        ? `${savedProduct.name} ×${selectedQuantity} added to cart. ${checkedItems} shopping list item(s) checked.`
+        : `${savedProduct.name} ×${selectedQuantity} added to cart.`
+    );
 
-      navigation.goBack();
+    navigation.goBack();
 
       return;
     }
@@ -422,6 +546,8 @@ export default function ProductFormScreen() {
       "✓ Product Saved"
     );
   }
+
+
 
   return (
     <Screen>
@@ -450,6 +576,7 @@ export default function ProductFormScreen() {
             <AppTextInput
                 label="Barcode"
                 value={barcode}
+                onFocus={() => {setOpenDropdown(null);}}
                 placeholder="Enter barcode"
                 keyboardType="number-pad"
                 editable={!scannedBarcode && !productId}
@@ -466,6 +593,7 @@ export default function ProductFormScreen() {
             <AppTextInput
               label="Product Name"
               value={name}
+              onFocus={() => {setOpenDropdown(null);}}
               placeholder="Enter product name"
               onChangeText={(text) => {
                 resetSaveStatus();
@@ -475,9 +603,43 @@ export default function ProductFormScreen() {
                   ""
                 );
 
-                setName(
-                  toTitleCase(cleaned)
-                );
+                const formatted = toTitleCase(cleaned);
+
+                setName(formatted);
+
+                if (detectionTimeoutRef.current) {
+                  clearTimeout(
+                    detectionTimeoutRef.current
+                  );
+                  detectionTimeoutRef.current = null;
+                }
+
+                if (
+                  categoryManuallySelected &&
+                  manuallyCategorizedNameRef.current !==
+                    formatted.trim()
+                ) {
+                  setCategoryManuallySelected(false);
+                  manuallyCategorizedNameRef.current = null;
+                }
+
+                if (formatted.trim().length < 3) {return;}
+
+                if (
+                  categoryManuallySelected &&
+                  manuallyCategorizedNameRef.current ===
+                    formatted.trim()
+                ) {return;}
+
+                detectionTimeoutRef.current =
+                  setTimeout(() => {
+                    const detected = detectProductCategory(formatted);
+
+                    if (!detected) {return;}
+
+                    setCategory(detected.category);
+                    setSubcategory(detected.subcategory);
+                    detectionTimeoutRef.current = null;}, 300);
               }}
               error={nameError}
             />
@@ -485,30 +647,93 @@ export default function ProductFormScreen() {
             <AppTextInput
               label="Brand"
               value={brand}
+              onFocus={() => {setOpenDropdown(null);}}
               placeholder="Enter brand"
               onChangeText={(text) => {
                 resetSaveStatus();
-
                 const cleaned = text.replace(
                   /[^a-zA-Z0-9\s\-.'&()/]/g,
                   ""
                 );
-
-                setBrand(
-                  toTitleCase(cleaned)
-                );
+                setBrand(toTitleCase(cleaned));
               }}
             />
 
             <AppDropdown
-                label="Category"
-                selectedValue={category}
-                items={PRODUCT_CATEGORIES}
-                onValueChange={(value) => {
-                  setSuccessMessage("");
-                  setButtonTitle("Save Product");
-                  setCategory(value);
-                }}
+              label="Category"
+              selectedValue={category}
+              items={PRODUCT_CATEGORIES}
+              isOpen={openDropdown === "category"}
+              onOpen={() =>
+                setOpenDropdown("category")
+              }
+              onClose={() =>
+                setOpenDropdown(null)
+              }
+              onValueChange={(value) => {
+                resetSaveStatus();
+
+                if (detectionTimeoutRef.current) {
+                  clearTimeout(
+                    detectionTimeoutRef.current
+                  );
+
+                  detectionTimeoutRef.current = null;
+                }
+
+                setCategoryManuallySelected(true);
+
+                manuallyCategorizedNameRef.current =
+                  name.trim();
+
+                setCategory(value);
+
+                const availableSubcategories =
+                  PRODUCT_SUBCATEGORIES[value] ?? [];
+
+                setSubcategory(
+                  availableSubcategories[0] ?? ""
+                );
+
+                setOpenDropdown(null);
+              }}
+            />
+
+            <AppDropdown
+              label="Subcategory"
+              selectedValue={subcategory}
+              items={
+                PRODUCT_SUBCATEGORIES[category] ?? []
+              }
+              isOpen={
+                openDropdown === "subcategory"
+              }
+              onOpen={() =>
+                setOpenDropdown("subcategory")
+              }
+              onClose={() =>
+                setOpenDropdown(null)
+              }
+              disabled={!category}
+              onValueChange={(value) => {
+                resetSaveStatus();
+
+                if (detectionTimeoutRef.current) {
+                  clearTimeout(
+                    detectionTimeoutRef.current
+                  );
+
+                  detectionTimeoutRef.current = null;
+                }
+
+                setCategoryManuallySelected(true);
+
+                manuallyCategorizedNameRef.current =
+                  name.trim();
+
+                setSubcategory(value);
+                setOpenDropdown(null);
+              }}
             />
 
             <AppTextInput
@@ -526,14 +751,23 @@ export default function ProductFormScreen() {
             />
 
             <AppDropdown
-                label="Unit"
-                selectedValue={unit}
-                items={PRODUCT_UNITS}
-                onValueChange={(value) => {
-                  setSuccessMessage("");
-                  setButtonTitle("Save Product");
-                  setUnit(value);
-                }}
+              label="Unit"
+              selectedValue={unit}
+              items={unitDropdownItems}
+              searchable
+              searchPlaceholder="Search unit, abbreviation, or group..."
+              isOpen={openDropdown === "unit"}
+              onOpen={() =>
+                setOpenDropdown("unit")
+              }
+              onClose={() =>
+                setOpenDropdown(null)
+              }
+              onValueChange={(value) => {
+                resetSaveStatus();
+                setUnit(value);
+                setOpenDropdown(null);
+              }}
             />
 
             <View style={styles.priceSection}>
@@ -562,6 +796,7 @@ export default function ProductFormScreen() {
               })`}
               prefix="₱"
               value={storePrice}
+              onFocus={() => {setOpenDropdown(null);}}
               placeholder="0.00"
               keyboardType="decimal-pad"
               onChangeText={(text) => {

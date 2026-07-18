@@ -1,4 +1,7 @@
 import { database } from "../database/database";
+import {
+  getShoppingTerms,
+} from "../constants/subcategoryMetadata";
 
 export type ShoppingListRecord = {
   id: number;
@@ -355,41 +358,149 @@ export const ShoppingListService = {
     );
   },
 
-  checkProduct(
-    shoppingListId: number,
-    productId: number
-  ): boolean {
-    const matchingItem =
-      database.getFirstSync<{
-        id: number;
-      }>(
-        `
-        SELECT id
-        FROM ShoppingListItems
-        WHERE shoppingListId = ?
-        AND productId = ?
-        AND checked = 0
-        LIMIT 1;
-        `,
-        [
-          shoppingListId,
-          productId,
-        ]
-      );
+checkProduct(
+  shoppingListId: number,
+  productId: number
+): boolean {
+  const matchingItem =
+    database.getFirstSync<{
+      id: number;
+    }>(
+      `
+      SELECT id
+      FROM ShoppingListItems
+      WHERE shoppingListId = ?
+      AND productId = ?
+      AND checked = 0
+      LIMIT 1;
+      `,
+      [
+        shoppingListId,
+        productId,
+      ]
+    );
 
-    if (!matchingItem) {
-      return false;
-    }
+  if (!matchingItem) {
+    return false;
+  }
 
+  database.runSync(
+    `
+    UPDATE ShoppingListItems
+    SET checked = 1
+    WHERE id = ?;
+    `,
+    [matchingItem.id]
+  );
+
+  return true;
+},
+
+checkMatchingItems(product: {
+  id: number;
+  name: string;
+  brand?: string | null;
+  category?: string | null;
+  subcategory?: string | null;
+}): number {
+  const uncheckedItems =
+    database.getAllSync<{
+      id: number;
+      productId: number | null;
+      itemName: string | null;
+    }>(
+      `
+      SELECT
+        id,
+        productId,
+        itemName
+      FROM ShoppingListItems
+      WHERE checked = 0;
+      `
+    );
+
+  const category =
+    product.category ?? "";
+
+  const subcategory =
+    product.subcategory ?? "";
+
+  const shoppingTerms =
+    getShoppingTerms(subcategory);
+
+  const productText = [
+    product.brand ?? "",
+    product.name,
+    product.category ?? "",
+    subcategory,
+    ...shoppingTerms,
+  ]
+    .join(" ")
+    .toLowerCase();
+
+  const productWords =
+    productText
+      .split(" ")
+      .filter(Boolean);
+
+  const matchingIds =
+    uncheckedItems
+      .filter(item => {
+        /*
+         * Registered product:
+         * match using the exact product ID.
+         */
+        if (item.productId !== null) {
+          return (
+            item.productId === product.id
+          );
+        }
+
+        /*
+         * Manual shopping-list item:
+         * match using its words.
+         */
+        const itemText =
+          (item.itemName ?? "")
+            .toLowerCase()
+            .replace(
+              /[^a-z0-9]+/g,
+              " "
+            )
+            .trim();
+
+        const itemWords =
+          itemText
+            .split(" ")
+            .filter(
+              word =>
+                word.length >= 3
+            );
+
+        if (itemWords.length === 0) {
+          return false;
+        }
+
+        return itemWords.every(
+          itemWord =>
+            productWords.includes(
+              itemWord
+            )
+        );
+      })
+      .map(item => item.id);
+
+  matchingIds.forEach(id => {
     database.runSync(
       `
       UPDATE ShoppingListItems
       SET checked = 1
       WHERE id = ?;
       `,
-      [matchingItem.id]
+      [id]
     );
+  });
 
-    return true;
-  },
+  return matchingIds.length;
+},
 };

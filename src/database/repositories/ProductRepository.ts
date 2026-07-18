@@ -33,6 +33,7 @@ export class ProductRepository {
         name = ?,
         brand = ?,
         category = ?,
+        subcategory = ?,
         measurement = ?,
         unit = ?,
         srp = ?
@@ -43,10 +44,11 @@ export class ProductRepository {
         product.name,
         product.brand ?? null,
         product.category ?? null,
+        product.subcategory ?? null,
         product.measurement,
         product.unit ?? null,
         product.srp ?? null,
-        product.id,
+        product.id
         ]
     );
     }
@@ -80,14 +82,15 @@ export class ProductRepository {
                 name,
                 brand,
                 category,
+                subcategory,
                 measurement,
                 unit,
-                srp
+                srp               
             )
 
             VALUES
             (
-                ?,?,?,?,?,?,?
+                ?,?,?,?,?,?,?,?
             );
             `,
 
@@ -96,9 +99,10 @@ export class ProductRepository {
                 product.name,
                 product.brand ?? null,
                 product.category ?? null,
+                product.subcategory ?? null,
                 product.measurement,
                 product.unit ?? null,
-                product.srp ?? null,
+                product.srp ?? null
             ]
 
         );
