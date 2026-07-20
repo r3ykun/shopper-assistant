@@ -336,19 +336,105 @@
 
 ### Milestone 21.5 – Product Form & User Experience Polish
 
-- Shopping List Dashboard Widget
-- Alphabetical Sorting
-- Intelligent Brand Extraction
-- Search Icon
-- Barcode Scanner Sound
-- Autofill Indicators
-- Autofill Confidence & Lock Status
+#### Product Detection Engine
+## Completed
+- ✅ Intelligent Category Detection
+- ✅ Intelligent Subcategory Detection
+- ✅ Intelligent Unit Detection
+- ✅ Smart Alias Matching
+- ✅ Brand Priority Scoring
+- ✅ Safe Product Name Cleanup
+- ✅ Product Line Recognition
+
+## Ongoing
+- 🚧 Autofill Indicators
+- 🚧 Autofill Confidence & Lock Status
+- 🚧 Detection Status Card
+- 🚧 Shopping List Dashboard Widget
+- 🚧 Alphabetical Sorting
+- 🚧 Search Icon
+- 🚧 Barcode Scanner Sound
 
 ---
 
-## Upcoming Milestones
+### Upcoming Milestone
 
-### Milestone 22 - Shopping Lists
+## Milestone 21.75 – Brand Intelligence & Metadata Engine
+
+### Metadata Architecture
+## Completed
+- ✅ Canonical Brand Model
+- ✅ Alias Metadata Redesign
+- ✅ Product Line Metadata
+## Ongoing
+- Variant Metadata
+- Manufacturer Metadata
+- Metadata Versioning
+
+### Metadata Processing
+## Completed
+- ✅ Canonical Brand Selection
+- ✅ Alias Normalization
+- ✅ Product Line Extraction
+## Ongoing
+- Automatic Brand Deduplication
+- Variant Extraction
+- Manufacturer Assignment
+- Metadata Validation Pipeline
+
+### Brand Recognition Engine
+## Completed
+- ✅ Alias Priority Scoring
+- ✅ Intelligent Alias Matching
+- ✅ Product Line Recognition
+- ✅ Safe Product Name Cleanup
+## Ongoing
+- Variant Recognition
+- Brand Confidence Scoring
+- Conflict Resolution
+
+### Synonyms & Fuzzy Matching
+## Completed
+- ✅ Common Name Support
+- ✅ Nickname Support
+- ✅ Abbreviation Support
+- ✅ Misspelling Recognition
+## Ongoing
+- Fuzzy Brand Matching
+- Similar Brand Suggestions
+
+### Philippine Product Intelligence
+- Grocery Brand Database
+- Household Brand Database
+- Personal Care Brand Database
+- Medicine Brand Database
+- Pet Supplies Brand Database
+- Electronics Brand Database
+- Hardware Brand Database
+- School Supplies Brand Database
+
+### Metadata Quality Assurance
+- Duplicate Detection
+- Brand/Product Separation
+- Consistency Validation
+- Category Verification
+- Subcategory Verification
+- Automated Metadata Testing
+
+## Milestone 22 – Smart Product Intelligence
+
+- Smart SRP Lookup
+- Automatic Product Metadata Lookup
+- Live Product Database Matching
+- Brand Suggestions
+- Product Suggestions
+- Duplicate Product Detection
+- Intelligent Product Validation
+- Product Image Support
+
+---
+
+## Milestone 23 – Shopping Lists
 
 - Multiple shopping lists
 - Shopping list management
@@ -361,7 +447,7 @@
 
 ---
 
-### Milestone 23 - Transaction History
+## Milestone 24 – Transaction History
 
 - Checkout persistence
 - Purchase history
@@ -374,7 +460,7 @@
 
 ---
 
-### Milestone 24 - SRP Synchronization
+## Milestone 25 – SRP Synchronization
 
 - Internet connectivity detection
 - Automatic SRP updates
@@ -384,10 +470,11 @@
 - Manual synchronization
 - Conflict resolution
 - Background synchronization
+- Live Product Database Synchronization
 
 ---
 
-### Milestone 25 - Receipt & OCR
+## Milestone 26 – Receipt & OCR
 
 - Receipt scanning
 - OCR text extraction
@@ -395,5 +482,5 @@
 - Price verification
 - Store Price updates
 - Missing product detection
-- Cart vs. receipt comparison
+- Cart vs. Receipt comparison
 - Automatic purchase confirmation

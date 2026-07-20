@@ -704,22 +704,19 @@ export default function ProductFormScreen() {
                   setSubcategoryLocked(false);
                   setUnitLocked(false);
                   setBrandLocked(false);
-
-                  setBrandDetection(null);
-
                   manuallyEditedNameRef.current = null;
                 }
 
-                if (normalizedName.length < 3) {
-                  setDetection(null);
-                  setBrandDetection(null);
+      if (normalizedName.length < 3) {
+        setDetection(null);
+        setBrandDetection(null);
 
-                  if (!brandLocked) {
-                    setBrand("");
-                  }
+        if (!brandLocked) {
+          setBrand("");
+        }
 
-                  return;
-                }
+        return;
+      }
 
                 detectionTimeoutRef.current =
                   setTimeout(() => {
@@ -732,26 +729,23 @@ export default function ProductFormScreen() {
                     );
 
                     if (
-                      detectedBrand &&
-                      !brandLocked
+                      detectedBrand && !brandLocked
                     ) {
                       setBrand(detectedBrand.brand);
 
-                      const cleanedName =
-                        detectedBrand.productName.trim();
+                      if (detectedBrand.removeFromProductName) 
+                        {
+                          const cleanedName = detectedBrand.productName;
 
-                      const shouldReplaceProductName =
-                        detectedBrand.removeFromProductName &&
-                        cleanedName.length > 0 &&
-                        normalizeProductName(cleanedName) !==
-                          normalizeProductName(formatted);
-
-                      if (shouldReplaceProductName) {
-                        setName(toTitleCase(cleanedName));
-
-                        manuallyEditedNameRef.current =
-                          normalizeProductName(cleanedName);
-                      }
+                          if (
+                            normalizeProductName(cleanedName) !==
+                            normalizeProductName(formatted)
+                          ) {
+                            setName(cleanedName);
+                            manuallyEditedNameRef.current =
+                              normalizeProductName(cleanedName);
+                          }
+                        }
                     }
 
                     setDetection(detected);
@@ -808,18 +802,6 @@ export default function ProductFormScreen() {
                     </Text>
                   </View>
                 </View>
-
-                {brandDetection && (
-                  <View style={styles.detectionRow}>
-                    <Text style={styles.detectionLabel}>
-                      Brand
-                    </Text>
-
-                    <Text style={styles.detectionValue}>
-                      {brandDetection.brand}
-                    </Text>
-                  </View>
-                )}
 
                 <View style={styles.detectionRow}>
                   <Text style={styles.detectionLabel}>

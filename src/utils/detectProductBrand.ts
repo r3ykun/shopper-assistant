@@ -1,55 +1,68 @@
 import {
   PRODUCT_BRAND_METADATA,
-  type ProductBrandAlias,
 } from "../constants/productBrandMetadata";
 
+import {
+  buildProductBrandIndex,
+  normalizeBrandText,
+  type CompiledProductBrandMatch,
+} from "./buildProductBrandIndex";
+
+export interface BrandDetectionContext {
+  category?: string;
+  subcategory?: string;
+}
+
 export interface BrandDetectionResult {
+  brandId: string;
   brand: string;
+
   matchedAlias: string;
-  matchedAliasType: ProductBrandAlias["type"];
+  matchedAliasType:
+    | "official"
+    | "abbreviation"
+    | "commonName"
+    | "nickname"
+    | "formerName"
+    | "misspelling";
+
+  matchType: "brand" | "productLine";
+
+  productLine?: string;
+  matchedProductLineAlias?: string;
+
   removeFromProductName: boolean;
   productName: string;
+
   score: number;
 }
 
 interface BrandCandidate {
-  brand: string;
-  alias: ProductBrandAlias;
-  normalizedAlias: string;
+  match: CompiledProductBrandMatch;
   score: number;
 }
 
-function normalizeText(
-  value: string | null | undefined
+const PRODUCT_BRAND_INDEX =
+  buildProductBrandIndex(
+    PRODUCT_BRAND_METADATA
+  );
+
+function escapeRegExp(
+  value: string
 ): string {
-  if (typeof value !== "string") {
-    return "";
-  }
-
-  return value
-    .toLowerCase()
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "")
-    .replace(/&/g, " and ")
-    .replace(/[^a-z0-9]+/g, " ")
-    .trim()
-    .replace(/\s+/g, " ");
-}
-
-function escapeRegExp(value: string): string {
   return value.replace(
     /[.*+?^${}()|[\]\\]/g,
     "\\$&"
   );
 }
 
-function containsWholeAlias(
+function containsWholeMatch(
   normalizedInput: string,
-  normalizedAlias: string
+  normalizedValue: string
 ): boolean {
   const pattern = new RegExp(
     `(?:^|\\s)${escapeRegExp(
-      normalizedAlias
+      normalizedValue
     )}(?:$|\\s)`,
     "i"
   );
@@ -57,20 +70,131 @@ function containsWholeAlias(
   return pattern.test(normalizedInput);
 }
 
-function removeMatchedAlias(
-  originalInput: string,
-  aliasValue: string
-): string {
-  const normalizedAliasParts =
-    normalizeText(aliasValue).split(" ");
+function valuesMatch(
+  expected: string,
+  actual?: string
+): boolean {
+  if (!actual) {
+    return false;
+  }
 
-  const flexibleAliasPattern =
-    normalizedAliasParts
+  return (
+    normalizeBrandText(expected) ===
+    normalizeBrandText(actual)
+  );
+}
+
+function matchesContext(
+  match: CompiledProductBrandMatch,
+  context?: BrandDetectionContext
+): boolean {
+  const hasCategoryContext =
+    Boolean(
+      context?.category &&
+      match.categories.some(category =>
+        valuesMatch(
+          category,
+          context.category
+        )
+      )
+    );
+
+  const hasSubcategoryContext =
+    Boolean(
+      context?.subcategory &&
+      match.subcategories.some(
+        subcategory =>
+          valuesMatch(
+            subcategory,
+            context.subcategory
+          )
+      )
+    );
+
+  if (
+    match.requiresCategoryContext &&
+    !hasCategoryContext &&
+    !hasSubcategoryContext
+  ) {
+    return false;
+  }
+
+  return true;
+}
+
+function calculateCandidateScore(
+  match: CompiledProductBrandMatch,
+  context?: BrandDetectionContext
+): number {
+  let score = match.priority;
+
+  score +=
+    match.normalizedValue.length * 10;
+
+  score +=
+    match.normalizedValue.split(" ")
+      .length * 25;
+
+  if (match.strength === "strong") {
+    score += 40;
+  }
+
+  if (match.strength === "normal") {
+    score += 20;
+  }
+
+  if (match.strength === "weak") {
+    score -= 20;
+  }
+
+  if (
+    context?.category &&
+    match.categories.some(category =>
+      valuesMatch(
+        category,
+        context.category
+      )
+    )
+  ) {
+    score += 60;
+  }
+
+  if (
+    context?.subcategory &&
+    match.subcategories.some(
+      subcategory =>
+        valuesMatch(
+          subcategory,
+          context.subcategory
+        )
+    )
+  ) {
+    score += 80;
+  }
+
+  if (match.matchType === "brand") {
+    score += 30;
+  }
+
+  return score;
+}
+
+function removeMatchedValue(
+  originalInput: string,
+  matchValue: string
+): string {
+  const normalizedParts =
+    normalizeBrandText(
+      matchValue
+    ).split(" ");
+
+  const flexiblePattern =
+    normalizedParts
       .map(escapeRegExp)
       .join("[\\s\\-.'&]*");
 
   const pattern = new RegExp(
-    `(^|\\s)${flexibleAliasPattern}(?=\\s|$)`,
+    `(^|\\s)${flexiblePattern}(?=\\s|$)`,
     "i"
   );
 
@@ -80,120 +204,189 @@ function removeMatchedAlias(
     .trim();
 }
 
-function calculateCandidateScore(
-  alias: ProductBrandAlias,
-  normalizedAlias: string
-): number {
-  const priority = alias.priority ?? 0;
+function sortCandidates(
+  candidates: BrandCandidate[]
+): BrandCandidate[] {
+  return candidates.sort((a, b) => {
+    if (b.score !== a.score) {
+      return b.score - a.score;
+    }
 
-  // Longer aliases should beat shorter ambiguous ones.
-  const lengthScore =
-    normalizedAlias.length * 10;
+    if (
+      b.match.normalizedValue.length !==
+      a.match.normalizedValue.length
+    ) {
+      return (
+        b.match.normalizedValue.length -
+        a.match.normalizedValue.length
+      );
+    }
 
-  const wordScore =
-    normalizedAlias.split(" ").length * 25;
-
-  return priority + lengthScore + wordScore;
+    return a.match.brandName.localeCompare(
+      b.match.brandName
+    );
+  });
 }
 
 export function detectProductBrand(
-  input: string
+  input: string,
+  context?: BrandDetectionContext
 ): BrandDetectionResult | null {
+
   const normalizedInput =
-    normalizeText(input);
+    normalizeBrandText(input);
 
   if (!normalizedInput) {
     return null;
   }
 
-  const candidates: BrandCandidate[] = [];
+  const brandCandidates: BrandCandidate[] =
+    [];
 
   for (
-    const [brand, metadata]
-    of Object.entries(
-      PRODUCT_BRAND_METADATA
-    )
+    const match
+    of PRODUCT_BRAND_INDEX
   ) {
-    for (const aliasEntry of metadata.aliases) {
-      const alias =
-        typeof aliasEntry === "string"
-          ? {
-              value: aliasEntry,
-              removeFromProductName: true,
-              priority: 0,
-              type: "brand" as const,
-            }
-          : aliasEntry;
-
-      if (
-        !alias ||
-        typeof alias.value !== "string"
-      ) {
-        continue;
-      }
-
-      const normalizedAlias =
-        normalizeText(alias.value);
-
-      if (
-        !normalizedAlias ||
-        !containsWholeAlias(
-          normalizedInput,
-          normalizedAlias
-        )
-      ) {
-        continue;
-      }
-
-      candidates.push({
-        brand,
-        alias,
-        normalizedAlias,
-        score: calculateCandidateScore(
-          alias,
-          normalizedAlias
-        ),
-      });
+    if (match.matchType !== "brand") {
+      continue;
     }
+
+    if (
+      !containsWholeMatch(
+        normalizedInput,
+        match.normalizedValue
+      )
+    ) {
+      continue;
+    }
+
+    if (
+      !matchesContext(
+        match,
+        context
+      )
+    ) {
+      continue;
+    }
+
+    brandCandidates.push({
+      match,
+      score: calculateCandidateScore(
+        match,
+        context
+      ),
+    });
   }
 
-  if (candidates.length === 0) {
+  if (brandCandidates.length === 0) {
     return null;
   }
 
-  candidates.sort((a, b) => {
-    if (b.score !== a.score) {
-      return b.score - a.score;
+  const bestBrand =
+    sortCandidates(
+      brandCandidates
+    )[0];
+
+  const productLineCandidates:
+    BrandCandidate[] = [];
+
+  for (
+    const match
+    of PRODUCT_BRAND_INDEX
+  ) {
+    if (
+      match.matchType !==
+      "productLine"
+    ) {
+      continue;
     }
 
-    return (
-      b.normalizedAlias.length -
-      a.normalizedAlias.length
-    );
-  });
+    if (
+      match.brandId !==
+      bestBrand.match.brandId
+    ) {
+      continue;
+    }
 
-  const bestMatch = candidates[0];
+    if (
+      !containsWholeMatch(
+        normalizedInput,
+        match.normalizedValue
+      )
+    ) {
+      continue;
+    }
+
+    if (
+      !matchesContext(
+        match,
+        context
+      )
+    ) {
+      continue;
+    }
+
+    productLineCandidates.push({
+      match,
+      score: calculateCandidateScore(
+        match,
+        context
+      ),
+    });
+  }
+
+  const bestProductLine =
+    productLineCandidates.length > 0
+      ? sortCandidates(
+          productLineCandidates
+        )[0]
+      : undefined;
+
+  const shouldRemoveBrand =
+    !bestBrand.match
+      .preserveInProductName;
 
   const cleanedProductName =
-    bestMatch.alias.removeFromProductName
-      ? removeMatchedAlias(
+    shouldRemoveBrand
+      ? removeMatchedValue(
           input,
-          bestMatch.alias.value
-        ).trim()
-      : input.trim();
-
-  const productName =
-    cleanedProductName.length > 0
-      ? cleanedProductName
+          bestBrand.match.value
+        )
       : input.trim();
 
   return {
-    brand: bestMatch.brand,
-    matchedAlias: bestMatch.alias.value,
-    matchedAliasType: bestMatch.alias.type,
+    brandId:
+      bestBrand.match.brandId,
+
+    brand:
+      bestBrand.match.brandName,
+
+    matchedAlias:
+      bestBrand.match.value,
+
+    matchedAliasType:
+      bestBrand.match.aliasType,
+
+    matchType: "brand",
+
+    productLine:
+      bestProductLine
+        ?.match.productLine,
+
+    matchedProductLineAlias:
+      bestProductLine
+        ?.match.value,
+
     removeFromProductName:
-      bestMatch.alias.removeFromProductName,
-    productName,
-    score: bestMatch.score,
+      shouldRemoveBrand,
+
+    productName:
+      cleanedProductName.length > 0
+        ? cleanedProductName
+        : input.trim(),
+
+    score:
+      bestBrand.score +
+      (bestProductLine?.score ?? 0),
   };
 }
