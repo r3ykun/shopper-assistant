@@ -148,26 +148,6 @@ export default function ProductFormScreen() {
       setBrandLocked,
     ] = useState(false);
 
-    useEffect(() => {
-      console.log(
-        detectProductBrand(
-          "Lucky Me Pancit Canton Chilimansi"
-        )
-      );
-
-      console.log(
-        detectProductBrand(
-          "Coca Cola Zero"
-        )
-      );
-
-      console.log(
-        detectProductBrand(
-          "Bear Brand Powdered Milk"
-        )
-      );
-    }, []);
-
     const manuallyEditedNameRef =
       useRef<string | null>(null);
     const route =
@@ -308,10 +288,12 @@ export default function ProductFormScreen() {
       setBarcode(existingProduct.barcode);
       setName(existingProduct.name);
       setBrand(existingProduct.brand ?? "");
+
       setCategory(
         existingProduct.category ??
           PRODUCT_CATEGORIES[0]
       );
+
       setSubcategory(
         existingProduct.subcategory ??
           PRODUCT_SUBCATEGORIES[
@@ -323,8 +305,11 @@ export default function ProductFormScreen() {
       setCategoryLocked(true);
       setSubcategoryLocked(true);
       setUnitLocked(true);
+      setBrandLocked(true);
+
       manuallyEditedNameRef.current =
-        normalizeProductName(name);      
+        normalizeProductName(existingProduct.name);  
+
       setMeasurement(
         existingProduct.measurement?.toString() ??
           "1"
@@ -367,7 +352,9 @@ export default function ProductFormScreen() {
     if (!existingProduct) return;
 
     setName(existingProduct.name);
+
     setBrand(existingProduct.brand ?? "");
+    
     setCategory(
       existingProduct.category ??
         PRODUCT_CATEGORIES[0]
@@ -380,12 +367,15 @@ export default function ProductFormScreen() {
         ]?.[0] ??
         ""
     );
+
     setDetection(null);
     setCategoryLocked(true);
     setSubcategoryLocked(true);
     setUnitLocked(true);
+    setBrandLocked(true);
+
     manuallyEditedNameRef.current =
-      normalizeProductName(name); 
+      normalizeProductName(existingProduct.name); 
     setMeasurement(
       existingProduct.measurement?.toString() ??
         "1"
@@ -405,19 +395,27 @@ export default function ProductFormScreen() {
 
         setBarcode("");
         setName("");
+
         setBrand("");
+        setBrandLocked(false);
+        setBrandDetection(null);
+
         setCategory(
           PRODUCT_CATEGORIES[0]
         );
+
         setSubcategory(
           PRODUCT_SUBCATEGORIES[
             PRODUCT_CATEGORIES[0]
           ]?.[0] ?? ""
         );
+
         setCategoryLocked(false);
         setSubcategoryLocked(false);
         setUnitLocked(false);
+
         manuallyEditedNameRef.current = null;
+
         setDetection(null);
         setMeasurement("1");
         setUnit(PRODUCT_UNITS[0]);
@@ -706,22 +704,29 @@ export default function ProductFormScreen() {
                   setSubcategoryLocked(false);
                   setUnitLocked(false);
                   setBrandLocked(false);
+
+                  setBrandDetection(null);
+
                   manuallyEditedNameRef.current = null;
                 }
 
                 if (normalizedName.length < 3) {
                   setDetection(null);
+                  setBrandDetection(null);
+
+                  if (!brandLocked) {
+                    setBrand("");
+                  }
+
                   return;
                 }
 
                 detectionTimeoutRef.current =
                   setTimeout(() => {
-                    const detected =
-                      detectProductCategory(formatted);
-
-                    const detectedBrand =
-                      detectProductBrand(formatted);
-
+                    const detectedBrand = detectProductBrand(formatted);
+                    const cleanedProductName = detectedBrand?.productName ?? formatted;
+                    const detected = detectProductCategory(cleanedProductName);
+                  
                     setBrandDetection(
                       detectedBrand
                     );
@@ -730,15 +735,24 @@ export default function ProductFormScreen() {
                       detectedBrand &&
                       !brandLocked
                     ) {
-                      setBrand(
-                        detectedBrand.brand
-                      );
-                    }
+                      setBrand(detectedBrand.brand);
 
-                    console.log(
-                      "Detection result:",
-                      detected
-                    );
+                      const cleanedName =
+                        detectedBrand.productName.trim();
+
+                      const shouldReplaceProductName =
+                        detectedBrand.removeFromProductName &&
+                        cleanedName.length > 0 &&
+                        normalizeProductName(cleanedName) !==
+                          normalizeProductName(formatted);
+
+                      if (shouldReplaceProductName) {
+                        setName(toTitleCase(cleanedName));
+
+                        manuallyEditedNameRef.current =
+                          normalizeProductName(cleanedName);
+                      }
+                    }
 
                     setDetection(detected);
 
@@ -794,6 +808,18 @@ export default function ProductFormScreen() {
                     </Text>
                   </View>
                 </View>
+
+                {brandDetection && (
+                  <View style={styles.detectionRow}>
+                    <Text style={styles.detectionLabel}>
+                      Brand
+                    </Text>
+
+                    <Text style={styles.detectionValue}>
+                      {brandDetection.brand}
+                    </Text>
+                  </View>
+                )}
 
                 <View style={styles.detectionRow}>
                   <Text style={styles.detectionLabel}>

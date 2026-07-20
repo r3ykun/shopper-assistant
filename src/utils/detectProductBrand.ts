@@ -1,41 +1,112 @@
 import {
   PRODUCT_BRAND_METADATA,
+  type ProductBrandAlias,
 } from "../constants/productBrandMetadata";
 
-console.log(
-  "Product brand metadata:",
-  PRODUCT_BRAND_METADATA
-);
+export interface BrandDetectionResult {
+  brand: string;
+  matchedAlias: string;
+  matchedAliasType: ProductBrandAlias["type"];
+  removeFromProductName: boolean;
+  productName: string;
+  score: number;
+}
 
-function normalize(value: string) {
+interface BrandCandidate {
+  brand: string;
+  alias: ProductBrandAlias;
+  normalizedAlias: string;
+  score: number;
+}
+
+function normalizeText(
+  value: string | null | undefined
+): string {
+  if (typeof value !== "string") {
+    return "";
+  }
+
   return value
     .toLowerCase()
-    .replace(/[^a-z0-9 ]/g, " ")
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/&/g, " and ")
+    .replace(/[^a-z0-9]+/g, " ")
+    .trim()
+    .replace(/\s+/g, " ");
+}
+
+function escapeRegExp(value: string): string {
+  return value.replace(
+    /[.*+?^${}()|[\]\\]/g,
+    "\\$&"
+  );
+}
+
+function containsWholeAlias(
+  normalizedInput: string,
+  normalizedAlias: string
+): boolean {
+  const pattern = new RegExp(
+    `(?:^|\\s)${escapeRegExp(
+      normalizedAlias
+    )}(?:$|\\s)`,
+    "i"
+  );
+
+  return pattern.test(normalizedInput);
+}
+
+function removeMatchedAlias(
+  originalInput: string,
+  aliasValue: string
+): string {
+  const normalizedAliasParts =
+    normalizeText(aliasValue).split(" ");
+
+  const flexibleAliasPattern =
+    normalizedAliasParts
+      .map(escapeRegExp)
+      .join("[\\s\\-.'&]*");
+
+  const pattern = new RegExp(
+    `(^|\\s)${flexibleAliasPattern}(?=\\s|$)`,
+    "i"
+  );
+
+  return originalInput
+    .replace(pattern, " ")
     .replace(/\s+/g, " ")
     .trim();
 }
 
-function toTitleCase(value: string) {
-  return value.replace(
-    /\b\w/g,
-    character => character.toUpperCase()
-  );
-}
+function calculateCandidateScore(
+  alias: ProductBrandAlias,
+  normalizedAlias: string
+): number {
+  const priority = alias.priority ?? 0;
 
-export interface BrandDetectionResult {
-  brand: string;
-  productName: string;
-  matchedAlias: string;
+  // Longer aliases should beat shorter ambiguous ones.
+  const lengthScore =
+    normalizedAlias.length * 10;
+
+  const wordScore =
+    normalizedAlias.split(" ").length * 25;
+
+  return priority + lengthScore + wordScore;
 }
 
 export function detectProductBrand(
-  text: string
+  input: string
 ): BrandDetectionResult | null {
-  const normalized = normalize(text);
+  const normalizedInput =
+    normalizeText(input);
 
-  if (!normalized) {
+  if (!normalizedInput) {
     return null;
   }
+
+  const candidates: BrandCandidate[] = [];
 
   for (
     const [brand, metadata]
@@ -43,45 +114,86 @@ export function detectProductBrand(
       PRODUCT_BRAND_METADATA
     )
   ) {
-    for (const alias of metadata.aliases) {
+    for (const aliasEntry of metadata.aliases) {
+      const alias =
+        typeof aliasEntry === "string"
+          ? {
+              value: aliasEntry,
+              removeFromProductName: true,
+              priority: 0,
+              type: "brand" as const,
+            }
+          : aliasEntry;
+
+      if (
+        !alias ||
+        typeof alias.value !== "string"
+      ) {
+        continue;
+      }
+
       const normalizedAlias =
-        normalize(alias);
+        normalizeText(alias.value);
 
-      if (!normalizedAlias) {
-        continue;
-      }
-
-      const aliasPattern = new RegExp(
-        `(^|\\s)${escapeRegExp(
+      if (
+        !normalizedAlias ||
+        !containsWholeAlias(
+          normalizedInput,
           normalizedAlias
-        )}(?=\\s|$)`,
-        "i"
-      );
-
-      if (!aliasPattern.test(normalized)) {
+        )
+      ) {
         continue;
       }
 
-      const cleanedName = normalized
-        .replace(aliasPattern, " ")
-        .replace(/\s+/g, " ")
-        .trim();
-
-      return {
+      candidates.push({
         brand,
-        matchedAlias: alias,
-        productName:
-          toTitleCase(cleanedName),
-      };
+        alias,
+        normalizedAlias,
+        score: calculateCandidateScore(
+          alias,
+          normalizedAlias
+        ),
+      });
     }
   }
 
-  return null;
-}
+  if (candidates.length === 0) {
+    return null;
+  }
 
-function escapeRegExp(value: string) {
-  return value.replace(
-    /[.*+?^${}()|[\]\\]/g,
-    "\\$&"
-  );
+  candidates.sort((a, b) => {
+    if (b.score !== a.score) {
+      return b.score - a.score;
+    }
+
+    return (
+      b.normalizedAlias.length -
+      a.normalizedAlias.length
+    );
+  });
+
+  const bestMatch = candidates[0];
+
+  const cleanedProductName =
+    bestMatch.alias.removeFromProductName
+      ? removeMatchedAlias(
+          input,
+          bestMatch.alias.value
+        ).trim()
+      : input.trim();
+
+  const productName =
+    cleanedProductName.length > 0
+      ? cleanedProductName
+      : input.trim();
+
+  return {
+    brand: bestMatch.brand,
+    matchedAlias: bestMatch.alias.value,
+    matchedAliasType: bestMatch.alias.type,
+    removeFromProductName:
+      bestMatch.alias.removeFromProductName,
+    productName,
+    score: bestMatch.score,
+  };
 }
