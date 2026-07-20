@@ -18,11 +18,12 @@ type Props = {
 
 export default function SearchBar({
   value,
+  placeholder,
   onChangeText,
 }: Props) {
   return (
     <TextInput
-      placeholder="Search store..."
+      placeholder={placeholder}
       value={value}
       onChangeText={onChangeText}
       style={styles.input}

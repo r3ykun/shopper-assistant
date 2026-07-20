@@ -34,23 +34,44 @@ create<CartStore>((set, get) => ({
   items: [],
 
   addItem(item) {
-    const existing = get().items.find(
-      cartItem =>
-        cartItem.productId === item.productId
-    );
+    const currentItems = get().items;
+
+    const quantity =
+      Math.max(1, Math.floor(item.quantity));
+
+    const price =
+      Math.max(0, item.price);
+
+    const existing =
+      currentItems.find(
+        cartItem =>
+          cartItem.productId ===
+          item.productId
+      );
 
     if (existing) {
       set({
-        items: get().items.map(cartItem =>
-          cartItem.productId === item.productId
-            ? {
-                ...cartItem,
-                quantity: cartItem.quantity + item.quantity,
-                subtotal:
-                  (cartItem.quantity + item.quantity) *
-                  cartItem.price,
-              }
-            : cartItem
+        items: currentItems.map(
+          cartItem => {
+            if (
+              cartItem.productId !==
+              item.productId
+            ) {
+              return cartItem;
+            }
+
+            const updatedQuantity =
+              cartItem.quantity +
+              quantity;
+
+            return {
+              ...cartItem,
+              quantity: updatedQuantity,
+              subtotal:
+                updatedQuantity *
+                cartItem.price,
+            };
+          }
         ),
       });
 
@@ -59,10 +80,12 @@ create<CartStore>((set, get) => ({
 
     set({
       items: [
-        ...get().items,
+        ...currentItems,
         {
           ...item,
-          subtotal: item.quantity * item.price,
+          price,
+          quantity,
+          subtotal: quantity * price,
         },
       ],
     });

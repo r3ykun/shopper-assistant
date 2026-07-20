@@ -1,3 +1,4 @@
+//shopper-assistant\src\constants\productBrandMetadata.ts
 import type {
   ProductBrandMetadataMap,
 } from "./productBrandMetadata.types";

@@ -347,13 +347,13 @@
 - ✅ Product Line Recognition
 
 ## Ongoing
-- 🚧 Autofill Indicators
-- 🚧 Autofill Confidence & Lock Status
-- 🚧 Detection Status Card
-- 🚧 Shopping List Dashboard Widget
-- 🚧 Alphabetical Sorting
-- 🚧 Search Icon
-- 🚧 Barcode Scanner Sound
+- Autofill Indicators
+- Autofill Confidence & Lock Status
+- Detection Status Card
+- Shopping List Dashboard Widget
+- Alphabetical Sorting
+- Search Icon
+- Barcode Scanner Sound
 
 ---
 

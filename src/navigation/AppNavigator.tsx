@@ -1,16 +1,11 @@
 import React from "react";
-import { SafeAreaView, Text } from "react-native";
+import { NavigationContainer } from "@react-navigation/native";
+import RootStack from "./RootStack";
 
-export default function HomeScreen() {
+export default function AppNavigator() {
   return (
-    <SafeAreaView
-      style={{
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
-      <Text>Home Screen</Text>
-    </SafeAreaView>
+    <NavigationContainer>
+      <RootStack />
+    </NavigationContainer>
   );
 }

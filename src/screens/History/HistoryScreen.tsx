@@ -10,7 +10,7 @@ export default function HistoryScreen() {
         alignItems: "center",
       }}
     >
-      <Text>📊 History</Text>
+      <Text>🕒 History</Text>
     </View>
   );
 }

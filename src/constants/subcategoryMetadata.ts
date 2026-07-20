@@ -7,13 +7,9 @@ import {
 
 export interface SubcategoryMetadataItem {
   category: string;
-
   productKeywords: string[];
-
   shoppingAliases: string[];
-
   defaultUnit?: ProductUnit;
-
   commonUnits?: ProductUnit[];
 }
 

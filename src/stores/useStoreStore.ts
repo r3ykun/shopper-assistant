@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { Store } from "../types/Store";
+import { Store } from "../database/entities/Store";
 
 type StoreState = {
   selectedStore: Store | null;
