@@ -1,12 +1,14 @@
 //shopper-assistant\src\screens\Products\ProductsScreen.tsx
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import { useNavigation } from "@react-navigation/native";
 import {
     Alert,
     FlatList,
     StyleSheet,
     Text,
+    TouchableOpacity,
     View,
+    Modal
 } from "react-native";
 import {
     useFocusEffect,
@@ -123,33 +125,204 @@ export default function ProductsScreen() {
 
     }
 
-    const filteredProducts = products.filter(product => {
+    type SortOption =
+        | "latest"
+        | "oldest"
+        | "priceHigh"
+        | "priceLow"
+        | "brandAsc"
+        | "brandDesc"
+        | "nameAsc"
+        | "nameDesc";
+
+    const [sortOption, setSortOption] =
+        useState<SortOption>("latest");
+
+    const [sortVisible, setSortVisible] =
+        useState(false);
+
+    const filteredProducts = useMemo(() => {
         const keyword =
             search.trim().toLowerCase();
 
-        const matchesSearch =
-            product.name
-            .toLowerCase()
-            .includes(keyword) ||
-            product.barcode.includes(keyword) ||
-            (product.brand ?? "")
-            .toLowerCase()
-            .includes(keyword);
+        const matchingProducts =
+            products.filter(product => {
+                const productName =
+                    product.name
+                        ?.trim()
+                        .toLowerCase() ?? "";
 
-        const matchesBrand =
-            selectedBrand === "All Brands" ||
-            product.brand === selectedBrand;
+                const productBrand =
+                    product.brand
+                        ?.trim()
+                        .toLowerCase() ?? "";
 
-        const matchesCategory =
-            selectedCategory === "All Categories" ||
-            product.category === selectedCategory;
+                const productBarcode =
+                    product.barcode?.trim() ?? "";
 
-        return (
-            matchesSearch &&
-            matchesBrand &&
-            matchesCategory
-        );
-    });
+                const matchesSearch =
+                    productName.includes(keyword) ||
+                    productBrand.includes(keyword) ||
+                    productBarcode.includes(keyword);
+
+                const matchesBrand =
+                    selectedBrand === "All Brands" ||
+                    product.brand?.trim() === selectedBrand;
+
+                const matchesCategory =
+                    selectedCategory === "All Categories" ||
+                    product.category?.trim() === selectedCategory;
+
+                return (
+                    matchesSearch &&
+                    matchesBrand &&
+                    matchesCategory
+                );
+            });
+
+            matchingProducts.sort((a, b) => {
+
+                switch (sortOption) {
+
+                    case "latest":
+                        return (
+                            new Date(b.createdAt ?? 0).getTime() -
+                            new Date(a.createdAt ?? 0).getTime()
+                        );
+
+                    case "oldest":
+                        return (
+                            new Date(a.createdAt ?? 0).getTime() -
+                            new Date(b.createdAt ?? 0).getTime()
+                        );
+
+                    case "priceHigh": {
+
+                        const priceA =
+                            selectedStore
+                                ? StorePriceService.getPrice(
+                                    selectedStore.id,
+                                    a.id
+                                ) ?? 0
+                                : a.srp ?? 0;
+
+                        const priceB =
+                            selectedStore
+                                ? StorePriceService.getPrice(
+                                    selectedStore.id,
+                                    b.id
+                                ) ?? 0
+                                : b.srp ?? 0;
+
+                        return priceB - priceA;
+                    }
+
+                    case "priceLow": {
+
+                        const priceA =
+                            selectedStore
+                                ? StorePriceService.getPrice(
+                                    selectedStore.id,
+                                    a.id
+                                ) ?? 0
+                                : a.srp ?? 0;
+
+                        const priceB =
+                            selectedStore
+                                ? StorePriceService.getPrice(
+                                    selectedStore.id,
+                                    b.id
+                                ) ?? 0
+                                : b.srp ?? 0;
+
+                        return priceA - priceB;
+                    }
+
+                    case "brandAsc":
+                        return (a.brand ?? "").localeCompare(
+                            b.brand ?? "",
+                            undefined,
+                            {
+                                sensitivity: "base",
+                                numeric: true,
+                            }
+                        );
+
+                    case "brandDesc":
+                        return (b.brand ?? "").localeCompare(
+                            a.brand ?? "",
+                            undefined,
+                            {
+                                sensitivity: "base",
+                                numeric: true,
+                            }
+                        );
+
+                    case "nameAsc":
+                        return (a.name ?? "").localeCompare(
+                            b.name ?? "",
+                            undefined,
+                            {
+                                sensitivity: "base",
+                                numeric: true,
+                            }
+                        );
+
+                    case "nameDesc":
+                        return (b.name ?? "").localeCompare(
+                            a.name ?? "",
+                            undefined,
+                            {
+                                sensitivity: "base",
+                                numeric: true,
+                            }
+                        );
+
+                    default:
+                        return 0;
+                }
+
+            });
+        return matchingProducts;
+    }, [
+        products,
+        search,
+        selectedBrand,
+        selectedCategory,
+        sortOption,
+        selectedStore
+    ]);
+
+    const renderSortOption = (
+        label: string,
+        value: SortOption,
+    ) => (
+
+        <TouchableOpacity
+            style={[
+                styles.sortOption,
+                sortOption === value &&
+                styles.selectedSortOption,
+            ]}
+            onPress={() => {
+                setSortOption(value);
+                setSortVisible(false);
+            }}
+        >
+
+            <Text style={styles.sortOptionText}>
+                {label}
+            </Text>
+
+            {sortOption === value && (
+                <Text style={styles.sortCheck}>
+                    ✓
+                </Text>
+            )}
+
+        </TouchableOpacity>
+
+    );
 
     return (
         <Screen>
@@ -159,11 +332,27 @@ export default function ProductsScreen() {
             />
             <View style={styles.container}>
 
-            <SearchBar
-                value={search}
-                placeholder="Search products, brands, or barcodes"
-                onChangeText={setSearch}
-            />
+            <View style={styles.searchRow}>
+                <View style={styles.searchArea}>
+                    <SearchBar
+                        value={search}
+                        placeholder="Search..."
+                        onChangeText={setSearch}
+                    />
+                </View>
+
+                <TouchableOpacity
+                    style={styles.sortButton}
+                    activeOpacity={0.75}
+                    onPress={() =>
+                        setSortVisible(true)
+                    }
+                >
+                    <Text style={styles.sortIcon}>
+                        ⇅
+                    </Text>
+                </TouchableOpacity>
+            </View>
 
             <View style={styles.filters}>
 
@@ -258,6 +447,58 @@ export default function ProductsScreen() {
                 }
             />
             </View>
+
+            <Modal
+                visible={sortVisible}
+                transparent
+                animationType="fade"
+                onRequestClose={() =>
+                    setSortVisible(false)
+                }
+            >
+                <TouchableOpacity
+                    style={styles.sortOverlay}
+                    activeOpacity={1}
+                    onPress={() => setSortVisible(false)}
+                >
+
+                    <TouchableOpacity
+                        activeOpacity={1}
+                        style={styles.sortMenu}
+                    >
+
+                        <Text style={styles.sortMenuTitle}>
+                            Sort Products
+                        </Text>
+
+                        <Text style={styles.sortSection}>
+                            TIME ADDED
+                        </Text>
+
+                        {renderSortOption("Latest First", "latest")}
+                        {renderSortOption("Oldest First", "oldest")}
+
+                        <Text style={styles.sortSection}>
+                            PRICE
+                        </Text>
+
+                        {renderSortOption("Highest First", "priceHigh")}
+                        {renderSortOption("Lowest First", "priceLow")}
+
+                        <Text style={styles.sortSection}>
+                            NAME
+                        </Text>
+
+                        {renderSortOption("Brand (A → Z)", "brandAsc")}
+                        {renderSortOption("Brand (Z → A)", "brandDesc")}
+                        {renderSortOption("Item Name (A → Z)", "nameAsc")}
+                        {renderSortOption("Item Name (Z → A)", "nameDesc")}
+
+                    </TouchableOpacity>
+
+                </TouchableOpacity>
+            </Modal>
+
         </Screen>
     );
 }
@@ -298,8 +539,96 @@ const styles = StyleSheet.create({
     filters: {
         flexDirection: "row",
         gap: 12,
+        marginTop: 6
     },
     filter: {
         flex: 1,
+    },
+    searchRow: {
+        flexDirection: "row",
+        alignItems: "center",
+        gap: 10,
+    },
+
+    searchArea: {
+        flex: 1
+    },
+
+    sortButton: {
+        width: 48,
+        height: 48,
+        justifyContent: "center",
+        alignItems: "center",
+        borderRadius: 12,
+        borderWidth: 1,
+        borderColor: Colors.border,
+        backgroundColor: Colors.surface,
+    },
+
+    sortIcon: {
+        fontSize: 24,
+        fontWeight: "700",
+        color: Colors.primary,
+    },
+
+    sortOverlay: {
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+        paddingHorizontal: 24,
+        backgroundColor: "rgba(0, 0, 0, 0.35)",
+    },
+
+    sortMenu: {
+        width: "100%",
+        maxWidth: 320,
+        overflow: "hidden",
+        borderRadius: 16,
+        backgroundColor: Colors.surface,
+        elevation: 8,
+    },
+
+    sortMenuTitle: {
+        paddingHorizontal: 18,
+        paddingVertical: 16,
+        fontSize: 16,
+        fontWeight: "700",
+        color: Colors.text,
+        borderBottomWidth: 1,
+        borderBottomColor: Colors.border,
+    },
+
+    sortOption: {
+        flexDirection: "row",
+        justifyContent: "space-between",
+        alignItems: "center",
+        paddingHorizontal: 18,
+        paddingVertical: 16,
+        borderBottomWidth: 1,
+        borderBottomColor: Colors.border,
+    },
+
+    selectedSortOption: {
+        backgroundColor: Colors.background,
+    },
+
+    sortOptionText: {
+        fontSize: 15,
+        color: Colors.text,
+    },
+
+    sortCheck: {
+        fontSize: 17,
+        fontWeight: "700",
+        color: Colors.primary,
+    },
+
+    sortSection: {
+        paddingHorizontal: 18,
+        paddingTop: 16,
+        paddingBottom: 6,
+        fontSize: 12,
+        fontWeight: "700",
+        color: Colors.textLight,
     },
 });

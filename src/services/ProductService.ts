@@ -1,3 +1,4 @@
+//shopper-assistant\src\services\ProductService.ts
 import { Product } from "../database/entities/Product";
 import { ProductRepository } from "../database/repositories/ProductRepository";
 

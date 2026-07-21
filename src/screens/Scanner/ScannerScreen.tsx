@@ -8,6 +8,8 @@ import {
   TouchableOpacity,
 } from "react-native";
 
+import { useAudioPlayer } from "expo-audio";
+
 import {
   BarcodeScanningResult,
   CameraView,
@@ -36,6 +38,12 @@ import {
 import QuantitySelector from "../../components/forms/QuantitySelector";
 
 export default function ScannerScreen() {
+
+  const scanSound = useAudioPlayer(
+    require("../../assets/sounds/scannerBeep.wav")  
+  );
+
+  scanSound.volume = 0.05;
 
   const [permission, requestPermission] =
     useCameraPermissions();
@@ -203,19 +211,22 @@ export default function ScannerScreen() {
     );
   }
 
-  function handleBarcodeScanned(
-    result: BarcodeScanningResult
-  ) {
+  function playScanSound() {
+      try {
+          scanSound.seekTo(0);
+          scanSound.play();
+      } catch (error) {
+          console.error(error);
+      }
+  }
+
+  function handleBarcodeScanned(result: BarcodeScanningResult) {
     if (scanned) return;
 
     const barcode = result.data.trim();
 
     if (!barcode) return;
 
-    /*
-    * First reading:
-    * remember it, but do not accept it yet.
-    */
     if (pendingBarcode.current !== barcode) {
       pendingBarcode.current = barcode;
 
@@ -233,10 +244,6 @@ export default function ScannerScreen() {
       return;
     }
 
-    /*
-    * Second identical reading:
-    * accept the barcode.
-    */
     if (pendingBarcodeTimer.current) {
       clearTimeout(
         pendingBarcodeTimer.current
@@ -247,6 +254,7 @@ export default function ScannerScreen() {
     pendingBarcodeTimer.current = null;
 
     setScanned(true);
+    playScanSound();
     setScannedBarcode(barcode);
 
     const foundProduct =

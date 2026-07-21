@@ -330,10 +330,6 @@
 - Reduced number of user taps
 - Overall Product Form polish
 
----
-
-# Ongoing Milestone
-
 ## Milestone 21.5 – Product Form & User Experience Polish
 
 ### Product Detection Engine
@@ -353,15 +349,21 @@
 - Autofill Confidence & Lock Status
 - Detection Status Card
 - Search Icon
-
-#### 🚧 Ongoing
-
-# ongoing
 - Shopping List Dashboard Widget
-
-# next
 - Alphabetical Sorting
 - Barcode Scanner Sound
+
+## Additional Sorting Options
+- Time added (latest or oldest)
+- Price (highest to lowest, vice versa)
+- Name (by brand) (ascending or descending)
+- Name (by item name) (ascending or descending)
+
+---
+
+# Ongoing Milestone
+
+
 
 ---
 
