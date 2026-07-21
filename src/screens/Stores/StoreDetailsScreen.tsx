@@ -823,15 +823,17 @@ export default function StoreDetailsScreen({
                 </View>
               </View>
 
-              <Text style={styles.resultCount}>
-                {search.trim()
-                  ? `Showing ${filteredProducts.length} result${
-                      filteredProducts.length !== 1 ? "s" : ""
-                  } for "${search.trim()}"`
-                  : `Showing ${filteredProducts.length} product${
-                      filteredProducts.length !== 1 ? "s" : ""
-                  }`} 
-              </Text>
+              {!(search.trim() && filteredProducts.length === 0) && (
+                  <Text style={styles.resultCount}>
+                      {search.trim()
+                          ? `Showing ${filteredProducts.length} result${
+                              filteredProducts.length !== 1 ? "s" : ""
+                          } for "${search.trim()}"`
+                          : `Showing ${filteredProducts.length} product${
+                              filteredProducts.length !== 1 ? "s" : ""
+                          }`}
+                  </Text>
+              )}
             </>
           }
           ListEmptyComponent={

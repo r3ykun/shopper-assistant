@@ -11,7 +11,13 @@ import {
 import SearchBar from "../../components/inputs/SearchBar";
 import {
   useNavigation,
+  useFocusEffect
 } from "@react-navigation/native";
+import {
+  ShoppingListItemRecord,
+  ShoppingListRecord,
+  ShoppingListService,
+} from "../../services";
 import Screen from "../../components/layout/Screen";
 import {
   useCartStore,
@@ -31,6 +37,16 @@ export default function HomeScreen() {
   const [cartSearch, setCartSearch] =
     React.useState("");
 
+  const [dashboardList, setDashboardList] =
+    React.useState<ShoppingListRecord | null>(
+      null
+    );
+  
+  const [dashboardListItems, setDashboardListItems] =
+    React.useState<ShoppingListItemRecord[]>(
+      []
+    );
+
   const { selectedStore } =
     useStoreStore();
 
@@ -49,16 +65,68 @@ export default function HomeScreen() {
       return true;
     }
 
-    return (
+  return (
       item.name
-        .toLowerCase()
-        .includes(keyword) ||
+          .toLowerCase()
+          .includes(keyword) ||
       item.barcode.includes(keyword) ||
+      (item.brand ?? "")
+          .toLowerCase()
+          .includes(keyword) ||
       item.category
-        .toLowerCase()
-        .includes(keyword)
-    );
+          .toLowerCase()
+          .includes(keyword)
+  );
   });
+
+  const loadDashboardList =
+    React.useCallback(() => {
+      const lists =
+        ShoppingListService.getAllLists();
+
+      const activeList =
+        lists.length > 0
+          ? lists[0]
+          : null;
+
+      setDashboardList(activeList);
+
+      if (!activeList) {
+        setDashboardListItems([]);
+        return;
+      }
+
+      setDashboardListItems(
+        ShoppingListService.getItems(
+          activeList.id
+        )
+      );
+    }, []);
+
+  useFocusEffect(
+    React.useCallback(() => {
+      loadDashboardList();
+    }, [loadDashboardList])
+  );
+
+  const completedShoppingListItems =
+    dashboardListItems.filter(
+      item => item.checked === 1
+    ).length;
+
+  const remainingShoppingListItems =
+    dashboardListItems.length -
+    completedShoppingListItems;
+
+  const shoppingListProgress =
+    dashboardListItems.length > 0
+      ? Math.round(
+          (
+            completedShoppingListItems /
+            dashboardListItems.length
+          ) * 100
+        )
+      : 0;
 
   function handleClearCart() {
     if (items.length === 0) {
@@ -134,6 +202,101 @@ export default function HomeScreen() {
           </TouchableOpacity>
         </View>
 
+        <View style={styles.shoppingListSection}>
+          <TouchableOpacity
+            style={styles.shoppingListCard}
+            activeOpacity={0.8}
+            onPress={() => {
+              if (dashboardList) {
+                navigation.navigate(
+                  "ShoppingListDetails",
+                  {
+                    shoppingListId:
+                      dashboardList.id,
+                  }
+                );
+
+                return;
+              }
+
+              navigation.navigate(
+                "MainDrawer",
+                {
+                  screen: "ShoppingList",
+                }
+              );
+            }}
+          >
+            <View style={styles.shoppingListTopRow}>
+              <View style={styles.shoppingListTitleArea}>
+                <View style={styles.shoppingListIcon}>
+                  <Text style={styles.shoppingListIconText}>
+                    📝
+                  </Text>
+                </View>
+
+                <View style={styles.shoppingListInfo}>
+                  <Text style={styles.shoppingListLabel}>
+                    SHOPPING LIST
+                  </Text>
+
+                  <Text
+                    style={styles.shoppingListName}
+                    numberOfLines={1}
+                  >
+                    {dashboardList?.name ??
+                      "No active shopping list"}
+                  </Text>
+                </View>
+              </View>
+
+              <Text style={styles.shoppingListArrow}>
+                ›
+              </Text>
+            </View>
+
+            {dashboardList ? (
+              <>
+                <View style={styles.progressSummary}>
+                  <Text style={styles.progressStatus}>
+                    {remainingShoppingListItems}{" "}
+                    {remainingShoppingListItems === 1
+                      ? "item"
+                      : "items"}{" "}
+                    remaining
+                  </Text>
+
+                  <Text style={styles.progressPercentage}>
+                    {shoppingListProgress}%
+                  </Text>
+                </View>
+
+                <View style={styles.progressTrack}>
+                  <View
+                    style={[
+                      styles.progressFill,
+                      {
+                        width:
+                          `${shoppingListProgress}%`,
+                      },
+                    ]}
+                  />
+                </View>
+
+                <Text style={styles.progressDetails}>
+                  {completedShoppingListItems} of{" "}
+                  {dashboardListItems.length} completed
+                </Text>
+              </>
+            ) : (
+              <Text style={styles.noListMessage}>
+                Tap here to create your first shopping
+                list.
+              </Text>
+            )}
+          </TouchableOpacity>
+        </View>
+
         <View style={styles.cartSection}>
 
             <View style={styles.cartHeader}>
@@ -201,15 +364,17 @@ export default function HomeScreen() {
 
           </View>
 
-          <Text style={styles.resultCount}>
-            {cartSearch.trim()
-                ? `Showing ${filteredItems.length} result${
-                    filteredItems.length !== 1 ? "s" : ""
-                } for "${cartSearch.trim()}"`
-                : `Showing ${filteredItems.length} cart item${
-                    filteredItems.length !== 1 ? "s" : ""
-                }`}
-          </Text>
+          {!(cartSearch.trim() && filteredItems.length === 0) && (
+              <Text style={styles.resultCount}>
+                  {cartSearch.trim()
+                      ? `Showing ${filteredItems.length} result${
+                          filteredItems.length !== 1 ? "s" : ""
+                      } for "${cartSearch.trim()}"`
+                      : `Showing ${filteredItems.length} cart item${
+                          filteredItems.length !== 1 ? "s" : ""
+                      }`}
+              </Text>
+          )}
 
           <FlatList
             data={filteredItems}
@@ -239,6 +404,15 @@ export default function HomeScreen() {
                     styles.nameColumn,
                   ]}
                 >
+                {item.brand ? (
+                    <HighlightedText
+                        text={item.brand}
+                        query={cartSearch}
+                        style={styles.productBrand}
+                        numberOfLines={1}
+                    />
+                ) : null}
+
                 <HighlightedText
                     text={item.name}
                     query={cartSearch}
@@ -602,5 +776,120 @@ const styles = StyleSheet.create({
       borderBottomColor: Colors.border,
       backgroundColor: Colors.surface,
       textAlign: "center"
+  },
+
+  shoppingListSection: {
+    paddingHorizontal: Spacing.lg,
+    paddingBottom: Spacing.lg,
+    backgroundColor: Colors.background,
+  },
+
+  shoppingListCard: {
+    padding: Spacing.md,
+    borderRadius: 18,
+    borderWidth: 1,
+    borderColor: Colors.border,
+    backgroundColor: Colors.surface,
+    elevation: 3,
+  },
+
+  shoppingListTopRow: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
+
+  shoppingListTitleArea: {
+    flex: 1,
+    flexDirection: "row",
+    alignItems: "center",
+  },
+
+  shoppingListIcon: {
+    width: 42,
+    height: 42,
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: 21,
+    backgroundColor: Colors.primary,
+  },
+
+  shoppingListIconText: {
+    fontSize: 20,
+  },
+
+  shoppingListInfo: {
+    flex: 1,
+    marginLeft: Spacing.sm,
+  },
+
+  shoppingListLabel: {
+    fontSize: 11,
+    fontWeight: "700",
+    color: Colors.primary,
+  },
+
+  shoppingListName: {
+    marginTop: 2,
+    fontSize: 16,
+    fontWeight: "700",
+    color: Colors.text,
+  },
+
+  shoppingListArrow: {
+    marginLeft: Spacing.sm,
+    fontSize: 30,
+    color: Colors.textLight,
+  },
+
+  progressSummary: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginTop: Spacing.md,
+    marginBottom: 6,
+  },
+
+  progressStatus: {
+    fontSize: 12,
+    color: Colors.textLight,
+  },
+
+  progressPercentage: {
+    fontSize: 12,
+    fontWeight: "700",
+    color: Colors.primary,
+  },
+
+  progressTrack: {
+    height: 8,
+    overflow: "hidden",
+    borderRadius: 4,
+    backgroundColor: Colors.border,
+  },
+
+  progressFill: {
+    height: "100%",
+    borderRadius: 4,
+    backgroundColor: Colors.primary,
+  },
+
+  progressDetails: {
+    marginTop: 6,
+    fontSize: 10,
+    color: Colors.textLight,
+  },
+
+  noListMessage: {
+    marginTop: Spacing.sm,
+    fontSize: 12,
+    color: Colors.textLight,
+  },
+
+  productBrand: {
+      fontSize: 10,
+      fontWeight: "700",
+      color: Colors.primary,
+      marginBottom: 1,
   },
 });

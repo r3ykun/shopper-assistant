@@ -351,13 +351,16 @@
 - Canonical Brand Resolution
 - Autofill Indicators
 - Autofill Confidence & Lock Status
+- Detection Status Card
+- Search Icon
 
 #### 🚧 Ongoing
 
-- Detection Status Card
+# ongoing
 - Shopping List Dashboard Widget
+
+# next
 - Alphabetical Sorting
-- Search Icon
 - Barcode Scanner Sound
 
 ---
