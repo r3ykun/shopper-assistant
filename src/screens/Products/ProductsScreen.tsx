@@ -192,13 +192,23 @@ export default function ProductsScreen() {
                     item.id.toString()
                 }
                 ListEmptyComponent={
-                    <Text style={styles.empty}>
-                        {
-                        products.length === 0
-                            ? "No products yet."
-                            : "No products match the selected filters."
-                        }
+                <View style={styles.emptyContainer}>
+                    <Text style={styles.emptyTitle}>
+                    {products.length === 0
+                        ? "No products yet"
+                        : search.trim()
+                        ? "No matching products"
+                        : "No products match the filters"}
                     </Text>
+
+                    <Text style={styles.emptyMessage}>
+                    {products.length === 0
+                        ? "Add your first product using the button below."
+                        : search.trim()
+                        ? `No results for "${search.trim()}".`
+                        : "Try selecting a different brand or category."}
+                    </Text>
+                </View>
                 }
                 contentContainerStyle={{
                     paddingBottom: 90,
@@ -206,6 +216,7 @@ export default function ProductsScreen() {
                 renderItem={({ item }) => (
                     <ProductRow
                     product={item}
+                    searchQuery={search}
                     storePrice={
                         selectedStore
                         ? StorePriceService.getPrice(
@@ -219,7 +230,9 @@ export default function ProductsScreen() {
                         productId: item.id,
                         })
                     }
-                    onDelete={() => handleDelete(item.id)}
+                    onDelete={() =>
+                        handleDelete(item.id)
+                    }
                     />
                 )}
             />
@@ -239,9 +252,23 @@ const styles = StyleSheet.create({
         flex: 1,
         padding: 16,
     },
-    empty:{
-        marginTop:80,
-        textAlign:"center",
+    emptyContainer: {
+    marginTop: 80,
+    alignItems: "center",
+    paddingHorizontal: 24,
+    },
+
+    emptyTitle: {
+    fontSize: 18,
+    fontWeight: "700",
+    textAlign: "center",
+    },
+
+    emptyMessage: {
+    marginTop: 8,
+    textAlign: "center",
+    lineHeight: 20,
+    opacity: 0.7,
     },
     filters: {
         flexDirection: "row",

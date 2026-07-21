@@ -1,31 +1,29 @@
+//shopper-assistant\src\screens\Home\HomeScreen.tsx
 import React from "react";
 import {
   Alert,
   FlatList,
   StyleSheet,
   Text,
-  TextInput,
   TouchableOpacity,
   View,
 } from "react-native";
-
+import SearchBar from "../../components/inputs/SearchBar";
 import {
   useNavigation,
 } from "@react-navigation/native";
-
 import Screen from "../../components/layout/Screen";
-
 import {
   useCartStore,
   useStoreStore,
 } from "../../stores";
-
 import {
   Colors,
   Spacing,
   Typography,
 } from "../../theme";
 import AppHeader from "../../components/layout/AppHeader";
+import HighlightedText from "../../components/text/HighlightedText";
 
 export default function HomeScreen() {
   const navigation = useNavigation<any>();
@@ -151,18 +149,11 @@ export default function HomeScreen() {
             </View>
 
             <View style={styles.searchContainer}>
-              <Text style={styles.searchIcon}>
-                🔍
-              </Text>
-
-              <TextInput
-                style={styles.searchInput}
-                value={cartSearch}
-                placeholder="Search cart"
-                placeholderTextColor={Colors.textLight}
-                onChangeText={setCartSearch}
-                returnKeyType="search"
-              />
+                <SearchBar
+                    value={cartSearch}
+                    placeholder="Search cart products"
+                    onChangeText={setCartSearch}
+                />
             </View>
           </View>
 
@@ -239,19 +230,19 @@ export default function HomeScreen() {
                     styles.nameColumn,
                   ]}
                 >
-                  <Text
+                <HighlightedText
+                    text={item.name}
+                    query={cartSearch}
                     style={styles.productName}
                     numberOfLines={1}
-                  >
-                    {item.name}
-                  </Text>
+                />
 
-                  <Text
+                <HighlightedText
+                    text={`#${item.barcode}`}
+                    query={cartSearch}
                     style={styles.productBarcode}
                     numberOfLines={1}
-                  >
-                    #{item.barcode}
-                  </Text>
+                />
                 </View>
 
                 <View style={styles.quantityColumn}>
@@ -260,15 +251,15 @@ export default function HomeScreen() {
                   </Text>
                 </View>
 
-                <Text
-                  style={[
-                    styles.rowCell,
-                    styles.categoryColumn,
-                  ]}
-                  numberOfLines={1}
-                >
-                  {item.category}
-                </Text>
+                <HighlightedText
+                    text={item.category}
+                    query={cartSearch}
+                    style={[
+                        styles.rowCell,
+                        styles.categoryColumn,
+                    ]}
+                    numberOfLines={1}
+                />
 
                 <View style={styles.priceColumn}>
                   <Text style={styles.rowCell}>
@@ -578,7 +569,9 @@ const styles = StyleSheet.create({
   },
 
   searchContainer: {
-    width: 150,
+    flex: 1,
+    marginLeft: Spacing.md,
+    width: 260,
     height: 40,
     flexDirection: "row",
     alignItems: "center",
@@ -591,13 +584,13 @@ const styles = StyleSheet.create({
 
   searchIcon: {
     marginRight: 6,
-    fontSize: 14,
+    fontSize: 18,
   },
 
   searchInput: {
     flex: 1,
     paddingVertical: 0,
-    fontSize: 13,
+    fontSize: 16,
     color: Colors.text,
   },
 });

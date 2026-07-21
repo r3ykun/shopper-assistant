@@ -5,12 +5,13 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-
+import HighlightedText from "../text/HighlightedText";
 import { Product } from "../../database/entities/Product";
 import { Colors } from "../../theme";
 
 type Props = {
   product: Product;
+  searchQuery?: string;
   storePrice?: number | null;
   onEdit: () => void;
   onDelete: () => void;
@@ -18,6 +19,7 @@ type Props = {
 
 export default function ProductRow({
   product,
+  searchQuery = "",
   storePrice,
   onEdit,
   onDelete,
@@ -25,19 +27,19 @@ export default function ProductRow({
   return (
     <View style={styles.row}>
       <View style={styles.productColumn}>
-        <Text
+        <HighlightedText
+          text={product.brand || "No Brand"}
+          query={searchQuery}
           style={styles.brand}
           numberOfLines={1}
-        >
-          {product.brand || "No Brand"}
-        </Text>
+        />
 
-        <Text
+        <HighlightedText
+          text={product.name}
+          query={searchQuery}
           style={styles.productName}
           numberOfLines={2}
-        >
-          {product.name}
-        </Text>
+        />
 
         <Text style={styles.category}>
           {product.subcategory
@@ -45,12 +47,12 @@ export default function ProductRow({
             : product.category}
         </Text>
 
-        <Text
+        <HighlightedText
+          text={`#${product.barcode}`}
+          query={searchQuery}
           style={styles.barcode}
           numberOfLines={1}
-        >
-          #{product.barcode}
-        </Text>
+        />
 
         <Text style={styles.measurement}>
           {product.measurement ?? 1}{" "}

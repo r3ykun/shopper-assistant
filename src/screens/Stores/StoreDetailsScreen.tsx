@@ -1,8 +1,8 @@
+//shopper-assistant\src\screens\Stores\StoreDetailsScreen.tsx
 import React, {
   useEffect,
   useState,
 } from "react";
-
 import {
   FlatList,
   StyleSheet,
@@ -11,44 +11,36 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-
 import {
   NativeStackScreenProps,
 } from "@react-navigation/native-stack";
-
 import {
   RootStackParamList,
 } from "../../navigation/RootStack";
-
 import Screen from "../../components/layout/Screen";
 import AppHeader from "../../components/layout/AppHeader";
-import AppTextInput from "../../components/forms/AppTextInput";
-
 import {
   Product,
 } from "../../database/entities/Product";
-
 import {
   Store,
 } from "../../database/entities/Store";
-
 import {
   ProductService,
   StorePriceService,
 } from "../../services";
-
 import {
   database,
 } from "../../database/database";
-
 import {
   useStoreStore,
 } from "../../stores";
-
 import {
   Colors,
   Spacing,
 } from "../../theme";
+import SearchBar from "../../components/inputs/SearchBar";
+import HighlightedText from "../../components/text/HighlightedText";
 
 type Props =
   NativeStackScreenProps<
@@ -733,10 +725,10 @@ export default function StoreDetailsScreen({
                 )}
               </View>
 
-              <AppTextInput
-                value={search}
-                placeholder="Search products..."
-                onChangeText={setSearch}
+              <SearchBar
+                  value={search}
+                  placeholder="Search products, brands, categories, or barcodes"
+                  onChangeText={setSearch}
               />
 
               <View
@@ -861,17 +853,13 @@ export default function StoreDetailsScreen({
             </>
           }
           ListEmptyComponent={
-            <View
-              style={
-                styles.emptyContainer
-              }
-            >
-              <Text
-                style={
-                  styles.emptyText
-                }
-              >
-                No products found.
+            <View style={styles.emptyContainer}>
+              <Text style={styles.emptyText}>
+                {products.length === 0
+                  ? "No products yet."
+                  : search.trim()
+                    ? `No results for "${search.trim()}"`
+                    : "No products found."}
               </Text>
             </View>
           }
@@ -976,39 +964,29 @@ export default function StoreDetailsScreen({
                     styles.productColumn
                   }
                 >
-                  <Text
-                    style={
-                      styles.brand
-                    }
-                  >
-                    {item.brand ||
-                      "No Brand"}
-                  </Text>
+                  <HighlightedText
+                      text={item.brand || "No Brand"}
+                      query={search}
+                      style={styles.brand}
+                  />
 
-                  <Text
-                    style={
-                      styles.productName
-                    }
-                  >
-                    {item.name}
-                  </Text>
+                  <HighlightedText
+                      text={item.name}
+                      query={search}
+                      style={styles.productName}
+                  />
 
-                  <Text
-                    style={
-                      styles.category
-                    }
-                  >
-                    {item.category ||
-                      "Uncategorized"}
-                  </Text>
+                  <HighlightedText
+                      text={item.category || "Uncategorized"}
+                      query={search}
+                      style={styles.category}
+                  />
 
-                  <Text
-                    style={
-                      styles.barcode
-                    }
-                  >
-                    #{item.barcode}
-                  </Text>
+                  <HighlightedText
+                      text={`#${item.barcode}`}
+                      query={search}
+                      style={styles.barcode}
+                  />
                 </View>
 
                 <View
