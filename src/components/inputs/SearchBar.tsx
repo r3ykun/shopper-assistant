@@ -76,13 +76,10 @@ const styles = StyleSheet.create({
     minHeight: 48,
     flexDirection: "row",
     alignItems: "center",
-
     paddingHorizontal: Spacing.md,
-
     borderWidth: 1,
     borderColor: Colors.border,
     borderRadius: 12,
-
     backgroundColor: Colors.surface,
   },
 
@@ -93,7 +90,6 @@ const styles = StyleSheet.create({
   input: {
     flex: 1,
     paddingVertical: Spacing.sm,
-
     fontSize: Typography.body,
     color: Colors.text,
   },

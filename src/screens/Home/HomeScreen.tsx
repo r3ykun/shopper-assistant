@@ -135,27 +135,26 @@ export default function HomeScreen() {
         </View>
 
         <View style={styles.cartSection}>
-          <View style={styles.cartHeader}>
-            <View style={styles.cartTitleContainer}>
-              <View style={styles.cartIcon}>
-                <Text style={styles.cartIconText}>
-                  🛒
-                </Text>
-              </View>
 
-              <Text style={styles.cartTitle}>
-                CART
-              </Text>
-            </View>
+            <View style={styles.cartHeader}>
+                <View style={styles.cartTitleContainer}>
+                    <View style={styles.cartIcon}>
+                        <Text style={styles.cartIconText}>🛒</Text>
+                    </View>
 
-            <View style={styles.searchContainer}>
-                <SearchBar
-                    value={cartSearch}
-                    placeholder="Search cart products"
-                    onChangeText={setCartSearch}
-                />
+                    <Text style={styles.cartTitle}>
+                        CART
+                    </Text>
+                </View>
+
+                <View style={styles.searchContainer}>
+                    <SearchBar
+                        value={cartSearch}
+                        placeholder="Search cart products"
+                        onChangeText={setCartSearch}
+                    />
+                </View>
             </View>
-          </View>
 
           <View style={styles.tableHeader}>
             <Text
@@ -201,6 +200,16 @@ export default function HomeScreen() {
             </Text>
 
           </View>
+
+          <Text style={styles.resultCount}>
+            {cartSearch.trim()
+                ? `Showing ${filteredItems.length} result${
+                    filteredItems.length !== 1 ? "s" : ""
+                } for "${cartSearch.trim()}"`
+                : `Showing ${filteredItems.length} cart item${
+                    filteredItems.length !== 1 ? "s" : ""
+                }`}
+          </Text>
 
           <FlatList
             data={filteredItems}
@@ -381,24 +390,25 @@ const styles = StyleSheet.create({
   },
 
   cartHeader: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    marginBottom: Spacing.md,
+      flexDirection: "row",
+      alignItems: "center",
+      marginBottom: 8,
   },
 
   cartTitleContainer: {
-    flexDirection: "row",
-    alignItems: "center",
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: "center",
+      height: 48,
   },
 
   cartIcon: {
-    width: 46,
-    height: 46,
-    justifyContent: "center",
-    alignItems: "center",
-    borderRadius: 23,
-    backgroundColor: Colors.primary,
+      width: 46,
+      height: 46,
+      justifyContent: "center",
+      alignItems: "center",
+      borderRadius: 23,
+      backgroundColor: Colors.primary,
   },
 
   cartIconText: {
@@ -406,10 +416,11 @@ const styles = StyleSheet.create({
   },
 
   cartTitle: {
-    marginLeft: Spacing.sm,
-    fontSize: Typography.heading,
-    fontWeight: "700",
-    color: Colors.text,
+      marginLeft: Spacing.sm,
+      lineHeight: 24,   // Helps vertically center the text
+      fontSize: Typography.heading,
+      fontWeight: "700",
+      color: Colors.text,
   },
 
   tableHeader: {
@@ -570,27 +581,26 @@ const styles = StyleSheet.create({
 
   searchContainer: {
     flex: 1,
-    marginLeft: Spacing.md,
-    width: 260,
-    height: 40,
-    flexDirection: "row",
-    alignItems: "center",
-    paddingHorizontal: 10,
-    borderWidth: 1,
-    borderColor: Colors.border,
-    borderRadius: 20,
-    backgroundColor: Colors.background,
+    marginLeft: 12,
+    justifyContent: 'center',
   },
 
-  searchIcon: {
-    marginRight: 6,
-    fontSize: 18,
+  searchSection: {
+      marginBottom: 6,
   },
 
-  searchInput: {
-    flex: 1,
-    paddingVertical: 0,
-    fontSize: 16,
-    color: Colors.text,
+  searchBarContainer: {
+      marginLeft: 150,
+  },
+
+  resultCount: {
+      paddingVertical: 6,
+      paddingHorizontal: 12,
+      fontSize: 12,
+      color: Colors.textLight,
+      borderBottomWidth: 1,
+      borderBottomColor: Colors.border,
+      backgroundColor: Colors.surface,
+      textAlign: "center"
   },
 });

@@ -22,6 +22,7 @@ import { useStoreStore, useCartStore } from "../../stores";
 import SearchBar from "../../components/inputs/SearchBar";
 import AppDropdown from "../../components/forms/AppDropdown";
 import AppHeader from "../../components/layout/AppHeader";
+import { Colors } from "../../theme";
 
 export default function ProductsScreen() {
     const { selectedStore } =
@@ -159,12 +160,13 @@ export default function ProductsScreen() {
             <View style={styles.container}>
 
             <SearchBar
-            value={search}
-            placeholder="Search products, brands, or barcodes"
-            onChangeText={setSearch}
+                value={search}
+                placeholder="Search products, brands, or barcodes"
+                onChangeText={setSearch}
             />
 
             <View style={styles.filters}>
+
             <View style={styles.filter}>
                 <AppDropdown
                 label="Brand"
@@ -182,9 +184,20 @@ export default function ProductsScreen() {
                 onValueChange={setSelectedCategory}
                 />
             </View>
+
             </View>
 
-            <ProductTableHeader />
+            <ProductTableHeader/>
+
+            <Text style={styles.resultCount}>
+                {search.trim()
+                    ? `Showing ${filteredProducts.length} result${
+                        filteredProducts.length !== 1 ? "s" : ""
+                    } for "${search.trim()}"`
+                    : `Showing ${filteredProducts.length} product${
+                        filteredProducts.length !== 1 ? "s" : ""
+                    }`}
+            </Text>
 
             <FlatList
                 data={filteredProducts}
@@ -269,6 +282,16 @@ const styles = StyleSheet.create({
     textAlign: "center",
     lineHeight: 20,
     opacity: 0.7,
+    },
+    resultCount: {
+        paddingVertical: 6,
+        paddingHorizontal: 12,
+        fontSize: 12,
+        color: Colors.textLight,
+        borderBottomWidth: 1,
+        borderBottomColor: Colors.border,
+        backgroundColor: Colors.surface,
+        textAlign: "center"
     },
     filters: {
         flexDirection: "row",

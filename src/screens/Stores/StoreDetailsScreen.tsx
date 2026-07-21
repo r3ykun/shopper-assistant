@@ -727,7 +727,7 @@ export default function StoreDetailsScreen({
 
               <SearchBar
                   value={search}
-                  placeholder="Search products, brands, categories, or barcodes"
+                  placeholder="Search..."
                   onChangeText={setSearch}
               />
 
@@ -803,53 +803,35 @@ export default function StoreDetailsScreen({
                 </Text>
               ) : null}
 
-              <View
-                style={
-                  styles.tableHeader
-                }
-              >
-                <View
-                  style={
-                    styles.productColumn
-                  }
-                >
-                  <Text
-                    style={
-                      styles.headerText
-                    }
-                  >
+              <View style={styles.tableHeader}>
+                <View style={styles.productColumn}>
+                  <Text style={styles.headerText}>
                     Product
                   </Text>
                 </View>
 
-                <View
-                  style={
-                    styles.priceColumn
-                  }
-                >
-                  <Text
-                    style={
-                      styles.headerText
-                    }
-                  >
+                <View style={styles.priceColumn}>
+                  <Text style={styles.headerText}>
                     SRP
                   </Text>
                 </View>
 
-                <View
-                  style={
-                    styles.priceColumn
-                  }
-                >
-                  <Text
-                    style={
-                      styles.headerText
-                    }
-                  >
+                <View style={styles.priceColumn}>
+                  <Text style={styles.headerText}>
                     Store Price
                   </Text>
                 </View>
               </View>
+
+              <Text style={styles.resultCount}>
+                {search.trim()
+                  ? `Showing ${filteredProducts.length} result${
+                      filteredProducts.length !== 1 ? "s" : ""
+                  } for "${search.trim()}"`
+                  : `Showing ${filteredProducts.length} product${
+                      filteredProducts.length !== 1 ? "s" : ""
+                  }`} 
+              </Text>
             </>
           }
           ListEmptyComponent={
@@ -1493,6 +1475,17 @@ const styles =
       fontSize: 12,
       fontWeight: "600",
       color: Colors.text,
+    },
+
+    resultCount: {
+        paddingVertical: 6,
+        paddingHorizontal: 12,
+        fontSize: 12,
+        color: Colors.textLight,
+        borderBottomWidth: 1,
+        borderBottomColor: Colors.border,
+        backgroundColor: Colors.surface,
+        textAlign: "center"
     },
 
     emptyContainer: {
