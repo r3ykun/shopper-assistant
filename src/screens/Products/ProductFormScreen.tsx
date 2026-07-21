@@ -822,6 +822,78 @@ export default function ProductFormScreen() {
                   </View>
                 </View>
 
+                {brandDetection && (
+                  <>
+                    <View style={styles.detectionRow}>
+                      <Text style={styles.detectionLabel}>
+                        Brand
+                      </Text>
+
+                      <Text style={styles.detectionValue}>
+                        {brandDetection.brand}
+                      </Text>
+                    </View>
+
+                    <View style={styles.detectionRow}>
+                      <Text style={styles.detectionLabel}>
+                        Matched Alias
+                      </Text>
+
+                      <Text style={styles.detectionValue}>
+                        {brandDetection.matchedAlias}
+                      </Text>
+                    </View>
+
+                    {brandDetection?.productLine && (
+                      <View style={styles.detectionRow}>
+                        <Text style={styles.detectionLabel}>
+                          Product Line
+                        </Text>
+
+                        <Text style={styles.detectionValue}>
+                          {brandDetection.productLine}
+                        </Text>
+                      </View>
+                    )}
+
+                    <View style={styles.detectionRow}>
+                      <Text style={styles.detectionLabel}>
+                        Alias Type
+                      </Text>
+
+                      <Text style={styles.detectionValue}>
+                        {brandDetection?.matchedAliasType
+                          ?.replace(/-/g, " ")
+                          .replace(/\b\w/g, c => c.toUpperCase()) ?? "-"}
+                      </Text>
+                    </View>
+
+                    <View style={styles.detectionRow}>
+                      <Text style={styles.detectionLabel}>
+                        Match Type
+                      </Text>
+
+                      <Text style={styles.detectionValue}>
+                        {brandDetection?.matchType
+                          ?.replace(/-/g, " ")
+                          .replace(/\b\w/g, c => c.toUpperCase()) ?? "-"}
+                      </Text>
+                    </View>
+
+                    <View style={styles.detectionRow}>
+                      <Text style={styles.detectionLabel}>
+                        Brand Score
+                      </Text>
+
+                      <Text style={styles.detectionValue}>
+                        {brandDetection
+                          ? `${Math.round(brandDetection.score)}%`
+                          : "-"}
+                      </Text>
+                    </View>
+                  </>
+                )}
+
                 <View style={styles.detectionRow}>
                   <Text style={styles.detectionLabel}>
                     Category

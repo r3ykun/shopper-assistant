@@ -1,3 +1,4 @@
+//shopper-assistant\src\screens\Products\ProductsScreen.tsx
 import React, { useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import {
@@ -18,7 +19,7 @@ import {
   ProductTableHeader,
 } from "../../components/tables";
 import { useStoreStore, useCartStore } from "../../stores";
-import AppTextInput from "../../components/forms/AppTextInput";
+import SearchBar from "../../components/inputs/SearchBar";
 import AppDropdown from "../../components/forms/AppDropdown";
 import AppHeader from "../../components/layout/AppHeader";
 
@@ -157,9 +158,9 @@ export default function ProductsScreen() {
             />
             <View style={styles.container}>
 
-            <AppTextInput
+            <SearchBar
             value={search}
-            placeholder="Search products..."
+            placeholder="Search products, brands, or barcodes"
             onChangeText={setSearch}
             />
 

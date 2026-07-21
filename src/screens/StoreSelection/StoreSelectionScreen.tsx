@@ -1,3 +1,4 @@
+//shopper-assistant\src\screens\StoreSelection\StoreSelectionScreen.tsx
 import React, { useMemo, useState } from "react";
 import { View, StyleSheet, Text } from "react-native";
 import { useStoreStore } from "../../stores";
@@ -43,7 +44,7 @@ export default function StoreSelectionScreen({ navigation }: any) {
         <SearchBar
           value={search}
           onChangeText={setSearch}
-          placeholder="Search store..."
+          placeholder="Search stores"
         />
 
         <View style={styles.gridContainer}>

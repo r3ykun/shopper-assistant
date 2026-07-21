@@ -1,3 +1,4 @@
+//shopper-assistant\src\screens\ShoppingList\ShoppingListScreen.tsx
 import React, {
   useCallback,
   useState,
@@ -20,7 +21,7 @@ import {
 
 import AppHeader from "../../components/layout/AppHeader";
 import Screen from "../../components/layout/Screen";
-import AppTextInput from "../../components/forms/AppTextInput";
+import SearchBar from "../../components/inputs/SearchBar";
 
 import {
   ShoppingListRecord,
@@ -215,9 +216,9 @@ export default function ShoppingListScreen() {
       <View style={styles.container}>
         <View style={styles.topRow}>
           <View style={styles.searchArea}>
-            <AppTextInput
+            <SearchBar
               value={search}
-              placeholder="Search shopping lists..."
+              placeholder="Search shopping lists"
               onChangeText={setSearch}
             />
           </View>
@@ -421,7 +422,7 @@ const styles = StyleSheet.create({
 
   topRow: {
     flexDirection: "row",
-    alignItems: "flex-start",
+    alignItems: "center",
     gap: Spacing.sm,
   },
 
