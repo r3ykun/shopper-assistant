@@ -332,23 +332,28 @@
 
 ---
 
-## Ongoing Milestone
+# Ongoing Milestone
 
-### Milestone 21.5 – Product Form & User Experience Polish
+## Milestone 21.5 – Product Form & User Experience Polish
 
-#### Product Detection Engine
-## Completed
-- ✅ Intelligent Category Detection
-- ✅ Intelligent Subcategory Detection
-- ✅ Intelligent Unit Detection
-- ✅ Smart Alias Matching
-- ✅ Brand Priority Scoring
-- ✅ Safe Product Name Cleanup
-- ✅ Product Line Recognition
+### Product Detection Engine
 
-## Ongoing
+#### ✅ Completed
+
+- Intelligent Category Detection
+- Intelligent Subcategory Detection
+- Intelligent Unit Detection
+- Smart Alias Matching
+- Alias Priority Scoring
+- Brand Priority Scoring
+- Safe Product Name Cleanup
+- Product Line Recognition
+- Canonical Brand Resolution
 - Autofill Indicators
 - Autofill Confidence & Lock Status
+
+#### 🚧 Ongoing
+
 - Detection Status Card
 - Shopping List Dashboard Widget
 - Alphabetical Sorting
@@ -357,53 +362,120 @@
 
 ---
 
-### Upcoming Milestone
+# Upcoming Milestone
 
 ## Milestone 21.75 – Brand Intelligence & Metadata Engine
 
 ### Metadata Architecture
-## Completed
-- ✅ Canonical Brand Model
-- ✅ Alias Metadata Redesign
-- ✅ Product Line Metadata
-## Ongoing
+
+#### ✅ Completed
+
+- Canonical Brand Model
+- Alias Metadata Redesign
+- Product Line Metadata
+- Metadata Compiler Architecture
+- Compiler Output Generation
+
+#### 🚧 Ongoing
+
 - Variant Metadata
 - Manufacturer Metadata
 - Metadata Versioning
 
+---
+
 ### Metadata Processing
-## Completed
-- ✅ Canonical Brand Selection
-- ✅ Alias Normalization
-- ✅ Product Line Extraction
-## Ongoing
+
+#### ✅ Completed
+
+- Legacy Brand Import
+- Canonical Brand Selection
+- Alias Normalization
 - Automatic Brand Deduplication
+- Equivalent Brand Merging
+- Product Line Extraction
+- Product Line Confidence Scoring
+- Automatic Alias Generation
+- Metadata Code Generation
+
+#### 🚧 Ongoing
+
 - Variant Extraction
 - Manufacturer Assignment
 - Metadata Validation Pipeline
 
+#### ✅ Completed
+
+- Metadata Audit Tool
+
+---
+
+### Metadata Compiler
+
+#### ✅ Completed
+
+- Legacy Brand Parser
+- Duplicate Removal
+- Brand Grouping
+- Canonical ID Generation
+- Product Line Detection
+- Product Line Promotion
+- Equivalent Name Merging
+- Automatic Metadata Export
+- Stable Metadata Formatting
+
+#### 🚧 Ongoing
+
+- Keyword Generation
+- Variant Generation
+- Manufacturer Generation
+- Regression Testing
+
+---
+
 ### Brand Recognition Engine
-## Completed
-- ✅ Alias Priority Scoring
-- ✅ Intelligent Alias Matching
-- ✅ Product Line Recognition
-- ✅ Safe Product Name Cleanup
-## Ongoing
+
+#### ✅ Completed
+
+- Alias Priority Scoring
+- Intelligent Alias Matching
+- Canonical Brand Resolution
+- Product Line Recognition
+- Safe Product Name Cleanup
+
+#### 🚧 Ongoing
+
 - Variant Recognition
 - Brand Confidence Scoring
 - Conflict Resolution
+- Multi-candidate Ranking
+
+---
 
 ### Synonyms & Fuzzy Matching
-## Completed
-- ✅ Common Name Support
-- ✅ Nickname Support
-- ✅ Abbreviation Support
-- ✅ Misspelling Recognition
-## Ongoing
+
+#### ✅ Completed
+
+- Common Name Support
+- Nickname Support
+- Abbreviation Support
+- Misspelling Recognition
+- Automatic Spacing Variants
+- Automatic Punctuation Variants
+- Unicode / Diacritic Handling
+
+#### 🚧 Ongoing
+
 - Fuzzy Brand Matching
 - Similar Brand Suggestions
+- Keyboard Typo Recognition
+
+---
 
 ### Philippine Product Intelligence
+
+#### 🚧 Ongoing
+
 - Grocery Brand Database
 - Household Brand Database
 - Personal Care Brand Database
@@ -413,13 +485,34 @@
 - Hardware Brand Database
 - School Supplies Brand Database
 
+---
+
 ### Metadata Quality Assurance
+
+#### ✅ Completed
+
+- Duplicate ID Validation
+- Canonical Name Validation
+- Metadata Generation Validation
 - Duplicate Detection
-- Brand/Product Separation
+- Brand / Product Separation
 - Consistency Validation
 - Category Verification
 - Subcategory Verification
+- Metadata Audit Reports
+- Metadata Audit Tool
+- Equivalent Brand Validation
+- Alias Conflict Validation
+- Product Line Validation
+- Promoted Product Line Validation
+- Zero-error Metadata Validation
+- Zero-warning Metadata Validation
+
+#### 🚧 Ongoing
+
 - Automated Metadata Testing
+
+---
 
 ## Milestone 22 – Smart Product Intelligence
 
@@ -436,51 +529,51 @@
 
 ## Milestone 23 – Shopping Lists
 
-- Multiple shopping lists
-- Shopping list management
+- Multiple Shopping Lists
+- Shopping List Management
 - Quick Add to Cart
-- Smart product suggestions
-- Intelligent shopping list parser
-- Automatic quantity detection
-- Automatic product matching
-- Shopping list import/export
+- Smart Product Suggestions
+- Intelligent Shopping List Parser
+- Automatic Quantity Detection
+- Automatic Product Matching
+- Shopping List Import / Export
 
 ---
 
 ## Milestone 24 – Transaction History
 
-- Checkout persistence
-- Purchase history
-- Receipt details
-- Search transactions
-- Transaction filtering
-- Purchase statistics
-- Favorite products
-- Frequently purchased items
+- Checkout Persistence
+- Purchase History
+- Receipt Details
+- Search Transactions
+- Transaction Filtering
+- Purchase Statistics
+- Favorite Products
+- Frequently Purchased Items
 
 ---
 
 ## Milestone 25 – SRP Synchronization
 
-- Internet connectivity detection
-- Automatic SRP updates
-- Store price synchronization
-- Offline caching
-- Version checking
-- Manual synchronization
-- Conflict resolution
-- Background synchronization
+- Internet Connectivity Detection
+- Automatic SRP Updates
+- Store Price Synchronization
+- Offline Caching
+- Version Checking
+- Manual Synchronization
+- Conflict Resolution
+- Background Synchronization
 - Live Product Database Synchronization
 
 ---
 
 ## Milestone 26 – Receipt & OCR
 
-- Receipt scanning
-- OCR text extraction
-- Automatic product recognition
-- Price verification
-- Store Price updates
-- Missing product detection
-- Cart vs. Receipt comparison
-- Automatic purchase confirmation
+- Receipt Scanning
+- OCR Text Extraction
+- Automatic Product Recognition
+- Price Verification
+- Store Price Updates
+- Missing Product Detection
+- Cart vs. Receipt Comparison
+- Automatic Purchase Confirmation

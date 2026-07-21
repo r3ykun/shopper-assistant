@@ -1,9 +1,15 @@
+//shopper-assistant\src\components\forms\AppDropdown.tsx
 import React, {
   useEffect,
   useMemo,
   useRef,
   useState,
 } from "react";
+
+import AutofillIndicator, {
+    AutofillState,
+    AutofillConfidence,
+} from "./AutofillIndicator";
 
 import {
   Animated,
@@ -37,6 +43,8 @@ type Props = {
   selectedValue: string;
   items: Array<string | DropdownItem>;
   onValueChange: (value: string) => void;
+  autofillState?: AutofillState;
+  autofillConfidence?: AutofillConfidence;
 
   isOpen?: boolean;
   onOpen?: () => void;
@@ -64,6 +72,8 @@ export default function AppDropdown({
   searchable,
   searchPlaceholder = "Search...",
   error,
+  autofillState,
+  autofillConfidence
 }: Props) {
 
   const normalizedItems = useMemo<
@@ -93,11 +103,6 @@ export default function AppDropdown({
   const arrowRotation =
     useRef(new Animated.Value(0)).current;
 
-  /*
-   * Automatically enable search when the list
-   * contains more than 10 items, unless explicitly
-   * configured through the searchable prop.
-   */
   const shouldShowSearch =
     searchable ??
     normalizedItems.length > 10;
@@ -153,10 +158,6 @@ export default function AppDropdown({
     arrowRotation,
   ]);
 
-  /*
-   * Close the dropdown if its selected value is
-   * removed from the available items.
-   */
   useEffect(() => {
     if (
       dropdownOpen &&
@@ -216,9 +217,18 @@ export default function AppDropdown({
 
   return (
     <View style={styles.container}>
-      <Text style={styles.label}>
-        {label}
-      </Text>
+      <View style={styles.labelRow}>
+          <Text style={styles.label}>
+              {label}
+          </Text>
+
+          {autofillState && (
+              <AutofillIndicator
+                  state={autofillState}
+                  confidence={autofillConfidence}
+              />
+          )}
+      </View>
 
       <Pressable
         disabled={disabled}
@@ -442,7 +452,6 @@ const styles = StyleSheet.create({
   },
 
   label: {
-    marginBottom: Spacing.sm,
     fontSize: Typography.body,
     fontWeight: "600",
     color: Colors.text,
@@ -658,5 +667,12 @@ const styles = StyleSheet.create({
     flex: 1,
     height: StyleSheet.hairlineWidth,
     backgroundColor: Colors.border,
+  },
+
+  labelRow: {
+      flexDirection: "row",
+      justifyContent: "space-between",
+      alignItems: "center",
+      marginBottom: Spacing.sm,
   },
 });

@@ -1,3 +1,4 @@
+//shopper-assistant\src\components\inputs\SearchBar.tsx
 import React from "react";
 import {
   TextInput,

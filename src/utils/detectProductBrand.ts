@@ -1,3 +1,4 @@
+//shopper-assistant\src\utils\detectProductBrand.ts
 import {
   PRODUCT_BRAND_METADATA,
 } from "../constants/productBrandMetadata";

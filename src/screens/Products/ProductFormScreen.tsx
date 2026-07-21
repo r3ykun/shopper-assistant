@@ -1,3 +1,4 @@
+//shopper-assistant\src\screens\Products\ProductFormScreen.tsx
 import React, {
   useEffect,
   useRef,
@@ -627,6 +628,24 @@ export default function ProductFormScreen() {
     );
   }
 
+  function getBrandConfidence(
+    score?: number
+  ): "high" | "medium" | "low" | undefined {
+    if (score === undefined) {
+      return undefined;
+    }
+
+    if (score >= 80) {
+      return "high";
+    }
+
+    if (score >= 50) {
+      return "medium";
+    }
+
+    return "low";
+  }
+
 
 
   return (
@@ -851,14 +870,32 @@ export default function ProductFormScreen() {
             <AppTextInput
               label="Brand"
               value={brand}
-              onFocus={() => {setOpenDropdown(null);}}
+              onFocus={() => {
+                setOpenDropdown(null);
+              }}
               placeholder="Enter brand"
+              autofillState={
+                brandLocked
+                  ? "locked"
+                  : brandDetection
+                    ? "auto"
+                    : "manual"
+              }
+              autofillConfidence={
+                brandLocked
+                  ? undefined
+                  : getBrandConfidence(
+                      brandDetection?.score
+                    )
+              }
               onChangeText={(text) => {
                 resetSaveStatus();
+
                 const cleaned = text.replace(
                   /[^a-zA-Z0-9\s\-.'&()/]/g,
                   ""
                 );
+
                 setBrandLocked(true);
                 setBrand(toTitleCase(cleaned));
               }}
@@ -867,6 +904,18 @@ export default function ProductFormScreen() {
             <AppDropdown
               label="Category"
               selectedValue={category}
+              autofillState={
+                categoryLocked
+                  ? "locked"
+                  : detection
+                    ? "auto"
+                    : "manual"
+              }
+              autofillConfidence={
+                categoryLocked
+                  ? undefined
+                  : detection?.confidence
+              }
               items={sortedCategories}
               isOpen={openDropdown === "category"}
               onOpen={() =>
@@ -925,6 +974,18 @@ export default function ProductFormScreen() {
             <AppDropdown
               label="Subcategory"
               selectedValue={subcategory}
+              autofillState={
+                subcategoryLocked
+                  ? "locked"
+                  : detection
+                    ? "auto"
+                    : "manual"
+              }
+              autofillConfidence={
+                subcategoryLocked
+                  ? undefined
+                  : detection?.confidence
+              }
               items={sortedSubcategories}
               isOpen={
                 openDropdown === "subcategory"
@@ -976,6 +1037,18 @@ export default function ProductFormScreen() {
             <AppDropdown
               label="Unit"
               selectedValue={unit}
+              autofillState={
+                unitLocked
+                  ? "locked"
+                  : detection
+                    ? "auto"
+                    : "manual"
+              }
+              autofillConfidence={
+                unitLocked
+                  ? undefined
+                  : detection?.confidence
+              }
               items={unitDropdownItems}
               searchable
               searchPlaceholder="Search unit, abbreviation, or group..."

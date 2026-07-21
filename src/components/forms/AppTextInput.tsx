@@ -1,3 +1,4 @@
+//shopper-assistant\src\components\forms\AppTextInput.tsx
 import React from "react";
 import {
   KeyboardTypeOptions,
@@ -7,6 +8,11 @@ import {
   TextInputProps,
   View,
 } from "react-native";
+
+import AutofillIndicator, {
+  AutofillState,
+  AutofillConfidence,
+} from "./AutofillIndicator";
 
 import {
   Colors,
@@ -25,6 +31,8 @@ type Props = {
   editable?: boolean;
   autoCapitalize?: TextInputProps["autoCapitalize"];
   onFocus?: () => void;
+  autofillState?: AutofillState;
+  autofillConfidence?: AutofillConfidence;
 };
 
 export default function AppTextInput({
@@ -38,13 +46,24 @@ export default function AppTextInput({
   editable = true,
   autoCapitalize = "sentences",
   onFocus,
+  autofillState,
+  autofillConfidence,
 }: Props) {
   return (
     <View style={styles.container}>
       {label ? (
-        <Text style={styles.label}>
-          {label}
-        </Text>
+        <View style={styles.labelRow}>
+            <Text style={styles.label}>
+                {label}
+            </Text>
+
+            {autofillState && (
+                <AutofillIndicator
+                    state={autofillState}
+                    confidence={autofillConfidence}
+                />
+            )}
+        </View>
       ) : null}
 
       <View
@@ -88,7 +107,6 @@ const styles = StyleSheet.create({
   },
 
   label: {
-    marginBottom: Spacing.sm,
     fontSize: Typography.body,
     fontWeight: "600",
     color: Colors.text,
@@ -132,5 +150,12 @@ const styles = StyleSheet.create({
   disabled: {
     opacity: 0.65,
     backgroundColor: Colors.background,
+  },
+
+  labelRow: {
+      flexDirection: "row",
+      justifyContent: "space-between",
+      alignItems: "center",
+      marginBottom: Spacing.sm,
   },
 });
