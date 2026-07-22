@@ -38,9 +38,10 @@
     "ios": "expo run:ios",
     "web": "expo start --web",
     "compile:brands": "tsx scripts/compileProductBrandMetadata.ts",
-    "test:brands": "tsx scripts/testProductBrandMetadata.ts",
+    "test:brands": "tsx scripts/tests/testProductBrandMetadata.ts",
     "verify:brands": "npm run compile:brands && npm run test:brands",
-    "test:recognize-brand": "tsx scripts/testRecognizeBrand.ts"
-  },
+    "test:recognize-brand": "tsx scripts/tests/testRecognizeBrand.ts",
+    "test:suggest-brands": "tsx scripts/tests/testSuggestBrands.ts",
+    "test:recognize-product": "tsx scripts/tests/testRecognizeProduct.ts"  },
   "private": true
 }

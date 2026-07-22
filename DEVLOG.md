@@ -448,21 +448,48 @@
 1. Brand Confidence Scoring
 2. Multi-candidate Ranking
 
+# Milestone 21.75.5 - Synonyms & Fuzzy Matching
+## ✅ Completed
+1. Fuzzy Brand
+2. Similar Brand Suggestions
+3. Keyboard Typo Recognition
+
+# Milestone 21.75.6 - Canonical Product Line Recognition
+## ✅ Completed
+1. Product Line Extraction
+2. Product Line Merging
+3. Canonical Product Lines
+4. Product Line Aliases
+5. Product Line Recognition
 
 
 ### 🚧 Ongoing
 
+# Milestone 21.77 - Variant Recognition
+1. Product Line Variants
+2. Variant Matching
+3. Keyword Variant Matching
+4. Product Recognition Integration
+5. Variant Validation
 
-# Milestone 21.75.5 - Synonyms & Fuzzy Matching
-1. Fuzzy Brand ✅
-## Goal
-- Recognize brands despite spelling differences.
+# Milestone 21.78 - Product Name Reconstruction
+1. Canonical Product Name
+2. Duplicate Name Removal
+3. Product Name Formatting
+4. Preserve Important Terms
 
-2. Similar Brand Suggestions ✅
-- Suggest the closest valid brands when no exact match exists.
+# Milestone 21.79 - Confidence Scoring Improvements
+1. Weighted Matching
+2. Confidence Calculation
+3. Match Ranking
+4. Confidence Thresholds
 
-3. Keyboard Typo Recognition ✅
-- Handle typing mistakes caused by nearby keyboard keys.
+# Milestone 21.80 - Category-aware Recognition
+1. Category Context
+2. Category Filtering
+3. Ambiguous Brand Resolution
+4. Category Validation
+
 
 ---
 

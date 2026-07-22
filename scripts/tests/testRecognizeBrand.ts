@@ -1,24 +1,30 @@
-import { recognizeBrand } from "../src/utils/recognizeBrand";
+import { recognizeBrand } from "../../src/utils/brand/recognizeBrand";
 
 const tests = [
 
-  "Coca-Cola",
-
-  "Coca Cola",
-
-  "Baby Bench",
-
   "Nescafe",
+  "Nescafee",
 
-  "3M",
+  "Nestle",
+  "Nestlee",
 
-  "Coca Cola Zero",
+  "Coka Cola",
+  "CocaCola",
 
-  "Sprite Zero",
+  "Safeguad",
+  "Palmoliv",
 
-  "Nestle Chuckie",
+  "Colagte",
+  "Colgat",
 
-  "Alaska Evaporada",
+  "Pepsii",
+  "Sprtie",
+
+  "Bear Brnad",
+
+  "Tobleron",
+
+  "Head n Shoulders",
 
 ];
 

@@ -29,13 +29,14 @@ export interface ProductLineAlias {
   priority?: number;
 }
 
-export interface ProductLineMetadata {
-  name: string;
-  aliases?: ProductLineAlias[];
-  categories?: string[];
-  subcategories?: string[];
-  preserveInProductName?: boolean;
-  keywords?: string[];
+export interface ProductLineMetadata{
+	name:string;
+	aliases?:ProductLineAlias[];
+	categories?:string[];
+	subcategories?:string[];
+	preserveInProductName?:boolean;
+	keywords?:string[];
+	variants?:ProductVariantMetadata[];
 }
 
 export interface ProductVariantMetadata {

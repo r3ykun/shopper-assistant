@@ -1,13 +1,13 @@
 //shopper-assistant\src\utils\detectProductBrand.ts
 import {
   PRODUCT_BRAND_METADATA,
-} from "../constants/productBrandMetadata";
+} from "../../constants/productBrandMetadata";
 
 import {
   buildProductBrandIndex,
   normalizeBrandText,
   type CompiledProductBrandMatch,
-} from "./buildProductBrandIndex";
+} from "../buildProductBrandIndex";
 
 export interface BrandDetectionContext {
   category?: string;

@@ -54,7 +54,7 @@ import {
 import {
   detectProductCategory,
   type DetectedProductCategory,
-} from "../../utils/detectProductCategory";
+} from "../../utils/product/detectProductCategory";
 import QuantitySelector from "../../components/forms/QuantitySelector";
 import AppHeader from "../../components/layout/AppHeader";
 import { 

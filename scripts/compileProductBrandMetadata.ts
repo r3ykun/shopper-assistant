@@ -10,8 +10,14 @@ interface LegacyBrand {
   brand: string;
 }
 
-interface ProductLineMetadata {
-  aliases: string[];
+interface ProductLineMetadata{
+	name:string;
+	aliases:string[];
+	categories?:string[];
+	subcategories?:string[];
+	keywords?:string[];
+	preserveInProductName?:boolean;
+	variants?:ProductVariantMetadata[];
 }
 
 interface ProductVariantMetadata {
@@ -35,7 +41,7 @@ export interface BrandMetadata {
   aliases: BrandAliasMetadata[];
   categories: string[];
   subcategories: string[];
-  productLines: Record<string, ProductLineMetadata>;
+  productLines:Record<string,ProductLineMetadata>;
   variants: ProductVariantMetadata[];
   keywords: string[];
 }
@@ -192,57 +198,46 @@ function indentLines(lines: string[], spaces: number): string[] {
 }
 
 function generateProductLine(
-  lineName: string,
-  brand: BrandMetadata
-): string[] {
-  const lineId = slugify(lineName);
+  lineName:string,
+  brand:BrandMetadata
+):string[]{
+  const lineId=slugify(lineName);
 
-  const lines = [
-    `${quote(lineId)}: {`,
-    `  name: ${quote(lineName)},`,
-    "  aliases: [",
+  const lines=[
+    `${quote(lineId)}:{`,
+    `  name:${quote(lineName)},`,
+    "  aliases:[",
     "    {",
-    `      value: ${quote(lineName)},`,
-    '      type: "official",',
-    "      priority: 90,",
+    `      value:${quote(lineName)},`,
+    '      type:"official",',
+    "      priority:90,",
     "    },",
     "  ],",
   ];
 
-  if (brand.categories.length > 0) {
+  if(brand.categories.length){
     lines.push(
-      `  categories: ${JSON.stringify(
-        [...brand.categories].sort((a, b) =>
-          a.localeCompare(b)
-        )
-      )},`
+      `  categories:${JSON.stringify([...brand.categories].sort((a,b)=>a.localeCompare(b)))},`
     );
   }
 
-  if (brand.subcategories.length > 0) {
+  if(brand.subcategories.length){
     lines.push(
-      `  subcategories: ${JSON.stringify(
-        [...brand.subcategories].sort((a, b) =>
-          a.localeCompare(b)
-        )
-      )},`
+      `  subcategories:${JSON.stringify([...brand.subcategories].sort((a,b)=>a.localeCompare(b)))},`
     );
   }
 
-  if (brand.keywords.length > 0) {
-    const keywords = [
-      ...brand.keywords,
-    ].sort((a, b) =>
-      a.localeCompare(b)
-    );
+  const keywords:string[]=[];
+  addKeywordTokens(keywords,lineName);
 
+  if(keywords.length){
     lines.push(
-      `  keywords: ${JSON.stringify(keywords)},`
+      `  keywords:${JSON.stringify([...new Set(keywords)].sort((a,b)=>a.localeCompare(b)))},`
     );
   }
 
   lines.push(
-    "  preserveInProductName: true,",
+    "  preserveInProductName:true,",
     "},"
   );
 
@@ -902,6 +897,49 @@ function addKeywordTokens(
   }
 }
 
+const KNOWN_PRODUCT_LINES=new Map<string,string[]>([
+	["Nestlé",["Chuckie","Coffee Mate"]],
+  ["Lucky Me!",[
+    "Pancit Canton", "Instant Mami", "Supreme", 
+    "Lomi", "Spicy Labuyo", "La Paz Batchoy",
+  ]],
+]);
+
+function mergeKnownProductLines(
+	brands:Map<string,BrandMetadata>,
+	confirmedChildIds:Set<string>
+){
+	const allBrands=[...brands.values()];
+
+	for(const[parentName,lineNames]of KNOWN_PRODUCT_LINES){
+		const parent=allBrands.find(
+			b=>b.name===parentName
+		);
+		if(!parent)continue;
+
+		for(const lineName of lineNames){
+      const child=allBrands.find(
+        b=>b.name.toLowerCase()===lineName.toLowerCase()
+      );
+
+      if(child){
+        parent.productLines[lineName]??={
+          name:lineName,
+          aliases:[lineName],
+          preserveInProductName:true,
+        };
+        confirmedChildIds.add(child.id);
+        continue;
+      }
+
+      parent.productLines[lineName]??={
+        name:lineName,
+        aliases:[lineName],
+        preserveInProductName:true,
+      };
+		}
+	}
+}
 function generateMetadataKeywords(
   brands: Map<string, BrandMetadata>
 ): void {
@@ -936,16 +974,6 @@ function generateMetadataKeywords(
       addKeywordTokens(
         brand.keywords,
         subcategory
-      );
-    }
-
-    for (
-      const productLineName of
-        Object.keys(brand.productLines)
-    ) {
-      addKeywordTokens(
-        brand.keywords,
-        productLineName
       );
     }
 
@@ -1031,18 +1059,40 @@ function main() {
     `Extracted variants: ${variantExtraction.extractedVariants}`
   );
 
-  const extraction =
-    extractProductLines(
-      brands,
-      variantExtraction.confirmedChildIds
-    );
+  const extraction=extractProductLines(
+    brands,
+    variantExtraction.confirmedChildIds
+  );
 
-  const confirmedChildIds =
-    new Set<string>([
-      ...variantExtraction
-        .confirmedChildIds,
-      ...extraction.confirmedChildIds,
-    ]);
+  mergeKnownProductLines(
+    brands,
+    extraction.confirmedChildIds
+  );
+
+  const luckyMe=brands.get("lucky-me");
+
+if(luckyMe){
+	luckyMe.productLines??={};
+
+	luckyMe.productLines["pancit-canton"]??={
+		name:"Pancit Canton",
+		aliases:["Pancit Canton"],
+		categories:["Grocery"],
+		keywords:[
+			"pancit canton",
+			"pancit",
+			"canton",
+			"instant noodles",
+			"noodles",
+		],
+		preserveInProductName:true,
+	};
+}
+
+  const confirmedChildIds=new Set<string>([
+    ...variantExtraction.confirmedChildIds,
+    ...extraction.confirmedChildIds,
+  ]);
 
   removeConfirmedProductLineBrands(
     brands,
@@ -1304,9 +1354,6 @@ const KNOWN_EQUIVALENT_BRAND_GROUPS =
           productLines: {
             ...brand.productLines,
           },
-          keywords: [
-            ...brand.keywords,
-          ],
           variants: brand.variants.map(
             variant => ({
               ...variant,
@@ -1618,11 +1665,12 @@ const KNOWN_EQUIVALENT_BRAND_GROUPS =
                 extracted.baseName
             )
         ) {
-            parent.productLines[
-                extracted.baseName
-            ] ??= {
-                aliases: [],
-            };
+          parent.productLines[
+            extracted.baseName
+          ]??={
+            name:extracted.baseName,
+            aliases:[],
+          };
         }
 
         confirmedChildIds.add(child.id);
@@ -1693,8 +1741,9 @@ const KNOWN_EQUIVALENT_BRAND_GROUPS =
           continue;
         }
 
-        parent.productLines[lineName] = {
-          aliases: [],
+        parent.productLines[lineName]={
+          name:lineName,
+          aliases:[],
         };
 
         confirmedChildIds.add(child.id);

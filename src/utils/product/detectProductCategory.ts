@@ -1,6 +1,6 @@
 import {
   SUBCATEGORY_METADATA,
-} from "../constants/subcategoryMetadata";
+} from "../../constants/subcategoryMetadata";
 
 export type ProductCategoryMatchType =
   | "subcategory"

@@ -78,70 +78,70 @@ export const PRODUCT_BRAND_METADATA = {
       },
     ],
     productLines: {
-      "command": {
-        name: "Command",
-        aliases: [
+      "command":{
+        name:"Command",
+        aliases:[
           {
-            value: "Command",
-            type: "official",
-            priority: 90,
+            value:"Command",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Hardware","Household","Personal Care","Pet Supplies","School Supplies"],
-        keywords: ["3m","care","command","drug","hardware","hot","household","medication","medicine","nexcare","nexcare pack","pack","personal","personal care","pet","pet supplies","post","post it","school","school supplies","scotch","supplies"],
-        preserveInProductName: true,
+        categories:["Hardware","Household","Personal Care","Pet Supplies","School Supplies"],
+        keywords:["command"],
+        preserveInProductName:true,
       },
-      "nexcare": {
-        name: "Nexcare",
-        aliases: [
+      "nexcare":{
+        name:"Nexcare",
+        aliases:[
           {
-            value: "Nexcare",
-            type: "official",
-            priority: 90,
+            value:"Nexcare",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Hardware","Household","Personal Care","Pet Supplies","School Supplies"],
-        keywords: ["3m","care","command","drug","hardware","hot","household","medication","medicine","nexcare","nexcare pack","pack","personal","personal care","pet","pet supplies","post","post it","school","school supplies","scotch","supplies"],
-        preserveInProductName: true,
+        categories:["Hardware","Household","Personal Care","Pet Supplies","School Supplies"],
+        keywords:["nexcare"],
+        preserveInProductName:true,
       },
-      "nexcare-pack": {
-        name: "Nexcare Pack",
-        aliases: [
+      "nexcare-pack":{
+        name:"Nexcare Pack",
+        aliases:[
           {
-            value: "Nexcare Pack",
-            type: "official",
-            priority: 90,
+            value:"Nexcare Pack",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Hardware","Household","Personal Care","Pet Supplies","School Supplies"],
-        keywords: ["3m","care","command","drug","hardware","hot","household","medication","medicine","nexcare","nexcare pack","pack","personal","personal care","pet","pet supplies","post","post it","school","school supplies","scotch","supplies"],
-        preserveInProductName: true,
+        categories:["Hardware","Household","Personal Care","Pet Supplies","School Supplies"],
+        keywords:["nexcare","nexcare pack","pack"],
+        preserveInProductName:true,
       },
-      "post-it": {
-        name: "Post-it",
-        aliases: [
+      "post-it":{
+        name:"Post-it",
+        aliases:[
           {
-            value: "Post-it",
-            type: "official",
-            priority: 90,
+            value:"Post-it",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Hardware","Household","Personal Care","Pet Supplies","School Supplies"],
-        keywords: ["3m","care","command","drug","hardware","hot","household","medication","medicine","nexcare","nexcare pack","pack","personal","personal care","pet","pet supplies","post","post it","school","school supplies","scotch","supplies"],
-        preserveInProductName: true,
+        categories:["Hardware","Household","Personal Care","Pet Supplies","School Supplies"],
+        keywords:["post","post it"],
+        preserveInProductName:true,
       },
-      "scotch": {
-        name: "Scotch",
-        aliases: [
+      "scotch":{
+        name:"Scotch",
+        aliases:[
           {
-            value: "Scotch",
-            type: "official",
-            priority: 90,
+            value:"Scotch",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Hardware","Household","Personal Care","Pet Supplies","School Supplies"],
-        keywords: ["3m","care","command","drug","hardware","hot","household","medication","medicine","nexcare","nexcare pack","pack","personal","personal care","pet","pet supplies","post","post it","school","school supplies","scotch","supplies"],
-        preserveInProductName: true,
+        categories:["Hardware","Household","Personal Care","Pet Supplies","School Supplies"],
+        keywords:["scotch"],
+        preserveInProductName:true,
       },
     },
     variants: [
@@ -503,31 +503,31 @@ export const PRODUCT_BRAND_METADATA = {
       },
     ],
     productLines: {
-      "lancets": {
-        name: "Lancets",
-        aliases: [
+      "lancets":{
+        name:"Lancets",
+        aliases:[
           {
-            value: "Lancets",
-            type: "official",
-            priority: 90,
+            value:"Lancets",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Medicine"],
-        keywords: ["accu","accu chek","chek","drug","lancets","medication","medicine","strips","test","test strips"],
-        preserveInProductName: true,
+        categories:["Medicine"],
+        keywords:["lancets"],
+        preserveInProductName:true,
       },
-      "test-strips": {
-        name: "Test Strips",
-        aliases: [
+      "test-strips":{
+        name:"Test Strips",
+        aliases:[
           {
-            value: "Test Strips",
-            type: "official",
-            priority: 90,
+            value:"Test Strips",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Medicine"],
-        keywords: ["accu","accu chek","chek","drug","lancets","medication","medicine","strips","test","test strips"],
-        preserveInProductName: true,
+        categories:["Medicine"],
+        keywords:["strips","test","test strips"],
+        preserveInProductName:true,
       },
     },
     categories: ["Medicine"],
@@ -570,18 +570,18 @@ export const PRODUCT_BRAND_METADATA = {
       },
     ],
     productLines: {
-      "hardware": {
-        name: "Hardware",
-        aliases: [
+      "hardware":{
+        name:"Hardware",
+        aliases:[
           {
-            value: "Hardware",
-            type: "official",
-            priority: 90,
+            value:"Hardware",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Grocery","Hardware","Household"],
-        keywords: ["ace","grocery","hardware","household"],
-        preserveInProductName: true,
+        categories:["Grocery","Hardware","Household"],
+        keywords:["hardware"],
+        preserveInProductName:true,
       },
     },
     categories: ["Grocery","Hardware","Household"],
@@ -1105,18 +1105,18 @@ export const PRODUCT_BRAND_METADATA = {
       },
     ],
     productLines: {
-      "crispy-fry": {
-        name: "Crispy Fry",
-        aliases: [
+      "crispy-fry":{
+        name:"Crispy Fry",
+        aliases:[
           {
-            value: "Crispy Fry",
-            type: "official",
-            priority: 90,
+            value:"Crispy Fry",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Grocery"],
-        keywords: ["ajinomoto","crispy","crispy fry","fry","grocery"],
-        preserveInProductName: true,
+        categories:["Grocery"],
+        keywords:["crispy","crispy fry","fry"],
+        preserveInProductName:true,
       },
     },
     categories: ["Grocery"],
@@ -1224,70 +1224,70 @@ export const PRODUCT_BRAND_METADATA = {
       },
     ],
     productLines: {
-      "creamer": {
-        name: "Creamer",
-        aliases: [
+      "creamer":{
+        name:"Creamer",
+        aliases:[
           {
-            value: "Creamer",
-            type: "official",
-            priority: 90,
+            value:"Creamer",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Grocery"],
-        keywords: ["alaska","condensed","creamer","crema","ened","ened condensed","evaporada","fortified","grocery","sweet"],
-        preserveInProductName: true,
+        categories:["Grocery"],
+        keywords:["creamer"],
+        preserveInProductName:true,
       },
-      "crema": {
-        name: "Crema",
-        aliases: [
+      "crema":{
+        name:"Crema",
+        aliases:[
           {
-            value: "Crema",
-            type: "official",
-            priority: 90,
+            value:"Crema",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Grocery"],
-        keywords: ["alaska","condensed","creamer","crema","ened","ened condensed","evaporada","fortified","grocery","sweet"],
-        preserveInProductName: true,
+        categories:["Grocery"],
+        keywords:["crema"],
+        preserveInProductName:true,
       },
-      "ened-condensed": {
-        name: "ened Condensed",
-        aliases: [
+      "ened-condensed":{
+        name:"ened Condensed",
+        aliases:[
           {
-            value: "ened Condensed",
-            type: "official",
-            priority: 90,
+            value:"ened Condensed",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Grocery"],
-        keywords: ["alaska","condensed","creamer","crema","ened","ened condensed","evaporada","fortified","grocery","sweet"],
-        preserveInProductName: true,
+        categories:["Grocery"],
+        keywords:["condensed","ened","ened condensed"],
+        preserveInProductName:true,
       },
-      "evaporada": {
-        name: "Evaporada",
-        aliases: [
+      "evaporada":{
+        name:"Evaporada",
+        aliases:[
           {
-            value: "Evaporada",
-            type: "official",
-            priority: 90,
+            value:"Evaporada",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Grocery"],
-        keywords: ["alaska","condensed","creamer","crema","ened","ened condensed","evaporada","fortified","grocery","sweet"],
-        preserveInProductName: true,
+        categories:["Grocery"],
+        keywords:["evaporada"],
+        preserveInProductName:true,
       },
-      "fortified": {
-        name: "Fortified",
-        aliases: [
+      "fortified":{
+        name:"Fortified",
+        aliases:[
           {
-            value: "Fortified",
-            type: "official",
-            priority: 90,
+            value:"Fortified",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Grocery"],
-        keywords: ["alaska","condensed","creamer","crema","ened","ened condensed","evaporada","fortified","grocery","sweet"],
-        preserveInProductName: true,
+        categories:["Grocery"],
+        keywords:["fortified"],
+        preserveInProductName:true,
       },
     },
     variants: [
@@ -1740,18 +1740,18 @@ export const PRODUCT_BRAND_METADATA = {
       },
     ],
     productLines: {
-      "discreet": {
-        name: "Discreet",
-        aliases: [
+      "discreet":{
+        name:"Discreet",
+        aliases:[
           {
-            value: "Discreet",
-            type: "official",
-            priority: 90,
+            value:"Discreet",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Personal Care"],
-        keywords: ["always","care","discreet","personal","personal care"],
-        preserveInProductName: true,
+        categories:["Personal Care"],
+        keywords:["discreet"],
+        preserveInProductName:true,
       },
     },
     categories: ["Personal Care"],
@@ -2236,31 +2236,31 @@ export const PRODUCT_BRAND_METADATA = {
       },
     ],
     productLines: {
-      "butter": {
-        name: "Butter",
-        aliases: [
+      "butter":{
+        name:"Butter",
+        aliases:[
           {
-            value: "Butter",
-            type: "official",
-            priority: 90,
+            value:"Butter",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Grocery"],
-        keywords: ["anchor","butter","cheese","cream","dairy","fat","full","full cream","grocery","low","low fat","skim"],
-        preserveInProductName: true,
+        categories:["Grocery"],
+        keywords:["butter"],
+        preserveInProductName:true,
       },
-      "skim": {
-        name: "Skim",
-        aliases: [
+      "skim":{
+        name:"Skim",
+        aliases:[
           {
-            value: "Skim",
-            type: "official",
-            priority: 90,
+            value:"Skim",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Grocery"],
-        keywords: ["anchor","butter","cheese","cream","dairy","fat","full","full cream","grocery","low","low fat","skim"],
-        preserveInProductName: true,
+        categories:["Grocery"],
+        keywords:["skim"],
+        preserveInProductName:true,
       },
     },
     variants: [
@@ -2385,44 +2385,44 @@ export const PRODUCT_BRAND_METADATA = {
       },
     ],
     productLines: {
-      "all-purpose-cream": {
-        name: "All Purpose Cream",
-        aliases: [
+      "all-purpose-cream":{
+        name:"All Purpose Cream",
+        aliases:[
           {
-            value: "All Purpose Cream",
-            type: "official",
-            priority: 90,
+            value:"All Purpose Cream",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Grocery"],
-        keywords: ["all","all purpose cream","angel","condensada","cream","evaporada","grocery","purpose"],
-        preserveInProductName: true,
+        categories:["Grocery"],
+        keywords:["all","all purpose cream","cream","purpose"],
+        preserveInProductName:true,
       },
-      "condensada": {
-        name: "Condensada",
-        aliases: [
+      "condensada":{
+        name:"Condensada",
+        aliases:[
           {
-            value: "Condensada",
-            type: "official",
-            priority: 90,
+            value:"Condensada",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Grocery"],
-        keywords: ["all","all purpose cream","angel","condensada","cream","evaporada","grocery","purpose"],
-        preserveInProductName: true,
+        categories:["Grocery"],
+        keywords:["condensada"],
+        preserveInProductName:true,
       },
-      "evaporada": {
-        name: "Evaporada",
-        aliases: [
+      "evaporada":{
+        name:"Evaporada",
+        aliases:[
           {
-            value: "Evaporada",
-            type: "official",
-            priority: 90,
+            value:"Evaporada",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Grocery"],
-        keywords: ["all","all purpose cream","angel","condensada","cream","evaporada","grocery","purpose"],
-        preserveInProductName: true,
+        categories:["Grocery"],
+        keywords:["evaporada"],
+        preserveInProductName:true,
       },
     },
     categories: ["Grocery"],
@@ -2491,18 +2491,18 @@ export const PRODUCT_BRAND_METADATA = {
       },
     ],
     productLines: {
-      "nebula": {
-        name: "Nebula",
-        aliases: [
+      "nebula":{
+        name:"Nebula",
+        aliases:[
           {
-            value: "Nebula",
-            type: "official",
-            priority: 90,
+            value:"Nebula",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Household","School Supplies"],
-        keywords: ["anker","household","nebula","school","school supplies","supplies"],
-        preserveInProductName: true,
+        categories:["Household","School Supplies"],
+        keywords:["nebula"],
+        preserveInProductName:true,
       },
     },
     categories: ["Household","School Supplies"],
@@ -3364,31 +3364,31 @@ export const PRODUCT_BRAND_METADATA = {
       },
     ],
     productLines: {
-      "butter": {
-        name: "Butter",
-        aliases: [
+      "butter":{
+        name:"Butter",
+        aliases:[
           {
-            value: "Butter",
-            type: "official",
-            priority: 90,
+            value:"Butter",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Grocery"],
-        keywords: ["arla","beverage","butter","cheese","dairy","fruit drink","grocery","juice"],
-        preserveInProductName: true,
+        categories:["Grocery"],
+        keywords:["butter"],
+        preserveInProductName:true,
       },
-      "juice": {
-        name: "Juice",
-        aliases: [
+      "juice":{
+        name:"Juice",
+        aliases:[
           {
-            value: "Juice",
-            type: "official",
-            priority: 90,
+            value:"Juice",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Grocery"],
-        keywords: ["arla","beverage","butter","cheese","dairy","fruit drink","grocery","juice"],
-        preserveInProductName: true,
+        categories:["Grocery"],
+        keywords:["beverage","fruit drink","juice"],
+        preserveInProductName:true,
       },
     },
     variants: [
@@ -4445,31 +4445,31 @@ export const PRODUCT_BRAND_METADATA = {
       },
     ],
     productLines: {
-      "lozenges": {
-        name: "Lozenges",
-        aliases: [
+      "lozenges":{
+        name:"Lozenges",
+        aliases:[
           {
-            value: "Lozenges",
-            type: "official",
-            priority: 90,
+            value:"Lozenges",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Medicine","Personal Care"],
-        keywords: ["bactidol","care","drug","lozenges","medication","medicine","personal","personal care","spray"],
-        preserveInProductName: true,
+        categories:["Medicine","Personal Care"],
+        keywords:["lozenges"],
+        preserveInProductName:true,
       },
-      "spray": {
-        name: "Spray",
-        aliases: [
+      "spray":{
+        name:"Spray",
+        aliases:[
           {
-            value: "Spray",
-            type: "official",
-            priority: 90,
+            value:"Spray",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Medicine","Personal Care"],
-        keywords: ["bactidol","care","drug","lozenges","medication","medicine","personal","personal care","spray"],
-        preserveInProductName: true,
+        categories:["Medicine","Personal Care"],
+        keywords:["spray"],
+        preserveInProductName:true,
       },
     },
     categories: ["Medicine","Personal Care"],
@@ -5344,31 +5344,31 @@ export const PRODUCT_BRAND_METADATA = {
       },
     ],
     productLines: {
-      "adult-plus": {
-        name: "Adult Plus",
-        aliases: [
+      "adult-plus":{
+        name:"Adult Plus",
+        aliases:[
           {
-            value: "Adult Plus",
-            type: "official",
-            priority: 90,
+            value:"Adult Plus",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Grocery"],
-        keywords: ["adult","adult plus","bear","bear brand","fortified","grocery","plus"],
-        preserveInProductName: true,
+        categories:["Grocery"],
+        keywords:["adult","adult plus","plus"],
+        preserveInProductName:true,
       },
-      "fortified": {
-        name: "Fortified",
-        aliases: [
+      "fortified":{
+        name:"Fortified",
+        aliases:[
           {
-            value: "Fortified",
-            type: "official",
-            priority: 90,
+            value:"Fortified",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Grocery"],
-        keywords: ["adult","adult plus","bear","bear brand","fortified","grocery","plus"],
-        preserveInProductName: true,
+        categories:["Grocery"],
+        keywords:["fortified"],
+        preserveInProductName:true,
       },
     },
     categories: ["Grocery"],
@@ -5658,18 +5658,18 @@ export const PRODUCT_BRAND_METADATA = {
       },
     ],
     productLines: {
-      "cough": {
-        name: "Cough",
-        aliases: [
+      "cough":{
+        name:"Cough",
+        aliases:[
           {
-            value: "Cough",
-            type: "official",
-            priority: 90,
+            value:"Cough",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Medicine"],
-        keywords: ["benadryl","cough","drug","medication","medicine"],
-        preserveInProductName: true,
+        categories:["Medicine"],
+        keywords:["cough"],
+        preserveInProductName:true,
       },
     },
     categories: ["Medicine"],
@@ -5686,18 +5686,18 @@ export const PRODUCT_BRAND_METADATA = {
       },
     ],
     productLines: {
-      "fix": {
-        name: "Fix",
-        aliases: [
+      "fix":{
+        name:"Fix",
+        aliases:[
           {
-            value: "Fix",
-            type: "official",
-            priority: 90,
+            value:"Fix",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Personal Care"],
-        keywords: ["bench","care","fix","personal","personal care"],
-        preserveInProductName: true,
+        categories:["Personal Care"],
+        keywords:["fix"],
+        preserveInProductName:true,
       },
     },
     categories: ["Personal Care"],
@@ -5844,18 +5844,18 @@ export const PRODUCT_BRAND_METADATA = {
       },
     ],
     productLines: {
-      "olive-oil": {
-        name: "Olive Oil",
-        aliases: [
+      "olive-oil":{
+        name:"Olive Oil",
+        aliases:[
           {
-            value: "Olive Oil",
-            type: "official",
-            priority: 90,
+            value:"Olive Oil",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Grocery"],
-        keywords: ["bertolli","grocery","oil","olive","olive oil"],
-        preserveInProductName: true,
+        categories:["Grocery"],
+        keywords:["oil","olive","olive oil"],
+        preserveInProductName:true,
       },
     },
     categories: ["Grocery"],
@@ -5963,44 +5963,44 @@ export const PRODUCT_BRAND_METADATA = {
       },
     ],
     productLines: {
-      "gargle": {
-        name: "Gargle",
-        aliases: [
+      "gargle":{
+        name:"Gargle",
+        aliases:[
           {
-            value: "Gargle",
-            type: "official",
-            priority: 90,
+            value:"Gargle",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Medicine","Personal Care","Pet Supplies"],
-        keywords: ["betadine","care","cleanser","drug","gargle","medication","medicine","personal","personal care","pet","pet supplies","skin","skin cleanser","supplies","wound","wound cleanser"],
-        preserveInProductName: true,
+        categories:["Medicine","Personal Care","Pet Supplies"],
+        keywords:["gargle"],
+        preserveInProductName:true,
       },
-      "skin-cleanser": {
-        name: "Skin Cleanser",
-        aliases: [
+      "skin-cleanser":{
+        name:"Skin Cleanser",
+        aliases:[
           {
-            value: "Skin Cleanser",
-            type: "official",
-            priority: 90,
+            value:"Skin Cleanser",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Medicine","Personal Care","Pet Supplies"],
-        keywords: ["betadine","care","cleanser","drug","gargle","medication","medicine","personal","personal care","pet","pet supplies","skin","skin cleanser","supplies","wound","wound cleanser"],
-        preserveInProductName: true,
+        categories:["Medicine","Personal Care","Pet Supplies"],
+        keywords:["cleanser","skin","skin cleanser"],
+        preserveInProductName:true,
       },
-      "wound-cleanser": {
-        name: "Wound Cleanser",
-        aliases: [
+      "wound-cleanser":{
+        name:"Wound Cleanser",
+        aliases:[
           {
-            value: "Wound Cleanser",
-            type: "official",
-            priority: 90,
+            value:"Wound Cleanser",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Medicine","Personal Care","Pet Supplies"],
-        keywords: ["betadine","care","cleanser","drug","gargle","medication","medicine","personal","personal care","pet","pet supplies","skin","skin cleanser","supplies","wound","wound cleanser"],
-        preserveInProductName: true,
+        categories:["Medicine","Personal Care","Pet Supplies"],
+        keywords:["cleanser","wound","wound cleanser"],
+        preserveInProductName:true,
       },
     },
     categories: ["Medicine","Personal Care","Pet Supplies"],
@@ -8454,18 +8454,18 @@ export const PRODUCT_BRAND_METADATA = {
       },
     ],
     productLines: {
-      "barako": {
-        name: "Barako",
-        aliases: [
+      "barako":{
+        name:"Barako",
+        aliases:[
           {
-            value: "Barako",
-            type: "official",
-            priority: 90,
+            value:"Barako",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Grocery"],
-        keywords: ["barako","cafe","cafe puro","grocery","puro"],
-        preserveInProductName: true,
+        categories:["Grocery"],
+        keywords:["barako"],
+        preserveInProductName:true,
       },
     },
     categories: ["Grocery"],
@@ -8599,18 +8599,17 @@ export const PRODUCT_BRAND_METADATA = {
       },
     ],
     productLines: {
-      "d": {
-        name: "D",
-        aliases: [
+      "d":{
+        name:"D",
+        aliases:[
           {
-            value: "D",
-            type: "official",
-            priority: 90,
+            value:"D",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Medicine"],
-        keywords: ["caltrate","drug","medication","medicine"],
-        preserveInProductName: true,
+        categories:["Medicine"],
+        preserveInProductName:true,
       },
     },
     categories: ["Medicine"],
@@ -8698,18 +8697,18 @@ export const PRODUCT_BRAND_METADATA = {
       },
     ],
     productLines: {
-      "hausfeld": {
-        name: "Hausfeld",
-        aliases: [
+      "hausfeld":{
+        name:"Hausfeld",
+        aliases:[
           {
-            value: "Hausfeld",
-            type: "official",
-            priority: 90,
+            value:"Hausfeld",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Grocery","Hardware"],
-        keywords: ["campbell","campbell s","grocery","hardware","hausfeld"],
-        preserveInProductName: true,
+        categories:["Grocery","Hardware"],
+        keywords:["hausfeld"],
+        preserveInProductName:true,
       },
     },
     categories: ["Grocery","Hardware"],
@@ -9233,18 +9232,18 @@ export const PRODUCT_BRAND_METADATA = {
       },
     ],
     productLines: {
-      "coffee-creamer": {
-        name: "Coffee Creamer",
-        aliases: [
+      "coffee-creamer":{
+        name:"Coffee Creamer",
+        aliases:[
           {
-            value: "Coffee Creamer",
-            type: "official",
-            priority: 90,
+            value:"Coffee Creamer",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Grocery"],
-        keywords: ["caffeine","carnation","coffee","coffee creamer","coffee drink","creamer","grocery","ground coffee","instant coffee"],
-        preserveInProductName: true,
+        categories:["Grocery"],
+        keywords:["caffeine","coffee","coffee creamer","coffee drink","creamer","ground coffee","instant coffee"],
+        preserveInProductName:true,
       },
     },
     categories: ["Grocery"],
@@ -9716,31 +9715,31 @@ export const PRODUCT_BRAND_METADATA = {
       },
     ],
     productLines: {
-      "funtastyk": {
-        name: "Funtastyk",
-        aliases: [
+      "funtastyk":{
+        name:"Funtastyk",
+        aliases:[
           {
-            value: "Funtastyk",
-            type: "official",
-            priority: 90,
+            value:"Funtastyk",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Grocery"],
-        keywords: ["cdo","funtastyk","grocery","idol"],
-        preserveInProductName: true,
+        categories:["Grocery"],
+        keywords:["funtastyk"],
+        preserveInProductName:true,
       },
-      "idol": {
-        name: "Idol",
-        aliases: [
+      "idol":{
+        name:"Idol",
+        aliases:[
           {
-            value: "Idol",
-            type: "official",
-            priority: 90,
+            value:"Idol",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Grocery"],
-        keywords: ["cdo","funtastyk","grocery","idol"],
-        preserveInProductName: true,
+        categories:["Grocery"],
+        keywords:["idol"],
+        preserveInProductName:true,
       },
     },
     categories: ["Grocery"],
@@ -9770,18 +9769,18 @@ export const PRODUCT_BRAND_METADATA = {
       },
     ],
     productLines: {
-      "drops": {
-        name: "Drops",
-        aliases: [
+      "drops":{
+        name:"Drops",
+        aliases:[
           {
-            value: "Drops",
-            type: "official",
-            priority: 90,
+            value:"Drops",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Medicine"],
-        keywords: ["ceelin","drops","drug","medication","medicine"],
-        preserveInProductName: true,
+        categories:["Medicine"],
+        keywords:["drops"],
+        preserveInProductName:true,
       },
     },
     categories: ["Medicine"],
@@ -9967,18 +9966,18 @@ export const PRODUCT_BRAND_METADATA = {
       },
     ],
     productLines: {
-      "tuna": {
-        name: "Tuna",
-        aliases: [
+      "tuna":{
+        name:"Tuna",
+        aliases:[
           {
-            value: "Tuna",
-            type: "official",
-            priority: 90,
+            value:"Tuna",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Grocery"],
-        keywords: ["century","grocery","tuna"],
-        preserveInProductName: true,
+        categories:["Grocery"],
+        keywords:["tuna"],
+        preserveInProductName:true,
       },
     },
     categories: ["Grocery"],
@@ -10086,18 +10085,18 @@ export const PRODUCT_BRAND_METADATA = {
       },
     ],
     productLines: {
-      "underpads": {
-        name: "Underpads",
-        aliases: [
+      "underpads":{
+        name:"Underpads",
+        aliases:[
           {
-            value: "Underpads",
-            type: "official",
-            priority: 90,
+            value:"Underpads",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Medicine","Personal Care"],
-        keywords: ["care","certainty","drug","medication","medicine","personal","personal care","underpads"],
-        preserveInProductName: true,
+        categories:["Medicine","Personal Care"],
+        keywords:["underpads"],
+        preserveInProductName:true,
       },
     },
     categories: ["Medicine","Personal Care"],
@@ -10127,57 +10126,57 @@ export const PRODUCT_BRAND_METADATA = {
       },
     ],
     productLines: {
-      "baby": {
-        name: "Baby",
-        aliases: [
+      "baby":{
+        name:"Baby",
+        aliases:[
           {
-            value: "Baby",
-            type: "official",
-            priority: 90,
+            value:"Baby",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Medicine","Personal Care"],
-        keywords: ["baby","bar","care","cetaphil","cleansing","cleansing bar","drug","medication","medicine","personal","personal care","restoraderm","sun"],
-        preserveInProductName: true,
+        categories:["Medicine","Personal Care"],
+        keywords:["baby"],
+        preserveInProductName:true,
       },
-      "cleansing-bar": {
-        name: "Cleansing Bar",
-        aliases: [
+      "cleansing-bar":{
+        name:"Cleansing Bar",
+        aliases:[
           {
-            value: "Cleansing Bar",
-            type: "official",
-            priority: 90,
+            value:"Cleansing Bar",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Medicine","Personal Care"],
-        keywords: ["baby","bar","care","cetaphil","cleansing","cleansing bar","drug","medication","medicine","personal","personal care","restoraderm","sun"],
-        preserveInProductName: true,
+        categories:["Medicine","Personal Care"],
+        keywords:["bar","cleansing","cleansing bar"],
+        preserveInProductName:true,
       },
-      "restoraderm": {
-        name: "Restoraderm",
-        aliases: [
+      "restoraderm":{
+        name:"Restoraderm",
+        aliases:[
           {
-            value: "Restoraderm",
-            type: "official",
-            priority: 90,
+            value:"Restoraderm",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Medicine","Personal Care"],
-        keywords: ["baby","bar","care","cetaphil","cleansing","cleansing bar","drug","medication","medicine","personal","personal care","restoraderm","sun"],
-        preserveInProductName: true,
+        categories:["Medicine","Personal Care"],
+        keywords:["restoraderm"],
+        preserveInProductName:true,
       },
-      "sun": {
-        name: "Sun",
-        aliases: [
+      "sun":{
+        name:"Sun",
+        aliases:[
           {
-            value: "Sun",
-            type: "official",
-            priority: 90,
+            value:"Sun",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Medicine","Personal Care"],
-        keywords: ["baby","bar","care","cetaphil","cleansing","cleansing bar","drug","medication","medicine","personal","personal care","restoraderm","sun"],
-        preserveInProductName: true,
+        categories:["Medicine","Personal Care"],
+        keywords:["sun"],
+        preserveInProductName:true,
       },
     },
     categories: ["Medicine","Personal Care"],
@@ -10733,18 +10732,18 @@ export const PRODUCT_BRAND_METADATA = {
       },
     ],
     productLines: {
-      "cookie": {
-        name: "Cookie",
-        aliases: [
+      "cookie":{
+        name:"Cookie",
+        aliases:[
           {
-            value: "Cookie",
-            type: "official",
-            priority: 90,
+            value:"Cookie",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Grocery"],
-        keywords: ["biscuits","choco","choco mucho","cookie","cookies","grocery","mucho","snacks"],
-        preserveInProductName: true,
+        categories:["Grocery"],
+        keywords:["biscuits","cookie","cookies","snacks"],
+        preserveInProductName:true,
       },
     },
     categories: ["Grocery"],
@@ -10852,19 +10851,6 @@ export const PRODUCT_BRAND_METADATA = {
       },
     ],
     categories: ["Hardware"],
-  },
-  "chuckie": {
-    id: "chuckie",
-    name: "Chuckie",
-    aliases: [
-      {
-        value: "Chuckie",
-        type: "official",
-        priority: 100,
-        strength: "strong",
-      },
-    ],
-    categories: ["Grocery"],
   },
   "chuckit": {
     id: "chuckit",
@@ -11242,18 +11228,18 @@ export const PRODUCT_BRAND_METADATA = {
       },
     ],
     productLines: {
-      "ovulation": {
-        name: "Ovulation",
-        aliases: [
+      "ovulation":{
+        name:"Ovulation",
+        aliases:[
           {
-            value: "Ovulation",
-            type: "official",
-            priority: 90,
+            value:"Ovulation",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Medicine"],
-        keywords: ["clearblue","drug","medication","medicine","ovulation"],
-        preserveInProductName: true,
+        categories:["Medicine"],
+        keywords:["ovulation"],
+        preserveInProductName:true,
       },
     },
     categories: ["Medicine"],
@@ -11452,18 +11438,18 @@ export const PRODUCT_BRAND_METADATA = {
       },
     ],
     productLines: {
-      "chips": {
-        name: "Chips",
-        aliases: [
+      "chips":{
+        name:"Chips",
+        aliases:[
           {
-            value: "Chips",
-            type: "official",
-            priority: 90,
+            value:"Chips",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Grocery"],
-        keywords: ["chips","clover","grocery","snacks"],
-        preserveInProductName: true,
+        categories:["Grocery"],
+        keywords:["chips","snacks"],
+        preserveInProductName:true,
       },
     },
     categories: ["Grocery"],
@@ -11704,59 +11690,6 @@ export const PRODUCT_BRAND_METADATA = {
         type: "official",
         priority: 100,
         strength: "strong",
-      },
-    ],
-    categories: ["Grocery"],
-  },
-  "coffee-mate": {
-    id: "coffee-mate",
-    name: "Coffee Mate",
-    aliases: [
-      {
-        value: "Coffee Mate",
-        type: "official",
-        priority: 100,
-        strength: "strong",
-      },
-    ],
-    productLines: {
-      "french": {
-        name: "French",
-        aliases: [
-          {
-            value: "French",
-            type: "official",
-            priority: 90,
-          },
-        ],
-        categories: ["Grocery"],
-        keywords: ["caffeine","coffee","coffee drink","coffee mate","french","grocery","ground coffee","hazelnut","instant coffee","mate","vanilla"],
-        preserveInProductName: true,
-      },
-      "hazelnut": {
-        name: "Hazelnut",
-        aliases: [
-          {
-            value: "Hazelnut",
-            type: "official",
-            priority: 90,
-          },
-        ],
-        categories: ["Grocery"],
-        keywords: ["caffeine","coffee","coffee drink","coffee mate","french","grocery","ground coffee","hazelnut","instant coffee","mate","vanilla"],
-        preserveInProductName: true,
-      },
-    },
-    variants: [
-      {
-        name: "Original",
-        categories: ["Grocery"],
-        keywords: ["grocery"],
-      },
-      {
-        name: "Vanilla",
-        categories: ["Grocery"],
-        keywords: ["grocery","vanilla"],
       },
     ],
     categories: ["Grocery"],
@@ -12033,18 +11966,18 @@ export const PRODUCT_BRAND_METADATA = {
       },
     ],
     productLines: {
-      "underpads": {
-        name: "Underpads",
-        aliases: [
+      "underpads":{
+        name:"Underpads",
+        aliases:[
           {
-            value: "Underpads",
-            type: "official",
-            priority: 90,
+            value:"Underpads",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Medicine"],
-        keywords: ["comfit","drug","medication","medicine","underpads"],
-        preserveInProductName: true,
+        categories:["Medicine"],
+        keywords:["underpads"],
+        preserveInProductName:true,
       },
     },
     categories: ["Medicine"],
@@ -12282,18 +12215,18 @@ export const PRODUCT_BRAND_METADATA = {
       },
     ],
     productLines: {
-      "test-strips": {
-        name: "Test Strips",
-        aliases: [
+      "test-strips":{
+        name:"Test Strips",
+        aliases:[
           {
-            value: "Test Strips",
-            type: "official",
-            priority: 90,
+            value:"Test Strips",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Medicine"],
-        keywords: ["contour","drug","medication","medicine","strips","test","test strips"],
-        preserveInProductName: true,
+        categories:["Medicine"],
+        keywords:["strips","test","test strips"],
+        preserveInProductName:true,
       },
     },
     categories: ["Medicine"],
@@ -13240,18 +13173,18 @@ export const PRODUCT_BRAND_METADATA = {
       },
     ],
     productLines: {
-      "sugar": {
-        name: "Sugar",
-        aliases: [
+      "sugar":{
+        name:"Sugar",
+        aliases:[
           {
-            value: "Sugar",
-            type: "official",
-            priority: 90,
+            value:"Sugar",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Grocery"],
-        keywords: ["crystal","grocery","sugar"],
-        preserveInProductName: true,
+        categories:["Grocery"],
+        keywords:["sugar"],
+        preserveInProductName:true,
       },
     },
     categories: ["Grocery"],
@@ -13359,18 +13292,18 @@ export const PRODUCT_BRAND_METADATA = {
       },
     ],
     productLines: {
-      "elastic-bandage": {
-        name: "Elastic Bandage",
-        aliases: [
+      "elastic-bandage":{
+        name:"Elastic Bandage",
+        aliases:[
           {
-            value: "Elastic Bandage",
-            type: "official",
-            priority: 90,
+            value:"Elastic Bandage",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Medicine"],
-        keywords: ["bandage","curad","drug","elastic","elastic bandage","medication","medicine"],
-        preserveInProductName: true,
+        categories:["Medicine"],
+        keywords:["bandage","elastic","elastic bandage"],
+        preserveInProductName:true,
       },
     },
     categories: ["Medicine"],
@@ -13738,18 +13671,18 @@ export const PRODUCT_BRAND_METADATA = {
       },
     ],
     productLines: {
-      "oral-gel": {
-        name: "Oral Gel",
-        aliases: [
+      "oral-gel":{
+        name:"Oral Gel",
+        aliases:[
           {
-            value: "Oral Gel",
-            type: "official",
-            priority: 90,
+            value:"Oral Gel",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Medicine"],
-        keywords: ["daktarin","drug","gel","medication","medicine","oral","oral gel"],
-        preserveInProductName: true,
+        categories:["Medicine"],
+        keywords:["gel","oral","oral gel"],
+        preserveInProductName:true,
       },
     },
     categories: ["Medicine"],
@@ -14201,18 +14134,18 @@ export const PRODUCT_BRAND_METADATA = {
       },
     ],
     productLines: {
-      "forte": {
-        name: "Forte",
-        aliases: [
+      "forte":{
+        name:"Forte",
+        aliases:[
           {
-            value: "Forte",
-            type: "official",
-            priority: 90,
+            value:"Forte",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Medicine"],
-        keywords: ["decolgen","drug","forte","medication","medicine"],
-        preserveInProductName: true,
+        categories:["Medicine"],
+        keywords:["forte"],
+        preserveInProductName:true,
       },
     },
     categories: ["Medicine"],
@@ -14320,31 +14253,31 @@ export const PRODUCT_BRAND_METADATA = {
       },
     ],
     productLines: {
-      "spaghetti-sauce": {
-        name: "Spaghetti Sauce",
-        aliases: [
+      "spaghetti-sauce":{
+        name:"Spaghetti Sauce",
+        aliases:[
           {
-            value: "Spaghetti Sauce",
-            type: "official",
-            priority: 90,
+            value:"Spaghetti Sauce",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Grocery"],
-        keywords: ["del","del monte","grocery","monte","sauce","spaghetti","spaghetti sauce","tomato","tomato sauce"],
-        preserveInProductName: true,
+        categories:["Grocery"],
+        keywords:["sauce","spaghetti","spaghetti sauce"],
+        preserveInProductName:true,
       },
-      "tomato-sauce": {
-        name: "Tomato Sauce",
-        aliases: [
+      "tomato-sauce":{
+        name:"Tomato Sauce",
+        aliases:[
           {
-            value: "Tomato Sauce",
-            type: "official",
-            priority: 90,
+            value:"Tomato Sauce",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Grocery"],
-        keywords: ["del","del monte","grocery","monte","sauce","spaghetti","spaghetti sauce","tomato","tomato sauce"],
-        preserveInProductName: true,
+        categories:["Grocery"],
+        keywords:["sauce","tomato","tomato sauce"],
+        preserveInProductName:true,
       },
     },
     categories: ["Grocery"],
@@ -14426,18 +14359,18 @@ export const PRODUCT_BRAND_METADATA = {
       },
     ],
     productLines: {
-      "cycle": {
-        name: "Cycle",
-        aliases: [
+      "cycle":{
+        name:"Cycle",
+        aliases:[
           {
-            value: "Cycle",
-            type: "official",
-            priority: 90,
+            value:"Cycle",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Hardware"],
-        keywords: ["cycle","delta","hardware"],
-        preserveInProductName: true,
+        categories:["Hardware"],
+        keywords:["cycle"],
+        preserveInProductName:true,
       },
     },
     categories: ["Hardware"],
@@ -14870,31 +14803,31 @@ export const PRODUCT_BRAND_METADATA = {
       },
     ],
     productLines: {
-      "chain": {
-        name: "Chain",
-        aliases: [
+      "chain":{
+        name:"Chain",
+        aliases:[
           {
-            value: "Chain",
-            type: "official",
-            priority: 90,
+            value:"Chain",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Grocery","Hardware","Household","School Supplies"],
-        keywords: ["chain","diamond","grocery","ground","hardware","household","school","school supplies","supplies"],
-        preserveInProductName: true,
+        categories:["Grocery","Hardware","Household","School Supplies"],
+        keywords:["chain"],
+        preserveInProductName:true,
       },
-      "ground": {
-        name: "Ground",
-        aliases: [
+      "ground":{
+        name:"Ground",
+        aliases:[
           {
-            value: "Ground",
-            type: "official",
-            priority: 90,
+            value:"Ground",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Grocery","Hardware","Household","School Supplies"],
-        keywords: ["chain","diamond","grocery","ground","hardware","household","school","school supplies","supplies"],
-        preserveInProductName: true,
+        categories:["Grocery","Hardware","Household","School Supplies"],
+        keywords:["ground"],
+        preserveInProductName:true,
       },
     },
     categories: ["Grocery","Hardware","Household","School Supplies"],
@@ -15457,18 +15390,18 @@ export const PRODUCT_BRAND_METADATA = {
       },
     ],
     productLines: {
-      "gusto": {
-        name: "Gusto",
-        aliases: [
+      "gusto":{
+        name:"Gusto",
+        aliases:[
           {
-            value: "Gusto",
-            type: "official",
-            priority: 90,
+            value:"Gusto",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Grocery"],
-        keywords: ["dolce","grocery","gusto"],
-        preserveInProductName: true,
+        categories:["Grocery"],
+        keywords:["gusto"],
+        preserveInProductName:true,
       },
     },
     categories: ["Grocery"],
@@ -15485,18 +15418,18 @@ export const PRODUCT_BRAND_METADATA = {
       },
     ],
     productLines: {
-      "plus": {
-        name: "Plus",
-        aliases: [
+      "plus":{
+        name:"Plus",
+        aliases:[
           {
-            value: "Plus",
-            type: "official",
-            priority: 90,
+            value:"Plus",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Medicine"],
-        keywords: ["dolcet","drug","medication","medicine","plus"],
-        preserveInProductName: true,
+        categories:["Medicine"],
+        keywords:["plus"],
+        preserveInProductName:true,
       },
     },
     categories: ["Medicine"],
@@ -16085,31 +16018,31 @@ export const PRODUCT_BRAND_METADATA = {
       },
     ],
     productLines: {
-      "cup": {
-        name: "Cup",
-        aliases: [
+      "cup":{
+        name:"Cup",
+        aliases:[
           {
-            value: "Cup",
-            type: "official",
-            priority: 90,
+            value:"Cup",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Grocery"],
-        keywords: ["cup","dream","grocery","whip"],
-        preserveInProductName: true,
+        categories:["Grocery"],
+        keywords:["cup"],
+        preserveInProductName:true,
       },
-      "whip": {
-        name: "Whip",
-        aliases: [
+      "whip":{
+        name:"Whip",
+        aliases:[
           {
-            value: "Whip",
-            type: "official",
-            priority: 90,
+            value:"Whip",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Grocery"],
-        keywords: ["cup","dream","grocery","whip"],
-        preserveInProductName: true,
+        categories:["Grocery"],
+        keywords:["whip"],
+        preserveInProductName:true,
       },
     },
     categories: ["Grocery"],
@@ -16282,18 +16215,18 @@ export const PRODUCT_BRAND_METADATA = {
       },
     ],
     productLines: {
-      "covers": {
-        name: "Covers",
-        aliases: [
+      "covers":{
+        name:"Covers",
+        aliases:[
           {
-            value: "Covers",
-            type: "official",
-            priority: 90,
+            value:"Covers",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Hardware","Household"],
-        keywords: ["covers","duck","hardware","household"],
-        preserveInProductName: true,
+        categories:["Hardware","Household"],
+        keywords:["covers"],
+        preserveInProductName:true,
       },
     },
     categories: ["Hardware","Household"],
@@ -16518,18 +16451,18 @@ export const PRODUCT_BRAND_METADATA = {
       },
     ],
     productLines: {
-      "de": {
-        name: "De",
-        aliases: [
+      "de":{
+        name:"De",
+        aliases:[
           {
-            value: "De",
-            type: "official",
-            priority: 90,
+            value:"De",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Grocery"],
-        keywords: ["de","dutch","dutch mill","grocery","light","mill"],
-        preserveInProductName: true,
+        categories:["Grocery"],
+        keywords:["de"],
+        preserveInProductName:true,
       },
     },
     variants: [
@@ -17457,18 +17390,18 @@ export const PRODUCT_BRAND_METADATA = {
       },
     ],
     productLines: {
-      "milk": {
-        name: "Milk",
-        aliases: [
+      "milk":{
+        name:"Milk",
+        aliases:[
           {
-            value: "Milk",
-            type: "official",
-            priority: 90,
+            value:"Milk",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Grocery"],
-        keywords: ["cheese","dairy","emborg","grocery","milk"],
-        preserveInProductName: true,
+        categories:["Grocery"],
+        keywords:["dairy","milk"],
+        preserveInProductName:true,
       },
     },
     variants: [
@@ -17674,18 +17607,18 @@ export const PRODUCT_BRAND_METADATA = {
       },
     ],
     productLines: {
-      "kidz": {
-        name: "Kidz",
-        aliases: [
+      "kidz":{
+        name:"Kidz",
+        aliases:[
           {
-            value: "Kidz",
-            type: "official",
-            priority: 90,
+            value:"Kidz",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Medicine"],
-        keywords: ["drug","enervon","kidz","medication","medicine"],
-        preserveInProductName: true,
+        categories:["Medicine"],
+        keywords:["kidz"],
+        preserveInProductName:true,
       },
     },
     categories: ["Medicine"],
@@ -17754,31 +17687,31 @@ export const PRODUCT_BRAND_METADATA = {
       },
     ],
     productLines: {
-      "gold": {
-        name: "Gold",
-        aliases: [
+      "gold":{
+        name:"Gold",
+        aliases:[
           {
-            value: "Gold",
-            type: "official",
-            priority: 90,
+            value:"Gold",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Grocery","Medicine"],
-        keywords: ["drug","ensure","gold","grocery","max","max protein","medication","medicine","protein"],
-        preserveInProductName: true,
+        categories:["Grocery","Medicine"],
+        keywords:["gold"],
+        preserveInProductName:true,
       },
-      "max-protein": {
-        name: "Max Protein",
-        aliases: [
+      "max-protein":{
+        name:"Max Protein",
+        aliases:[
           {
-            value: "Max Protein",
-            type: "official",
-            priority: 90,
+            value:"Max Protein",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Grocery","Medicine"],
-        keywords: ["drug","ensure","gold","grocery","max","max protein","medication","medicine","protein"],
-        preserveInProductName: true,
+        categories:["Grocery","Medicine"],
+        keywords:["max","max protein","protein"],
+        preserveInProductName:true,
       },
     },
     categories: ["Grocery","Medicine"],
@@ -18926,18 +18859,18 @@ export const PRODUCT_BRAND_METADATA = {
       },
     ],
     productLines: {
-      "rocher": {
-        name: "Rocher",
-        aliases: [
+      "rocher":{
+        name:"Rocher",
+        aliases:[
           {
-            value: "Rocher",
-            type: "official",
-            priority: 90,
+            value:"Rocher",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Grocery"],
-        keywords: ["ferrero","grocery","rocher"],
-        preserveInProductName: true,
+        categories:["Grocery"],
+        keywords:["rocher"],
+        preserveInProductName:true,
       },
     },
     categories: ["Grocery"],
@@ -19071,18 +19004,18 @@ export const PRODUCT_BRAND_METADATA = {
       },
     ],
     productLines: {
-      "pasta": {
-        name: "Pasta",
-        aliases: [
+      "pasta":{
+        name:"Pasta",
+        aliases:[
           {
-            value: "Pasta",
-            type: "official",
-            priority: 90,
+            value:"Pasta",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Grocery","Household"],
-        keywords: ["fiesta","grocery","household","pasta"],
-        preserveInProductName: true,
+        categories:["Grocery","Household"],
+        keywords:["pasta"],
+        preserveInProductName:true,
       },
     },
     categories: ["Grocery","Household"],
@@ -19554,18 +19487,18 @@ export const PRODUCT_BRAND_METADATA = {
       },
     ],
     productLines: {
-      "white": {
-        name: "White",
-        aliases: [
+      "white":{
+        name:"White",
+        aliases:[
           {
-            value: "White",
-            type: "official",
-            priority: 90,
+            value:"White",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Grocery"],
-        keywords: ["flat","flat tops","grocery","tops","white"],
-        preserveInProductName: true,
+        categories:["Grocery"],
+        keywords:["white"],
+        preserveInProductName:true,
       },
     },
     categories: ["Grocery"],
@@ -19816,18 +19749,18 @@ export const PRODUCT_BRAND_METADATA = {
       },
     ],
     productLines: {
-      "networks": {
-        name: "Networks",
-        aliases: [
+      "networks":{
+        name:"Networks",
+        aliases:[
           {
-            value: "Networks",
-            type: "official",
-            priority: 90,
+            value:"Networks",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Hardware"],
-        keywords: ["fluke","hardware","networks"],
-        preserveInProductName: true,
+        categories:["Hardware"],
+        keywords:["networks"],
+        preserveInProductName:true,
       },
     },
     categories: ["Hardware"],
@@ -20286,18 +20219,18 @@ export const PRODUCT_BRAND_METADATA = {
       },
     ],
     productLines: {
-      "test-strips": {
-        name: "Test Strips",
-        aliases: [
+      "test-strips":{
+        name:"Test Strips",
+        aliases:[
           {
-            value: "Test Strips",
-            type: "official",
-            priority: 90,
+            value:"Test Strips",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Medicine"],
-        keywords: ["drug","freestyle","medication","medicine","strips","test","test strips"],
-        preserveInProductName: true,
+        categories:["Medicine"],
+        keywords:["strips","test","test strips"],
+        preserveInProductName:true,
       },
     },
     categories: ["Medicine"],
@@ -20340,31 +20273,31 @@ export const PRODUCT_BRAND_METADATA = {
       },
     ],
     productLines: {
-      "gourmet": {
-        name: "Gourmet",
-        aliases: [
+      "gourmet":{
+        name:"Gourmet",
+        aliases:[
           {
-            value: "Gourmet",
-            type: "official",
-            priority: 90,
+            value:"Gourmet",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Grocery"],
-        keywords: ["fresh","gourmet","grocery","options"],
-        preserveInProductName: true,
+        categories:["Grocery"],
+        keywords:["gourmet"],
+        preserveInProductName:true,
       },
-      "options": {
-        name: "Options",
-        aliases: [
+      "options":{
+        name:"Options",
+        aliases:[
           {
-            value: "Options",
-            type: "official",
-            priority: 90,
+            value:"Options",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Grocery"],
-        keywords: ["fresh","gourmet","grocery","options"],
-        preserveInProductName: true,
+        categories:["Grocery"],
+        keywords:["options"],
+        preserveInProductName:true,
       },
     },
     categories: ["Grocery"],
@@ -20654,18 +20587,18 @@ export const PRODUCT_BRAND_METADATA = {
       },
     ],
     productLines: {
-      "instax": {
-        name: "Instax",
-        aliases: [
+      "instax":{
+        name:"Instax",
+        aliases:[
           {
-            value: "Instax",
-            type: "official",
-            priority: 90,
+            value:"Instax",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["School Supplies"],
-        keywords: ["fujifilm","instax","school","school supplies","supplies"],
-        preserveInProductName: true,
+        categories:["School Supplies"],
+        keywords:["instax"],
+        preserveInProductName:true,
       },
     },
     categories: ["School Supplies"],
@@ -21137,44 +21070,44 @@ export const PRODUCT_BRAND_METADATA = {
       },
     ],
     productLines: {
-      "black-forest": {
-        name: "Black Forest",
-        aliases: [
+      "black-forest":{
+        name:"Black Forest",
+        aliases:[
           {
-            value: "Black Forest",
-            type: "official",
-            priority: 90,
+            value:"Black Forest",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Grocery"],
-        keywords: ["black","black forest","delicia","forest","gardenia","grocery","wheat"],
-        preserveInProductName: true,
+        categories:["Grocery"],
+        keywords:["black","black forest","forest"],
+        preserveInProductName:true,
       },
-      "delicia": {
-        name: "Delicia",
-        aliases: [
+      "delicia":{
+        name:"Delicia",
+        aliases:[
           {
-            value: "Delicia",
-            type: "official",
-            priority: 90,
+            value:"Delicia",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Grocery"],
-        keywords: ["black","black forest","delicia","forest","gardenia","grocery","wheat"],
-        preserveInProductName: true,
+        categories:["Grocery"],
+        keywords:["delicia"],
+        preserveInProductName:true,
       },
-      "wheat": {
-        name: "Wheat",
-        aliases: [
+      "wheat":{
+        name:"Wheat",
+        aliases:[
           {
-            value: "Wheat",
-            type: "official",
-            priority: 90,
+            value:"Wheat",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Grocery"],
-        keywords: ["black","black forest","delicia","forest","gardenia","grocery","wheat"],
-        preserveInProductName: true,
+        categories:["Grocery"],
+        keywords:["wheat"],
+        preserveInProductName:true,
       },
     },
     categories: ["Grocery"],
@@ -21711,18 +21644,18 @@ export const PRODUCT_BRAND_METADATA = {
       },
     ],
     productLines: {
-      "wrap": {
-        name: "Wrap",
-        aliases: [
+      "wrap":{
+        name:"Wrap",
+        aliases:[
           {
-            value: "Wrap",
-            type: "official",
-            priority: 90,
+            value:"Wrap",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Household"],
-        keywords: ["glad","household","wrap"],
-        preserveInProductName: true,
+        categories:["Household"],
+        keywords:["wrap"],
+        preserveInProductName:true,
       },
     },
     categories: ["Household"],
@@ -22233,18 +22166,18 @@ export const PRODUCT_BRAND_METADATA = {
       },
     ],
     productLines: {
-      "coffee": {
-        name: "Coffee",
-        aliases: [
+      "coffee":{
+        name:"Coffee",
+        aliases:[
           {
-            value: "Coffee",
-            type: "official",
-            priority: 90,
+            value:"Coffee",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Grocery"],
-        keywords: ["caffeine","coffee","coffee drink","day","good","good day","grocery","ground coffee","instant coffee"],
-        preserveInProductName: true,
+        categories:["Grocery"],
+        keywords:["caffeine","coffee","coffee drink","ground coffee","instant coffee"],
+        preserveInProductName:true,
       },
     },
     categories: ["Grocery"],
@@ -22417,18 +22350,18 @@ export const PRODUCT_BRAND_METADATA = {
       },
     ],
     productLines: {
-      "grip": {
-        name: "Grip",
-        aliases: [
+      "grip":{
+        name:"Grip",
+        aliases:[
           {
-            value: "Grip",
-            type: "official",
-            priority: 90,
+            value:"Grip",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Hardware"],
-        keywords: ["gorilla","grip","hardware"],
-        preserveInProductName: true,
+        categories:["Hardware"],
+        keywords:["grip"],
+        preserveInProductName:true,
       },
     },
     categories: ["Hardware"],
@@ -22640,31 +22573,31 @@ export const PRODUCT_BRAND_METADATA = {
       },
     ],
     productLines: {
-      "granules": {
-        name: "Granules",
-        aliases: [
+      "granules":{
+        name:"Granules",
+        aliases:[
           {
-            value: "Granules",
-            type: "official",
-            priority: 90,
+            value:"Granules",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Grocery"],
-        keywords: ["granules","great","great taste","grocery","taste","white"],
-        preserveInProductName: true,
+        categories:["Grocery"],
+        keywords:["granules"],
+        preserveInProductName:true,
       },
-      "white": {
-        name: "White",
-        aliases: [
+      "white":{
+        name:"White",
+        aliases:[
           {
-            value: "White",
-            type: "official",
-            priority: 90,
+            value:"White",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Grocery"],
-        keywords: ["granules","great","great taste","grocery","taste","white"],
-        preserveInProductName: true,
+        categories:["Grocery"],
+        keywords:["white"],
+        preserveInProductName:true,
       },
     },
     categories: ["Grocery"],
@@ -23513,18 +23446,18 @@ export const PRODUCT_BRAND_METADATA = {
       },
     ],
     productLines: {
-      "price": {
-        name: "Price",
-        aliases: [
+      "price":{
+        name:"Price",
+        aliases:[
           {
-            value: "Price",
-            type: "official",
-            priority: 90,
+            value:"Price",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Grocery"],
-        keywords: ["grocery","happy","price"],
-        preserveInProductName: true,
+        categories:["Grocery"],
+        keywords:["price"],
+        preserveInProductName:true,
       },
     },
     categories: ["Grocery"],
@@ -25361,18 +25294,18 @@ export const PRODUCT_BRAND_METADATA = {
       },
     ],
     productLines: {
-      "douglas": {
-        name: "Douglas",
-        aliases: [
+      "douglas":{
+        name:"Douglas",
+        aliases:[
           {
-            value: "Douglas",
-            type: "official",
-            priority: 90,
+            value:"Douglas",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Hardware","Household","Pet Supplies"],
-        keywords: ["douglas","hardware","household","hunter","pet","pet supplies","supplies"],
-        preserveInProductName: true,
+        categories:["Hardware","Household","Pet Supplies"],
+        keywords:["douglas"],
+        preserveInProductName:true,
       },
     },
     categories: ["Hardware","Household","Pet Supplies"],
@@ -25805,44 +25738,44 @@ export const PRODUCT_BRAND_METADATA = {
       },
     ],
     productLines: {
-      "macaroni": {
-        name: "Macaroni",
-        aliases: [
+      "macaroni":{
+        name:"Macaroni",
+        aliases:[
           {
-            value: "Macaroni",
-            type: "official",
-            priority: 90,
+            value:"Macaroni",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Grocery","Hardware"],
-        keywords: ["grocery","hardware","ideal","macaroni","shield","tridon"],
-        preserveInProductName: true,
+        categories:["Grocery","Hardware"],
+        keywords:["macaroni"],
+        preserveInProductName:true,
       },
-      "shield": {
-        name: "Shield",
-        aliases: [
+      "shield":{
+        name:"Shield",
+        aliases:[
           {
-            value: "Shield",
-            type: "official",
-            priority: 90,
+            value:"Shield",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Grocery","Hardware"],
-        keywords: ["grocery","hardware","ideal","macaroni","shield","tridon"],
-        preserveInProductName: true,
+        categories:["Grocery","Hardware"],
+        keywords:["shield"],
+        preserveInProductName:true,
       },
-      "tridon": {
-        name: "Tridon",
-        aliases: [
+      "tridon":{
+        name:"Tridon",
+        aliases:[
           {
-            value: "Tridon",
-            type: "official",
-            priority: 90,
+            value:"Tridon",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Grocery","Hardware"],
-        keywords: ["grocery","hardware","ideal","macaroni","shield","tridon"],
-        preserveInProductName: true,
+        categories:["Grocery","Hardware"],
+        keywords:["tridon"],
+        preserveInProductName:true,
       },
     },
     categories: ["Grocery","Hardware"],
@@ -25898,18 +25831,18 @@ export const PRODUCT_BRAND_METADATA = {
       },
     ],
     productLines: {
-      "paper": {
-        name: "Paper",
-        aliases: [
+      "paper":{
+        name:"Paper",
+        aliases:[
           {
-            value: "Paper",
-            type: "official",
-            priority: 90,
+            value:"Paper",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["School Supplies"],
-        keywords: ["copy","ik copy","paper","school","school supplies","supplies"],
-        preserveInProductName: true,
+        categories:["School Supplies"],
+        keywords:["paper"],
+        preserveInProductName:true,
       },
     },
     categories: ["School Supplies"],
@@ -27245,44 +27178,44 @@ export const PRODUCT_BRAND_METADATA = {
       },
     ],
     productLines: {
-      "cow": {
-        name: "Cow",
-        aliases: [
+      "cow":{
+        name:"Cow",
+        aliases:[
           {
-            value: "Cow",
-            type: "official",
-            priority: 90,
+            value:"Cow",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Grocery","School Supplies"],
-        keywords: ["cow","grocery","jolly","school","school supplies","spaghetti","supplies","time"],
-        preserveInProductName: true,
+        categories:["Grocery","School Supplies"],
+        keywords:["cow"],
+        preserveInProductName:true,
       },
-      "spaghetti": {
-        name: "Spaghetti",
-        aliases: [
+      "spaghetti":{
+        name:"Spaghetti",
+        aliases:[
           {
-            value: "Spaghetti",
-            type: "official",
-            priority: 90,
+            value:"Spaghetti",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Grocery","School Supplies"],
-        keywords: ["cow","grocery","jolly","school","school supplies","spaghetti","supplies","time"],
-        preserveInProductName: true,
+        categories:["Grocery","School Supplies"],
+        keywords:["spaghetti"],
+        preserveInProductName:true,
       },
-      "time": {
-        name: "Time",
-        aliases: [
+      "time":{
+        name:"Time",
+        aliases:[
           {
-            value: "Time",
-            type: "official",
-            priority: 90,
+            value:"Time",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Grocery","School Supplies"],
-        keywords: ["cow","grocery","jolly","school","school supplies","spaghetti","supplies","time"],
-        preserveInProductName: true,
+        categories:["Grocery","School Supplies"],
+        keywords:["time"],
+        preserveInProductName:true,
       },
     },
     categories: ["Grocery","School Supplies"],
@@ -27416,31 +27349,31 @@ export const PRODUCT_BRAND_METADATA = {
       },
     ],
     productLines: {
-      "carpets": {
-        name: "Carpets",
-        aliases: [
+      "carpets":{
+        name:"Carpets",
+        aliases:[
           {
-            value: "Carpets",
-            type: "official",
-            priority: 90,
+            value:"Carpets",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Grocery","Hardware","Household","School Supplies"],
-        keywords: ["carpets","cone","grocery","hardware","household","joy","school","school supplies","supplies"],
-        preserveInProductName: true,
+        categories:["Grocery","Hardware","Household","School Supplies"],
+        keywords:["carpets"],
+        preserveInProductName:true,
       },
-      "cone": {
-        name: "Cone",
-        aliases: [
+      "cone":{
+        name:"Cone",
+        aliases:[
           {
-            value: "Cone",
-            type: "official",
-            priority: 90,
+            value:"Cone",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Grocery","Hardware","Household","School Supplies"],
-        keywords: ["carpets","cone","grocery","hardware","household","joy","school","school supplies","supplies"],
-        preserveInProductName: true,
+        categories:["Grocery","Hardware","Household","School Supplies"],
+        keywords:["cone"],
+        preserveInProductName:true,
       },
     },
     categories: ["Grocery","Hardware","Household","School Supplies"],
@@ -29192,18 +29125,18 @@ export const PRODUCT_BRAND_METADATA = {
       },
     ],
     productLines: {
-      "cloud": {
-        name: "Cloud",
-        aliases: [
+      "cloud":{
+        name:"Cloud",
+        aliases:[
           {
-            value: "Cloud",
-            type: "official",
-            priority: 90,
+            value:"Cloud",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Pet Supplies"],
-        keywords: ["cloud","kong","pet","pet supplies","supplies"],
-        preserveInProductName: true,
+        categories:["Pet Supplies"],
+        keywords:["cloud"],
+        preserveInProductName:true,
       },
     },
     categories: ["Pet Supplies"],
@@ -29220,57 +29153,57 @@ export const PRODUCT_BRAND_METADATA = {
       },
     ],
     productLines: {
-      "black": {
-        name: "Black",
-        aliases: [
+      "black":{
+        name:"Black",
+        aliases:[
           {
-            value: "Black",
-            type: "official",
-            priority: 90,
+            value:"Black",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Grocery"],
-        keywords: ["black","blanca","brown","day","grocery","kopiko","lucky","lucky day"],
-        preserveInProductName: true,
+        categories:["Grocery"],
+        keywords:["black"],
+        preserveInProductName:true,
       },
-      "blanca": {
-        name: "Blanca",
-        aliases: [
+      "blanca":{
+        name:"Blanca",
+        aliases:[
           {
-            value: "Blanca",
-            type: "official",
-            priority: 90,
+            value:"Blanca",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Grocery"],
-        keywords: ["black","blanca","brown","day","grocery","kopiko","lucky","lucky day"],
-        preserveInProductName: true,
+        categories:["Grocery"],
+        keywords:["blanca"],
+        preserveInProductName:true,
       },
-      "brown": {
-        name: "Brown",
-        aliases: [
+      "brown":{
+        name:"Brown",
+        aliases:[
           {
-            value: "Brown",
-            type: "official",
-            priority: 90,
+            value:"Brown",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Grocery"],
-        keywords: ["black","blanca","brown","day","grocery","kopiko","lucky","lucky day"],
-        preserveInProductName: true,
+        categories:["Grocery"],
+        keywords:["brown"],
+        preserveInProductName:true,
       },
-      "lucky-day": {
-        name: "Lucky Day",
-        aliases: [
+      "lucky-day":{
+        name:"Lucky Day",
+        aliases:[
           {
-            value: "Lucky Day",
-            type: "official",
-            priority: 90,
+            value:"Lucky Day",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Grocery"],
-        keywords: ["black","blanca","brown","day","grocery","kopiko","lucky","lucky day"],
-        preserveInProductName: true,
+        categories:["Grocery"],
+        keywords:["day","lucky","lucky day"],
+        preserveInProductName:true,
       },
     },
     categories: ["Grocery"],
@@ -29398,18 +29331,18 @@ export const PRODUCT_BRAND_METADATA = {
       },
     ],
     productLines: {
-      "advance": {
-        name: "Advance",
-        aliases: [
+      "advance":{
+        name:"Advance",
+        aliases:[
           {
-            value: "Advance",
-            type: "official",
-            priority: 90,
+            value:"Advance",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Medicine"],
-        keywords: ["advance","drug","kremil","kremil s","medication","medicine"],
-        preserveInProductName: true,
+        categories:["Medicine"],
+        keywords:["advance"],
+        preserveInProductName:true,
       },
     },
     categories: ["Medicine"],
@@ -29595,18 +29528,18 @@ export const PRODUCT_BRAND_METADATA = {
       },
     ],
     productLines: {
-      "lotion": {
-        name: "Lotion",
-        aliases: [
+      "lotion":{
+        name:"Lotion",
+        aliases:[
           {
-            value: "Lotion",
-            type: "official",
-            priority: 90,
+            value:"Lotion",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Medicine"],
-        keywords: ["drug","kwell","lotion","medication","medicine"],
-        preserveInProductName: true,
+        categories:["Medicine"],
+        keywords:["lotion"],
+        preserveInProductName:true,
       },
     },
     categories: ["Medicine"],
@@ -31040,18 +30973,18 @@ export const PRODUCT_BRAND_METADATA = {
       },
     ],
     productLines: {
-      "electric": {
-        name: "Electric",
-        aliases: [
+      "electric":{
+        name:"Electric",
+        aliases:[
           {
-            value: "Electric",
-            type: "official",
-            priority: 90,
+            value:"Electric",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Hardware"],
-        keywords: ["electric","hardware","lincoln"],
-        preserveInProductName: true,
+        categories:["Hardware"],
+        keywords:["electric"],
+        preserveInProductName:true,
       },
     },
     categories: ["Hardware"],
@@ -31146,18 +31079,18 @@ export const PRODUCT_BRAND_METADATA = {
       },
     ],
     productLines: {
-      "ice-tea": {
-        name: "Ice Tea",
-        aliases: [
+      "ice-tea":{
+        name:"Ice Tea",
+        aliases:[
           {
-            value: "Ice Tea",
-            type: "official",
-            priority: 90,
+            value:"Ice Tea",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Grocery"],
-        keywords: ["grocery","ice","ice tea","lipton","tea"],
-        preserveInProductName: true,
+        categories:["Grocery"],
+        keywords:["ice","ice tea","tea"],
+        preserveInProductName:true,
       },
     },
     categories: ["Grocery"],
@@ -31706,6 +31639,86 @@ export const PRODUCT_BRAND_METADATA = {
         strength: "strong",
       },
     ],
+    productLines: {
+      "instant-mami":{
+        name:"Instant Mami",
+        aliases:[
+          {
+            value:"Instant Mami",
+            type:"official",
+            priority:90,
+          },
+        ],
+        categories:["Grocery"],
+        keywords:["instant","instant mami","mami"],
+        preserveInProductName:true,
+      },
+      "la-paz-batchoy":{
+        name:"La Paz Batchoy",
+        aliases:[
+          {
+            value:"La Paz Batchoy",
+            type:"official",
+            priority:90,
+          },
+        ],
+        categories:["Grocery"],
+        keywords:["batchoy","la paz batchoy","paz"],
+        preserveInProductName:true,
+      },
+      "lomi":{
+        name:"Lomi",
+        aliases:[
+          {
+            value:"Lomi",
+            type:"official",
+            priority:90,
+          },
+        ],
+        categories:["Grocery"],
+        keywords:["lomi"],
+        preserveInProductName:true,
+      },
+      "pancit-canton":{
+        name:"Pancit Canton",
+        aliases:[
+          {
+            value:"Pancit Canton",
+            type:"official",
+            priority:90,
+          },
+        ],
+        categories:["Grocery"],
+        keywords:["canton","instant noodles","noodles","pancit","pancit canton"],
+        preserveInProductName:true,
+      },
+      "spicy-labuyo":{
+        name:"Spicy Labuyo",
+        aliases:[
+          {
+            value:"Spicy Labuyo",
+            type:"official",
+            priority:90,
+          },
+        ],
+        categories:["Grocery"],
+        keywords:["labuyo","spicy","spicy labuyo"],
+        preserveInProductName:true,
+      },
+      "supreme":{
+        name:"Supreme",
+        aliases:[
+          {
+            value:"Supreme",
+            type:"official",
+            priority:90,
+          },
+        ],
+        categories:["Grocery"],
+        keywords:["supreme"],
+        preserveInProductName:true,
+      },
+    },
     categories: ["Grocery"],
   },
   "lucky-reptile": {
@@ -32142,31 +32155,31 @@ export const PRODUCT_BRAND_METADATA = {
       },
     ],
     productLines: {
-      "fresh-milk": {
-        name: "Fresh Milk",
-        aliases: [
+      "fresh-milk":{
+        name:"Fresh Milk",
+        aliases:[
           {
-            value: "Fresh Milk",
-            type: "official",
-            priority: 90,
+            value:"Fresh Milk",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Grocery"],
-        keywords: ["dairy","fresh","fresh milk","gold","grocery","magnolia","milk"],
-        preserveInProductName: true,
+        categories:["Grocery"],
+        keywords:["dairy","fresh","fresh milk","milk"],
+        preserveInProductName:true,
       },
-      "gold": {
-        name: "Gold",
-        aliases: [
+      "gold":{
+        name:"Gold",
+        aliases:[
           {
-            value: "Gold",
-            type: "official",
-            priority: 90,
+            value:"Gold",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Grocery"],
-        keywords: ["dairy","fresh","fresh milk","gold","grocery","magnolia","milk"],
-        preserveInProductName: true,
+        categories:["Grocery"],
+        keywords:["gold"],
+        preserveInProductName:true,
       },
     },
     categories: ["Grocery"],
@@ -32300,44 +32313,44 @@ export const PRODUCT_BRAND_METADATA = {
       },
     ],
     productLines: {
-      "lola-s": {
-        name: "Lola's",
-        aliases: [
+      "lola-s":{
+        name:"Lola's",
+        aliases:[
           {
-            value: "Lola's",
-            type: "official",
-            priority: 90,
+            value:"Lola's",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Grocery"],
-        keywords: ["grocery","household","instant","lemon","lola","lola s","lugaw","mama","sita","sita s","sita s instant lugaw"],
-        preserveInProductName: true,
+        categories:["Grocery"],
+        keywords:["lola","lola s"],
+        preserveInProductName:true,
       },
-      "sita-s": {
-        name: "Sita's",
-        aliases: [
+      "sita-s":{
+        name:"Sita's",
+        aliases:[
           {
-            value: "Sita's",
-            type: "official",
-            priority: 90,
+            value:"Sita's",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Grocery"],
-        keywords: ["grocery","household","instant","lemon","lola","lola s","lugaw","mama","sita","sita s","sita s instant lugaw"],
-        preserveInProductName: true,
+        categories:["Grocery"],
+        keywords:["sita","sita s"],
+        preserveInProductName:true,
       },
-      "sita-s-instant-lugaw": {
-        name: "Sita's Instant Lugaw",
-        aliases: [
+      "sita-s-instant-lugaw":{
+        name:"Sita's Instant Lugaw",
+        aliases:[
           {
-            value: "Sita's Instant Lugaw",
-            type: "official",
-            priority: 90,
+            value:"Sita's Instant Lugaw",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Grocery"],
-        keywords: ["grocery","household","instant","lemon","lola","lola s","lugaw","mama","sita","sita s","sita s instant lugaw"],
-        preserveInProductName: true,
+        categories:["Grocery"],
+        keywords:["instant","lugaw","sita","sita s instant lugaw"],
+        preserveInProductName:true,
       },
     },
     variants: [
@@ -32517,18 +32530,18 @@ export const PRODUCT_BRAND_METADATA = {
       },
     ],
     productLines: {
-      "joe": {
-        name: "Joe",
-        aliases: [
+      "joe":{
+        name:"Joe",
+        aliases:[
           {
-            value: "Joe",
-            type: "official",
-            priority: 90,
+            value:"Joe",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Grocery"],
-        keywords: ["grocery","joe","maple"],
-        preserveInProductName: true,
+        categories:["Grocery"],
+        keywords:["joe"],
+        preserveInProductName:true,
       },
     },
     categories: ["Grocery"],
@@ -32987,83 +33000,83 @@ export const PRODUCT_BRAND_METADATA = {
       },
     ],
     productLines: {
-      "flow": {
-        name: "Flow",
-        aliases: [
+      "flow":{
+        name:"Flow",
+        aliases:[
           {
-            value: "Flow",
-            type: "official",
-            priority: 90,
+            value:"Flow",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Grocery","Hardware"],
-        keywords: ["flow","grocery","hardware","lock","magnetics","mark","master","rice","siomai"],
-        preserveInProductName: true,
+        categories:["Grocery","Hardware"],
+        keywords:["flow"],
+        preserveInProductName:true,
       },
-      "lock": {
-        name: "Lock",
-        aliases: [
+      "lock":{
+        name:"Lock",
+        aliases:[
           {
-            value: "Lock",
-            type: "official",
-            priority: 90,
+            value:"Lock",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Grocery","Hardware"],
-        keywords: ["flow","grocery","hardware","lock","magnetics","mark","master","rice","siomai"],
-        preserveInProductName: true,
+        categories:["Grocery","Hardware"],
+        keywords:["lock"],
+        preserveInProductName:true,
       },
-      "magnetics": {
-        name: "Magnetics",
-        aliases: [
+      "magnetics":{
+        name:"Magnetics",
+        aliases:[
           {
-            value: "Magnetics",
-            type: "official",
-            priority: 90,
+            value:"Magnetics",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Grocery","Hardware"],
-        keywords: ["flow","grocery","hardware","lock","magnetics","mark","master","rice","siomai"],
-        preserveInProductName: true,
+        categories:["Grocery","Hardware"],
+        keywords:["magnetics"],
+        preserveInProductName:true,
       },
-      "mark": {
-        name: "Mark",
-        aliases: [
+      "mark":{
+        name:"Mark",
+        aliases:[
           {
-            value: "Mark",
-            type: "official",
-            priority: 90,
+            value:"Mark",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Grocery","Hardware"],
-        keywords: ["flow","grocery","hardware","lock","magnetics","mark","master","rice","siomai"],
-        preserveInProductName: true,
+        categories:["Grocery","Hardware"],
+        keywords:["mark"],
+        preserveInProductName:true,
       },
-      "rice": {
-        name: "Rice",
-        aliases: [
+      "rice":{
+        name:"Rice",
+        aliases:[
           {
-            value: "Rice",
-            type: "official",
-            priority: 90,
+            value:"Rice",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Grocery","Hardware"],
-        keywords: ["flow","grocery","hardware","lock","magnetics","mark","master","rice","siomai"],
-        preserveInProductName: true,
+        categories:["Grocery","Hardware"],
+        keywords:["rice"],
+        preserveInProductName:true,
       },
-      "siomai": {
-        name: "Siomai",
-        aliases: [
+      "siomai":{
+        name:"Siomai",
+        aliases:[
           {
-            value: "Siomai",
-            type: "official",
-            priority: 90,
+            value:"Siomai",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Grocery","Hardware"],
-        keywords: ["flow","grocery","hardware","lock","magnetics","mark","master","rice","siomai"],
-        preserveInProductName: true,
+        categories:["Grocery","Hardware"],
+        keywords:["siomai"],
+        preserveInProductName:true,
       },
     },
     categories: ["Grocery","Hardware"],
@@ -33489,18 +33502,18 @@ export const PRODUCT_BRAND_METADATA = {
       },
     ],
     productLines: {
-      "advance": {
-        name: "Advance",
-        aliases: [
+      "advance":{
+        name:"Advance",
+        aliases:[
           {
-            value: "Advance",
-            type: "official",
-            priority: 90,
+            value:"Advance",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Medicine"],
-        keywords: ["advance","drug","medication","medicine","medicol"],
-        preserveInProductName: true,
+        categories:["Medicine"],
+        keywords:["advance"],
+        preserveInProductName:true,
       },
     },
     categories: ["Medicine"],
@@ -33829,44 +33842,44 @@ export const PRODUCT_BRAND_METADATA = {
       },
     ],
     productLines: {
-      "chef": {
-        name: "Chef",
-        aliases: [
+      "chef":{
+        name:"Chef",
+        aliases:[
           {
-            value: "Chef",
-            type: "official",
-            priority: 90,
+            value:"Chef",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Grocery"],
-        keywords: ["chef","grocery","marshmallow","mega","prime"],
-        preserveInProductName: true,
+        categories:["Grocery"],
+        keywords:["chef"],
+        preserveInProductName:true,
       },
-      "marshmallow": {
-        name: "Marshmallow",
-        aliases: [
+      "marshmallow":{
+        name:"Marshmallow",
+        aliases:[
           {
-            value: "Marshmallow",
-            type: "official",
-            priority: 90,
+            value:"Marshmallow",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Grocery"],
-        keywords: ["chef","grocery","marshmallow","mega","prime"],
-        preserveInProductName: true,
+        categories:["Grocery"],
+        keywords:["marshmallow"],
+        preserveInProductName:true,
       },
-      "prime": {
-        name: "Prime",
-        aliases: [
+      "prime":{
+        name:"Prime",
+        aliases:[
           {
-            value: "Prime",
-            type: "official",
-            priority: 90,
+            value:"Prime",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Grocery"],
-        keywords: ["chef","grocery","marshmallow","mega","prime"],
-        preserveInProductName: true,
+        categories:["Grocery"],
+        keywords:["prime"],
+        preserveInProductName:true,
       },
     },
     categories: ["Grocery"],
@@ -34650,18 +34663,18 @@ export const PRODUCT_BRAND_METADATA = {
       },
     ],
     productLines: {
-      "cereal": {
-        name: "Cereal",
-        aliases: [
+      "cereal":{
+        name:"Cereal",
+        aliases:[
           {
-            value: "Cereal",
-            type: "official",
-            priority: 90,
+            value:"Cereal",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Grocery"],
-        keywords: ["cereal","grocery","milo"],
-        preserveInProductName: true,
+        categories:["Grocery"],
+        keywords:["cereal"],
+        preserveInProductName:true,
       },
     },
     categories: ["Grocery"],
@@ -35646,31 +35659,31 @@ export const PRODUCT_BRAND_METADATA = {
       },
     ],
     productLines: {
-      "gelatin": {
-        name: "Gelatin",
-        aliases: [
+      "gelatin":{
+        name:"Gelatin",
+        aliases:[
           {
-            value: "Gelatin",
-            type: "official",
-            priority: 90,
+            value:"Gelatin",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Grocery"],
-        keywords: ["gelatin","grocery","gulaman","hat","mr hat"],
-        preserveInProductName: true,
+        categories:["Grocery"],
+        keywords:["gelatin"],
+        preserveInProductName:true,
       },
-      "gulaman": {
-        name: "Gulaman",
-        aliases: [
+      "gulaman":{
+        name:"Gulaman",
+        aliases:[
           {
-            value: "Gulaman",
-            type: "official",
-            priority: 90,
+            value:"Gulaman",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Grocery"],
-        keywords: ["gelatin","grocery","gulaman","hat","mr hat"],
-        preserveInProductName: true,
+        categories:["Grocery"],
+        keywords:["gulaman"],
+        preserveInProductName:true,
       },
     },
     categories: ["Grocery"],
@@ -35882,31 +35895,31 @@ export const PRODUCT_BRAND_METADATA = {
       },
     ],
     productLines: {
-      "knee-support": {
-        name: "Knee Support",
-        aliases: [
+      "knee-support":{
+        name:"Knee Support",
+        aliases:[
           {
-            value: "Knee Support",
-            type: "official",
-            priority: 90,
+            value:"Knee Support",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Hardware","Medicine","Personal Care"],
-        keywords: ["brace","care","drug","hardware","knee","knee support","medication","medicine","mueller","personal","personal care","support","wrist","wrist brace"],
-        preserveInProductName: true,
+        categories:["Hardware","Medicine","Personal Care"],
+        keywords:["knee","knee support","support"],
+        preserveInProductName:true,
       },
-      "wrist-brace": {
-        name: "Wrist Brace",
-        aliases: [
+      "wrist-brace":{
+        name:"Wrist Brace",
+        aliases:[
           {
-            value: "Wrist Brace",
-            type: "official",
-            priority: 90,
+            value:"Wrist Brace",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Hardware","Medicine","Personal Care"],
-        keywords: ["brace","care","drug","hardware","knee","knee support","medication","medicine","mueller","personal","personal care","support","wrist","wrist brace"],
-        preserveInProductName: true,
+        categories:["Hardware","Medicine","Personal Care"],
+        keywords:["brace","wrist","wrist brace"],
+        preserveInProductName:true,
       },
     },
     categories: ["Hardware","Medicine","Personal Care"],
@@ -36430,57 +36443,57 @@ export const PRODUCT_BRAND_METADATA = {
       },
     ],
     productLines: {
-      "book-store": {
-        name: "Book Store",
-        aliases: [
+      "book-store":{
+        name:"Book Store",
+        aliases:[
           {
-            value: "Book Store",
-            type: "official",
-            priority: 90,
+            value:"Book Store",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Hardware","School Supplies"],
-        keywords: ["book","book store","fire","geographic","hardware","national","school","school supplies","store","supplies"],
-        preserveInProductName: true,
+        categories:["Hardware","School Supplies"],
+        keywords:["book","book store","store"],
+        preserveInProductName:true,
       },
-      "fire": {
-        name: "Fire",
-        aliases: [
+      "fire":{
+        name:"Fire",
+        aliases:[
           {
-            value: "Fire",
-            type: "official",
-            priority: 90,
+            value:"Fire",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Hardware","School Supplies"],
-        keywords: ["book","book store","fire","geographic","hardware","national","school","school supplies","store","supplies"],
-        preserveInProductName: true,
+        categories:["Hardware","School Supplies"],
+        keywords:["fire"],
+        preserveInProductName:true,
       },
-      "geographic": {
-        name: "Geographic",
-        aliases: [
+      "geographic":{
+        name:"Geographic",
+        aliases:[
           {
-            value: "Geographic",
-            type: "official",
-            priority: 90,
+            value:"Geographic",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Hardware","School Supplies"],
-        keywords: ["book","book store","fire","geographic","hardware","national","school","school supplies","store","supplies"],
-        preserveInProductName: true,
+        categories:["Hardware","School Supplies"],
+        keywords:["geographic"],
+        preserveInProductName:true,
       },
-      "hardware": {
-        name: "Hardware",
-        aliases: [
+      "hardware":{
+        name:"Hardware",
+        aliases:[
           {
-            value: "Hardware",
-            type: "official",
-            priority: 90,
+            value:"Hardware",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Hardware","School Supplies"],
-        keywords: ["book","book store","fire","geographic","hardware","national","school","school supplies","store","supplies"],
-        preserveInProductName: true,
+        categories:["Hardware","School Supplies"],
+        keywords:["hardware"],
+        preserveInProductName:true,
       },
     },
     categories: ["Hardware","School Supplies"],
@@ -36848,18 +36861,18 @@ export const PRODUCT_BRAND_METADATA = {
       },
     ],
     productLines: {
-      "baby": {
-        name: "Baby",
-        aliases: [
+      "baby":{
+        name:"Baby",
+        aliases:[
           {
-            value: "Baby",
-            type: "official",
-            priority: 90,
+            value:"Baby",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Medicine"],
-        keywords: ["baby","drug","medication","medicine","neilmed"],
-        preserveInProductName: true,
+        categories:["Medicine"],
+        keywords:["baby"],
+        preserveInProductName:true,
       },
     },
     categories: ["Medicine"],
@@ -36941,18 +36954,18 @@ export const PRODUCT_BRAND_METADATA = {
       },
     ],
     productLines: {
-      "ankle-support": {
-        name: "Ankle Support",
-        aliases: [
+      "ankle-support":{
+        name:"Ankle Support",
+        aliases:[
           {
-            value: "Ankle Support",
-            type: "official",
-            priority: 90,
+            value:"Ankle Support",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Medicine"],
-        keywords: ["ankle","ankle support","drug","medication","medicine","neo","neo g","support"],
-        preserveInProductName: true,
+        categories:["Medicine"],
+        keywords:["ankle","ankle support","support"],
+        preserveInProductName:true,
       },
     },
     categories: ["Medicine"],
@@ -36995,18 +37008,18 @@ export const PRODUCT_BRAND_METADATA = {
       },
     ],
     productLines: {
-      "forte": {
-        name: "Forte",
-        aliases: [
+      "forte":{
+        name:"Forte",
+        aliases:[
           {
-            value: "Forte",
-            type: "official",
-            priority: 90,
+            value:"Forte",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Medicine"],
-        keywords: ["drug","forte","medication","medicine","neozep"],
-        preserveInProductName: true,
+        categories:["Medicine"],
+        keywords:["forte"],
+        preserveInProductName:true,
       },
     },
     categories: ["Medicine"],
@@ -37049,44 +37062,44 @@ export const PRODUCT_BRAND_METADATA = {
       },
     ],
     productLines: {
-      "creamy-white": {
-        name: "Creamy White",
-        aliases: [
+      "creamy-white":{
+        name:"Creamy White",
+        aliases:[
           {
-            value: "Creamy White",
-            type: "official",
-            priority: 90,
+            value:"Creamy White",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Grocery"],
-        keywords: ["creamy","creamy white","drink","gold","grocery","nescafe","ready","ready to drink","white"],
-        preserveInProductName: true,
+        categories:["Grocery"],
+        keywords:["creamy","creamy white","white"],
+        preserveInProductName:true,
       },
-      "gold": {
-        name: "Gold",
-        aliases: [
+      "gold":{
+        name:"Gold",
+        aliases:[
           {
-            value: "Gold",
-            type: "official",
-            priority: 90,
+            value:"Gold",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Grocery"],
-        keywords: ["creamy","creamy white","drink","gold","grocery","nescafe","ready","ready to drink","white"],
-        preserveInProductName: true,
+        categories:["Grocery"],
+        keywords:["gold"],
+        preserveInProductName:true,
       },
-      "ready-to-drink": {
-        name: "Ready-to-Drink",
-        aliases: [
+      "ready-to-drink":{
+        name:"Ready-to-Drink",
+        aliases:[
           {
-            value: "Ready-to-Drink",
-            type: "official",
-            priority: 90,
+            value:"Ready-to-Drink",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Grocery"],
-        keywords: ["creamy","creamy white","drink","gold","grocery","nescafe","ready","ready to drink","white"],
-        preserveInProductName: true,
+        categories:["Grocery"],
+        keywords:["drink","ready","ready to drink"],
+        preserveInProductName:true,
       },
     },
     variants: [
@@ -37162,122 +37175,135 @@ export const PRODUCT_BRAND_METADATA = {
       },
     ],
     productLines: {
-      "coffee-mate": {
-        name: "Coffee Mate",
-        aliases: [
+      "chuckie":{
+        name:"Chuckie",
+        aliases:[
           {
-            value: "Coffee Mate",
-            type: "official",
-            priority: 90,
+            value:"Chuckie",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Grocery"],
-        keywords: ["caffeine","coffee","coffee drink","coffee mate","cream","dairy","fitnesse","fresh","fresh milk","gold","grocery","ground coffee","honey","honey stars","house","ice","ice cream","instant coffee","koko","koko krunch","krunch","mate","milk","nestle","stars","toll","toll house","yogurt"],
-        preserveInProductName: true,
+        categories:["Grocery"],
+        keywords:["chuckie"],
+        preserveInProductName:true,
       },
-      "fitnesse": {
-        name: "Fitnesse",
-        aliases: [
+      "coffee-mate":{
+        name:"Coffee Mate",
+        aliases:[
           {
-            value: "Fitnesse",
-            type: "official",
-            priority: 90,
+            value:"Coffee Mate",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Grocery"],
-        keywords: ["caffeine","coffee","coffee drink","coffee mate","cream","dairy","fitnesse","fresh","fresh milk","gold","grocery","ground coffee","honey","honey stars","house","ice","ice cream","instant coffee","koko","koko krunch","krunch","mate","milk","nestle","stars","toll","toll house","yogurt"],
-        preserveInProductName: true,
+        categories:["Grocery"],
+        keywords:["caffeine","coffee","coffee drink","coffee mate","ground coffee","instant coffee","mate"],
+        preserveInProductName:true,
       },
-      "fresh-milk": {
-        name: "Fresh Milk",
-        aliases: [
+      "fitnesse":{
+        name:"Fitnesse",
+        aliases:[
           {
-            value: "Fresh Milk",
-            type: "official",
-            priority: 90,
+            value:"Fitnesse",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Grocery"],
-        keywords: ["caffeine","coffee","coffee drink","coffee mate","cream","dairy","fitnesse","fresh","fresh milk","gold","grocery","ground coffee","honey","honey stars","house","ice","ice cream","instant coffee","koko","koko krunch","krunch","mate","milk","nestle","stars","toll","toll house","yogurt"],
-        preserveInProductName: true,
+        categories:["Grocery"],
+        keywords:["fitnesse"],
+        preserveInProductName:true,
       },
-      "gold": {
-        name: "Gold",
-        aliases: [
+      "fresh-milk":{
+        name:"Fresh Milk",
+        aliases:[
           {
-            value: "Gold",
-            type: "official",
-            priority: 90,
+            value:"Fresh Milk",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Grocery"],
-        keywords: ["caffeine","coffee","coffee drink","coffee mate","cream","dairy","fitnesse","fresh","fresh milk","gold","grocery","ground coffee","honey","honey stars","house","ice","ice cream","instant coffee","koko","koko krunch","krunch","mate","milk","nestle","stars","toll","toll house","yogurt"],
-        preserveInProductName: true,
+        categories:["Grocery"],
+        keywords:["dairy","fresh","fresh milk","milk"],
+        preserveInProductName:true,
       },
-      "honey-stars": {
-        name: "Honey Stars",
-        aliases: [
+      "gold":{
+        name:"Gold",
+        aliases:[
           {
-            value: "Honey Stars",
-            type: "official",
-            priority: 90,
+            value:"Gold",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Grocery"],
-        keywords: ["caffeine","coffee","coffee drink","coffee mate","cream","dairy","fitnesse","fresh","fresh milk","gold","grocery","ground coffee","honey","honey stars","house","ice","ice cream","instant coffee","koko","koko krunch","krunch","mate","milk","nestle","stars","toll","toll house","yogurt"],
-        preserveInProductName: true,
+        categories:["Grocery"],
+        keywords:["gold"],
+        preserveInProductName:true,
       },
-      "ice-cream": {
-        name: "Ice Cream",
-        aliases: [
+      "honey-stars":{
+        name:"Honey Stars",
+        aliases:[
           {
-            value: "Ice Cream",
-            type: "official",
-            priority: 90,
+            value:"Honey Stars",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Grocery"],
-        keywords: ["caffeine","coffee","coffee drink","coffee mate","cream","dairy","fitnesse","fresh","fresh milk","gold","grocery","ground coffee","honey","honey stars","house","ice","ice cream","instant coffee","koko","koko krunch","krunch","mate","milk","nestle","stars","toll","toll house","yogurt"],
-        preserveInProductName: true,
+        categories:["Grocery"],
+        keywords:["honey","honey stars","stars"],
+        preserveInProductName:true,
       },
-      "koko-krunch": {
-        name: "Koko Krunch",
-        aliases: [
+      "ice-cream":{
+        name:"Ice Cream",
+        aliases:[
           {
-            value: "Koko Krunch",
-            type: "official",
-            priority: 90,
+            value:"Ice Cream",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Grocery"],
-        keywords: ["caffeine","coffee","coffee drink","coffee mate","cream","dairy","fitnesse","fresh","fresh milk","gold","grocery","ground coffee","honey","honey stars","house","ice","ice cream","instant coffee","koko","koko krunch","krunch","mate","milk","nestle","stars","toll","toll house","yogurt"],
-        preserveInProductName: true,
+        categories:["Grocery"],
+        keywords:["cream","ice","ice cream"],
+        preserveInProductName:true,
       },
-      "toll-house": {
-        name: "Toll House",
-        aliases: [
+      "koko-krunch":{
+        name:"Koko Krunch",
+        aliases:[
           {
-            value: "Toll House",
-            type: "official",
-            priority: 90,
+            value:"Koko Krunch",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Grocery"],
-        keywords: ["caffeine","coffee","coffee drink","coffee mate","cream","dairy","fitnesse","fresh","fresh milk","gold","grocery","ground coffee","honey","honey stars","house","ice","ice cream","instant coffee","koko","koko krunch","krunch","mate","milk","nestle","stars","toll","toll house","yogurt"],
-        preserveInProductName: true,
+        categories:["Grocery"],
+        keywords:["koko","koko krunch","krunch"],
+        preserveInProductName:true,
       },
-      "yogurt": {
-        name: "Yogurt",
-        aliases: [
+      "toll-house":{
+        name:"Toll House",
+        aliases:[
           {
-            value: "Yogurt",
-            type: "official",
-            priority: 90,
+            value:"Toll House",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Grocery"],
-        keywords: ["caffeine","coffee","coffee drink","coffee mate","cream","dairy","fitnesse","fresh","fresh milk","gold","grocery","ground coffee","honey","honey stars","house","ice","ice cream","instant coffee","koko","koko krunch","krunch","mate","milk","nestle","stars","toll","toll house","yogurt"],
-        preserveInProductName: true,
+        categories:["Grocery"],
+        keywords:["house","toll","toll house"],
+        preserveInProductName:true,
+      },
+      "yogurt":{
+        name:"Yogurt",
+        aliases:[
+          {
+            value:"Yogurt",
+            type:"official",
+            priority:90,
+          },
+        ],
+        categories:["Grocery"],
+        keywords:["dairy","yogurt"],
+        preserveInProductName:true,
       },
     },
     categories: ["Grocery"],
@@ -37437,18 +37463,18 @@ export const PRODUCT_BRAND_METADATA = {
       },
     ],
     productLines: {
-      "spectra": {
-        name: "Spectra",
-        aliases: [
+      "spectra":{
+        name:"Spectra",
+        aliases:[
           {
-            value: "Spectra",
-            type: "official",
-            priority: 90,
+            value:"Spectra",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Pet Supplies"],
-        keywords: ["nexgard","pet","pet supplies","spectra","supplies"],
-        preserveInProductName: true,
+        categories:["Pet Supplies"],
+        keywords:["spectra"],
+        preserveInProductName:true,
       },
     },
     categories: ["Pet Supplies"],
@@ -37569,44 +37595,44 @@ export const PRODUCT_BRAND_METADATA = {
       },
     ],
     productLines: {
-      "gum": {
-        name: "Gum",
-        aliases: [
+      "gum":{
+        name:"Gum",
+        aliases:[
           {
-            value: "Gum",
-            type: "official",
-            priority: 90,
+            value:"Gum",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Medicine"],
-        keywords: ["drug","gum","lozenges","medication","medicine","nicorette","patch"],
-        preserveInProductName: true,
+        categories:["Medicine"],
+        keywords:["gum"],
+        preserveInProductName:true,
       },
-      "lozenges": {
-        name: "Lozenges",
-        aliases: [
+      "lozenges":{
+        name:"Lozenges",
+        aliases:[
           {
-            value: "Lozenges",
-            type: "official",
-            priority: 90,
+            value:"Lozenges",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Medicine"],
-        keywords: ["drug","gum","lozenges","medication","medicine","nicorette","patch"],
-        preserveInProductName: true,
+        categories:["Medicine"],
+        keywords:["lozenges"],
+        preserveInProductName:true,
       },
-      "patch": {
-        name: "Patch",
-        aliases: [
+      "patch":{
+        name:"Patch",
+        aliases:[
           {
-            value: "Patch",
-            type: "official",
-            priority: 90,
+            value:"Patch",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Medicine"],
-        keywords: ["drug","gum","lozenges","medication","medicine","nicorette","patch"],
-        preserveInProductName: true,
+        categories:["Medicine"],
+        keywords:["patch"],
+        preserveInProductName:true,
       },
     },
     categories: ["Medicine"],
@@ -37623,18 +37649,18 @@ export const PRODUCT_BRAND_METADATA = {
       },
     ],
     productLines: {
-      "patch": {
-        name: "Patch",
-        aliases: [
+      "patch":{
+        name:"Patch",
+        aliases:[
           {
-            value: "Patch",
-            type: "official",
-            priority: 90,
+            value:"Patch",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Medicine"],
-        keywords: ["drug","medication","medicine","nicotinell","patch"],
-        preserveInProductName: true,
+        categories:["Medicine"],
+        keywords:["patch"],
+        preserveInProductName:true,
       },
     },
     categories: ["Medicine"],
@@ -37833,18 +37859,18 @@ export const PRODUCT_BRAND_METADATA = {
       },
     ],
     productLines: {
-      "wafer": {
-        name: "Wafer",
-        aliases: [
+      "wafer":{
+        name:"Wafer",
+        aliases:[
           {
-            value: "Wafer",
-            type: "official",
-            priority: 90,
+            value:"Wafer",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Grocery"],
-        keywords: ["grocery","nissin","wafer"],
-        preserveInProductName: true,
+        categories:["Grocery"],
+        keywords:["wafer"],
+        preserveInProductName:true,
       },
     },
     categories: ["Grocery"],
@@ -37926,18 +37952,18 @@ export const PRODUCT_BRAND_METADATA = {
       },
     ],
     productLines: {
-      "men": {
-        name: "Men",
-        aliases: [
+      "men":{
+        name:"Men",
+        aliases:[
           {
-            value: "Men",
-            type: "official",
-            priority: 90,
+            value:"Men",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Personal Care"],
-        keywords: ["care","men","nivea","personal","personal care"],
-        preserveInProductName: true,
+        categories:["Personal Care"],
+        keywords:["men"],
+        preserveInProductName:true,
       },
     },
     categories: ["Personal Care"],
@@ -38890,57 +38916,57 @@ export const PRODUCT_BRAND_METADATA = {
       },
     ],
     productLines: {
-      "pillows": {
-        name: "Pillows",
-        aliases: [
+      "pillows":{
+        name:"Pillows",
+        aliases:[
           {
-            value: "Pillows",
-            type: "official",
-            priority: 90,
+            value:"Pillows",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Grocery"],
-        keywords: ["biscuits","crackers","grocery","oishi","pillows","prawn","prawn crackers","ridges","snacks","tea"],
-        preserveInProductName: true,
+        categories:["Grocery"],
+        keywords:["pillows"],
+        preserveInProductName:true,
       },
-      "prawn-crackers": {
-        name: "Prawn Crackers",
-        aliases: [
+      "prawn-crackers":{
+        name:"Prawn Crackers",
+        aliases:[
           {
-            value: "Prawn Crackers",
-            type: "official",
-            priority: 90,
+            value:"Prawn Crackers",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Grocery"],
-        keywords: ["biscuits","crackers","grocery","oishi","pillows","prawn","prawn crackers","ridges","snacks","tea"],
-        preserveInProductName: true,
+        categories:["Grocery"],
+        keywords:["biscuits","crackers","prawn","prawn crackers","snacks"],
+        preserveInProductName:true,
       },
-      "ridges": {
-        name: "Ridges",
-        aliases: [
+      "ridges":{
+        name:"Ridges",
+        aliases:[
           {
-            value: "Ridges",
-            type: "official",
-            priority: 90,
+            value:"Ridges",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Grocery"],
-        keywords: ["biscuits","crackers","grocery","oishi","pillows","prawn","prawn crackers","ridges","snacks","tea"],
-        preserveInProductName: true,
+        categories:["Grocery"],
+        keywords:["ridges"],
+        preserveInProductName:true,
       },
-      "tea": {
-        name: "Tea",
-        aliases: [
+      "tea":{
+        name:"Tea",
+        aliases:[
           {
-            value: "Tea",
-            type: "official",
-            priority: 90,
+            value:"Tea",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Grocery"],
-        keywords: ["biscuits","crackers","grocery","oishi","pillows","prawn","prawn crackers","ridges","snacks","tea"],
-        preserveInProductName: true,
+        categories:["Grocery"],
+        keywords:["tea"],
+        preserveInProductName:true,
       },
     },
     categories: ["Grocery"],
@@ -39015,18 +39041,18 @@ export const PRODUCT_BRAND_METADATA = {
       },
     ],
     productLines: {
-      "white-coffee": {
-        name: "White Coffee",
-        aliases: [
+      "white-coffee":{
+        name:"White Coffee",
+        aliases:[
           {
-            value: "White Coffee",
-            type: "official",
-            priority: 90,
+            value:"White Coffee",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Grocery"],
-        keywords: ["caffeine","coffee","coffee drink","grocery","ground coffee","instant coffee","old","old town","oldtown","town","white","white coffee"],
-        preserveInProductName: true,
+        categories:["Grocery"],
+        keywords:["caffeine","coffee","coffee drink","ground coffee","instant coffee","white","white coffee"],
+        preserveInProductName:true,
       },
     },
     categories: ["Grocery"],
@@ -39316,31 +39342,31 @@ export const PRODUCT_BRAND_METADATA = {
       },
     ],
     productLines: {
-      "lancets": {
-        name: "Lancets",
-        aliases: [
+      "lancets":{
+        name:"Lancets",
+        aliases:[
           {
-            value: "Lancets",
-            type: "official",
-            priority: 90,
+            value:"Lancets",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Medicine"],
-        keywords: ["drug","lancets","medication","medicine","onetouch","strips","test","test strips"],
-        preserveInProductName: true,
+        categories:["Medicine"],
+        keywords:["lancets"],
+        preserveInProductName:true,
       },
-      "test-strips": {
-        name: "Test Strips",
-        aliases: [
+      "test-strips":{
+        name:"Test Strips",
+        aliases:[
           {
-            value: "Test Strips",
-            type: "official",
-            priority: 90,
+            value:"Test Strips",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Medicine"],
-        keywords: ["drug","lancets","medication","medicine","onetouch","strips","test","test strips"],
-        preserveInProductName: true,
+        categories:["Medicine"],
+        keywords:["strips","test","test strips"],
+        preserveInProductName:true,
       },
     },
     categories: ["Medicine"],
@@ -40267,18 +40293,18 @@ export const PRODUCT_BRAND_METADATA = {
       },
     ],
     productLines: {
-      "corned": {
-        name: "Corned",
-        aliases: [
+      "corned":{
+        name:"Corned",
+        aliases:[
           {
-            value: "Corned",
-            type: "official",
-            priority: 90,
+            value:"Corned",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Grocery"],
-        keywords: ["beef","corned","grocery","palm"],
-        preserveInProductName: true,
+        categories:["Grocery"],
+        keywords:["corned"],
+        preserveInProductName:true,
       },
     },
     variants: [
@@ -40393,18 +40419,18 @@ export const PRODUCT_BRAND_METADATA = {
       },
     ],
     productLines: {
-      "toughbook": {
-        name: "Toughbook",
-        aliases: [
+      "toughbook":{
+        name:"Toughbook",
+        aliases:[
           {
-            value: "Toughbook",
-            type: "official",
-            priority: 90,
+            value:"Toughbook",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Hardware","Household","Personal Care","School Supplies"],
-        keywords: ["care","hardware","household","panasonic","personal","personal care","school","school supplies","supplies","toughbook"],
-        preserveInProductName: true,
+        categories:["Hardware","Household","Personal Care","School Supplies"],
+        keywords:["toughbook"],
+        preserveInProductName:true,
       },
     },
     categories: ["Hardware","Household","Personal Care","School Supplies"],
@@ -40655,18 +40681,18 @@ export const PRODUCT_BRAND_METADATA = {
       },
     ],
     productLines: {
-      "forte": {
-        name: "Forte",
-        aliases: [
+      "forte":{
+        name:"Forte",
+        aliases:[
           {
-            value: "Forte",
-            type: "official",
-            priority: 90,
+            value:"Forte",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Medicine"],
-        keywords: ["drug","forte","medication","medicine","patanol"],
-        preserveInProductName: true,
+        categories:["Medicine"],
+        keywords:["forte"],
+        preserveInProductName:true,
       },
     },
     categories: ["Medicine"],
@@ -41021,18 +41047,18 @@ export const PRODUCT_BRAND_METADATA = {
       },
     ],
     productLines: {
-      "max": {
-        name: "Max",
-        aliases: [
+      "max":{
+        name:"Max",
+        aliases:[
           {
-            value: "Max",
-            type: "official",
-            priority: 90,
+            value:"Max",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Grocery"],
-        keywords: ["grocery","max","pepsi"],
-        preserveInProductName: true,
+        categories:["Grocery"],
+        keywords:["max"],
+        preserveInProductName:true,
       },
     },
     categories: ["Grocery"],
@@ -41595,18 +41621,18 @@ export const PRODUCT_BRAND_METADATA = {
       },
     ],
     productLines: {
-      "b-complex": {
-        name: "B-Complex",
-        aliases: [
+      "b-complex":{
+        name:"B-Complex",
+        aliases:[
           {
-            value: "B-Complex",
-            type: "official",
-            priority: 90,
+            value:"B-Complex",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Medicine"],
-        keywords: ["b complex","complex","drug","medication","medicine","pharex"],
-        preserveInProductName: true,
+        categories:["Medicine"],
+        keywords:["b complex","complex"],
+        preserveInProductName:true,
       },
     },
     categories: ["Medicine"],
@@ -41714,44 +41740,44 @@ export const PRODUCT_BRAND_METADATA = {
       },
     ],
     productLines: {
-      "avent": {
-        name: "Avent",
-        aliases: [
+      "avent":{
+        name:"Avent",
+        aliases:[
           {
-            value: "Avent",
-            type: "official",
-            priority: 90,
+            value:"Avent",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Hardware","Household","Personal Care","Pet Supplies","School Supplies"],
-        keywords: ["avent","care","hardware","household","hue","personal","personal care","pet","pet supplies","philips","school","school supplies","sonicare","supplies"],
-        preserveInProductName: true,
+        categories:["Hardware","Household","Personal Care","Pet Supplies","School Supplies"],
+        keywords:["avent"],
+        preserveInProductName:true,
       },
-      "hue": {
-        name: "Hue",
-        aliases: [
+      "hue":{
+        name:"Hue",
+        aliases:[
           {
-            value: "Hue",
-            type: "official",
-            priority: 90,
+            value:"Hue",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Hardware","Household","Personal Care","Pet Supplies","School Supplies"],
-        keywords: ["avent","care","hardware","household","hue","personal","personal care","pet","pet supplies","philips","school","school supplies","sonicare","supplies"],
-        preserveInProductName: true,
+        categories:["Hardware","Household","Personal Care","Pet Supplies","School Supplies"],
+        keywords:["hue"],
+        preserveInProductName:true,
       },
-      "sonicare": {
-        name: "Sonicare",
-        aliases: [
+      "sonicare":{
+        name:"Sonicare",
+        aliases:[
           {
-            value: "Sonicare",
-            type: "official",
-            priority: 90,
+            value:"Sonicare",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Hardware","Household","Personal Care","Pet Supplies","School Supplies"],
-        keywords: ["avent","care","hardware","household","hue","personal","personal care","pet","pet supplies","philips","school","school supplies","sonicare","supplies"],
-        preserveInProductName: true,
+        categories:["Hardware","Household","Personal Care","Pet Supplies","School Supplies"],
+        keywords:["sonicare"],
+        preserveInProductName:true,
       },
     },
     categories: ["Hardware","Household","Personal Care","Pet Supplies","School Supplies"],
@@ -41794,18 +41820,18 @@ export const PRODUCT_BRAND_METADATA = {
       },
     ],
     productLines: {
-      "publishing-house": {
-        name: "Publishing House",
-        aliases: [
+      "publishing-house":{
+        name:"Publishing House",
+        aliases:[
           {
-            value: "Publishing House",
-            type: "official",
-            priority: 90,
+            value:"Publishing House",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Household","School Supplies"],
-        keywords: ["house","household","phoenix","publishing","publishing house","school","school supplies","supplies"],
-        preserveInProductName: true,
+        categories:["Household","School Supplies"],
+        keywords:["house","publishing","publishing house"],
+        preserveInProductName:true,
       },
     },
     categories: ["Household","School Supplies"],
@@ -41861,18 +41887,18 @@ export const PRODUCT_BRAND_METADATA = {
       },
     ],
     productLines: {
-      "ai": {
-        name: "AI",
-        aliases: [
+      "ai":{
+        name:"AI",
+        aliases:[
           {
-            value: "AI",
-            type: "official",
-            priority: 90,
+            value:"AI",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Medicine"],
-        keywords: ["ai","drug","medication","medicine","physiogel"],
-        preserveInProductName: true,
+        categories:["Medicine"],
+        keywords:["ai"],
+        preserveInProductName:true,
       },
     },
     categories: ["Medicine"],
@@ -42266,18 +42292,18 @@ export const PRODUCT_BRAND_METADATA = {
       },
     ],
     productLines: {
-      "powder": {
-        name: "Powder",
-        aliases: [
+      "powder":{
+        name:"Powder",
+        aliases:[
           {
-            value: "Powder",
-            type: "official",
-            priority: 90,
+            value:"Powder",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Grocery"],
-        keywords: ["grocery","pocari","pocari sweat","powder","sweat"],
-        preserveInProductName: true,
+        categories:["Grocery"],
+        keywords:["powder"],
+        preserveInProductName:true,
       },
     },
     categories: ["Grocery"],
@@ -42593,18 +42619,18 @@ export const PRODUCT_BRAND_METADATA = {
       },
     ],
     productLines: {
-      "zinc": {
-        name: "Zinc",
-        aliases: [
+      "zinc":{
+        name:"Zinc",
+        aliases:[
           {
-            value: "Zinc",
-            type: "official",
-            priority: 90,
+            value:"Zinc",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Medicine"],
-        keywords: ["cee","drug","medication","medicine","poten","poten cee","zinc"],
-        preserveInProductName: true,
+        categories:["Medicine"],
+        keywords:["zinc"],
+        preserveInProductName:true,
       },
     },
     categories: ["Medicine"],
@@ -42790,18 +42816,18 @@ export const PRODUCT_BRAND_METADATA = {
       },
     ],
     productLines: {
-      "protein": {
-        name: "Protein",
-        aliases: [
+      "protein":{
+        name:"Protein",
+        aliases:[
           {
-            value: "Protein",
-            type: "official",
-            priority: 90,
+            value:"Protein",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Grocery","Pet Supplies"],
-        keywords: ["grocery","pet","pet supplies","premier","protein","supplies"],
-        preserveInProductName: true,
+        categories:["Grocery","Pet Supplies"],
+        keywords:["protein"],
+        preserveInProductName:true,
       },
     },
     categories: ["Grocery","Pet Supplies"],
@@ -43644,31 +43670,31 @@ export const PRODUCT_BRAND_METADATA = {
       },
     ],
     productLines: {
-      "pro-plan": {
-        name: "Pro Plan",
-        aliases: [
+      "pro-plan":{
+        name:"Pro Plan",
+        aliases:[
           {
-            value: "Pro Plan",
-            type: "official",
-            priority: 90,
+            value:"Pro Plan",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Pet Supplies"],
-        keywords: ["pet","pet supplies","plan","pro","pro plan","pro plan veterinary","purina","supplies","veterinary"],
-        preserveInProductName: true,
+        categories:["Pet Supplies"],
+        keywords:["plan","pro","pro plan"],
+        preserveInProductName:true,
       },
-      "pro-plan-veterinary": {
-        name: "Pro Plan Veterinary",
-        aliases: [
+      "pro-plan-veterinary":{
+        name:"Pro Plan Veterinary",
+        aliases:[
           {
-            value: "Pro Plan Veterinary",
-            type: "official",
-            priority: 90,
+            value:"Pro Plan Veterinary",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Pet Supplies"],
-        keywords: ["pet","pet supplies","plan","pro","pro plan","pro plan veterinary","purina","supplies","veterinary"],
-        preserveInProductName: true,
+        categories:["Pet Supplies"],
+        keywords:["plan","pro","pro plan veterinary","veterinary"],
+        preserveInProductName:true,
       },
     },
     categories: ["Pet Supplies"],
@@ -43789,18 +43815,18 @@ export const PRODUCT_BRAND_METADATA = {
       },
     ],
     productLines: {
-      "oats": {
-        name: "Oats",
-        aliases: [
+      "oats":{
+        name:"Oats",
+        aliases:[
           {
-            value: "Oats",
-            type: "official",
-            priority: 90,
+            value:"Oats",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Grocery"],
-        keywords: ["grocery","oats","quaker"],
-        preserveInProductName: true,
+        categories:["Grocery"],
+        keywords:["oats"],
+        preserveInProductName:true,
       },
     },
     categories: ["Grocery"],
@@ -44285,18 +44311,18 @@ export const PRODUCT_BRAND_METADATA = {
       },
     ],
     productLines: {
-      "power": {
-        name: "Power",
-        aliases: [
+      "power":{
+        name:"Power",
+        aliases:[
           {
-            value: "Power",
-            type: "official",
-            priority: 90,
+            value:"Power",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Hardware"],
-        keywords: ["hardware","power","record"],
-        preserveInProductName: true,
+        categories:["Hardware"],
+        keywords:["power"],
+        preserveInProductName:true,
       },
     },
     categories: ["Hardware"],
@@ -44794,18 +44820,18 @@ export const PRODUCT_BRAND_METADATA = {
       },
     ],
     productLines: {
-      "doors": {
-        name: "Doors",
-        aliases: [
+      "doors":{
+        name:"Doors",
+        aliases:[
           {
-            value: "Doors",
-            type: "official",
-            priority: 90,
+            value:"Doors",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Hardware"],
-        keywords: ["doors","hardware","republic"],
-        preserveInProductName: true,
+        categories:["Hardware"],
+        keywords:["doors"],
+        preserveInProductName:true,
       },
     },
     categories: ["Hardware"],
@@ -45901,57 +45927,57 @@ export const PRODUCT_BRAND_METADATA = {
       },
     ],
     productLines: {
-      "family": {
-        name: "Family",
-        aliases: [
+      "family":{
+        name:"Family",
+        aliases:[
           {
-            value: "Family",
-            type: "official",
-            priority: 90,
+            value:"Family",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Grocery"],
-        keywords: ["family","grocery","orange","quinoa","royal","tru","umbrella"],
-        preserveInProductName: true,
+        categories:["Grocery"],
+        keywords:["family"],
+        preserveInProductName:true,
       },
-      "quinoa": {
-        name: "Quinoa",
-        aliases: [
+      "quinoa":{
+        name:"Quinoa",
+        aliases:[
           {
-            value: "Quinoa",
-            type: "official",
-            priority: 90,
+            value:"Quinoa",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Grocery"],
-        keywords: ["family","grocery","orange","quinoa","royal","tru","umbrella"],
-        preserveInProductName: true,
+        categories:["Grocery"],
+        keywords:["quinoa"],
+        preserveInProductName:true,
       },
-      "tru": {
-        name: "Tru-",
-        aliases: [
+      "tru":{
+        name:"Tru-",
+        aliases:[
           {
-            value: "Tru-",
-            type: "official",
-            priority: 90,
+            value:"Tru-",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Grocery"],
-        keywords: ["family","grocery","orange","quinoa","royal","tru","umbrella"],
-        preserveInProductName: true,
+        categories:["Grocery"],
+        keywords:["tru"],
+        preserveInProductName:true,
       },
-      "umbrella": {
-        name: "Umbrella",
-        aliases: [
+      "umbrella":{
+        name:"Umbrella",
+        aliases:[
           {
-            value: "Umbrella",
-            type: "official",
-            priority: 90,
+            value:"Umbrella",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Grocery"],
-        keywords: ["family","grocery","orange","quinoa","royal","tru","umbrella"],
-        preserveInProductName: true,
+        categories:["Grocery"],
+        keywords:["umbrella"],
+        preserveInProductName:true,
       },
     },
     variants: [
@@ -46001,18 +46027,18 @@ export const PRODUCT_BRAND_METADATA = {
       },
     ],
     productLines: {
-      "veterinary": {
-        name: "Veterinary",
-        aliases: [
+      "veterinary":{
+        name:"Veterinary",
+        aliases:[
           {
-            value: "Veterinary",
-            type: "official",
-            priority: 90,
+            value:"Veterinary",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Pet Supplies"],
-        keywords: ["canin","pet","pet supplies","royal","royal canin","supplies","veterinary"],
-        preserveInProductName: true,
+        categories:["Pet Supplies"],
+        keywords:["veterinary"],
+        preserveInProductName:true,
       },
     },
     categories: ["Pet Supplies"],
@@ -46640,31 +46666,31 @@ export const PRODUCT_BRAND_METADATA = {
       },
     ],
     productLines: {
-      "gel": {
-        name: "Gel",
-        aliases: [
+      "gel":{
+        name:"Gel",
+        aliases:[
           {
-            value: "Gel",
-            type: "official",
-            priority: 90,
+            value:"Gel",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Medicine"],
-        keywords: ["drug","gel","jet","jet spray","medication","medicine","salonpas","spray"],
-        preserveInProductName: true,
+        categories:["Medicine"],
+        keywords:["gel"],
+        preserveInProductName:true,
       },
-      "jet-spray": {
-        name: "Jet Spray",
-        aliases: [
+      "jet-spray":{
+        name:"Jet Spray",
+        aliases:[
           {
-            value: "Jet Spray",
-            type: "official",
-            priority: 90,
+            value:"Jet Spray",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Medicine"],
-        keywords: ["drug","gel","jet","jet spray","medication","medicine","salonpas","spray"],
-        preserveInProductName: true,
+        categories:["Medicine"],
+        keywords:["jet","jet spray","spray"],
+        preserveInProductName:true,
       },
     },
     categories: ["Medicine"],
@@ -46746,18 +46772,18 @@ export const PRODUCT_BRAND_METADATA = {
       },
     ],
     productLines: {
-      "smartthings": {
-        name: "SmartThings",
-        aliases: [
+      "smartthings":{
+        name:"SmartThings",
+        aliases:[
           {
-            value: "SmartThings",
-            type: "official",
-            priority: 90,
+            value:"SmartThings",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Hardware","Household","School Supplies"],
-        keywords: ["hardware","household","samsung","school","school supplies","smartthings","supplies"],
-        preserveInProductName: true,
+        categories:["Hardware","Household","School Supplies"],
+        keywords:["smartthings"],
+        preserveInProductName:true,
       },
     },
     categories: ["Hardware","Household","School Supplies"],
@@ -47736,18 +47762,18 @@ export const PRODUCT_BRAND_METADATA = {
       },
     ],
     productLines: {
-      "milk": {
-        name: "Milk",
-        aliases: [
+      "milk":{
+        name:"Milk",
+        aliases:[
           {
-            value: "Milk",
-            type: "official",
-            priority: 90,
+            value:"Milk",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Grocery"],
-        keywords: ["dairy","grocery","milk","selecta"],
-        preserveInProductName: true,
+        categories:["Grocery"],
+        keywords:["dairy","milk"],
+        preserveInProductName:true,
       },
     },
     categories: ["Grocery"],
@@ -49142,18 +49168,18 @@ export const PRODUCT_BRAND_METADATA = {
       },
     ],
     productLines: {
-      "natural": {
-        name: "Natural",
-        aliases: [
+      "natural":{
+        name:"Natural",
+        aliases:[
           {
-            value: "Natural",
-            type: "official",
-            priority: 90,
+            value:"Natural",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Grocery"],
-        keywords: ["grocery","natural","skippy"],
-        preserveInProductName: true,
+        categories:["Grocery"],
+        keywords:["natural"],
+        preserveInProductName:true,
       },
     },
     categories: ["Grocery"],
@@ -49469,18 +49495,18 @@ export const PRODUCT_BRAND_METADATA = {
       },
     ],
     productLines: {
-      "natural": {
-        name: "Natural",
-        aliases: [
+      "natural":{
+        name:"Natural",
+        aliases:[
           {
-            value: "Natural",
-            type: "official",
-            priority: 90,
+            value:"Natural",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Grocery"],
-        keywords: ["grocery","natural","smucker","smucker s"],
-        preserveInProductName: true,
+        categories:["Grocery"],
+        keywords:["natural"],
+        preserveInProductName:true,
       },
     },
     categories: ["Grocery"],
@@ -50407,18 +50433,18 @@ export const PRODUCT_BRAND_METADATA = {
       },
     ],
     productLines: {
-      "margarine": {
-        name: "Margarine",
-        aliases: [
+      "margarine":{
+        name:"Margarine",
+        aliases:[
           {
-            value: "Margarine",
-            type: "official",
-            priority: 90,
+            value:"Margarine",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Grocery"],
-        keywords: ["grocery","margarine","star"],
-        preserveInProductName: true,
+        categories:["Grocery"],
+        keywords:["margarine"],
+        preserveInProductName:true,
       },
     },
     categories: ["Grocery"],
@@ -50695,18 +50721,18 @@ export const PRODUCT_BRAND_METADATA = {
       },
     ],
     productLines: {
-      "baby": {
-        name: "Baby",
-        aliases: [
+      "baby":{
+        name:"Baby",
+        aliases:[
           {
-            value: "Baby",
-            type: "official",
-            priority: 90,
+            value:"Baby",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Medicine"],
-        keywords: ["baby","drug","medication","medicine","sterimar"],
-        preserveInProductName: true,
+        categories:["Medicine"],
+        keywords:["baby"],
+        preserveInProductName:true,
       },
     },
     categories: ["Medicine"],
@@ -51152,18 +51178,18 @@ export const PRODUCT_BRAND_METADATA = {
       },
     ],
     productLines: {
-      "cola": {
-        name: "Cola",
-        aliases: [
+      "cola":{
+        name:"Cola",
+        aliases:[
           {
-            value: "Cola",
-            type: "official",
-            priority: 90,
+            value:"Cola",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Grocery"],
-        keywords: ["beverage","cola","grocery","soda","soft drink","summit"],
-        preserveInProductName: true,
+        categories:["Grocery"],
+        keywords:["beverage","cola","soda","soft drink"],
+        preserveInProductName:true,
       },
     },
     categories: ["Grocery"],
@@ -51817,18 +51843,18 @@ export const PRODUCT_BRAND_METADATA = {
       },
     ],
     productLines: {
-      "ultra": {
-        name: "Ultra",
-        aliases: [
+      "ultra":{
+        name:"Ultra",
+        aliases:[
           {
-            value: "Ultra",
-            type: "official",
-            priority: 90,
+            value:"Ultra",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Medicine","Personal Care"],
-        keywords: ["care","drug","medication","medicine","personal","personal care","systane","ultra"],
-        preserveInProductName: true,
+        categories:["Medicine","Personal Care"],
+        keywords:["ultra"],
+        preserveInProductName:true,
       },
     },
     categories: ["Medicine","Personal Care"],
@@ -52183,18 +52209,18 @@ export const PRODUCT_BRAND_METADATA = {
       },
     ],
     productLines: {
-      "ii": {
-        name: "II",
-        aliases: [
+      "ii":{
+        name:"II",
+        aliases:[
           {
-            value: "II",
-            type: "official",
-            priority: 90,
+            value:"II",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Medicine","Personal Care"],
-        keywords: ["care","drug","ii","medication","medicine","naturale","personal","personal care","tears","tears naturale"],
-        preserveInProductName: true,
+        categories:["Medicine","Personal Care"],
+        keywords:["ii"],
+        preserveInProductName:true,
       },
     },
     categories: ["Medicine","Personal Care"],
@@ -52328,18 +52354,18 @@ export const PRODUCT_BRAND_METADATA = {
       },
     ],
     productLines: {
-      "drops": {
-        name: "Drops",
-        aliases: [
+      "drops":{
+        name:"Drops",
+        aliases:[
           {
-            value: "Drops",
-            type: "official",
-            priority: 90,
+            value:"Drops",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Medicine"],
-        keywords: ["drops","drug","medication","medicine","tempra"],
-        preserveInProductName: true,
+        categories:["Medicine"],
+        keywords:["drops"],
+        preserveInProductName:true,
       },
     },
     categories: ["Medicine"],
@@ -52369,18 +52395,18 @@ export const PRODUCT_BRAND_METADATA = {
       },
     ],
     productLines: {
-      "underpads": {
-        name: "Underpads",
-        aliases: [
+      "underpads":{
+        name:"Underpads",
+        aliases:[
           {
-            value: "Underpads",
-            type: "official",
-            priority: 90,
+            value:"Underpads",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Medicine","Personal Care"],
-        keywords: ["care","drug","medication","medicine","personal","personal care","tena","underpads"],
-        preserveInProductName: true,
+        categories:["Medicine","Personal Care"],
+        keywords:["underpads"],
+        preserveInProductName:true,
       },
     },
     categories: ["Medicine","Personal Care"],
@@ -53164,18 +53190,18 @@ export const PRODUCT_BRAND_METADATA = {
       },
     ],
     productLines: {
-      "patch": {
-        name: "Patch",
-        aliases: [
+      "patch":{
+        name:"Patch",
+        aliases:[
           {
-            value: "Patch",
-            type: "official",
-            priority: 90,
+            value:"Patch",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Medicine"],
-        keywords: ["balm","drug","medication","medicine","patch","tiger","tiger balm"],
-        preserveInProductName: true,
+        categories:["Medicine"],
+        keywords:["patch"],
+        preserveInProductName:true,
       },
     },
     categories: ["Medicine"],
@@ -53374,31 +53400,31 @@ export const PRODUCT_BRAND_METADATA = {
       },
     ],
     productLines: {
-      "minis": {
-        name: "Minis",
-        aliases: [
+      "minis":{
+        name:"Minis",
+        aliases:[
           {
-            value: "Minis",
-            type: "official",
-            priority: 90,
+            value:"Minis",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Grocery"],
-        keywords: ["grocery","minis","toblerone","white"],
-        preserveInProductName: true,
+        categories:["Grocery"],
+        keywords:["minis"],
+        preserveInProductName:true,
       },
-      "white": {
-        name: "White",
-        aliases: [
+      "white":{
+        name:"White",
+        aliases:[
           {
-            value: "White",
-            type: "official",
-            priority: 90,
+            value:"White",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Grocery"],
-        keywords: ["grocery","minis","toblerone","white"],
-        preserveInProductName: true,
+        categories:["Grocery"],
+        keywords:["white"],
+        preserveInProductName:true,
       },
     },
     categories: ["Grocery"],
@@ -54936,18 +54962,18 @@ export const PRODUCT_BRAND_METADATA = {
       },
     ],
     productLines: {
-      "cold-infuse": {
-        name: "Cold Infuse",
-        aliases: [
+      "cold-infuse":{
+        name:"Cold Infuse",
+        aliases:[
           {
-            value: "Cold Infuse",
-            type: "official",
-            priority: 90,
+            value:"Cold Infuse",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Grocery"],
-        keywords: ["cold","cold infuse","grocery","infuse","twinings"],
-        preserveInProductName: true,
+        categories:["Grocery"],
+        keywords:["cold","cold infuse","infuse"],
+        preserveInProductName:true,
       },
     },
     categories: ["Grocery"],
@@ -55172,18 +55198,18 @@ export const PRODUCT_BRAND_METADATA = {
       },
     ],
     productLines: {
-      "black": {
-        name: "Black",
-        aliases: [
+      "black":{
+        name:"Black",
+        aliases:[
           {
-            value: "Black",
-            type: "official",
-            priority: 90,
+            value:"Black",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Grocery"],
-        keywords: ["black","grocery","ucc"],
-        preserveInProductName: true,
+        categories:["Grocery"],
+        keywords:["black"],
+        preserveInProductName:true,
       },
     },
     categories: ["Grocery"],
@@ -55863,18 +55889,18 @@ export const PRODUCT_BRAND_METADATA = {
       },
     ],
     productLines: {
-      "boral": {
-        name: "Boral",
-        aliases: [
+      "boral":{
+        name:"Boral",
+        aliases:[
           {
-            value: "Boral",
-            type: "official",
-            priority: 90,
+            value:"Boral",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Hardware"],
-        keywords: ["boral","hardware","usg"],
-        preserveInProductName: true,
+        categories:["Hardware"],
+        keywords:["boral"],
+        preserveInProductName:true,
       },
     },
     categories: ["Hardware"],
@@ -57217,18 +57243,18 @@ export const PRODUCT_BRAND_METADATA = {
       },
     ],
     productLines: {
-      "meters": {
-        name: "Meters",
-        aliases: [
+      "meters":{
+        name:"Meters",
+        aliases:[
           {
-            value: "Meters",
-            type: "official",
-            priority: 90,
+            value:"Meters",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Hardware"],
-        keywords: ["hardware","meters","wagner"],
-        preserveInProductName: true,
+        categories:["Hardware"],
+        keywords:["meters"],
+        preserveInProductName:true,
       },
     },
     categories: ["Hardware"],
@@ -57388,18 +57414,18 @@ export const PRODUCT_BRAND_METADATA = {
       },
     ],
     productLines: {
-      "bread": {
-        name: "Bread",
-        aliases: [
+      "bread":{
+        name:"Bread",
+        aliases:[
           {
-            value: "Bread",
-            type: "official",
-            priority: 90,
+            value:"Bread",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Grocery"],
-        keywords: ["bread","grocery","walter"],
-        preserveInProductName: true,
+        categories:["Grocery"],
+        keywords:["bread"],
+        preserveInProductName:true,
       },
     },
     categories: ["Grocery"],
@@ -58547,18 +58573,18 @@ export const PRODUCT_BRAND_METADATA = {
       },
     ],
     productLines: {
-      "depot": {
-        name: "Depot",
-        aliases: [
+      "depot":{
+        name:"Depot",
+        aliases:[
           {
-            value: "Depot",
-            type: "official",
-            priority: 90,
+            value:"Depot",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Hardware"],
-        keywords: ["depot","hardware","wilcon"],
-        preserveInProductName: true,
+        categories:["Hardware"],
+        keywords:["depot"],
+        preserveInProductName:true,
       },
     },
     categories: ["Hardware"],
@@ -59485,18 +59511,18 @@ export const PRODUCT_BRAND_METADATA = {
       },
     ],
     productLines: {
-      "ap": {
-        name: "AP",
-        aliases: [
+      "ap":{
+        name:"AP",
+        aliases:[
           {
-            value: "AP",
-            type: "official",
-            priority: 90,
+            value:"AP",
+            type:"official",
+            priority:90,
           },
         ],
-        categories: ["Hardware"],
-        keywords: ["ap","hardware","ykk"],
-        preserveInProductName: true,
+        categories:["Hardware"],
+        keywords:["ap"],
+        preserveInProductName:true,
       },
     },
     categories: ["Hardware"],

@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 
 import {
   PRODUCT_BRAND_METADATA,
-} from "../src/constants/productBrandMetadata";
+} from "../../src/constants/productBrandMetadata";
 
 interface AliasMetadata {
   value: string;

@@ -1,4 +1,4 @@
-import { BrandCandidate } from "../types/BrandCandidate";
+import { BrandCandidate } from "../../types/BrandCandidate";
 
 export function deduplicateBrandCandidates(
   candidates: BrandCandidate[]
