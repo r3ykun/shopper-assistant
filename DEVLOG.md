@@ -443,19 +443,15 @@
 2. Variant Generation
 3. Compiler Regression Testing
 
+# Milestone 21.75.3 - Brand Recognition Engine
+## ✅ Completed
+1. Brand Confidence Scoring
+2. Multi-candidate Ranking
+
 
 
 ### 🚧 Ongoing
 
-# Milestone 21.75.3 - Brand Recognition Engine
-1. Brand Confidence Scoring ✅
-## Goal
-- Assign a confidence score to every detected brand.
-
-2. Multi-candidate Ranking ✅
-- Return ranked candidate matches instead of a single result.
-## Goal
-- Return ranked candidate matches instead of a single result.
 
 # Milestone 21.75.5 - Synonyms & Fuzzy Matching
 1. Fuzzy Brand ✅
