@@ -198,42 +198,53 @@ function indentLines(lines: string[], spaces: number): string[] {
 }
 
 function generateProductLine(
-  lineName:string,
-  brand:BrandMetadata
+  line:ProductLineMetadata
 ):string[]{
-  const lineId=slugify(lineName);
+  const lineId=slugify(line.name);
 
   const lines=[
     `${quote(lineId)}:{`,
-    `  name:${quote(lineName)},`,
+    `  name:${quote(line.name)},`,
     "  aliases:[",
     "    {",
-    `      value:${quote(lineName)},`,
+    `      value:${quote(line.name)},`,
     '      type:"official",',
     "      priority:90,",
     "    },",
     "  ],",
   ];
 
-  if(brand.categories.length){
+  if(line.categories?.length){
     lines.push(
-      `  categories:${JSON.stringify([...brand.categories].sort((a,b)=>a.localeCompare(b)))},`
+      `  categories:${JSON.stringify([...line.categories].sort((a,b)=>a.localeCompare(b)))},`
     );
   }
 
-  if(brand.subcategories.length){
+  if(line.subcategories?.length){
     lines.push(
-      `  subcategories:${JSON.stringify([...brand.subcategories].sort((a,b)=>a.localeCompare(b)))},`
+      `  subcategories:${JSON.stringify([...line.subcategories].sort((a,b)=>a.localeCompare(b)))},`
     );
   }
 
-  const keywords:string[]=[];
-  addKeywordTokens(keywords,lineName);
+  const keywords=[...(line.keywords??[])];
 
   if(keywords.length){
     lines.push(
       `  keywords:${JSON.stringify([...new Set(keywords)].sort((a,b)=>a.localeCompare(b)))},`
     );
+  }
+
+  if(line.variants?.length){
+    lines.push("  variants:[");
+    for(const variant of line.variants){
+      lines.push(
+        ...indentLines(
+          generateVariant(variant),
+          4
+        )
+      );
+    }
+    lines.push("  ],");
   }
 
   lines.push(
@@ -365,8 +376,7 @@ function generateBrandEntry(
       lines.push(
         ...indentLines(
           generateProductLine(
-            lineName,
-            brand
+            brand.productLines[lineName]
           ),
           4
         )
@@ -905,6 +915,17 @@ const KNOWN_PRODUCT_LINES=new Map<string,string[]>([
   ]],
 ]);
 
+const KNOWN_PRODUCT_LINE_VARIANTS=new Map<
+	string,
+	Record<string,string[]>
+>([
+	["Lucky Me!",{
+		"Pancit Canton":["Chilimansi"],
+		"Instant Mami":["Chicken"],
+		"Supreme":["Bulalo"],
+	}],
+]);
+
 function mergeKnownProductLines(
 	brands:Map<string,BrandMetadata>,
 	confirmedChildIds:Set<string>
@@ -923,23 +944,69 @@ function mergeKnownProductLines(
       );
 
       if(child){
-        parent.productLines[lineName]??={
+        parent.productLines[lineName]??=
+        {
           name:lineName,
           aliases:[lineName],
           preserveInProductName:true,
-        };
+          variants:[],
+        }
         confirmedChildIds.add(child.id);
         continue;
       }
 
-      parent.productLines[lineName]??={
+      parent.productLines[lineName]??=
+      {
         name:lineName,
         aliases:[lineName],
         preserveInProductName:true,
-      };
+        variants:[],
+      }
 		}
 	}
 }
+
+function mergeKnownProductLineVariants(
+	brands:Map<string,BrandMetadata>
+):number{
+	let addedVariants=0;
+
+	for(const[parentName,productLines]of KNOWN_PRODUCT_LINE_VARIANTS){
+		const parent=[...brands.values()].find(
+			brand=>brand.name.toLowerCase()===parentName.toLowerCase()
+		);
+
+		if(!parent)continue;
+
+		for(const[lineName,variantNames]of Object.entries(productLines)){
+			const productLine=
+				parent.productLines[lineName]??=
+				{
+					name:lineName,
+					aliases:[lineName],
+					preserveInProductName:true,
+					variants:[],
+				};
+
+			for(const variantName of variantNames){
+				const wasAdded=addVariantMetadata(
+					parent,
+					variantName,
+					parent.categories,
+					parent.subcategories,
+					productLine
+				);
+
+				if(wasAdded){
+					addedVariants++;
+				}
+			}
+		}
+	}
+
+	return addedVariants;
+}
+
 function generateMetadataKeywords(
   brands: Map<string, BrandMetadata>
 ): void {
@@ -1067,6 +1134,13 @@ function main() {
   mergeKnownProductLines(
     brands,
     extraction.confirmedChildIds
+  );
+
+  const knownVariantsAdded=
+    mergeKnownProductLineVariants(brands);
+
+  console.log(
+    `Known product-line variants added: ${knownVariantsAdded}`
   );
 
   const luckyMe=brands.get("lucky-me");
@@ -1435,10 +1509,82 @@ const KNOWN_EQUIVALENT_BRAND_GROUPS =
         );
       }
 
-      Object.assign(
-        existing.productLines,
+      for(const[key,incomingLine]of Object.entries(
         brand.productLines
-      );
+      )){
+        const existingLine=
+          existing.productLines[key];
+
+        if(!existingLine){
+          existing.productLines[key]={
+            ...incomingLine,
+            aliases:[...incomingLine.aliases],
+            categories:[...(incomingLine.categories??[])],
+            subcategories:[...(incomingLine.subcategories??[])],
+            keywords:[...(incomingLine.keywords??[])],
+            variants:(incomingLine.variants??[]).map(
+              variant=>({
+                ...variant,
+                aliases:[...variant.aliases],
+                categories:[...variant.categories],
+                subcategories:[...variant.subcategories],
+                keywords:[...variant.keywords],
+              })
+            ),
+          };
+          continue;
+        }
+
+        for(const alias of incomingLine.aliases){
+          addUnique(existingLine.aliases,alias);
+        }
+
+        for(const category of incomingLine.categories??[]){
+          addUnique(existingLine.categories??=[],category);
+        }
+
+        for(const subcategory of incomingLine.subcategories??[]){
+          addUnique(existingLine.subcategories??=[],subcategory);
+        }
+
+        for(const keyword of incomingLine.keywords??[]){
+          addUnique(existingLine.keywords??=[],keyword);
+        }
+
+        existingLine.variants??=[];
+
+        for(const variant of incomingLine.variants??[]){
+          const existingVariant=
+            existingLine.variants.find(
+              v=>v.name.toLowerCase()===
+              variant.name.toLowerCase()
+            );
+
+          if(existingVariant){
+            for(const alias of variant.aliases){
+              addUnique(existingVariant.aliases,alias);
+            }
+            for(const category of variant.categories){
+              addUnique(existingVariant.categories,category);
+            }
+            for(const subcategory of variant.subcategories){
+              addUnique(existingVariant.subcategories,subcategory);
+            }
+            for(const keyword of variant.keywords){
+              addUnique(existingVariant.keywords,keyword);
+            }
+            continue;
+          }
+
+          existingLine.variants.push({
+            ...variant,
+            aliases:[...variant.aliases],
+            categories:[...variant.categories],
+            subcategories:[...variant.subcategories],
+            keywords:[...variant.keywords],
+          });
+        }
+      }
 
       for (const keyword of brand.keywords) {
         addUnique(
@@ -1524,12 +1670,15 @@ const KNOWN_EQUIVALENT_BRAND_GROUPS =
       const variantLower =
         variantName.toLowerCase();
 
-      const index =
-        normalizedLower.indexOf(variantLower);
+      const match=normalizedLower.match(
+        new RegExp(`(^|[\\s\\-/])${escapeRegExp(variantLower)}(?=$|[\\s\\-/])`)
+      );
 
-      if (index === -1) {
+      if(!match||match.index===undefined){
         continue;
       }
+
+      const index=match.index+match[1].length;
 
       const before = normalizedValue
         .slice(0, index)
@@ -1564,49 +1713,47 @@ const KNOWN_EQUIVALENT_BRAND_GROUPS =
     return null;
   }
 
-  function addVariantMetadata(
-    brand: BrandMetadata,
-    variantName: string,
-    categories: string[],
-    subcategories: string[]
-  ): boolean {
-    const normalizedName =
-      normalizeText(variantName);
+function addVariantMetadata(
+	brand:BrandMetadata,
+	variantName:string,
+	categories:string[],
+	subcategories:string[],
+	productLine?:ProductLineMetadata
+):boolean{
+	const target=productLine??brand;
 
-    const existing = brand.variants.find(
-      variant =>
-        variant.name.toLowerCase() ===
-        normalizedName.toLowerCase()
-    );
+	target.variants??=[];
 
-    if (existing) {
-      for (const category of categories) {
-        addUnique(
-          existing.categories,
-          category
-        );
-      }
+	const normalizedName=normalizeText(variantName);
 
-      for (const subcategory of subcategories) {
-        addUnique(
-          existing.subcategories,
-          subcategory
-        );
-      }
+	const existing=target.variants.find(
+		variant=>
+			variant.name.toLowerCase()===
+			normalizedName.toLowerCase()
+	);
 
-      return false;
-    }
+	if(existing){
+		for(const category of categories){
+			addUnique(existing.categories,category);
+		}
 
-    brand.variants.push({
-        name: normalizedName,
-        aliases: [],
-        categories: [...categories],
-        subcategories: [...subcategories],
-        keywords: [],
-    });
+		for(const subcategory of subcategories){
+			addUnique(existing.subcategories,subcategory);
+		}
 
-    return true;
-  }
+		return false;
+	}
+
+	target.variants.push({
+		name:normalizedName,
+		aliases:[],
+		categories:[...categories],
+		subcategories:[...subcategories],
+		keywords:[],
+	});
+
+	return true;
+}
 
   function extractVariants(
     brands: Map<string, BrandMetadata>
@@ -1646,31 +1793,47 @@ const KNOWN_EQUIVALENT_BRAND_GROUPS =
           continue;
         }
 
-        const wasAdded = addVariantMetadata(
-          parent,
-          extracted.variantName,
-          child.categories,
-          child.subcategories
-        );
+        console.log({
+          parent:parent.name,
+          child:child.name,
+          remainder,
+          extracted,
+        });
 
-        if (wasAdded) {
-          extractedVariants++;
-        }
-
-        if (
-            extracted.baseName &&
-            extracted.baseName !== extracted.variantName &&
-            !isExcludedProductLine(
-                parent.name,
-                extracted.baseName
-            )
-        ) {
+        if(
+          extracted.baseName &&
+          extracted.baseName!==extracted.variantName &&
+          !isExcludedProductLine(
+            parent.name,
+            extracted.baseName
+          )
+        ){
           parent.productLines[
             extracted.baseName
           ]??={
             name:extracted.baseName,
             aliases:[],
+            variants:[],
           };
+        }
+
+        const productLine=
+          extracted.baseName
+            ?parent.productLines[
+              extracted.baseName
+            ]
+            :undefined;
+
+        const wasAdded=addVariantMetadata(
+          parent,
+          extracted.variantName,
+          child.categories,
+          child.subcategories,
+          productLine
+        );
+
+        if(wasAdded){
+          extractedVariants++;
         }
 
         confirmedChildIds.add(child.id);
