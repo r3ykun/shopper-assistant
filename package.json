@@ -39,7 +39,8 @@
     "web": "expo start --web",
     "compile:brands": "tsx scripts/compileProductBrandMetadata.ts",
     "test:brands": "tsx scripts/testProductBrandMetadata.ts",
-    "verify:brands": "npm run compile:brands && npm run test:brands"
+    "verify:brands": "npm run compile:brands && npm run test:brands",
+    "test:recognize-brand": "tsx scripts/testRecognizeBrand.ts"
   },
   "private": true
 }
