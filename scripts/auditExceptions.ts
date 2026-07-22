@@ -1,3 +1,4 @@
+//shopper-assistant\scripts\auditExceptions.ts
 export const PROMOTED_PRODUCT_LINE_EXCEPTIONS =
   new Set<string>([
     "mega::chef::megachef",

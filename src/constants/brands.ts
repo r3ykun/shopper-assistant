@@ -1,3 +1,4 @@
+//shopper-assistant\src\constants\brands.ts
 export const PRODUCT_BRANDS = {
   Grocery: [
     "1st Choice",

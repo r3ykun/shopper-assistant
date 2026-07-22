@@ -1,6 +1,9 @@
+//shopper-assistant\scripts\compileProductBrandMetadata.ts
 import { writeFileSync } from "fs";
 import { resolve } from "path";
 import { PRODUCT_BRANDS } from "../src/constants/brands";
+import { enrichAliases } from "./enrich/enrichAliases";
+import strict from "assert/strict";
 
 interface LegacyBrand {
   category: string;
@@ -9,6 +12,14 @@ interface LegacyBrand {
 
 interface ProductLineMetadata {
   aliases: string[];
+}
+
+interface ProductVariantMetadata {
+  name: string;
+  aliases: string[];
+  categories: string[];
+  subcategories: string[];
+  keywords: string[];
 }
 
 export interface BrandAliasMetadata {
@@ -25,11 +36,18 @@ export interface BrandMetadata {
   categories: string[];
   subcategories: string[];
   productLines: Record<string, ProductLineMetadata>;
+  variants: ProductVariantMetadata[];
+  keywords: string[];
 }
 
 interface ProductLineExtractionResult {
   confirmedChildIds: Set<string>;
   confirmedRelations: number;
+}
+
+interface VariantExtractionResult {
+  confirmedChildIds: Set<string>;
+  extractedVariants: number;
 }
 
 interface ProductLineCandidate {
@@ -211,10 +229,80 @@ function generateProductLine(
     );
   }
 
+  if (brand.keywords.length > 0) {
+    const keywords = [
+      ...brand.keywords,
+    ].sort((a, b) =>
+      a.localeCompare(b)
+    );
+
+    lines.push(
+      `  keywords: ${JSON.stringify(keywords)},`
+    );
+  }
+
   lines.push(
     "  preserveInProductName: true,",
     "},"
   );
+
+  return lines;
+}
+
+function generateVariant(
+  variant: ProductVariantMetadata
+): string[] {
+  const lines = [
+    "{",
+    `  name: ${quote(variant.name)},`,
+  ];
+
+  if (variant.aliases.length > 0) {
+    lines.push(
+      `  aliases: ${JSON.stringify(
+        [...variant.aliases].sort(
+          (a, b) =>
+            a.localeCompare(b)
+        )
+      )},`
+    );
+  }
+
+  if (variant.categories.length > 0) {
+    lines.push(
+      `  categories: ${JSON.stringify(
+        [...variant.categories].sort(
+          (a, b) =>
+            a.localeCompare(b)
+        )
+      )},`
+    );
+  }
+
+  if (
+    variant.subcategories.length > 0
+  ) {
+    lines.push(
+      `  subcategories: ${JSON.stringify(
+        [...variant.subcategories].sort(
+          (a, b) =>
+            a.localeCompare(b)
+        )
+      )},`
+    );
+  }
+
+  if (variant.keywords.length > 0) {
+    lines.push(
+      `  keywords: ${JSON.stringify(
+        [...variant.keywords].sort((a, b) =>
+          a.localeCompare(b)
+        )
+      )},`
+    );
+  }
+
+  lines.push("},");
 
   return lines;
 }
@@ -291,6 +379,26 @@ function generateBrandEntry(
     }
 
     lines.push("  },");
+  }
+
+    const variants = [...brand.variants]
+    .sort((a, b) =>
+      a.name.localeCompare(b.name)
+    );
+
+  if (variants.length > 0) {
+    lines.push("  variants: [");
+
+    for (const variant of variants) {
+      lines.push(
+        ...indentLines(
+          generateVariant(variant),
+          4
+        )
+      );
+    }
+
+    lines.push("  ],");
   }
 
   if (brand.categories.length > 0) {
@@ -497,6 +605,410 @@ function generateAutomaticBrandAliases(
   }
 }
 
+const KEYWORD_STOP_WORDS = new Set([
+  "and", "the", "with", "for", "from", "brand", "product",
+  "products", "original", "classic", "regular",
+]);
+
+const KEYWORD_EXPANSIONS: Record<
+  string,
+  string[]
+> = {
+  coffee: [
+    "coffee",
+    "instant coffee",
+    "ground coffee",
+    "coffee drink",
+    "caffeine",
+  ],
+
+  espresso: [
+    "coffee",
+    "espresso",
+  ],
+
+  cappuccino: [
+    "coffee",
+    "cappuccino",
+  ],
+
+  latte: [
+    "coffee",
+    "latte",
+  ],
+
+  mocha: [
+    "coffee",
+    "mocha",
+    "chocolate coffee",
+  ],
+
+  chocolate: [
+    "chocolate",
+    "cocoa",
+  ],
+
+  cocoa: [
+    "chocolate",
+    "cocoa",
+  ],
+
+  milk: [
+    "milk",
+    "dairy",
+  ],
+
+  cheese: [
+    "cheese",
+    "dairy",
+  ],
+
+  yogurt: [
+    "yogurt",
+    "dairy",
+  ],
+
+  yoghurt: [
+    "yogurt",
+    "dairy",
+  ],
+
+  noodle: [
+    "noodles",
+    "instant noodles",
+  ],
+
+  noodles: [
+    "noodles",
+    "instant noodles",
+  ],
+
+  canton: [
+    "noodles",
+    "pancit canton",
+    "instant noodles",
+  ],
+
+  ramen: [
+    "ramen",
+    "noodles",
+    "instant noodles",
+  ],
+
+  biscuit: [
+    "biscuits",
+    "cookies",
+    "snacks",
+  ],
+
+  biscuits: [
+    "biscuits",
+    "cookies",
+    "snacks",
+  ],
+
+  cookie: [
+    "cookies",
+    "biscuits",
+    "snacks",
+  ],
+
+  cookies: [
+    "cookies",
+    "biscuits",
+    "snacks",
+  ],
+
+  cracker: [
+    "crackers",
+    "biscuits",
+    "snacks",
+  ],
+
+  crackers: [
+    "crackers",
+    "biscuits",
+    "snacks",
+  ],
+
+  chips: [
+    "chips",
+    "snacks",
+  ],
+
+  candy: [
+    "candy",
+    "sweets",
+  ],
+
+  juice: [
+    "juice",
+    "fruit drink",
+    "beverage",
+  ],
+
+  soda: [
+    "soda",
+    "soft drink",
+    "beverage",
+  ],
+
+  cola: [
+    "cola",
+    "soft drink",
+    "soda",
+    "beverage",
+  ],
+
+  water: [
+    "water",
+    "drinking water",
+    "beverage",
+  ],
+
+  shampoo: [
+    "shampoo",
+    "hair care",
+  ],
+
+  conditioner: [
+    "conditioner",
+    "hair care",
+  ],
+
+  soap: [
+    "soap",
+    "body care",
+    "personal care",
+  ],
+
+  toothpaste: [
+    "toothpaste",
+    "oral care",
+  ],
+
+  toothbrush: [
+    "toothbrush",
+    "oral care",
+  ],
+
+  detergent: [
+    "detergent",
+    "laundry",
+    "cleaning",
+  ],
+
+  bleach: [
+    "bleach",
+    "laundry",
+    "cleaning",
+  ],
+
+  cleaner: [
+    "cleaner",
+    "cleaning",
+    "household",
+  ],
+
+  medicine: [
+    "medicine",
+    "medication",
+    "drug",
+  ],
+
+  vitamin: [
+    "vitamins",
+    "medicine",
+  ],
+
+  vitamins: [
+    "vitamins",
+    "medicine",
+  ],
+};
+
+function normalizeKeyword(
+  value: string
+): string {
+  return value
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[™®]/g, "")
+    .replace(/&/g, " and ")
+    .replace(/[^a-zA-Z0-9]+/g, " ")
+    .replace(/\s+/g, " ")
+    .trim()
+    .toLowerCase();
+}
+
+function addKeyword(
+  target: string[],
+  value: string
+): void {
+  const normalized =
+    normalizeKeyword(value);
+
+  if (
+    normalized.length < 2 ||
+    KEYWORD_STOP_WORDS.has(normalized)
+  ) {
+    return;
+  }
+
+  if (
+    target.some(
+      keyword =>
+        keyword.toLowerCase() ===
+        normalized
+    )
+  ) {
+    return;
+  }
+
+  target.push(normalized);
+}
+
+function addKeywordTokens(
+  target: string[],
+  value: string
+): void {
+  const normalized =
+    normalizeKeyword(value);
+
+  if (!normalized) {
+    return;
+  }
+
+  addKeyword(target, normalized);
+
+  const tokens = normalized.split(" ");
+
+  for (const token of tokens) {
+    if (
+      token.length < 3 ||
+      KEYWORD_STOP_WORDS.has(token)
+    ) {
+      continue;
+    }
+
+    addKeyword(target, token);
+
+    const expansions =
+      KEYWORD_EXPANSIONS[token] ?? [];
+
+    for (const expansion of expansions) {
+      addKeyword(target, expansion);
+    }
+  }
+}
+
+function generateMetadataKeywords(
+  brands: Map<string, BrandMetadata>
+): void {
+  for (const brand of brands.values()) {
+    brand.keywords = [];
+
+    addKeywordTokens(
+      brand.keywords,
+      brand.name
+    );
+
+    for (const alias of brand.aliases) {
+      addKeywordTokens(
+        brand.keywords,
+        alias.value
+      );
+    }
+
+    for (
+      const category of brand.categories
+    ) {
+      addKeywordTokens(
+        brand.keywords,
+        category
+      );
+    }
+
+    for (
+      const subcategory of
+        brand.subcategories
+    ) {
+      addKeywordTokens(
+        brand.keywords,
+        subcategory
+      );
+    }
+
+    for (
+      const productLineName of
+        Object.keys(brand.productLines)
+    ) {
+      addKeywordTokens(
+        brand.keywords,
+        productLineName
+      );
+    }
+
+    for (const variant of brand.variants) {
+      variant.keywords = [];
+
+      addKeywordTokens(
+        variant.keywords,
+        variant.name
+      );
+
+      for (
+        const alias of variant.aliases
+      ) {
+        addKeywordTokens(
+          variant.keywords,
+          alias
+        );
+      }
+
+      for (
+        const category of
+          variant.categories
+      ) {
+        addKeywordTokens(
+          variant.keywords,
+          category
+        );
+      }
+
+      for (
+        const subcategory of
+          variant.subcategories
+      ) {
+        addKeywordTokens(
+          variant.keywords,
+          subcategory
+        );
+      }
+
+      for (
+        const keyword of
+          variant.keywords
+      ) {
+        addKeyword(
+          brand.keywords,
+          keyword
+        );
+      }
+
+      variant.keywords.sort(
+        (a, b) =>
+          a.localeCompare(b)
+      );
+    }
+
+    brand.keywords.sort(
+      (a, b) =>
+        a.localeCompare(b)
+    );
+  }
+}
+
 function main() {
   const legacy = uniqueLegacyBrands(
     buildLegacyBrands()
@@ -512,12 +1024,29 @@ function main() {
     `Exact canonical brands: ${brands.size}`
   );
 
+  const variantExtraction =
+    extractVariants(brands);
+
+  console.log(
+    `Extracted variants: ${variantExtraction.extractedVariants}`
+  );
+
   const extraction =
-    extractProductLines(brands);
+    extractProductLines(
+      brands,
+      variantExtraction.confirmedChildIds
+    );
+
+  const confirmedChildIds =
+    new Set<string>([
+      ...variantExtraction
+        .confirmedChildIds,
+      ...extraction.confirmedChildIds,
+    ]);
 
   removeConfirmedProductLineBrands(
     brands,
-    extraction.confirmedChildIds
+    confirmedChildIds
   );
 
   console.log(
@@ -535,8 +1064,22 @@ function main() {
     `Merged canonical brands: ${mergedBrands.size}`
   );
 
-  generateAutomaticBrandAliases(
+  enrichAliases(mergedBrands);
+
+  generateMetadataKeywords(
     mergedBrands
+  );
+
+  const generatedKeywordCount = [
+    ...mergedBrands.values(),
+  ].reduce(
+    (total, brand) =>
+      total + brand.keywords.length,
+    0
+  );
+
+  console.log(
+    `Generated keywords: ${generatedKeywordCount}`
   );
 
   const generatedAliasCount = [
@@ -554,7 +1097,9 @@ function main() {
   writeMetadataFile(mergedBrands);
 }
 
-function createBrandMetadata(name: string): BrandMetadata {
+function createBrandMetadata(
+  name: string
+): BrandMetadata {
   return {
     id: slugify(name),
     name,
@@ -562,6 +1107,8 @@ function createBrandMetadata(name: string): BrandMetadata {
     categories: [],
     subcategories: [],
     productLines: {},
+    variants: [],
+    keywords: [],
   };
 }
 
@@ -583,6 +1130,55 @@ function sharesCategory(
     child.categories.includes(category)
   );
 }
+
+const KNOWN_VARIANT_SUFFIXES = [
+  "Zero Sugar",
+  "Sugar Free",
+  "No Sugar",
+  "Less Sugar",
+  "Low Sugar",
+  "Extra Hot",
+  "Extra Spicy",
+  "Low Fat",
+  "Non Fat",
+  "Full Cream",
+  "Milk Chocolate",
+  "Dark Chocolate",
+  "White Chocolate",
+  "Unsweetened",
+  "Unsalted",
+  "Salted",
+  "Original",
+  "Classic",
+  "Regular",
+  "Diet",
+  "Light",
+  "Lite",
+  "Mild",
+  "Spicy",
+  "Hot",
+  "Sweet",
+  "Chilimansi",
+  "Calamansi",
+  "Barbecue",
+  "BBQ",
+  "Cheese",
+  "Chocolate",
+  "Vanilla",
+  "Strawberry",
+  "Mango",
+  "Lemon",
+  "Orange",
+  "Apple",
+  "Grape",
+  "Chicken",
+  "Beef",
+  "Pork",
+  "Seafood",
+].sort(
+  (a, b) =>
+    b.length - a.length
+);
 
 const REJECTED_PRODUCT_LINE_SUFFIXES = new Set([
   "hardware",
@@ -671,178 +1267,477 @@ const KNOWN_EQUIVALENT_BRAND_GROUPS =
     ["jacob-s", "jacobs"],
   ]);
 
-function mergeEquivalentBrands(
-  brands: Map<string, BrandMetadata>
-): Map<string, BrandMetadata> {
-  const merged = new Map<string, BrandMetadata>();
+  function mergeEquivalentBrands(
+    brands: Map<string, BrandMetadata>
+  ): Map<string, BrandMetadata> {
+    const merged =
+      new Map<string, BrandMetadata>();
 
-  for (const brand of brands.values()) {
-    const normalizedKey =
-      equivalentBrandKey(brand.name);
+    for (const brand of brands.values()) {
+      const normalizedKey =
+        equivalentBrandKey(brand.name);
 
-    const preferredName =
-      PREFERRED_BRAND_NAMES.get(normalizedKey);
-
-    const id = slugify(
-      preferredName ?? brand.name
-    );
-    const existing = merged.get(id);
-
-    if (!existing) {
-      merged.set(id, {
-        ...brand,
-        id,
-        aliases: [...brand.aliases],
-        categories: [...brand.categories],
-        subcategories: [...brand.subcategories],
-        productLines: { ...brand.productLines },
-      });
-
-      continue;
-    }
-
-    const existingHasDiacritics =
-      hasNonAsciiCharacters(existing.name);
-
-    const incomingHasDiacritics =
-      hasNonAsciiCharacters(brand.name);
-
-    if (
-      incomingHasDiacritics &&
-      !existingHasDiacritics
-    ) {
-      const previousName = existing.name;
-
-      existing.name = brand.name;
-      addBrandAlias(existing, previousName);
-    } else {
-      addBrandAlias(existing, brand.name);
-    }
-
-    for (const alias of brand.aliases) {
-      addBrandAlias(existing, alias.value);
-    }
-
-    for (const category of brand.categories) {
-      addUnique(existing.categories, category);
-    }
-
-    for (const subcategory of brand.subcategories) {
-      addUnique(existing.subcategories, subcategory);
-    }
-
-    Object.assign(
-      existing.productLines,
-      brand.productLines
-    );
-  }
-
-  return merged;
-}
-
-function isExcludedProductLine(
-  parentName: string,
-  lineName: string
-): boolean {
-  const exclusions =
-    PRODUCT_LINE_EXCLUSIONS[parentName] ?? [];
-
-  return exclusions.some(
-    exclusion =>
-      exclusion.toLowerCase() === lineName.toLowerCase()
-  );
-}
-
-function extractProductLines(
-  brands: Map<string, BrandMetadata>
-): ProductLineExtractionResult {
-  const allBrands = [...brands.values()];
-  const confirmedChildIds = new Set<string>();
-
-  let confirmedRelations = 0;
-
-  for (const parent of allBrands) {
-    const prefix = `${parent.name.toLowerCase()} `;
-
-    const candidates = allBrands.filter(child => {
-      if (child.id === parent.id) {
-        return false;
-      }
-
-      return child.name
-        .toLowerCase()
-        .startsWith(prefix);
-    });
-
-    if (candidates.length < 2) {
-      continue;
-    }
-
-    for (const child of candidates) {
-      const lineName = child.name
-        .slice(parent.name.length)
-        .trim();
-
-      if (!lineName) {
-        continue;
-      }
-
-      const candidate =
-        scoreProductLineCandidate(
-          parent,
-          child,
-          lineName
+      const preferredName =
+        PREFERRED_BRAND_NAMES.get(
+          normalizedKey
         );
 
-      if (candidate.confidence < 70) {
+      const id = slugify(
+        preferredName ?? brand.name
+      );
+
+      const existing = merged.get(id);
+
+      if (!existing) {
+        merged.set(id, {
+          ...brand,
+          id,
+          aliases: [
+            ...brand.aliases,
+          ],
+          categories: [
+            ...brand.categories,
+          ],
+          subcategories: [
+            ...brand.subcategories,
+          ],
+          productLines: {
+            ...brand.productLines,
+          },
+          keywords: [
+            ...brand.keywords,
+          ],
+          variants: brand.variants.map(
+            variant => ({
+              ...variant,
+              aliases: [
+                ...variant.aliases,
+              ],
+              categories: [
+                ...variant.categories,
+              ],
+              subcategories: [
+                ...variant.subcategories,
+              ],
+              keywords: [
+                ...variant.keywords,
+              ],
+            })
+          ),
+        });
+
         continue;
       }
 
-      parent.productLines[lineName] = {
-        aliases: [],
+      const existingHasDiacritics =
+        hasNonAsciiCharacters(
+          existing.name
+        );
+
+      const incomingHasDiacritics =
+        hasNonAsciiCharacters(
+          brand.name
+        );
+
+      if (
+        incomingHasDiacritics &&
+        !existingHasDiacritics
+      ) {
+        const previousName =
+          existing.name;
+
+        existing.name = brand.name;
+
+        addBrandAlias(
+          existing,
+          previousName
+        );
+      } else {
+        addBrandAlias(
+          existing,
+          brand.name
+        );
+      }
+
+      for (
+        const alias of brand.aliases
+      ) {
+        addBrandAlias(
+          existing,
+          alias.value
+        );
+      }
+
+      for (
+        const category of
+          brand.categories
+      ) {
+        addUnique(
+          existing.categories,
+          category
+        );
+      }
+
+      for (
+        const subcategory of
+          brand.subcategories
+      ) {
+        addUnique(
+          existing.subcategories,
+          subcategory
+        );
+      }
+
+      Object.assign(
+        existing.productLines,
+        brand.productLines
+      );
+
+      for (const keyword of brand.keywords) {
+        addUnique(
+          existing.keywords,
+          keyword
+        );
+      }
+
+      for (
+        const variant of
+          brand.variants
+      ) {
+        addVariantMetadata(
+          existing,
+          variant.name,
+          variant.categories,
+          variant.subcategories
+        );
+
+        const mergedVariant =
+          existing.variants.find(
+            existingVariant =>
+              existingVariant.name
+                .toLowerCase() ===
+              variant.name.toLowerCase()
+          );
+
+        if (!mergedVariant) {
+          continue;
+        }
+
+        for (
+          const alias of
+            variant.aliases
+        ) {
+          addUnique(
+            mergedVariant.aliases,
+            alias
+          );
+        }
+
+        for (
+          const keyword of
+            variant.keywords
+        ) {
+          addUnique(
+            mergedVariant.keywords,
+            keyword
+          );
+        }
+      }
+    }
+
+    return merged;
+  }
+
+  function isExcludedProductLine(
+    parentName: string,
+    lineName: string
+  ): boolean {
+    const exclusions =
+      PRODUCT_LINE_EXCLUSIONS[parentName] ?? [];
+
+    return exclusions.some(
+      exclusion =>
+        exclusion.toLowerCase() === lineName.toLowerCase()
+    );
+  }
+
+  function extractTrailingVariant(
+    value: string
+  ): {
+    baseName: string;
+    variantName: string;
+  } | null {
+    const normalizedValue =
+      normalizeText(value);
+
+    const normalizedLower =
+      normalizedValue.toLowerCase();
+
+    for (const variantName of KNOWN_VARIANT_SUFFIXES) {
+      const variantLower =
+        variantName.toLowerCase();
+
+      const index =
+        normalizedLower.indexOf(variantLower);
+
+      if (index === -1) {
+        continue;
+      }
+
+      const before = normalizedValue
+        .slice(0, index)
+        .trim();
+
+      const after = normalizedValue
+        .slice(index + variantName.length)
+        .trim();
+
+      let baseName = before;
+
+      if (after.length > 0) {
+        const remainder = after
+          .replace(
+            /^[\d.\sxXMLLmlkgKG()\-]+/,
+            ""
+          )
+          .trim();
+
+        if (remainder.length > 0) {
+          baseName =
+            `${before} ${remainder}`.trim();
+        }
+      }
+
+      return {
+        baseName,
+        variantName,
       };
+    }
 
-      confirmedChildIds.add(child.id);
-      confirmedRelations++;
+    return null;
+  }
+
+  function addVariantMetadata(
+    brand: BrandMetadata,
+    variantName: string,
+    categories: string[],
+    subcategories: string[]
+  ): boolean {
+    const normalizedName =
+      normalizeText(variantName);
+
+    const existing = brand.variants.find(
+      variant =>
+        variant.name.toLowerCase() ===
+        normalizedName.toLowerCase()
+    );
+
+    if (existing) {
+      for (const category of categories) {
+        addUnique(
+          existing.categories,
+          category
+        );
+      }
+
+      for (const subcategory of subcategories) {
+        addUnique(
+          existing.subcategories,
+          subcategory
+        );
+      }
+
+      return false;
+    }
+
+    brand.variants.push({
+        name: normalizedName,
+        aliases: [],
+        categories: [...categories],
+        subcategories: [...subcategories],
+        keywords: [],
+    });
+
+    return true;
+  }
+
+  function extractVariants(
+    brands: Map<string, BrandMetadata>
+  ): VariantExtractionResult {
+    const allBrands = [...brands.values()];
+
+    const confirmedChildIds =
+      new Set<string>();
+
+    let extractedVariants = 0;
+
+    for (const parent of allBrands) {
+      const prefix =
+        `${parent.name.toLowerCase()} `;
+
+      for (const child of allBrands) {
+        if (child.id === parent.id) {
+          continue;
+        }
+
+        if (
+          !child.name
+            .toLowerCase()
+            .startsWith(prefix)
+        ) {
+          continue;
+        }
+
+        const remainder = child.name
+          .slice(parent.name.length)
+          .trim();
+
+        const extracted =
+          extractTrailingVariant(remainder);
+
+        if (!extracted) {
+          continue;
+        }
+
+        const wasAdded = addVariantMetadata(
+          parent,
+          extracted.variantName,
+          child.categories,
+          child.subcategories
+        );
+
+        if (wasAdded) {
+          extractedVariants++;
+        }
+
+        if (
+            extracted.baseName &&
+            extracted.baseName !== extracted.variantName &&
+            !isExcludedProductLine(
+                parent.name,
+                extracted.baseName
+            )
+        ) {
+            parent.productLines[
+                extracted.baseName
+            ] ??= {
+                aliases: [],
+            };
+        }
+
+        confirmedChildIds.add(child.id);
+      }
+    }
+
+    return {
+      confirmedChildIds,
+      extractedVariants,
+    };
+  }
+
+  function extractProductLines(
+    brands: Map<string, BrandMetadata>,
+    excludedChildIds: Set<string> =
+      new Set<string>()
+  ): ProductLineExtractionResult {
+    const allBrands = [...brands.values()];
+
+    const confirmedChildIds =
+      new Set<string>();
+
+    let confirmedRelations = 0;
+
+    for (const parent of allBrands) {
+      const prefix =
+        `${parent.name.toLowerCase()} `;
+
+      const candidates = allBrands.filter(
+        child => {
+          if (child.id === parent.id) {
+            return false;
+          }
+
+          if (
+            excludedChildIds.has(child.id)
+          ) {
+            return false;
+          }
+
+          return child.name
+            .toLowerCase()
+            .startsWith(prefix);
+        }
+      );
+
+      if (candidates.length === 0) {
+          continue;
+      }
+
+      for (const child of candidates) {
+        const lineName = child.name
+          .slice(parent.name.length)
+          .trim();
+
+        if (!lineName) {
+          continue;
+        }
+
+        const candidate =
+          scoreProductLineCandidate(
+            parent,
+            child,
+            lineName
+          );
+
+        if (candidate.confidence < 70) {
+          continue;
+        }
+
+        parent.productLines[lineName] = {
+          aliases: [],
+        };
+
+        confirmedChildIds.add(child.id);
+        confirmedRelations++;
+      }
+    }
+
+    return {
+      confirmedChildIds,
+      confirmedRelations,
+    };
+  }
+
+  function removeConfirmedProductLineBrands(
+    brands: Map<string, BrandMetadata>,
+    confirmedChildIds: Set<string>
+  ): void {
+    for (const [key, brand] of brands.entries()) {
+      if (confirmedChildIds.has(brand.id)) {
+        brands.delete(key);
+      }
     }
   }
 
-  return {
-    confirmedChildIds,
-    confirmedRelations,
-  };
-}
+  function groupExactBrands(
+    legacyBrands: LegacyBrand[]
+  ): Map<string, BrandMetadata> {
+    const brands = new Map<string, BrandMetadata>();
 
-function removeConfirmedProductLineBrands(
-  brands: Map<string, BrandMetadata>,
-  confirmedChildIds: Set<string>
-): void {
-  for (const [key, brand] of brands.entries()) {
-    if (confirmedChildIds.has(brand.id)) {
-      brands.delete(key);
-    }
-  }
-}
+    for (const item of legacyBrands) {
+      const key = item.brand.toLowerCase();
 
-function groupExactBrands(
-  legacyBrands: LegacyBrand[]
-): Map<string, BrandMetadata> {
-  const brands = new Map<string, BrandMetadata>();
+      let metadata = brands.get(key);
 
-  for (const item of legacyBrands) {
-    const key = item.brand.toLowerCase();
+      if (!metadata) {
+        metadata = createBrandMetadata(item.brand);
+        brands.set(key, metadata);
+      }
 
-    let metadata = brands.get(key);
-
-    if (!metadata) {
-      metadata = createBrandMetadata(item.brand);
-      brands.set(key, metadata);
+      addUnique(metadata.categories, item.category);
     }
 
-    addUnique(metadata.categories, item.category);
+    return brands;
   }
-
-  return brands;
-}
 
 main();

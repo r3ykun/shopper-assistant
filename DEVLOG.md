@@ -364,35 +364,15 @@
 # Ongoing Milestone
 
 
-
----
-
-# Upcoming Milestone
-
-## Milestone 21.75 – Brand Intelligence & Metadata Engine
-
-### Metadata Architecture
-
-#### ✅ Completed
-
+# Milestone 21.75 – Brand Intelligence & Metadata Engine
+### ✅ Completed
+## Metadata Architecture
 - Canonical Brand Model
 - Alias Metadata Redesign
 - Product Line Metadata
 - Metadata Compiler Architecture
 - Compiler Output Generation
-
-#### 🚧 Ongoing
-
-- Variant Metadata
-- Manufacturer Metadata
-- Metadata Versioning
-
----
-
-### Metadata Processing
-
-#### ✅ Completed
-
+## Metadata Processing
 - Legacy Brand Import
 - Canonical Brand Selection
 - Alias Normalization
@@ -402,23 +382,8 @@
 - Product Line Confidence Scoring
 - Automatic Alias Generation
 - Metadata Code Generation
-
-#### 🚧 Ongoing
-
-- Variant Extraction
-- Manufacturer Assignment
-- Metadata Validation Pipeline
-
-#### ✅ Completed
-
 - Metadata Audit Tool
-
----
-
-### Metadata Compiler
-
-#### ✅ Completed
-
+## Metadata Compiler
 - Legacy Brand Parser
 - Duplicate Removal
 - Brand Grouping
@@ -428,39 +393,13 @@
 - Equivalent Name Merging
 - Automatic Metadata Export
 - Stable Metadata Formatting
-
-#### 🚧 Ongoing
-
-- Keyword Generation
-- Variant Generation
-- Manufacturer Generation
-- Regression Testing
-
----
-
-### Brand Recognition Engine
-
-#### ✅ Completed
-
+## Brand Recognition Engine
 - Alias Priority Scoring
 - Intelligent Alias Matching
 - Canonical Brand Resolution
 - Product Line Recognition
 - Safe Product Name Cleanup
-
-#### 🚧 Ongoing
-
-- Variant Recognition
-- Brand Confidence Scoring
-- Conflict Resolution
-- Multi-candidate Ranking
-
----
-
-### Synonyms & Fuzzy Matching
-
-#### ✅ Completed
-
+## Synonyms & Fuzzy Matching
 - Common Name Support
 - Nickname Support
 - Abbreviation Support
@@ -468,34 +407,15 @@
 - Automatic Spacing Variants
 - Automatic Punctuation Variants
 - Unicode / Diacritic Handling
-
-#### 🚧 Ongoing
-
-- Fuzzy Brand Matching
-- Similar Brand Suggestions
-- Keyboard Typo Recognition
-
----
-
-### Philippine Product Intelligence
-
-#### 🚧 Ongoing
-
+## Philippine Product Intelligence
 - Grocery Brand Database
 - Household Brand Database
 - Personal Care Brand Database
 - Medicine Brand Database
 - Pet Supplies Brand Database
-- Electronics Brand Database
 - Hardware Brand Database
 - School Supplies Brand Database
-
----
-
-### Metadata Quality Assurance
-
-#### ✅ Completed
-
+## Metadata Quality Assurance
 - Duplicate ID Validation
 - Canonical Name Validation
 - Metadata Generation Validation
@@ -513,11 +433,53 @@
 - Zero-error Metadata Validation
 - Zero-warning Metadata Validation
 
-#### 🚧 Ongoing
 
-- Automated Metadata Testing
+### 🚧 Ongoing
+# Milestone 21.75.1 - Metadata Processing ✅
+###### 🛠️ Current
+1. Variant Extraction 
+## Goal
+- Transform raw brand data into richer structured metadata before it is exported.
+- Instead of treating every brand name as plain text, the compiler should identify meaningful components that can later improve recognition and search.
+
+# Milestone 21.75.2 - Metadata Compiler
+1. Keyword Generation + Conflict Resolution ✅
+## Goal
+- Generate searchable keywords automatically.
+- typing common keywords like "coffee" instead opens a dropdown list for the brand section that lists every brand that has a coffee item
+
+2. Variant Generation ✅
+## Goal
+- Export extracted variants into the generated metadata.
+
+3. Compiler Regression Testing ✅
+## Goal
+- Ensure compiler changes do not unintentionally alter generated metadata.
+
+# Milestone 21.75.3 - Brand Recognition Engine
+1. Brand Confidence Scoring ✅
+## Goal
+- Assign a confidence score to every detected brand.
+
+2. Multi-candidate Ranking ✅
+- Return ranked candidate matches instead of a single result.
+## Goal
+- Return ranked candidate matches instead of a single result.
+
+# Milestone 21.75.5 - Synonyms & Fuzzy Matching
+1. Fuzzy Brand ✅
+## Goal
+- Recognize brands despite spelling differences.
+
+2. Similar Brand Suggestions ✅
+- Suggest the closest valid brands when no exact match exists.
+
+3. Keyboard Typo Recognition ✅
+- Handle typing mistakes caused by nearby keyboard keys.
 
 ---
+
+# Upcoming Milestone
 
 ## Milestone 22 – Smart Product Intelligence
 

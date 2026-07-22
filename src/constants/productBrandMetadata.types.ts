@@ -1,3 +1,4 @@
+//shopper-assistant\src\constants\productBrandMetadata.types.ts
 export type ProductBrandAliasType =
   | "official"
   | "abbreviation"
@@ -14,11 +15,12 @@ export type ProductBrandMatchStrength =
 export interface ProductBrandAlias {
   value: string;
   type: ProductBrandAliasType;
-  priority?: number;
+  priority: number;
   strength?: ProductBrandMatchStrength;
-  requiresCategoryContext?: boolean;
+  removeFromProductName?: boolean;
   categories?: string[];
   subcategories?: string[];
+  requiresCategoryContext?: boolean;
 }
 
 export interface ProductLineAlias {
@@ -41,6 +43,13 @@ export interface ProductVariantMetadata {
   aliases?: string[];
   categories?: string[];
   subcategories?: string[];
+  keywords?: string[];
+}
+
+export interface ProductManufacturerReference {
+  id: string;
+
+  name: string;
 }
 
 export interface ProductBrandMetadata {
@@ -51,7 +60,8 @@ export interface ProductBrandMetadata {
   variants?: ProductVariantMetadata[];
   categories?: string[];
   subcategories?: string[];
-  manufacturer?: string;
+  manufacturerId?: string;
+  manufacturer?: ProductManufacturerReference;
   keywords?: string[];
   deprecated?: boolean;
   replacedByBrandId?: string;

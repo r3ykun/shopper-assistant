@@ -1,3 +1,4 @@
+//shopper-assistant\scripts\auditProductBrandMetadata.ts
 import { PRODUCT_BRAND_METADATA } from "../src/constants/productBrandMetadata";
 import type {
   ProductBrandMetadata,
