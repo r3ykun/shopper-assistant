@@ -1,4 +1,4 @@
-// src/constants/productUnits.ts
+// shopper-assistant\src\constants\units.ts
 
 export const PRODUCT_UNIT_GROUPS = [
   "Individual",
@@ -17,10 +17,13 @@ export const PRODUCT_UNIT_GROUPS = [
 export type ProductUnitGroup =
   typeof PRODUCT_UNIT_GROUPS[number];
 
-export interface ProductUnitMetadata {
-  name: string;
-  group: ProductUnitGroup;
-  aliases: string[];
+export interface ProductUnitMetadata{
+	name:string;
+	group:ProductUnitGroup;
+	aliases:string[];
+	isPackaging?:boolean;
+	isMeasurement?:boolean;
+	isQuantity?:boolean;
 }
 
 export const PRODUCT_UNIT_METADATA: ProductUnitMetadata[] = [
@@ -1143,6 +1146,30 @@ export function getProductUnitMetadata(
     unit => unit.name === name
   );
 }
+
+export const PRODUCT_PACKAGING=
+	PRODUCT_UNIT_METADATA
+		.filter(unit=>unit.group==="Packaging")
+		.map(unit=>unit.name);
+
+export const MEASUREMENT_UNITS=
+	PRODUCT_UNIT_METADATA
+		.filter(unit=>
+			unit.group==="Weight"||
+			unit.group==="Volume"||
+			unit.group==="Length"||
+			unit.group==="Area"
+		)
+		.map(unit=>unit.name);
+
+export const QUANTITY_UNITS=
+	PRODUCT_UNIT_METADATA
+		.filter(unit=>
+			unit.group==="Individual"||
+			unit.group==="Food"||
+			unit.group==="Medicine"
+		)
+		.map(unit=>unit.name);
 
 export const PRODUCT_UNIT_DROPDOWN_ITEMS =
   PRODUCT_UNIT_METADATA.map(unit => ({

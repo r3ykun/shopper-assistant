@@ -1,5 +1,5 @@
+//shopper-assistant\src\stores\useCartStore.ts
 import { create } from "zustand";
-
 import { CartItem } from "../types/CartItem";
 
 type CartStore = {

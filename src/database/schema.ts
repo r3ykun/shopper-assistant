@@ -1,3 +1,4 @@
+//shopper-assistant\src\database\schema.ts
 import { database } from "./database";
 
 export function createTables() {
@@ -27,8 +28,11 @@ export function createTables() {
       brand TEXT,
       category TEXT,
       subcategory TEXT,
+      packaging TEXT,
       measurement REAL,
-      unit TEXT,
+      measurementUnit TEXT,
+      quantity REAL DEFAULT 1,
+      quantityUnit TEXT,
       srp REAL,
       keywords TEXT,
       createdAt TEXT DEFAULT CURRENT_TIMESTAMP
@@ -175,17 +179,46 @@ export function createTables() {
       "PRAGMA table_info(Products);"
     );
 
-  const hasMeasurementColumn =
-    productColumns.some(
-      column => column.name === "measurement"
-    );
+  const ensureColumn=(
+    name:string,
+    definition:string
+  )=>{
+    if(
+      !productColumns.some(
+        column=>column.name===name
+      )
+    ){
+      database.execSync(`
+        ALTER TABLE Products
+        ADD COLUMN ${definition};
+      `);
+    }
+  };
 
-  if (!hasMeasurementColumn) {
-    database.execSync(`
-      ALTER TABLE Products
-      ADD COLUMN measurement REAL DEFAULT 1;
-    `);
-  }
+  ensureColumn(
+    "packaging",
+    "packaging TEXT"
+  );
+
+  ensureColumn(
+    "measurement",
+    "measurement REAL"
+  );
+
+  ensureColumn(
+    "measurementUnit",
+    "measurementUnit TEXT"
+  );
+
+  ensureColumn(
+    "quantity",
+    "quantity REAL DEFAULT 1"
+  );
+
+  ensureColumn(
+    "quantityUnit",
+    "quantityUnit TEXT"
+  );
 
   const hasSrpColumn =
     productColumns.some(

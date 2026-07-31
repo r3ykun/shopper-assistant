@@ -485,18 +485,22 @@
 4. Confidence Thresholds
 
 # Milestone 21.79 - Category-aware Recognition
+## ✅ Completed
 1. Category Context
 2. Category Filtering
 3. Ambiguous Brand Resolution
 4. Category Validation
 
-### 🚧 Ongoing
-
 # Milestone 21.80 - Product Packaging & Measurement Recognition
+## ✅ Completed
 1. Packaging Recognition
 2. Measurement Recognition an Unit of measurement input
 3. Quantity Recognition
 4. Canonical Prouct Specification
+
+### 🚧 Ongoing
+
+# Updating every screen that still displays or expects the old unit field.
 ---
 
 # Upcoming Milestone

@@ -1,3 +1,4 @@
+//shopper-assistant\src\database\repositories\ProductRepository.ts
 import { database } from "../database";
 import { Product } from "../entities/Product";
 
@@ -24,33 +25,39 @@ export class ProductRepository {
         );
     }
 
-    static update(product: Product) {
-    database.runSync(
-        `
-        UPDATE Products
-        SET
-        barcode = ?,
-        name = ?,
-        brand = ?,
-        category = ?,
-        subcategory = ?,
-        measurement = ?,
-        unit = ?,
-        srp = ?
-        WHERE id = ?;
-        `,
-        [
-        product.barcode,
-        product.name,
-        product.brand ?? null,
-        product.category ?? null,
-        product.subcategory ?? null,
-        product.measurement,
-        product.unit ?? null,
-        product.srp ?? null,
-        product.id
-        ]
-    );
+    static update(product:Product){
+        database.runSync(
+            `
+            UPDATE Products
+            SET
+                barcode=?,
+                name=?,
+                brand=?,
+                category=?,
+                subcategory=?,
+                packaging=?,
+                measurement=?,
+                measurementUnit=?,
+                quantity=?,
+                quantityUnit=?,
+                srp=?
+            WHERE id=?;
+            `,
+            [
+                product.barcode,
+                product.name,
+                product.brand??null,
+                product.category??null,
+                product.subcategory??null,
+                product.packaging??null,
+                product.measurement??null,
+                product.measurementUnit??null,
+                product.quantity??1,
+                product.quantityUnit??null,
+                product.srp??null,
+                product.id,
+            ]
+        );
     }
 
     static findByBarcode(
@@ -71,42 +78,38 @@ export class ProductRepository {
 
     }
 
-    static create(product: Omit<Product, "id">) {
-
+    static create(product:Omit<Product,"id">){
         database.runSync(
-
             `
-            INSERT INTO Products
-            (
+            INSERT INTO Products(
                 barcode,
                 name,
                 brand,
                 category,
                 subcategory,
+                packaging,
                 measurement,
-                unit,
-                srp               
+                measurementUnit,
+                quantity,
+                quantityUnit,
+                srp
             )
-
-            VALUES
-            (
-                ?,?,?,?,?,?,?,?
-            );
+            VALUES(?,?,?,?,?,?,?,?,?,?,?);
             `,
-
             [
                 product.barcode,
                 product.name,
-                product.brand ?? null,
-                product.category ?? null,
-                product.subcategory ?? null,
-                product.measurement,
-                product.unit ?? null,
-                product.srp ?? null
+                product.brand??null,
+                product.category??null,
+                product.subcategory??null,
+                product.packaging??null,
+                product.measurement??null,
+                product.measurementUnit??null,
+                product.quantity??1,
+                product.quantityUnit??null,
+                product.srp??null,
             ]
-
         );
-
     }
 
     static delete(id: number) {

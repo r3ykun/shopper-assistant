@@ -37,17 +37,16 @@ import {
 import {
   PRODUCT_SUBCATEGORIES,
 } from "../../constants/subcategories";
-import {
-  PRODUCT_UNITS,
-} from "../../constants/units";
 import { 
   useCartStore,
   useStoreStore,
   useScannerFeedbackStore,
  } from "../../stores";
-import {
-  PRODUCT_UNIT_DROPDOWN_ITEMS,
-} from "../../constants/units";
+import{
+  PRODUCT_PACKAGING,
+  MEASUREMENT_UNITS,
+  QUANTITY_UNITS,
+}from "../../constants/units";
 import {
   getSubcategoryMetadata,
 } from "../../constants/subcategoryMetadata";
@@ -116,8 +115,14 @@ export default function ProductFormScreen() {
           PRODUCT_CATEGORIES[0]
         ]?.[0] ?? ""
       );
-    const [unit, setUnit] = useState(
-    PRODUCT_UNITS[0]
+    const [packaging,setPackaging]=useState(
+      PRODUCT_PACKAGING[0]
+    );
+    const [measurementUnit,setMeasurementUnit]=useState(
+      MEASUREMENT_UNITS[0]
+    );
+    const [quantityUnit,setQuantityUnit]=useState(
+      QUANTITY_UNITS[0]
     );
     const [barcodeError, setBarcodeError] = useState("");
     const [nameError, setNameError] = useState("");
@@ -159,28 +164,6 @@ export default function ProductFormScreen() {
     const navigation = useNavigation<NavigationProp<RootStackParamList>>();
     const { selectedStore } =
       useStoreStore();
-
-    const subcategoryUnitMetadata =
-      getSubcategoryMetadata(subcategory);
-
-    const commonUnits =
-      subcategoryUnitMetadata?.commonUnits ?? [];
-
-    const unitDropdownItems =
-      commonUnits.length > 0
-        ? commonUnits
-            .map(unitName =>
-              PRODUCT_UNIT_DROPDOWN_ITEMS.find(
-                item => item.value === unitName
-              )
-            )
-            .filter(
-              (
-                item
-              ): item is typeof PRODUCT_UNIT_DROPDOWN_ITEMS[number] =>
-                Boolean(item)
-            )
-        : PRODUCT_UNIT_DROPDOWN_ITEMS;
     const productId =
       route.params?.productId;
     const scannedBarcode =
@@ -235,11 +218,13 @@ export default function ProductFormScreen() {
     const [storePriceError, setStorePriceError] =
       useState("");
 
-    type OpenDropdown =
-      | "category"
-      | "subcategory"
-      | "unit"
-      | null;
+    type OpenDropdown=
+      |"category"
+      |"subcategory"
+      |"packaging"
+      |"measurementUnit"
+      |"quantityUnit"
+      |null;
 
     const [
       openDropdown,
@@ -255,7 +240,7 @@ export default function ProductFormScreen() {
     }
 
     if (metadata?.defaultUnit) {
-      setUnit(metadata.defaultUnit);
+      setPackaging(metadata.defaultUnit);
       return;
     }
 
@@ -263,7 +248,7 @@ export default function ProductFormScreen() {
       metadata?.commonUnits?.[0];
 
     if (firstCommonUnit) {
-      setUnit(firstCommonUnit);
+      setPackaging(firstCommonUnit);
     }
   }, [subcategory, unitLocked]);
 
@@ -315,11 +300,25 @@ export default function ProductFormScreen() {
         existingProduct.measurement?.toString() ??
           "1"
       );
-      setUnit(
-        existingProduct.unit ??
-          PRODUCT_UNITS[0]
+      setPackaging(
+        existingProduct.packaging ??
+          PRODUCT_PACKAGING[0]
       );
 
+      setMeasurementUnit(
+        existingProduct.measurementUnit ??
+          MEASUREMENT_UNITS[0]
+      );
+
+      setQuantity(
+        existingProduct.quantity?.toString() ??
+          "1"
+      );
+
+      setQuantityUnit(
+        existingProduct.quantityUnit ??
+          QUANTITY_UNITS[0]
+      );
       setSrp(existingProduct.srp);
 
       if (selectedStore) {
@@ -381,9 +380,24 @@ export default function ProductFormScreen() {
       existingProduct.measurement?.toString() ??
         "1"
     );
-    setUnit(
-      existingProduct.unit ??
-        PRODUCT_UNITS[0]
+    setPackaging(
+      existingProduct.packaging ??
+        PRODUCT_PACKAGING[0]
+    );
+
+    setMeasurementUnit(
+      existingProduct.measurementUnit ??
+        MEASUREMENT_UNITS[0]
+    );
+
+    setQuantity(
+      existingProduct.quantity?.toString() ??
+        "1"
+    );
+
+    setQuantityUnit(
+      existingProduct.quantityUnit ??
+        QUANTITY_UNITS[0]
     );
   }, [productId, scannedBarcode, selectedStore?.id,]);
 
@@ -419,7 +433,9 @@ export default function ProductFormScreen() {
 
         setDetection(null);
         setMeasurement("1");
-        setUnit(PRODUCT_UNITS[0]);
+        setPackaging(PRODUCT_PACKAGING[0]);
+        setMeasurementUnit(MEASUREMENT_UNITS[0]);
+        setQuantityUnit(QUANTITY_UNITS[0]);
         setQuantity("1");
         setSrp(undefined);
         setStorePrice("");
@@ -487,8 +503,11 @@ export default function ProductFormScreen() {
       category: toTitleCase(category.trim()),
       subcategory: subcategory.trim()
         ? toTitleCase(subcategory.trim()) : undefined,
-      measurement: Number(measurement),
-      unit: toTitleCase(unit.trim()),
+      packaging:toTitleCase(packaging.trim()),
+      measurement:Number(measurement),
+      measurementUnit,
+      quantity:Number(quantity),
+      quantityUnit,
       srp,
     };
 
@@ -587,7 +606,11 @@ export default function ProductFormScreen() {
         category:
           savedProduct.category ??
           "Uncategorized",
-        unit: savedProduct.unit,
+        packaging:savedProduct.packaging,
+        measurement:savedProduct.measurement,
+        measurementUnit:savedProduct.measurementUnit,
+        productQuantity:savedProduct.quantity,
+        quantityUnit:savedProduct.quantityUnit,
         srp: savedProduct.srp ?? 0,
         price: savedStorePrice,
         quantity: selectedQuantity,
@@ -790,7 +813,7 @@ export default function ProductFormScreen() {
                       );
 
                       if (metadata?.defaultUnit) {
-                        setUnit(metadata.defaultUnit);
+                        setPackaging(metadata.defaultUnit);
                       }
                     }
 
@@ -1035,7 +1058,7 @@ export default function ProductFormScreen() {
                     getSubcategoryMetadata(firstSubcategory);
 
                   if (metadata?.defaultUnit) {
-                    setUnit(metadata.defaultUnit);
+                    setPackaging(metadata.defaultUnit);
                   }
                 }
 
@@ -1107,42 +1130,51 @@ export default function ProductFormScreen() {
             />
 
             <AppDropdown
-              label="Unit"
-              selectedValue={unit}
-              autofillState={
-                unitLocked
-                  ? "locked"
-                  : detection
-                    ? "auto"
-                    : "manual"
-              }
-              autofillConfidence={
-                unitLocked
-                  ? undefined
-                  : detection?.confidence
-              }
-              items={unitDropdownItems}
+              label="Packaging"
+              selectedValue={packaging}
+              items={PRODUCT_PACKAGING}
               searchable
-              searchPlaceholder="Search unit, abbreviation, or group..."
-              isOpen={openDropdown === "unit"}
-              onOpen={() =>
-                setOpenDropdown("unit")
-              }
-              onClose={() =>
-                setOpenDropdown(null)
-              }
-              onValueChange={(value) => {
+              isOpen={openDropdown==="packaging"}
+              onOpen={()=>setOpenDropdown("packaging")}
+              onClose={()=>setOpenDropdown(null)}
+              onValueChange={value=>{
                 resetSaveStatus();
-
-                setUnit(value);
-                setUnitLocked(true);
-
-                manuallyEditedNameRef.current =
-                  normalizeProductName(name);
-
+                setPackaging(value);
                 setOpenDropdown(null);
               }}
             />
+
+            <AppDropdown
+              label="Measurement Unit"
+              selectedValue={measurementUnit}
+              items={MEASUREMENT_UNITS}
+              searchable
+              isOpen={openDropdown==="measurementUnit"}
+              onOpen={()=>setOpenDropdown("measurementUnit")}
+              onClose={()=>setOpenDropdown(null)}
+              onValueChange={value=>{
+                resetSaveStatus();
+                setMeasurementUnit(value);
+                setOpenDropdown(null);
+              }}
+            />
+
+            {!shouldAddToCart&&(
+              <AppDropdown
+                label="Quantity Unit"
+                selectedValue={quantityUnit}
+                items={QUANTITY_UNITS}
+                searchable
+                isOpen={openDropdown==="quantityUnit"}
+                onOpen={()=>setOpenDropdown("quantityUnit")}
+                onClose={()=>setOpenDropdown(null)}
+                onValueChange={value=>{
+                  resetSaveStatus();
+                  setQuantityUnit(value);
+                  setOpenDropdown(null);
+                }}
+              />
+            )}
 
             <View style={styles.priceSection}>
               <Text style={styles.priceLabel}>
