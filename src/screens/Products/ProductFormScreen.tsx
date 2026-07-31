@@ -60,7 +60,7 @@ import AppHeader from "../../components/layout/AppHeader";
 import { 
   detectProductBrand,
   type BrandDetectionResult,
- } from "../../utils/detectProductBrand";
+ } from "../../utils/brand/detectProductBrand";
 
 type SortDirection = "asc" | "desc";
 

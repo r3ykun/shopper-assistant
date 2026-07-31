@@ -1,3 +1,4 @@
+//shopper-assistant\src\utils\brand\selectBestBrand.ts
 import {BrandCandidate} from "../../types/BrandCandidate";
 import {findBrandOwner} from "./findBrandOwner";
 

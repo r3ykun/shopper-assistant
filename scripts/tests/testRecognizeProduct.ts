@@ -1,9 +1,11 @@
 import { recognizeProduct } from "../../src/utils/product/recognizeProduct";
 
 const products=[
-	" Lucky   Me   Pancit   Canton   Chilimansi ",
-	"Nescafé    Classic",
-	"Royal   Tru-Orange",
+	"Nestle Chuckie 180ml",
+	"Nescafe Classic Twin Pack",
+	"Lucky Me Pancit Canton Chilimansi",
+	"Bear Brand Fortified",
+	"Coke Zero Sugar",
 ];
 
 for(const product of products){

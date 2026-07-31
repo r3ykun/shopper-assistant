@@ -1,42 +1,59 @@
-import { BRAND_CONFIDENCE } from "../../constants/brandConfidence";
-
-import {
-  ProductBrandAlias,
-} from "../../constants/productBrandMetadata.types";
-
+import {BRAND_CONFIDENCE} from "../../constants/brandConfidence";
+import {ProductBrandAlias} from "../../constants/productBrandMetadata.types";
 import {normalize} from "../normalize";
 
 export function scoreBrandAlias(
-  input: string,
-  alias: ProductBrandAlias
-): number {
+	input:string,
+	alias:ProductBrandAlias
+):number{
+	const search=normalize(input);
+	const candidate=normalize(alias.value);
 
-  const search = normalize(input);
+	let score=
+		BRAND_CONFIDENCE[
+			alias.type
+		]??
+		BRAND_CONFIDENCE.keyword;
 
-  const candidate = normalize(alias.value);
+	const candidateWords=
+		candidate.split(/\s+/);
 
-  let score =
-    BRAND_CONFIDENCE[alias.type] ??
-    BRAND_CONFIDENCE.keyword;
+	const searchWords=
+		search.split(/\s+/);
 
-  if (search === candidate) {
+	const matchedWords=
+		candidateWords.filter(
+			word=>searchWords.includes(word)
+		).length;
 
-    score += 0.10;
+	const coverage=
+		matchedWords/
+		candidateWords.length;
 
-  } else if (
-    search.startsWith(candidate)
-  ) {
+	score+=coverage*0.05;
 
-    score += 0.07;
+	if(search===candidate){
+		score+=0.10;
+	}else if(
+		search.startsWith(candidate+" ")||
+		search.endsWith(" "+candidate)
+	){
+		score+=0.07;
+	}else if(
+		search.includes(" "+candidate+" ")
+	){
+		score+=0.05;
+	}
 
-  } else if (
-    search.includes(candidate)
-  ) {
+	if(
+		search.length>
+		candidate.length
+	){
+		score+=Math.min(
+			0.03,
+			(search.length-candidate.length)/200
+		);
+	}
 
-    score += 0.05;
-
-  }
-
-  return Math.min(score, 1);
-
+	return Math.min(score,1);
 }

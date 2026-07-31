@@ -477,14 +477,15 @@
 3. Product Name Formatting
 4. Preserve Important Terms
 
-
-### 🚧 Ongoing
-
 # Milestone 21.78- Confidence Scoring Improvements
+## ✅ Completed
 1. Weighted Matching
 2. Confidence Calculation
 3. Match Ranking
 4. Confidence Thresholds
+
+### 🚧 Ongoing
+
 
 # Milestone 21.79 - Category-aware Recognition
 1. Category Context

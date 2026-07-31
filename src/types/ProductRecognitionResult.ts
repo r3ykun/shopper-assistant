@@ -13,4 +13,5 @@ export interface ProductRecognitionResult{
 		matchedText:string;
 	};
 	productName?:string;
+  confidence:number;
 }

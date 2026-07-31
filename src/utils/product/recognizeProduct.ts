@@ -5,6 +5,8 @@ import {selectBestBrand} from "../brand/selectBestBrand";
 import {recognizeProductLine} from "./recognizeProductLine";
 import {findVariant} from "./findVariant";
 import {reconstructProductName} from "./reconstructProductName";
+import {calculateProductConfidence} from "./calculateProductConfidence";
+import {PRODUCT_CONFIDENCE} from "../../constants/productConfidence";
 
 export function recognizeProduct(
 	text:string
@@ -37,10 +39,23 @@ export function recognizeProduct(
 		variant,
 	});
 
+	const confidence=calculateProductConfidence({
+		brand,
+		productLine,
+		variant,
+	});
+
+	if(confidence<PRODUCT_CONFIDENCE.minimum){
+		return{
+			confidence,
+		};
+	}
+
 	return{
 		brand,
 		productLine,
 		variant,
 		productName,
+		confidence,
 	};
 }

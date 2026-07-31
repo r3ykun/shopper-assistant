@@ -1,3 +1,4 @@
+//shopper-assistant\src\utils\brand\recognizeBrand.ts
 import { PRODUCT_BRAND_METADATA } from "../../constants/productBrandMetadata";
 import { BrandCandidate } from "../../types/BrandCandidate";
 import { scoreBrandAlias } from "./scoreBrandCandidate";
