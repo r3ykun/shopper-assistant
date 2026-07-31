@@ -39,12 +39,14 @@ export interface ProductLineMetadata{
 	variants?:ProductVariantMetadata[];
 }
 
-export interface ProductVariantMetadata {
-  name: string;
-  aliases?: string[];
-  categories?: string[];
-  subcategories?: string[];
-  keywords?: string[];
+export interface ProductVariantMetadata{
+	name:string;
+	aliases?:string[];
+	categories?:string[];
+	subcategories?:string[];
+	keywords?:string[];
+	priority?:number;
+	exclusiveToProductLine?:boolean;
 }
 
 export interface ProductManufacturerReference {

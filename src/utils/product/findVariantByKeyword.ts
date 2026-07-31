@@ -8,12 +8,13 @@ export function findVariantByKeyword(
 ){
 	const search=normalize(text);
 
-	const variants=[
-		...(productLine?.variants??[]),
-		...(brand.variants??[]),
-	];
+	const variants=productLine?.variants??brand.variants??[];
 
-	let best:{name:string;matchedText:string;score:number}|undefined;
+	let best:{
+		name:string;
+		matchedText:string;
+		score:number;
+	}|undefined;
 
 	for(const variant of variants){
 		for(const keyword of variant.keywords??[]){
@@ -29,7 +30,22 @@ export function findVariantByKeyword(
 
 			if(!matched)continue;
 
-			const score=value.length;
+			let score=
+				value.length+
+				(variant.priority??0);
+
+			if(
+				variant.exclusiveToProductLine&&
+				productLine
+			){
+				score+=10000;
+			}
+
+			if(
+				productLine?.variants?.includes(variant)
+			){
+				score+=1000;
+			}
 
 			if(!best||score>best.score){
 				best={

@@ -1,5 +1,6 @@
+//shopper-assistant\src\utils\product\findProductLine.ts
 import {ProductBrandMetadata,ProductLineAlias} from "../../constants/productBrandMetadata.types";
-
+import {isCategoryCompatible} from "./isCategoryCompatible";
 import {normalize} from "../normalize";
 
 export function findProductLine(brand:ProductBrandMetadata,text:string){
