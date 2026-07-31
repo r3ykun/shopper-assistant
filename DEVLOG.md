@@ -506,7 +506,7 @@
 
 ### 🚧 Ongoing
 
-# additional
+# still need to fix
 - actually since there are already aliases for the units, lets integrate it with the name input just like the brand, to make it automatic
 - also display like: "mililiter (mL)", and not just the very name
 ---

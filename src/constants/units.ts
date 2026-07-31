@@ -985,8 +985,7 @@ export const MEASUREMENT_UNITS=
 	PRODUCT_UNIT_METADATA
 		.filter(unit=>
 			unit.group==="Weight"||
-			unit.group==="Volume"||
-			unit.group==="Length"
+			unit.group==="Volume"
 		)
 		.map(unit=>unit.name);
 
@@ -998,6 +997,72 @@ export const QUANTITY_UNITS=
 			unit.group==="Medicine"
 		)
 		.map(unit=>unit.name);
+
+export const PRODUCT_UNIT_SYMBOLS:Partial<
+	Record<string,string>
+>={
+	Microgram:"μg",
+	Milligram:"mg",
+	Gram:"g",
+	Kilogram:"kg",
+	Ounce:"oz",
+	Pound:"lb",
+	Milliliter:"mL",
+	Liter:"L",
+	"Fluid Ounce":"fl oz",
+	Gallon:"gal",
+};
+
+function formatUnitLabel(name:string):string{
+	const symbol=PRODUCT_UNIT_SYMBOLS[name];
+	return symbol?`${name} (${symbol})`:name;
+}
+
+export const PRODUCT_PACKAGING_DROPDOWN_ITEMS=
+	PRODUCT_UNIT_METADATA
+		.filter(unit=>unit.group==="Packaging")
+		.map(unit=>({
+			label:formatUnitLabel(unit.name),
+			value:unit.name,
+			keywords:[
+				unit.name,
+				...unit.aliases,
+			],
+			section:unit.group,
+		}));
+
+export const MEASUREMENT_UNIT_DROPDOWN_ITEMS=
+	PRODUCT_UNIT_METADATA
+		.filter(unit=>
+			unit.group==="Weight"||
+			unit.group==="Volume"
+		)
+		.map(unit=>({
+			label:formatUnitLabel(unit.name),
+			value:unit.name,
+			keywords:[
+				unit.name,
+				...unit.aliases,
+			],
+			section:unit.group,
+		}));
+
+export const QUANTITY_UNIT_DROPDOWN_ITEMS=
+	PRODUCT_UNIT_METADATA
+		.filter(unit=>
+			unit.group==="Individual"||
+			unit.group==="Food"||
+			unit.group==="Medicine"
+		)
+		.map(unit=>({
+			label:formatUnitLabel(unit.name),
+			value:unit.name,
+			keywords:[
+				unit.name,
+				...unit.aliases,
+			],
+			section:unit.group,
+		}));
 
 export const PRODUCT_UNIT_DROPDOWN_ITEMS =
   PRODUCT_UNIT_METADATA.map(unit => ({

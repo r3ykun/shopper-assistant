@@ -43,9 +43,12 @@ import {
   useScannerFeedbackStore,
  } from "../../stores";
 import{
-  PRODUCT_PACKAGING,
-  MEASUREMENT_UNITS,
-  QUANTITY_UNITS,
+	PRODUCT_PACKAGING,
+	MEASUREMENT_UNITS,
+	QUANTITY_UNITS,
+	PRODUCT_PACKAGING_DROPDOWN_ITEMS,
+	MEASUREMENT_UNIT_DROPDOWN_ITEMS,
+	QUANTITY_UNIT_DROPDOWN_ITEMS,
 }from "../../constants/units";
 import {
   getSubcategoryMetadata,
@@ -60,6 +63,7 @@ import {
   detectProductBrand,
   type BrandDetectionResult,
  } from "../../utils/brand/detectProductBrand";
+import {detectProductSpecification} from "../../utils/product/detectProductSpecification";
 
 type SortDirection = "asc" | "desc";
 
@@ -762,23 +766,45 @@ export default function ProductFormScreen() {
 
                 detectionTimeoutRef.current =
                   setTimeout(() => {
-                    const detectedBrand = detectProductBrand(formatted);
-                    const cleanedProductName = detectedBrand?.productName ?? formatted;
-                    const detected = detectProductCategory(cleanedProductName);
-                  
+                    const detectedBrand=detectProductBrand(formatted);
+                    const brandCleanedName=detectedBrand?.productName??formatted;
+                    const specification=detectProductSpecification(
+                      brandCleanedName
+                    );
+                    const cleanedProductName=specification.productName;
+                    const detected=detectProductCategory(cleanedProductName);                  
                     setBrandDetection(
                       detectedBrand
                     );
+
+                    if(specification.packaging){
+                      setPackaging(
+                        specification.packaging
+                      );
+                    }
+
+                    if(specification.measurement!==undefined){
+                      setMeasurement(
+                        specification.measurement.toString()
+                      );
+                    }
+
+                    if(specification.measurementUnit){
+                      setMeasurementUnit(
+                        specification.measurementUnit
+                      );
+                    }
 
                     if (
                       detectedBrand && !brandLocked
                     ) {
                       setBrand(detectedBrand.brand);
 
-                      if (detectedBrand.removeFromProductName) 
-                        {
-                          const cleanedName = detectedBrand.productName;
-
+                      if(
+                        detectedBrand.removeFromProductName||
+                        specification.productName!==formatted
+                      ){
+                        const cleanedName=specification.productName;
                           if (
                             normalizeProductName(cleanedName) !==
                             normalizeProductName(formatted)
@@ -1118,7 +1144,7 @@ export default function ProductFormScreen() {
             <AppDropdown
               label="Packaging"
               selectedValue={packaging}
-              items={PRODUCT_PACKAGING}
+              items={PRODUCT_PACKAGING_DROPDOWN_ITEMS}
               searchable
               isOpen={openDropdown==="packaging"}
               onOpen={()=>setOpenDropdown("packaging")}
@@ -1153,7 +1179,7 @@ export default function ProductFormScreen() {
                 <AppDropdown
                   label="Unit"
                   selectedValue={measurementUnit}
-                  items={MEASUREMENT_UNITS}
+                  items={MEASUREMENT_UNIT_DROPDOWN_ITEMS}
                   searchable
                   isOpen={openDropdown==="measurementUnit"}
                   onOpen={()=>setOpenDropdown("measurementUnit")}
@@ -1171,7 +1197,7 @@ export default function ProductFormScreen() {
               <AppDropdown
                 label="Quantity Unit"
                 selectedValue={quantityUnit}
-                items={QUANTITY_UNITS}
+                items={QUANTITY_UNIT_DROPDOWN_ITEMS}
                 searchable
                 isOpen={openDropdown==="quantityUnit"}
                 onOpen={()=>setOpenDropdown("quantityUnit")}
