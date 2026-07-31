@@ -1,3 +1,4 @@
+//shopper-assistant\src\components\tables\ProductRow.tsx
 import React from "react";
 import {
   StyleSheet,
@@ -55,8 +56,18 @@ export default function ProductRow({
         />
 
         <Text style={styles.measurement}>
-          {product.measurement ?? 1}{" "}
-          {product.unit || ""}
+          {[
+            product.packaging,
+            product.measurement !== undefined
+              ? `${product.measurement} ${product.measurementUnit ?? ""}`.trim()
+              : undefined,
+            product.quantity !== undefined &&
+            product.quantity > 1
+              ? `${product.quantity} ${product.quantityUnit ?? ""}`.trim()
+              : undefined,
+          ]
+            .filter(Boolean)
+            .join(" • ")}
         </Text>
       </View>
 

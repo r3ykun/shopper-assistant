@@ -1,3 +1,4 @@
+//shopper-assistant\src\screens\Scanner\ScannerScreen.tsx
 import React, { useEffect, useRef } from "react";
 import {
   View,
@@ -354,7 +355,11 @@ export default function ScannerScreen() {
     category:
       product.category ??
       "Uncategorized",
-    unit: product.unit,
+    packaging: product.packaging,
+    measurement: product.measurement,
+    measurementUnit: product.measurementUnit,
+    productQuantity: product.quantity,
+    quantityUnit: product.quantityUnit,  
     srp: product.srp ?? 0,
     price,
     quantity: selectedQuantity,
@@ -553,7 +558,18 @@ export default function ScannerScreen() {
             </Text>
 
             <Text style={styles.productInfo}>
-              {product.measurement} {product.unit}
+              {[
+                product.packaging,
+                product.measurement !== undefined
+                  ? `${product.measurement} ${product.measurementUnit ?? ""}`.trim()
+                  : undefined,
+                product.quantity !== undefined &&
+                product.quantity > 1
+                  ? `${product.quantity} ${product.quantityUnit ?? ""}`.trim()
+                  : undefined,
+              ]
+                .filter(Boolean)
+                .join(" • ")}
             </Text>
 
             <Text style={styles.productInfo}>

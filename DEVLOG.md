@@ -496,11 +496,14 @@
 1. Packaging Recognition
 2. Measurement Recognition an Unit of measurement input
 3. Quantity Recognition
-4. Canonical Prouct Specification
+4. Canonical Product Specification
 
 ### 🚧 Ongoing
 
-# Updating every screen that still displays or expects the old unit field.
+# Needs fixing:
+1. if the brand is in the middle of the input, it stays in the name. It shoul be deleted since it is already recognized.
+2. Remove unnecessary unit of measurements that will not be used like square meter, deciliter, etc...
+3. Make the measurement and unit to be side-by-side in the products form screen
 ---
 
 # Upcoming Milestone

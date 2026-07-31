@@ -1,3 +1,4 @@
+//shopper-assistant\src\components\tables\ProductTableHeader.tsx
 import React from "react";
 import {
   StyleSheet,
