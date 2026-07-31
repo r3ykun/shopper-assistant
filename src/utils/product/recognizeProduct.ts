@@ -4,6 +4,7 @@ import {recognizeBrand} from "../brand/recognizeBrand";
 import {selectBestBrand} from "../brand/selectBestBrand";
 import {recognizeProductLine} from "./recognizeProductLine";
 import {findVariant} from "./findVariant";
+import {reconstructProductName} from "./reconstructProductName";
 
 export function recognizeProduct(
 	text:string
@@ -30,9 +31,16 @@ export function recognizeProduct(
 		)
 		:undefined;
 
+	const productName=reconstructProductName({
+		brand,
+		productLine,
+		variant,
+	});
+
 	return{
 		brand,
 		productLine,
 		variant,
+		productName,
 	};
 }

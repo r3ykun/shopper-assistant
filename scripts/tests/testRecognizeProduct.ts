@@ -1,9 +1,9 @@
 import { recognizeProduct } from "../../src/utils/product/recognizeProduct";
 
 const products=[
-	"Lucky Me Pancit Canton Chilimansi",
-	"Lucky Me Instant Mami Chicken",
-	"Lucky Me Supreme Bulalo",
+	" Lucky   Me   Pancit   Canton   Chilimansi ",
+	"Nescafé    Classic",
+	"Royal   Tru-Orange",
 ];
 
 for(const product of products){
