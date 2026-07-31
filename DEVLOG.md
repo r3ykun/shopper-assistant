@@ -498,12 +498,17 @@
 3. Quantity Recognition
 4. Canonical Product Specification
 
-### 🚧 Ongoing
-
 # Needs fixing:
+## ✅ Completed
 1. if the brand is in the middle of the input, it stays in the name. It shoul be deleted since it is already recognized.
 2. Remove unnecessary unit of measurements that will not be used like square meter, deciliter, etc...
 3. Make the measurement and unit to be side-by-side in the products form screen
+
+### 🚧 Ongoing
+
+# additional
+- actually since there are already aliases for the units, lets integrate it with the name input just like the brand, to make it automatic
+- also display like: "mililiter (mL)", and not just the very name
 ---
 
 # Upcoming Milestone

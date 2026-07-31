@@ -1,4 +1,4 @@
-//shopper-assistant\src\utils\detectProductBrand.ts
+//shopper-assistant\src\utils\brand\detectProductBrand.ts
 import {
   PRODUCT_BRAND_METADATA,
 } from "../../constants/productBrandMetadata";
@@ -181,28 +181,58 @@ function calculateCandidateScore(
 }
 
 function removeMatchedValue(
-  originalInput: string,
-  matchValue: string
-): string {
-  const normalizedParts =
-    normalizeBrandText(
-      matchValue
-    ).split(" ");
+	originalInput:string,
+	matchValue:string
+):string{
+	const exactPattern=escapeRegExp(
+		matchValue.trim()
+	).replace(/\s+/g,"\\s+");
 
-  const flexiblePattern =
-    normalizedParts
-      .map(escapeRegExp)
-      .join("[\\s\\-.'&]*");
+	const exactRegex=new RegExp(
+		`(^|\\s)${exactPattern}(?=\\s|$)`,
+		"gi"
+	);
 
-  const pattern = new RegExp(
-    `(^|\\s)${flexiblePattern}(?=\\s|$)`,
-    "i"
-  );
+	const exactResult=originalInput
+		.replace(exactRegex," ")
+		.replace(/\s+/g," ")
+		.trim();
 
-  return originalInput
-    .replace(pattern, " ")
-    .replace(/\s+/g, " ")
-    .trim();
+	if(exactResult!==originalInput.trim()){
+		return exactResult;
+	}
+
+	const normalizedParts=normalizeBrandText(
+		matchValue
+	)
+		.split(/\s+/)
+		.filter(Boolean);
+
+	if(normalizedParts.length===0){
+		return originalInput.trim();
+	}
+
+	const flexiblePattern=normalizedParts
+		.map(part=>{
+			if(part==="and"){
+				return "(?:and|&)";
+			}
+
+			return escapeRegExp(part);
+		})
+		.join("[\\s\\-.'&+]*");
+
+	const flexibleRegex=new RegExp(
+		`(^|\\s)${flexiblePattern}(?=\\s|$)`,
+		"gi"
+	);
+
+	return originalInput
+		.replace(flexibleRegex," ")
+		.replace(/\s+([,.;:!?])/g,"$1")
+		.replace(/\s+/g," ")
+		.replace(/^[,.;:!?\s-]+|[,.;:!?\s-]+$/g,"")
+		.trim();
 }
 
 function sortCandidates(
@@ -343,9 +373,7 @@ export function detectProductBrand(
         )[0]
       : undefined;
 
-  const shouldRemoveBrand =
-    !bestBrand.match
-      .preserveInProductName;
+  const shouldRemoveBrand=true;
 
   const cleanedProductName =
     shouldRemoveBrand

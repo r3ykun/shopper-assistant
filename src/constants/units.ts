@@ -7,7 +7,6 @@ export const PRODUCT_UNIT_GROUPS = [
   "Weight",
   "Volume",
   "Length",
-  "Area",
   "Hardware",
   "Medicine",
   "Pet Supplies",
@@ -511,77 +510,34 @@ export const PRODUCT_UNIT_METADATA: ProductUnitMetadata[] = [
   // =====================================================
 
   {
-    name: "Microgram",
-    group: "Weight",
-    aliases: [
-      "microgram",
-      "micrograms",
-      "mcg",
-      "μg",
-      "ug",
-    ],
+    name:"Microgram",
+    group:"Weight",
+    aliases:["microgram","micrograms","mcg","μg","ug"],
   },
   {
-    name: "Milligram",
-    group: "Weight",
-    aliases: [
-      "milligram",
-      "milligrams",
-      "mg",
-    ],
+    name:"Milligram",
+    group:"Weight",
+    aliases:["milligram","milligrams","mg"],
   },
   {
-    name: "Gram",
-    group: "Weight",
-    aliases: [
-      "gram",
-      "grams",
-      "g",
-      "gm",
-      "gms",
-    ],
+    name:"Gram",
+    group:"Weight",
+    aliases:["gram","grams","g","gm","gms"],
   },
   {
-    name: "Kilogram",
-    group: "Weight",
-    aliases: [
-      "kilogram",
-      "kilograms",
-      "kg",
-      "kgs",
-      "kilo",
-      "kilos",
-    ],
+    name:"Kilogram",
+    group:"Weight",
+    aliases:["kilogram","kilograms","kg","kgs","kilo","kilos"],
   },
   {
-    name: "Metric Ton",
-    group: "Weight",
-    aliases: [
-      "metric ton",
-      "metric tons",
-      "tonne",
-      "tonnes",
-      "mt",
-    ],
+    name:"Ounce",
+    group:"Weight",
+    aliases:["ounce","ounces","oz"],
   },
   {
-    name: "Ounce",
-    group: "Weight",
-    aliases: [
-      "ounce",
-      "ounces",
-      "oz",
-    ],
-  },
-  {
-    name: "Pound",
-    group: "Weight",
-    aliases: [
-      "pound",
-      "pounds",
-      "lb",
-      "lbs",
-    ],
+    name:"Pound",
+    group:"Weight",
+    aliases:["pound","pounds","lb","lbs"],
   },
 
   // =====================================================
@@ -589,119 +545,24 @@ export const PRODUCT_UNIT_METADATA: ProductUnitMetadata[] = [
   // =====================================================
 
   {
-    name: "Drop",
-    group: "Volume",
-    aliases: [
-      "drop",
-      "drops",
-      "gtt",
-    ],
+    name:"Milliliter",
+    group:"Volume",
+    aliases:["milliliter","milliliters","millilitre","millilitres","ml","mL"],
   },
   {
-    name: "Teaspoon",
-    group: "Volume",
-    aliases: [
-      "teaspoon",
-      "teaspoons",
-      "tsp",
-    ],
+    name:"Liter",
+    group:"Volume",
+    aliases:["liter","liters","litre","litres","l","L","ltr","ltrs"],
   },
   {
-    name: "Tablespoon",
-    group: "Volume",
-    aliases: [
-      "tablespoon",
-      "tablespoons",
-      "tbsp",
-      "tbs",
-    ],
+    name:"Fluid Ounce",
+    group:"Volume",
+    aliases:["fluid ounce","fluid ounces","fl oz","floz"],
   },
   {
-    name: "Fluid Ounce",
-    group: "Volume",
-    aliases: [
-      "fluid ounce",
-      "fluid ounces",
-      "fl oz",
-      "floz",
-    ],
-  },
-  {
-    name: "Pint",
-    group: "Volume",
-    aliases: [
-      "pint",
-      "pints",
-      "pt",
-    ],
-  },
-  {
-    name: "Quart",
-    group: "Volume",
-    aliases: [
-      "quart",
-      "quarts",
-      "qt",
-    ],
-  },
-  {
-    name: "Gallon",
-    group: "Volume",
-    aliases: [
-      "gallon",
-      "gallons",
-      "gal",
-    ],
-  },
-  {
-    name: "Milliliter",
-    group: "Volume",
-    aliases: [
-      "milliliter",
-      "milliliters",
-      "millilitre",
-      "millilitres",
-      "ml",
-      "mL",
-    ],
-  },
-  {
-    name: "Centiliter",
-    group: "Volume",
-    aliases: [
-      "centiliter",
-      "centiliters",
-      "centilitre",
-      "centilitres",
-      "cl",
-      "cL",
-    ],
-  },
-  {
-    name: "Deciliter",
-    group: "Volume",
-    aliases: [
-      "deciliter",
-      "deciliters",
-      "decilitre",
-      "decilitres",
-      "dl",
-      "dL",
-    ],
-  },
-  {
-    name: "Liter",
-    group: "Volume",
-    aliases: [
-      "liter",
-      "liters",
-      "litre",
-      "litres",
-      "l",
-      "L",
-      "ltr",
-      "ltrs",
-    ],
+    name:"Gallon",
+    group:"Volume",
+    aliases:["gallon","gallons","gal"],
   },
 
   // =====================================================
@@ -777,37 +638,6 @@ export const PRODUCT_UNIT_METADATA: ProductUnitMetadata[] = [
       "yard",
       "yards",
       "yd",
-    ],
-  },
-
-  // =====================================================
-  // Area
-  // =====================================================
-
-  {
-    name: "Square Meter",
-    group: "Area",
-    aliases: [
-      "square meter",
-      "square meters",
-      "square metre",
-      "square metres",
-      "sqm",
-      "sq m",
-      "m2",
-      "m²",
-    ],
-  },
-  {
-    name: "Square Foot",
-    group: "Area",
-    aliases: [
-      "square foot",
-      "square feet",
-      "sq ft",
-      "sqft",
-      "ft2",
-      "ft²",
     ],
   },
 
@@ -1094,7 +924,6 @@ export const PRODUCT_UNITS_BY_GROUP =
       Weight: [],
       Volume: [],
       Length: [],
-      Area: [],
       Hardware: [],
       Medicine: [],
       "Pet Supplies": [],
@@ -1157,8 +986,7 @@ export const MEASUREMENT_UNITS=
 		.filter(unit=>
 			unit.group==="Weight"||
 			unit.group==="Volume"||
-			unit.group==="Length"||
-			unit.group==="Area"
+			unit.group==="Length"
 		)
 		.map(unit=>unit.name);
 

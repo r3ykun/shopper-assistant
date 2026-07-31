@@ -1115,20 +1115,6 @@ export default function ProductFormScreen() {
               }}
             />
 
-            <AppTextInput
-              label="Measurement"
-              value={measurement}
-              placeholder="Enter measurement"
-              keyboardType="decimal-pad"
-              onChangeText={(text) => {
-                setSuccessMessage("");
-                setButtonTitle("Save Product");
-                setMeasurement(
-                  text.replace(/[^0-9.]/g, "")
-                );
-              }}
-            />
-
             <AppDropdown
               label="Packaging"
               selectedValue={packaging}
@@ -1144,20 +1130,42 @@ export default function ProductFormScreen() {
               }}
             />
 
-            <AppDropdown
-              label="Measurement Unit"
-              selectedValue={measurementUnit}
-              items={MEASUREMENT_UNITS}
-              searchable
-              isOpen={openDropdown==="measurementUnit"}
-              onOpen={()=>setOpenDropdown("measurementUnit")}
-              onClose={()=>setOpenDropdown(null)}
-              onValueChange={value=>{
-                resetSaveStatus();
-                setMeasurementUnit(value);
-                setOpenDropdown(null);
-              }}
-            />
+            <View style={styles.measurementRow}>
+              <View style={styles.measurementValue}>
+                <AppTextInput
+                  label="Measurement"
+                  value={measurement}
+                  placeholder="0"
+                  keyboardType="decimal-pad"
+                  onFocus={()=>setOpenDropdown(null)}
+                  onChangeText={text=>{
+                    resetSaveStatus();
+                    setMeasurement(
+                      text
+                        .replace(/[^0-9.]/g,"")
+                        .replace(/(\..*)\./g,"$1")
+                    );
+                  }}
+                />
+              </View>
+
+              <View style={styles.measurementUnit}>
+                <AppDropdown
+                  label="Unit"
+                  selectedValue={measurementUnit}
+                  items={MEASUREMENT_UNITS}
+                  searchable
+                  isOpen={openDropdown==="measurementUnit"}
+                  onOpen={()=>setOpenDropdown("measurementUnit")}
+                  onClose={()=>setOpenDropdown(null)}
+                  onValueChange={value=>{
+                    resetSaveStatus();
+                    setMeasurementUnit(value);
+                    setOpenDropdown(null);
+                  }}
+                />
+              </View>
+            </View>
 
             {!shouldAddToCart&&(
               <AppDropdown
@@ -1245,6 +1253,19 @@ export default function ProductFormScreen() {
 }
 
 const styles = StyleSheet.create({
+
+  measurementRow:{
+    flexDirection:"row",
+    alignItems:"flex-start",
+    gap:12,
+  },
+  measurementValue:{
+    flex:1,
+  },
+  measurementUnit:{
+    flex:1.4,
+  },
+
   container: {
     padding: Spacing.lg,
     paddingBottom: 40,
