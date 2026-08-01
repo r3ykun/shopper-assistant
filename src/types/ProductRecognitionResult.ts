@@ -1,3 +1,4 @@
+//shopper-assistant\src\types\ProductRecognitionResult.ts
 import {BrandCandidate} from "./BrandCandidate";
 
 export interface ProductRecognitionResult{

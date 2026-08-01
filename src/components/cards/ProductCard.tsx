@@ -36,8 +36,7 @@ export default function ProductCard({
           style={styles.details}
           numberOfLines={1}
         >
-          {product.brand || "No Brand"} • {product.category} • {product.unit}
-        </Text>
+      {product.brand||"No Brand"} • {product.category} • {[product.measurement,product.measurementUnit].filter(Boolean).join(" ")}        </Text>
 
       </View>
 

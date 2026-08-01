@@ -1,3 +1,4 @@
+// shopper-assistant/src/utils/product/recognizeProductLine.ts
 import {BrandCandidate} from "../../types/BrandCandidate";
 import {findProductLine} from "./findProductLine";
 import {findProductLineByKeyword} from "./findProductLineByKeyword";

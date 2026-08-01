@@ -1,4 +1,4 @@
-//shopper-assistant\src\utils\buildProductBrandIndex.ts
+// shopper-assistant/src/utils/buildProductBrandIndex.ts
 import type {
   ProductBrandAliasType,
   ProductBrandMetadata,

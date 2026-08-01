@@ -1,3 +1,4 @@
+// shopper-assistant/src/utils/product/findVariantByKeyword.ts
 import {ProductBrandMetadata,ProductLineMetadata} from "../../constants/productBrandMetadata.types";
 import {normalize} from "../normalize";
 

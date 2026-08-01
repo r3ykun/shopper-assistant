@@ -1,5 +1,5 @@
+//shopper-assistant\src\utils\brand\filterContainedBrandCandidates.ts
 import { BrandCandidate } from "../../types/BrandCandidate";
-
 import {normalize} from "../normalize";
 
 export function filterContainedBrandCandidates(

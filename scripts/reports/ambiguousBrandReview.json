@@ -1,0 +1,181 @@
+[
+  {
+    "id": "555",
+    "name": "555",
+    "categories": [
+      "Grocery"
+    ],
+    "reasons": [
+      "generic-name-pattern"
+    ]
+  },
+  {
+    "id": "arm-and-hammer",
+    "name": "Arm & Hammer",
+    "categories": [
+      "Grocery",
+      "Household",
+      "Personal Care",
+      "Pet Supplies"
+    ],
+    "reasons": [
+      "broad-category-coverage"
+    ]
+  },
+  {
+    "id": "champion",
+    "name": "Champion",
+    "categories": [
+      "Grocery",
+      "Household"
+    ],
+    "reasons": [
+      "generic-single-word"
+    ]
+  },
+  {
+    "id": "crystal",
+    "name": "Crystal",
+    "categories": [
+      "Grocery"
+    ],
+    "reasons": [
+      "generic-single-word"
+    ]
+  },
+  {
+    "id": "diamond",
+    "name": "Diamond",
+    "categories": [
+      "Grocery",
+      "Hardware",
+      "Household",
+      "School Supplies"
+    ],
+    "reasons": [
+      "generic-single-word"
+    ]
+  },
+  {
+    "id": "dream",
+    "name": "Dream",
+    "categories": [
+      "Grocery"
+    ],
+    "reasons": [
+      "generic-single-word"
+    ]
+  },
+  {
+    "id": "excellent",
+    "name": "Excellent",
+    "categories": [
+      "Grocery"
+    ],
+    "reasons": [
+      "generic-single-word"
+    ]
+  },
+  {
+    "id": "fi",
+    "name": "Fi",
+    "categories": [
+      "Pet Supplies"
+    ],
+    "reasons": [
+      "short-non-acronym"
+    ]
+  },
+  {
+    "id": "fortune",
+    "name": "Fortune",
+    "categories": [
+      "Grocery"
+    ],
+    "reasons": [
+      "generic-single-word"
+    ]
+  },
+  {
+    "id": "happy",
+    "name": "Happy",
+    "categories": [
+      "Grocery"
+    ],
+    "reasons": [
+      "generic-single-word"
+    ]
+  },
+  {
+    "id": "ideal",
+    "name": "Ideal",
+    "categories": [
+      "Grocery",
+      "Hardware"
+    ],
+    "reasons": [
+      "generic-single-word"
+    ]
+  },
+  {
+    "id": "master",
+    "name": "Master",
+    "categories": [
+      "Grocery",
+      "Hardware"
+    ],
+    "reasons": [
+      "generic-single-word"
+    ]
+  },
+  {
+    "id": "rubbermaid",
+    "name": "Rubbermaid",
+    "categories": [
+      "Hardware",
+      "Household",
+      "Pet Supplies",
+      "School Supplies"
+    ],
+    "reasons": [
+      "broad-category-coverage"
+    ]
+  },
+  {
+    "id": "sharp",
+    "name": "Sharp",
+    "categories": [
+      "Hardware",
+      "Household",
+      "Pet Supplies",
+      "School Supplies"
+    ],
+    "reasons": [
+      "broad-category-coverage"
+    ]
+  },
+  {
+    "id": "sunny",
+    "name": "Sunny",
+    "categories": [
+      "Grocery"
+    ],
+    "reasons": [
+      "generic-single-word"
+    ]
+  },
+  {
+    "id": "xiaomi",
+    "name": "Xiaomi",
+    "categories": [
+      "Hardware",
+      "Household",
+      "Personal Care",
+      "Pet Supplies",
+      "School Supplies"
+    ],
+    "reasons": [
+      "broad-category-coverage"
+    ]
+  }
+]

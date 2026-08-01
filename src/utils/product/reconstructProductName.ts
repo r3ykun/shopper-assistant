@@ -1,3 +1,4 @@
+// shopper-assistant/src/utils/product/reconstructProductName.ts
 import {BrandCandidate} from "../../types/BrandCandidate";
 
 interface ReconstructProductNameArgs{

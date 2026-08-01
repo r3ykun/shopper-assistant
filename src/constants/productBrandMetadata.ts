@@ -78,6 +78,18 @@ export const PRODUCT_BRAND_METADATA = {
       },
     ],
     productLines: {
+      "aura":{
+        name:"Aura",
+        aliases:[
+          {
+            value:"Aura",
+            type:"official",
+            priority:90,
+          },
+        ],
+        categories:["Medicine"],
+        preserveInProductName:true,
+      },
       "command":{
         name:"Command",
         aliases:[
@@ -87,6 +99,19 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Household"],
+        preserveInProductName:true,
+      },
+      "micropore":{
+        name:"Micropore",
+        aliases:[
+          {
+            value:"Micropore",
+            type:"official",
+            priority:90,
+          },
+        ],
+        categories:["Medicine"],
         preserveInProductName:true,
       },
       "nexcare":{
@@ -98,23 +123,19 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Personal Care"],
         preserveInProductName:true,
       },
-      "nexcare-pack":{
-        name:"Nexcare Pack",
+      "nexcare-elastic-bandage":{
+        name:"Nexcare Elastic Bandage",
         aliases:[
           {
-            value:"Nexcare Pack",
+            value:"Nexcare Elastic Bandage",
             type:"official",
             priority:90,
           },
         ],
-        variants:[
-          {
-            name: "Hot",
-            categories: ["Medicine"],
-          },
-        ],
+        categories:["Medicine"],
         preserveInProductName:true,
       },
       "post-it":{
@@ -126,6 +147,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["School Supplies"],
         preserveInProductName:true,
       },
       "scotch":{
@@ -137,36 +159,11 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["School Supplies"],
         preserveInProductName:true,
       },
     },
     categories: ["Hardware","Household","Personal Care","Pet Supplies","School Supplies"],
-  },
-  "3m-aura": {
-    id: "3m-aura",
-    name: "3M Aura",
-    aliases: [
-      {
-        value: "3M Aura",
-        type: "official",
-        priority: 100,
-        strength: "strong",
-      },
-    ],
-    categories: ["Medicine"],
-  },
-  "3m-micropore": {
-    id: "3m-micropore",
-    name: "3M Micropore",
-    aliases: [
-      {
-        value: "3M Micropore",
-        type: "official",
-        priority: 100,
-        strength: "strong",
-      },
-    ],
-    categories: ["Medicine"],
   },
   "3m-n95": {
     id: "3m-n95",
@@ -174,32 +171,6 @@ export const PRODUCT_BRAND_METADATA = {
     aliases: [
       {
         value: "3M N95",
-        type: "official",
-        priority: 100,
-        strength: "strong",
-      },
-    ],
-    categories: ["Medicine"],
-  },
-  "3m-nexcare-cold-pack": {
-    id: "3m-nexcare-cold-pack",
-    name: "3M Nexcare Cold Pack",
-    aliases: [
-      {
-        value: "3M Nexcare Cold Pack",
-        type: "official",
-        priority: 100,
-        strength: "strong",
-      },
-    ],
-    categories: ["Medicine"],
-  },
-  "3m-nexcare-elastic-bandage": {
-    id: "3m-nexcare-elastic-bandage",
-    name: "3M Nexcare Elastic Bandage",
-    aliases: [
-      {
-        value: "3M Nexcare Elastic Bandage",
         type: "official",
         priority: 100,
         strength: "strong",
@@ -501,6 +472,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Medicine"],
         preserveInProductName:true,
       },
       "test-strips":{
@@ -512,6 +484,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Medicine"],
         preserveInProductName:true,
       },
     },
@@ -554,20 +527,20 @@ export const PRODUCT_BRAND_METADATA = {
         strength: "strong",
       },
     ],
-    productLines: {
-      "hardware":{
-        name:"Hardware",
-        aliases:[
-          {
-            value:"Hardware",
-            type:"official",
-            priority:90,
-          },
-        ],
-        preserveInProductName:true,
-      },
-    },
     categories: ["Grocery","Hardware","Household"],
+  },
+  "ace-hardware": {
+    id: "ace-hardware",
+    name: "ACE Hardware",
+    aliases: [
+      {
+        value: "ACE Hardware",
+        type: "official",
+        priority: 100,
+        strength: "strong",
+      },
+    ],
+    categories: ["Hardware"],
   },
   "acer": {
     id: "acer",
@@ -653,19 +626,6 @@ export const PRODUCT_BRAND_METADATA = {
     aliases: [
       {
         value: "Actemra",
-        type: "official",
-        priority: 100,
-        strength: "strong",
-      },
-    ],
-    categories: ["Medicine"],
-  },
-  "activated-charcoal": {
-    id: "activated-charcoal",
-    name: "Activated Charcoal",
-    aliases: [
-      {
-        value: "Activated Charcoal",
         type: "official",
         priority: 100,
         strength: "strong",
@@ -1097,6 +1057,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Grocery"],
         preserveInProductName:true,
       },
     },
@@ -1214,6 +1175,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Grocery"],
         preserveInProductName:true,
       },
       "crema":{
@@ -1225,6 +1187,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Grocery"],
         preserveInProductName:true,
       },
       "evaporada":{
@@ -1236,6 +1199,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Grocery"],
         preserveInProductName:true,
       },
       "fortified":{
@@ -1247,6 +1211,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Grocery"],
         preserveInProductName:true,
       },
       "sweetened-condensed":{
@@ -1258,6 +1223,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Grocery"],
         preserveInProductName:true,
       },
     },
@@ -1713,23 +1679,23 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Personal Care"],
+        preserveInProductName:true,
+      },
+      "save":{
+        name:"Save",
+        aliases:[
+          {
+            value:"Save",
+            type:"official",
+            priority:90,
+          },
+        ],
+        categories:["Grocery"],
         preserveInProductName:true,
       },
     },
     categories: ["Personal Care"],
-  },
-  "always-save": {
-    id: "always-save",
-    name: "Always Save",
-    aliases: [
-      {
-        value: "Always Save",
-        type: "official",
-        priority: 100,
-        strength: "strong",
-      },
-    ],
-    categories: ["Grocery"],
   },
   "amaron": {
     id: "amaron",
@@ -2207,6 +2173,19 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Grocery"],
+        preserveInProductName:true,
+      },
+      "hocking":{
+        name:"Hocking",
+        aliases:[
+          {
+            value:"Hocking",
+            type:"official",
+            priority:90,
+          },
+        ],
+        categories:["Household"],
         preserveInProductName:true,
       },
       "skim":{
@@ -2218,6 +2197,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Grocery"],
         preserveInProductName:true,
       },
     },
@@ -2239,19 +2219,6 @@ export const PRODUCT_BRAND_METADATA = {
       },
     ],
     categories: ["Grocery"],
-  },
-  "anchor-hocking": {
-    id: "anchor-hocking",
-    name: "Anchor Hocking",
-    aliases: [
-      {
-        value: "Anchor Hocking",
-        type: "official",
-        priority: 100,
-        strength: "strong",
-      },
-    ],
-    categories: ["Household"],
   },
   "ancient-harvest": {
     id: "ancient-harvest",
@@ -2352,6 +2319,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Grocery"],
         preserveInProductName:true,
       },
       "condensada":{
@@ -2363,6 +2331,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Grocery"],
         preserveInProductName:true,
       },
       "evaporada":{
@@ -2374,6 +2343,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Grocery"],
         preserveInProductName:true,
       },
     },
@@ -2452,6 +2422,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["School Supplies"],
         preserveInProductName:true,
       },
     },
@@ -2624,46 +2595,45 @@ export const PRODUCT_BRAND_METADATA = {
         strength: "strong",
       },
     ],
+    productLines: {
+      "pill-crusher":{
+        name:"Pill Crusher",
+        aliases:[
+          {
+            value:"Pill Crusher",
+            type:"official",
+            priority:90,
+          },
+        ],
+        categories:["Medicine"],
+        preserveInProductName:true,
+      },
+      "pill-cutter":{
+        name:"Pill Cutter",
+        aliases:[
+          {
+            value:"Pill Cutter",
+            type:"official",
+            priority:90,
+          },
+        ],
+        categories:["Medicine"],
+        preserveInProductName:true,
+      },
+      "pill-organizer":{
+        name:"Pill Organizer",
+        aliases:[
+          {
+            value:"Pill Organizer",
+            type:"official",
+            priority:90,
+          },
+        ],
+        categories:["Medicine"],
+        preserveInProductName:true,
+      },
+    },
     categories: ["Hardware","Pet Supplies"],
-  },
-  "apex-pill-crusher": {
-    id: "apex-pill-crusher",
-    name: "Apex Pill Crusher",
-    aliases: [
-      {
-        value: "Apex Pill Crusher",
-        type: "official",
-        priority: 100,
-        strength: "strong",
-      },
-    ],
-    categories: ["Medicine"],
-  },
-  "apex-pill-cutter": {
-    id: "apex-pill-cutter",
-    name: "Apex Pill Cutter",
-    aliases: [
-      {
-        value: "Apex Pill Cutter",
-        type: "official",
-        priority: 100,
-        strength: "strong",
-      },
-    ],
-    categories: ["Medicine"],
-  },
-  "apex-pill-organizer": {
-    id: "apex-pill-organizer",
-    name: "Apex Pill Organizer",
-    aliases: [
-      {
-        value: "Apex Pill Organizer",
-        type: "official",
-        priority: 100,
-        strength: "strong",
-      },
-    ],
-    categories: ["Medicine"],
   },
   "api": {
     id: "api",
@@ -2728,72 +2698,57 @@ export const PRODUCT_BRAND_METADATA = {
         strength: "strong",
       },
     ],
+    productLines: {
+      "cotton-balls":{
+        name:"Cotton Balls",
+        aliases:[
+          {
+            value:"Cotton Balls",
+            type:"official",
+            priority:90,
+          },
+        ],
+        categories:["Medicine"],
+        preserveInProductName:true,
+      },
+      "cotton-buds":{
+        name:"Cotton Buds",
+        aliases:[
+          {
+            value:"Cotton Buds",
+            type:"official",
+            priority:90,
+          },
+        ],
+        categories:["Medicine"],
+        preserveInProductName:true,
+      },
+      "medical-cotton":{
+        name:"Medical Cotton",
+        aliases:[
+          {
+            value:"Medical Cotton",
+            type:"official",
+            priority:90,
+          },
+        ],
+        categories:["Medicine"],
+        preserveInProductName:true,
+      },
+      "petroleum-jelly":{
+        name:"Petroleum Jelly",
+        aliases:[
+          {
+            value:"Petroleum Jelly",
+            type:"official",
+            priority:90,
+          },
+        ],
+        categories:["Medicine"],
+        preserveInProductName:true,
+      },
+    },
     categories: ["Hardware","School Supplies"],
-  },
-  "apollo-cotton-balls": {
-    id: "apollo-cotton-balls",
-    name: "Apollo Cotton Balls",
-    aliases: [
-      {
-        value: "Apollo Cotton Balls",
-        type: "official",
-        priority: 100,
-        strength: "strong",
-      },
-    ],
-    categories: ["Medicine"],
-  },
-  "apollo-cotton-buds": {
-    id: "apollo-cotton-buds",
-    name: "Apollo Cotton Buds",
-    aliases: [
-      {
-        value: "Apollo Cotton Buds",
-        type: "official",
-        priority: 100,
-        strength: "strong",
-      },
-    ],
-    categories: ["Medicine"],
-  },
-  "apollo-medical-cotton": {
-    id: "apollo-medical-cotton",
-    name: "Apollo Medical Cotton",
-    aliases: [
-      {
-        value: "Apollo Medical Cotton",
-        type: "official",
-        priority: 100,
-        strength: "strong",
-      },
-    ],
-    categories: ["Medicine"],
-  },
-  "apollo-medicine-box": {
-    id: "apollo-medicine-box",
-    name: "Apollo Medicine Box",
-    aliases: [
-      {
-        value: "Apollo Medicine Box",
-        type: "official",
-        priority: 100,
-        strength: "strong",
-      },
-    ],
-    categories: ["Medicine"],
-  },
-  "apollo-petroleum-jelly": {
-    id: "apollo-petroleum-jelly",
-    name: "Apollo Petroleum Jelly",
-    aliases: [
-      {
-        value: "Apollo Petroleum Jelly",
-        type: "official",
-        priority: 100,
-        strength: "strong",
-      },
-    ],
-    categories: ["Medicine"],
   },
   "apple": {
     id: "apple",
@@ -2806,33 +2761,33 @@ export const PRODUCT_BRAND_METADATA = {
         strength: "strong",
       },
     ],
+    productLines: {
+      "airtag":{
+        name:"AirTag",
+        aliases:[
+          {
+            value:"AirTag",
+            type:"official",
+            priority:90,
+          },
+        ],
+        categories:["Pet Supplies"],
+        preserveInProductName:true,
+      },
+      "jacks":{
+        name:"Jacks",
+        aliases:[
+          {
+            value:"Jacks",
+            type:"official",
+            priority:90,
+          },
+        ],
+        categories:["Grocery"],
+        preserveInProductName:true,
+      },
+    },
     categories: ["School Supplies"],
-  },
-  "apple-airtag": {
-    id: "apple-airtag",
-    name: "Apple AirTag",
-    aliases: [
-      {
-        value: "Apple AirTag",
-        type: "official",
-        priority: 100,
-        strength: "strong",
-      },
-    ],
-    categories: ["Pet Supplies"],
-  },
-  "apple-jacks": {
-    id: "apple-jacks",
-    name: "Apple Jacks",
-    aliases: [
-      {
-        value: "Apple Jacks",
-        type: "official",
-        priority: 100,
-        strength: "strong",
-      },
-    ],
-    categories: ["Grocery"],
   },
   "applied-nutrition": {
     id: "applied-nutrition",
@@ -3323,6 +3278,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Grocery"],
         preserveInProductName:true,
       },
       "juice":{
@@ -3334,6 +3290,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Grocery"],
         preserveInProductName:true,
       },
     },
@@ -3671,19 +3628,6 @@ export const PRODUCT_BRAND_METADATA = {
     ],
     categories: ["Medicine"],
   },
-  "asparagus": {
-    id: "asparagus",
-    name: "Asparagus",
-    aliases: [
-      {
-        value: "Asparagus",
-        type: "official",
-        priority: 100,
-        strength: "strong",
-      },
-    ],
-    categories: ["Grocery"],
-  },
   "aspen": {
     id: "aspen",
     name: "Aspen",
@@ -3812,20 +3756,21 @@ export const PRODUCT_BRAND_METADATA = {
         strength: "strong",
       },
     ],
-    categories: ["Pet Supplies"],
-  },
-  "atlas-copco": {
-    id: "atlas-copco",
-    name: "Atlas Copco",
-    aliases: [
-      {
-        value: "Atlas Copco",
-        type: "official",
-        priority: 100,
-        strength: "strong",
+    productLines: {
+      "copco":{
+        name:"Copco",
+        aliases:[
+          {
+            value:"Copco",
+            type:"official",
+            priority:90,
+          },
+        ],
+        categories:["Hardware"],
+        preserveInProductName:true,
       },
-    ],
-    categories: ["Hardware"],
+    },
+    categories: ["Pet Supplies"],
   },
   "atorvastatin": {
     id: "atorvastatin",
@@ -3943,19 +3888,6 @@ export const PRODUCT_BRAND_METADATA = {
       },
     ],
     categories: ["Hardware"],
-  },
-  "australian": {
-    id: "australian",
-    name: "Australian",
-    aliases: [
-      {
-        value: "Australian",
-        type: "official",
-        priority: 100,
-        strength: "strong",
-      },
-    ],
-    categories: ["Grocery"],
   },
   "autel": {
     id: "autel",
@@ -4400,6 +4332,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Medicine"],
         preserveInProductName:true,
       },
       "spray":{
@@ -4411,6 +4344,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Medicine"],
         preserveInProductName:true,
       },
     },
@@ -4767,19 +4701,6 @@ export const PRODUCT_BRAND_METADATA = {
     ],
     categories: ["Hardware"],
   },
-  "bankers-box": {
-    id: "bankers-box",
-    name: "Bankers Box",
-    aliases: [
-      {
-        value: "Bankers Box",
-        type: "official",
-        priority: 100,
-        strength: "strong",
-      },
-    ],
-    categories: ["School Supplies"],
-  },
   "bansbach": {
     id: "bansbach",
     name: "Bansbach",
@@ -5129,20 +5050,21 @@ export const PRODUCT_BRAND_METADATA = {
         strength: "strong",
       },
     ],
-    categories: ["Hardware","Pet Supplies"],
-  },
-  "bayer-aspirin": {
-    id: "bayer-aspirin",
-    name: "Bayer Aspirin",
-    aliases: [
-      {
-        value: "Bayer Aspirin",
-        type: "official",
-        priority: 100,
-        strength: "strong",
+    productLines: {
+      "aspirin":{
+        name:"Aspirin",
+        aliases:[
+          {
+            value:"Aspirin",
+            type:"official",
+            priority:90,
+          },
+        ],
+        categories:["Medicine"],
+        preserveInProductName:true,
       },
-    ],
-    categories: ["Medicine"],
+    },
+    categories: ["Hardware","Pet Supplies"],
   },
   "baygon": {
     id: "baygon",
@@ -5168,59 +5090,57 @@ export const PRODUCT_BRAND_METADATA = {
         strength: "strong",
       },
     ],
+    productLines: {
+      "pen-needle":{
+        name:"Pen Needle",
+        aliases:[
+          {
+            value:"Pen Needle",
+            type:"official",
+            priority:90,
+          },
+        ],
+        categories:["Medicine"],
+        preserveInProductName:true,
+      },
+      "sharps-container":{
+        name:"Sharps Container",
+        aliases:[
+          {
+            value:"Sharps Container",
+            type:"official",
+            priority:90,
+          },
+        ],
+        categories:["Medicine"],
+        preserveInProductName:true,
+      },
+      "syringe":{
+        name:"Syringe",
+        aliases:[
+          {
+            value:"Syringe",
+            type:"official",
+            priority:90,
+          },
+        ],
+        categories:["Medicine"],
+        preserveInProductName:true,
+      },
+      "ultra-fine":{
+        name:"Ultra-Fine",
+        aliases:[
+          {
+            value:"Ultra-Fine",
+            type:"official",
+            priority:90,
+          },
+        ],
+        categories:["Medicine"],
+        preserveInProductName:true,
+      },
+    },
     categories: ["Pet Supplies"],
-  },
-  "bd-pen-needle": {
-    id: "bd-pen-needle",
-    name: "BD Pen Needle",
-    aliases: [
-      {
-        value: "BD Pen Needle",
-        type: "official",
-        priority: 100,
-        strength: "strong",
-      },
-    ],
-    categories: ["Medicine"],
-  },
-  "bd-sharps-container": {
-    id: "bd-sharps-container",
-    name: "BD Sharps Container",
-    aliases: [
-      {
-        value: "BD Sharps Container",
-        type: "official",
-        priority: 100,
-        strength: "strong",
-      },
-    ],
-    categories: ["Medicine"],
-  },
-  "bd-syringe": {
-    id: "bd-syringe",
-    name: "BD Syringe",
-    aliases: [
-      {
-        value: "BD Syringe",
-        type: "official",
-        priority: 100,
-        strength: "strong",
-      },
-    ],
-    categories: ["Medicine"],
-  },
-  "bd-ultra-fine": {
-    id: "bd-ultra-fine",
-    name: "BD Ultra-Fine",
-    aliases: [
-      {
-        value: "BD Ultra-Fine",
-        type: "official",
-        priority: 100,
-        strength: "strong",
-      },
-    ],
-    categories: ["Medicine"],
   },
   "bea": {
     id: "bea",
@@ -5295,6 +5215,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Grocery"],
         preserveInProductName:true,
       },
       "fortified":{
@@ -5306,6 +5227,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Grocery"],
         preserveInProductName:true,
       },
     },
@@ -5543,20 +5465,21 @@ export const PRODUCT_BRAND_METADATA = {
         strength: "strong",
       },
     ],
-    categories: ["Personal Care"],
-  },
-  "belo-sunexpert": {
-    id: "belo-sunexpert",
-    name: "Belo SunExpert",
-    aliases: [
-      {
-        value: "Belo SunExpert",
-        type: "official",
-        priority: 100,
-        strength: "strong",
+    productLines: {
+      "sunexpert":{
+        name:"SunExpert",
+        aliases:[
+          {
+            value:"SunExpert",
+            type:"official",
+            priority:90,
+          },
+        ],
+        categories:["Medicine"],
+        preserveInProductName:true,
       },
-    ],
-    categories: ["Medicine"],
+    },
+    categories: ["Personal Care"],
   },
   "belvita": {
     id: "belvita",
@@ -5605,6 +5528,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Medicine"],
         preserveInProductName:true,
       },
     },
@@ -5631,6 +5555,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Personal Care"],
         preserveInProductName:true,
       },
     },
@@ -5787,6 +5712,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Grocery"],
         preserveInProductName:true,
       },
     },
@@ -5857,19 +5783,6 @@ export const PRODUCT_BRAND_METADATA = {
     ],
     categories: ["Pet Supplies"],
   },
-  "best-value": {
-    id: "best-value",
-    name: "Best Value",
-    aliases: [
-      {
-        value: "Best Value",
-        type: "official",
-        priority: 100,
-        strength: "strong",
-      },
-    ],
-    categories: ["Grocery"],
-  },
   "bestank": {
     id: "bestank",
     name: "Bestank",
@@ -5904,6 +5817,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Medicine"],
         preserveInProductName:true,
       },
       "skin-cleanser":{
@@ -5915,6 +5829,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Medicine"],
         preserveInProductName:true,
       },
       "wound-cleanser":{
@@ -5926,6 +5841,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Medicine"],
         preserveInProductName:true,
       },
     },
@@ -6007,20 +5923,21 @@ export const PRODUCT_BRAND_METADATA = {
         strength: "strong",
       },
     ],
-    categories: ["Personal Care","Pet Supplies"],
-  },
-  "beurer-pulse-oximeter": {
-    id: "beurer-pulse-oximeter",
-    name: "Beurer Pulse Oximeter",
-    aliases: [
-      {
-        value: "Beurer Pulse Oximeter",
-        type: "official",
-        priority: 100,
-        strength: "strong",
+    productLines: {
+      "pulse-oximeter":{
+        name:"Pulse Oximeter",
+        aliases:[
+          {
+            value:"Pulse Oximeter",
+            type:"official",
+            priority:90,
+          },
+        ],
+        categories:["Medicine"],
+        preserveInProductName:true,
       },
-    ],
-    categories: ["Medicine"],
+    },
+    categories: ["Personal Care","Pet Supplies"],
   },
   "bewell-c": {
     id: "bewell-c",
@@ -6308,32 +6225,6 @@ export const PRODUCT_BRAND_METADATA = {
     ],
     categories: ["Hardware"],
   },
-  "bio-clean": {
-    id: "bio-clean",
-    name: "Bio-Clean",
-    aliases: [
-      {
-        value: "Bio-Clean",
-        type: "official",
-        priority: 100,
-        strength: "strong",
-      },
-    ],
-    categories: ["Hardware"],
-  },
-  "bio-groom": {
-    id: "bio-groom",
-    name: "Bio-Groom",
-    aliases: [
-      {
-        value: "Bio-Groom",
-        type: "official",
-        priority: 100,
-        strength: "strong",
-      },
-    ],
-    categories: ["Pet Supplies"],
-  },
   "bio-oil": {
     id: "bio-oil",
     name: "Bio-Oil",
@@ -6345,7 +6236,33 @@ export const PRODUCT_BRAND_METADATA = {
         strength: "strong",
       },
     ],
-    categories: ["Personal Care"],
+    productLines: {
+      "bio-clean":{
+        name:"Bio-Clean",
+        aliases:[
+          {
+            value:"Bio-Clean",
+            type:"official",
+            priority:90,
+          },
+        ],
+        categories:["Hardware"],
+        preserveInProductName:true,
+      },
+      "bio-groom":{
+        name:"Bio-Groom",
+        aliases:[
+          {
+            value:"Bio-Groom",
+            type:"official",
+            priority:90,
+          },
+        ],
+        categories:["Pet Supplies"],
+        preserveInProductName:true,
+      },
+    },
+    categories: ["Hardware","Personal Care","Pet Supplies"],
   },
   "biobag": {
     id: "biobag",
@@ -7151,20 +7068,21 @@ export const PRODUCT_BRAND_METADATA = {
         strength: "strong",
       },
     ],
-    categories: ["Grocery"],
-  },
-  "bosco-and-roxy-s": {
-    id: "bosco-and-roxy-s",
-    name: "Bosco & Roxy's",
-    aliases: [
-      {
-        value: "Bosco & Roxy's",
-        type: "official",
-        priority: 100,
-        strength: "strong",
+    productLines: {
+      "and-roxy-s":{
+        name:"& Roxy's",
+        aliases:[
+          {
+            value:"& Roxy's",
+            type:"official",
+            priority:90,
+          },
+        ],
+        categories:["Pet Supplies"],
+        preserveInProductName:true,
       },
-    ],
-    categories: ["Pet Supplies"],
+    },
+    categories: ["Grocery"],
   },
   "bosny": {
     id: "bosny",
@@ -7190,20 +7108,21 @@ export const PRODUCT_BRAND_METADATA = {
         strength: "strong",
       },
     ],
-    categories: ["Hardware"],
-  },
-  "boss-coffee": {
-    id: "boss-coffee",
-    name: "Boss Coffee",
-    aliases: [
-      {
-        value: "Boss Coffee",
-        type: "official",
-        priority: 100,
-        strength: "strong",
+    productLines: {
+      "coffee":{
+        name:"Coffee",
+        aliases:[
+          {
+            value:"Coffee",
+            type:"official",
+            priority:90,
+          },
+        ],
+        categories:["Grocery"],
+        preserveInProductName:true,
       },
-    ],
-    categories: ["Grocery"],
+    },
+    categories: ["Hardware"],
   },
   "bossing": {
     id: "bossing",
@@ -7450,33 +7369,33 @@ export const PRODUCT_BRAND_METADATA = {
         strength: "strong",
       },
     ],
+    productLines: {
+      "no-touch":{
+        name:"No Touch",
+        aliases:[
+          {
+            value:"No Touch",
+            type:"official",
+            priority:90,
+          },
+        ],
+        categories:["Medicine"],
+        preserveInProductName:true,
+      },
+      "thermoscan":{
+        name:"ThermoScan",
+        aliases:[
+          {
+            value:"ThermoScan",
+            type:"official",
+            priority:90,
+          },
+        ],
+        categories:["Medicine"],
+        preserveInProductName:true,
+      },
+    },
     categories: ["Household","Personal Care","Pet Supplies"],
-  },
-  "braun-no-touch": {
-    id: "braun-no-touch",
-    name: "Braun No Touch",
-    aliases: [
-      {
-        value: "Braun No Touch",
-        type: "official",
-        priority: 100,
-        strength: "strong",
-      },
-    ],
-    categories: ["Medicine"],
-  },
-  "braun-thermoscan": {
-    id: "braun-thermoscan",
-    name: "Braun ThermoScan",
-    aliases: [
-      {
-        value: "Braun ThermoScan",
-        type: "official",
-        priority: 100,
-        strength: "strong",
-      },
-    ],
-    categories: ["Medicine"],
   },
   "bravecto": {
     id: "bravecto",
@@ -8389,6 +8308,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Grocery"],
         preserveInProductName:true,
       },
     },
@@ -8532,6 +8452,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Medicine"],
         preserveInProductName:true,
       },
     },
@@ -8629,6 +8550,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Hardware"],
         preserveInProductName:true,
       },
     },
@@ -8920,19 +8842,6 @@ export const PRODUCT_BRAND_METADATA = {
     ],
     categories: ["Grocery"],
   },
-  "carabao": {
-    id: "carabao",
-    name: "Carabao",
-    aliases: [
-      {
-        value: "Carabao",
-        type: "official",
-        priority: 100,
-        strength: "strong",
-      },
-    ],
-    categories: ["Grocery"],
-  },
   "caran-d-ache": {
     id: "caran-d-ache",
     name: "Caran d'Ache",
@@ -9063,32 +8972,6 @@ export const PRODUCT_BRAND_METADATA = {
     ],
     categories: ["Medicine"],
   },
-  "carex-medicine-box": {
-    id: "carex-medicine-box",
-    name: "Carex Medicine Box",
-    aliases: [
-      {
-        value: "Carex Medicine Box",
-        type: "official",
-        priority: 100,
-        strength: "strong",
-      },
-    ],
-    categories: ["Medicine"],
-  },
-  "carex-pill-box": {
-    id: "carex-pill-box",
-    name: "Carex Pill Box",
-    aliases: [
-      {
-        value: "Carex Pill Box",
-        type: "official",
-        priority: 100,
-        strength: "strong",
-      },
-    ],
-    categories: ["Medicine"],
-  },
   "carex-pill-crusher": {
     id: "carex-pill-crusher",
     name: "Carex Pill Crusher",
@@ -9162,6 +9045,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Grocery"],
         preserveInProductName:true,
       },
     },
@@ -9178,20 +9062,21 @@ export const PRODUCT_BRAND_METADATA = {
         strength: "strong",
       },
     ],
-    categories: ["Grocery"],
-  },
-  "carolina-biological": {
-    id: "carolina-biological",
-    name: "Carolina Biological",
-    aliases: [
-      {
-        value: "Carolina Biological",
-        type: "official",
-        priority: 100,
-        strength: "strong",
+    productLines: {
+      "biological":{
+        name:"Biological",
+        aliases:[
+          {
+            value:"Biological",
+            type:"official",
+            priority:90,
+          },
+        ],
+        categories:["School Supplies"],
+        preserveInProductName:true,
       },
-    ],
-    categories: ["School Supplies"],
+    },
+    categories: ["Grocery"],
   },
   "caronia": {
     id: "caronia",
@@ -9269,19 +9154,20 @@ export const PRODUCT_BRAND_METADATA = {
         strength: "strong",
       },
     ],
-    categories: ["School Supplies"],
-  },
-  "carson-dellosa": {
-    id: "carson-dellosa",
-    name: "Carson-Dellosa",
-    aliases: [
-      {
-        value: "Carson-Dellosa",
-        type: "official",
-        priority: 100,
-        strength: "strong",
+    productLines: {
+      "carson-dellosa":{
+        name:"Carson-Dellosa",
+        aliases:[
+          {
+            value:"Carson-Dellosa",
+            type:"official",
+            priority:90,
+          },
+        ],
+        categories:["School Supplies"],
+        preserveInProductName:true,
       },
-    ],
+    },
     categories: ["School Supplies"],
   },
   "carvedilol": {
@@ -9412,20 +9298,21 @@ export const PRODUCT_BRAND_METADATA = {
         strength: "strong",
       },
     ],
-    categories: ["Household","Personal Care"],
-  },
-  "casino-alcohol": {
-    id: "casino-alcohol",
-    name: "Casino Alcohol",
-    aliases: [
-      {
-        value: "Casino Alcohol",
-        type: "official",
-        priority: 100,
-        strength: "strong",
+    productLines: {
+      "alcohol":{
+        name:"Alcohol",
+        aliases:[
+          {
+            value:"Alcohol",
+            type:"official",
+            priority:90,
+          },
+        ],
+        categories:["Medicine"],
+        preserveInProductName:true,
       },
-    ],
-    categories: ["Medicine"],
+    },
+    categories: ["Household","Personal Care"],
   },
   "casio": {
     id: "casio",
@@ -9643,6 +9530,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Grocery"],
         preserveInProductName:true,
       },
       "idol":{
@@ -9654,6 +9542,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Grocery"],
         preserveInProductName:true,
       },
     },
@@ -9693,6 +9582,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Medicine"],
         preserveInProductName:true,
       },
     },
@@ -9879,6 +9769,18 @@ export const PRODUCT_BRAND_METADATA = {
       },
     ],
     productLines: {
+      "spring":{
+        name:"Spring",
+        aliases:[
+          {
+            value:"Spring",
+            type:"official",
+            priority:90,
+          },
+        ],
+        categories:["Hardware"],
+        preserveInProductName:true,
+      },
       "tuna":{
         name:"Tuna",
         aliases:[
@@ -9888,23 +9790,11 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Grocery"],
         preserveInProductName:true,
       },
     },
     categories: ["Grocery"],
-  },
-  "century-spring": {
-    id: "century-spring",
-    name: "Century Spring",
-    aliases: [
-      {
-        value: "Century Spring",
-        type: "official",
-        priority: 100,
-        strength: "strong",
-      },
-    ],
-    categories: ["Hardware"],
   },
   "cephalexin": {
     id: "cephalexin",
@@ -10005,6 +9895,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Medicine"],
         preserveInProductName:true,
       },
     },
@@ -10044,6 +9935,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Personal Care"],
         preserveInProductName:true,
       },
       "cleansing-bar":{
@@ -10055,6 +9947,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Medicine"],
         preserveInProductName:true,
       },
       "restoraderm":{
@@ -10066,6 +9959,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Medicine"],
         preserveInProductName:true,
       },
       "sun":{
@@ -10077,6 +9971,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Medicine"],
         preserveInProductName:true,
       },
     },
@@ -10411,20 +10306,21 @@ export const PRODUCT_BRAND_METADATA = {
         strength: "strong",
       },
     ],
-    categories: ["Grocery","Hardware"],
-  },
-  "cherry-blossom": {
-    id: "cherry-blossom",
-    name: "Cherry Blossom",
-    aliases: [
-      {
-        value: "Cherry Blossom",
-        type: "official",
-        priority: 100,
-        strength: "strong",
+    productLines: {
+      "blossom":{
+        name:"Blossom",
+        aliases:[
+          {
+            value:"Blossom",
+            type:"official",
+            priority:90,
+          },
+        ],
+        categories:["Household"],
+        preserveInProductName:true,
       },
-    ],
-    categories: ["Household"],
+    },
+    categories: ["Grocery","Hardware"],
   },
   "chester-s": {
     id: "chester-s",
@@ -10642,6 +10538,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Grocery"],
         preserveInProductName:true,
       },
     },
@@ -10931,20 +10828,21 @@ export const PRODUCT_BRAND_METADATA = {
         strength: "strong",
       },
     ],
-    categories: ["School Supplies"],
-  },
-  "citizen-blood-pressure-monitor": {
-    id: "citizen-blood-pressure-monitor",
-    name: "Citizen Blood Pressure Monitor",
-    aliases: [
-      {
-        value: "Citizen Blood Pressure Monitor",
-        type: "official",
-        priority: 100,
-        strength: "strong",
+    productLines: {
+      "blood-pressure-monitor":{
+        name:"Blood Pressure Monitor",
+        aliases:[
+          {
+            value:"Blood Pressure Monitor",
+            type:"official",
+            priority:90,
+          },
+        ],
+        categories:["Medicine"],
+        preserveInProductName:true,
       },
-    ],
-    categories: ["Medicine"],
+    },
+    categories: ["School Supplies"],
   },
   "cj": {
     id: "cj",
@@ -11136,6 +11034,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Medicine"],
         preserveInProductName:true,
       },
     },
@@ -11269,20 +11168,21 @@ export const PRODUCT_BRAND_METADATA = {
         strength: "strong",
       },
     ],
-    categories: ["Household"],
-  },
-  "clorox-pool": {
-    id: "clorox-pool",
-    name: "Clorox Pool",
-    aliases: [
-      {
-        value: "Clorox Pool",
-        type: "official",
-        priority: 100,
-        strength: "strong",
+    productLines: {
+      "pool":{
+        name:"Pool",
+        aliases:[
+          {
+            value:"Pool",
+            type:"official",
+            priority:90,
+          },
+        ],
+        categories:["Hardware"],
+        preserveInProductName:true,
       },
-    ],
-    categories: ["Hardware"],
+    },
+    categories: ["Household"],
   },
   "closetmaid": {
     id: "closetmaid",
@@ -11344,6 +11244,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Grocery"],
         preserveInProductName:true,
       },
     },
@@ -11870,6 +11771,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Medicine"],
         preserveInProductName:true,
       },
     },
@@ -11992,19 +11894,6 @@ export const PRODUCT_BRAND_METADATA = {
     ],
     categories: ["Grocery"],
   },
-  "con-tact": {
-    id: "con-tact",
-    name: "Con-Tact",
-    aliases: [
-      {
-        value: "Con-Tact",
-        type: "official",
-        priority: 100,
-        strength: "strong",
-      },
-    ],
-    categories: ["School Supplies"],
-  },
   "conair": {
     id: "conair",
     name: "Conair",
@@ -12117,6 +12006,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Medicine"],
         preserveInProductName:true,
       },
     },
@@ -12738,20 +12628,21 @@ export const PRODUCT_BRAND_METADATA = {
         strength: "strong",
       },
     ],
-    categories: ["Personal Care"],
-  },
-  "cream-silk-coffee": {
-    id: "cream-silk-coffee",
-    name: "Cream Silk Coffee",
-    aliases: [
-      {
-        value: "Cream Silk Coffee",
-        type: "official",
-        priority: 100,
-        strength: "strong",
+    productLines: {
+      "coffee":{
+        name:"Coffee",
+        aliases:[
+          {
+            value:"Coffee",
+            type:"official",
+            priority:90,
+          },
+        ],
+        categories:["Grocery"],
+        preserveInProductName:true,
       },
-    ],
-    categories: ["Grocery"],
+    },
+    categories: ["Personal Care"],
   },
   "cream-o": {
     id: "cream-o",
@@ -13011,20 +12902,21 @@ export const PRODUCT_BRAND_METADATA = {
         strength: "strong",
       },
     ],
-    categories: ["Hardware"],
-  },
-  "crown-awards": {
-    id: "crown-awards",
-    name: "Crown Awards",
-    aliases: [
-      {
-        value: "Crown Awards",
-        type: "official",
-        priority: 100,
-        strength: "strong",
+    productLines: {
+      "awards":{
+        name:"Awards",
+        aliases:[
+          {
+            value:"Awards",
+            type:"official",
+            priority:90,
+          },
+        ],
+        categories:["School Supplies"],
+        preserveInProductName:true,
       },
-    ],
-    categories: ["School Supplies"],
+    },
+    categories: ["Hardware"],
   },
   "crucial": {
     id: "crucial",
@@ -13073,6 +12965,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Grocery"],
         preserveInProductName:true,
       },
     },
@@ -13190,6 +13083,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Medicine"],
         preserveInProductName:true,
       },
     },
@@ -13336,7 +13230,21 @@ export const PRODUCT_BRAND_METADATA = {
         strength: "strong",
       },
     ],
-    categories: ["Hardware"],
+    productLines: {
+      "con-tact":{
+        name:"Con-Tact",
+        aliases:[
+          {
+            value:"Con-Tact",
+            type:"official",
+            priority:90,
+          },
+        ],
+        categories:["School Supplies"],
+        preserveInProductName:true,
+      },
+    },
+    categories: ["Hardware","School Supplies"],
   },
   "d5lr": {
     id: "d5lr",
@@ -13567,6 +13475,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Medicine"],
         preserveInProductName:true,
       },
     },
@@ -14028,6 +13937,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Medicine"],
         preserveInProductName:true,
       },
     },
@@ -14122,44 +14032,45 @@ export const PRODUCT_BRAND_METADATA = {
         strength: "strong",
       },
     ],
-    categories: ["Household"],
-  },
-  "del-monte": {
-    id: "del-monte",
-    name: "Del Monte",
-    aliases: [
-      {
-        value: "Del Monte",
-        type: "official",
-        priority: 100,
-        strength: "strong",
-      },
-    ],
     productLines: {
-      "spaghetti-sauce":{
-        name:"Spaghetti Sauce",
+      "monte":{
+        name:"Monte",
         aliases:[
           {
-            value:"Spaghetti Sauce",
+            value:"Monte",
             type:"official",
             priority:90,
           },
         ],
+        categories:["Grocery"],
         preserveInProductName:true,
       },
-      "tomato-sauce":{
-        name:"Tomato Sauce",
+      "monte-spaghetti-sauce":{
+        name:"Monte Spaghetti Sauce",
         aliases:[
           {
-            value:"Tomato Sauce",
+            value:"Monte Spaghetti Sauce",
             type:"official",
             priority:90,
           },
         ],
+        categories:["Grocery"],
+        preserveInProductName:true,
+      },
+      "monte-tomato-sauce":{
+        name:"Monte Tomato Sauce",
+        aliases:[
+          {
+            value:"Monte Tomato Sauce",
+            type:"official",
+            priority:90,
+          },
+        ],
+        categories:["Grocery"],
         preserveInProductName:true,
       },
     },
-    categories: ["Grocery"],
+    categories: ["Household"],
   },
   "deli": {
     id: "deli",
@@ -14247,6 +14158,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Hardware"],
         preserveInProductName:true,
       },
     },
@@ -14689,6 +14601,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Hardware"],
         preserveInProductName:true,
       },
       "ground":{
@@ -14700,6 +14613,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Hardware"],
         preserveInProductName:true,
       },
     },
@@ -15272,6 +15186,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Grocery"],
         preserveInProductName:true,
       },
     },
@@ -15298,6 +15213,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Medicine"],
         preserveInProductName:true,
       },
     },
@@ -15896,6 +15812,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Grocery"],
         preserveInProductName:true,
       },
       "whip":{
@@ -15907,6 +15824,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Grocery"],
         preserveInProductName:true,
       },
     },
@@ -16089,6 +16007,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Hardware"],
         preserveInProductName:true,
       },
     },
@@ -16323,6 +16242,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Grocery"],
         preserveInProductName:true,
       },
     },
@@ -16399,19 +16319,6 @@ export const PRODUCT_BRAND_METADATA = {
     aliases: [
       {
         value: "Dynarex Biohazard Bags",
-        type: "official",
-        priority: 100,
-        strength: "strong",
-      },
-    ],
-    categories: ["Medicine"],
-  },
-  "dynarex-cold-pack": {
-    id: "dynarex-cold-pack",
-    name: "Dynarex Cold Pack",
-    aliases: [
-      {
-        value: "Dynarex Cold Pack",
         type: "official",
         priority: 100,
         strength: "strong",
@@ -16705,19 +16612,6 @@ export const PRODUCT_BRAND_METADATA = {
     ],
     categories: ["Pet Supplies"],
   },
-  "easy-going": {
-    id: "easy-going",
-    name: "Easy-Going",
-    aliases: [
-      {
-        value: "Easy-Going",
-        type: "official",
-        priority: 100,
-        strength: "strong",
-      },
-    ],
-    categories: ["Pet Supplies"],
-  },
   "easy-life": {
     id: "easy-life",
     name: "Easy-Life",
@@ -16729,6 +16623,20 @@ export const PRODUCT_BRAND_METADATA = {
         strength: "strong",
       },
     ],
+    productLines: {
+      "easy-going":{
+        name:"Easy-Going",
+        aliases:[
+          {
+            value:"Easy-Going",
+            type:"official",
+            priority:90,
+          },
+        ],
+        categories:["Pet Supplies"],
+        preserveInProductName:true,
+      },
+    },
     categories: ["Pet Supplies"],
   },
   "easy-home": {
@@ -16781,20 +16689,21 @@ export const PRODUCT_BRAND_METADATA = {
         strength: "strong",
       },
     ],
-    categories: ["Hardware"],
-  },
-  "echo-park": {
-    id: "echo-park",
-    name: "Echo Park",
-    aliases: [
-      {
-        value: "Echo Park",
-        type: "official",
-        priority: 100,
-        strength: "strong",
+    productLines: {
+      "park":{
+        name:"Park",
+        aliases:[
+          {
+            value:"Park",
+            type:"official",
+            priority:90,
+          },
+        ],
+        categories:["School Supplies"],
+        preserveInProductName:true,
       },
-    ],
-    categories: ["School Supplies"],
+    },
+    categories: ["Hardware"],
   },
   "eclipse": {
     id: "eclipse",
@@ -17253,6 +17162,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Grocery"],
         preserveInProductName:true,
       },
     },
@@ -17468,6 +17378,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Medicine"],
         preserveInProductName:true,
       },
     },
@@ -17546,6 +17457,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Medicine"],
         preserveInProductName:true,
       },
       "max-protein":{
@@ -17557,6 +17469,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Grocery"],
         preserveInProductName:true,
       },
     },
@@ -18714,6 +18627,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Grocery"],
         preserveInProductName:true,
       },
     },
@@ -18857,6 +18771,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Grocery"],
         preserveInProductName:true,
       },
     },
@@ -18977,20 +18892,21 @@ export const PRODUCT_BRAND_METADATA = {
         strength: "strong",
       },
     ],
-    categories: ["Household"],
-  },
-  "finish-thompson": {
-    id: "finish-thompson",
-    name: "Finish Thompson",
-    aliases: [
-      {
-        value: "Finish Thompson",
-        type: "official",
-        priority: 100,
-        strength: "strong",
+    productLines: {
+      "thompson":{
+        name:"Thompson",
+        aliases:[
+          {
+            value:"Thompson",
+            type:"official",
+            priority:90,
+          },
+        ],
+        categories:["Hardware"],
+        preserveInProductName:true,
       },
-    ],
-    categories: ["Hardware"],
+    },
+    categories: ["Household"],
   },
   "finishing-touch": {
     id: "finishing-touch",
@@ -19338,6 +19254,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Grocery"],
         preserveInProductName:true,
       },
     },
@@ -19406,20 +19323,33 @@ export const PRODUCT_BRAND_METADATA = {
         strength: "strong",
       },
     ],
-    categories: ["Personal Care"],
-  },
-  "flex-tape": {
-    id: "flex-tape",
-    name: "Flex Tape",
-    aliases: [
-      {
-        value: "Flex Tape",
-        type: "official",
-        priority: 100,
-        strength: "strong",
+    productLines: {
+      "k-flex":{
+        name:"K-Flex",
+        aliases:[
+          {
+            value:"K-Flex",
+            type:"official",
+            priority:90,
+          },
+        ],
+        categories:["Hardware"],
+        preserveInProductName:true,
       },
-    ],
-    categories: ["Hardware"],
+      "tape":{
+        name:"Tape",
+        aliases:[
+          {
+            value:"Tape",
+            type:"official",
+            priority:90,
+          },
+        ],
+        categories:["Hardware"],
+        preserveInProductName:true,
+      },
+    },
+    categories: ["Hardware","Personal Care"],
   },
   "flexi": {
     id: "flexi",
@@ -19598,6 +19528,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Hardware"],
         preserveInProductName:true,
       },
     },
@@ -20066,6 +19997,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Medicine"],
         preserveInProductName:true,
       },
     },
@@ -20097,41 +20029,30 @@ export const PRODUCT_BRAND_METADATA = {
     ],
     categories: ["Grocery"],
   },
-  "fresh": {
-    id: "fresh",
-    name: "Fresh",
+  "fresh-gourmet": {
+    id: "fresh-gourmet",
+    name: "Fresh Gourmet",
     aliases: [
       {
-        value: "Fresh",
+        value: "Fresh Gourmet",
         type: "official",
         priority: 100,
         strength: "strong",
       },
     ],
-    productLines: {
-      "gourmet":{
-        name:"Gourmet",
-        aliases:[
-          {
-            value:"Gourmet",
-            type:"official",
-            priority:90,
-          },
-        ],
-        preserveInProductName:true,
+    categories: ["Grocery"],
+  },
+  "fresh-options": {
+    id: "fresh-options",
+    name: "Fresh Options",
+    aliases: [
+      {
+        value: "Fresh Options",
+        type: "official",
+        priority: 100,
+        strength: "strong",
       },
-      "options":{
-        name:"Options",
-        aliases:[
-          {
-            value:"Options",
-            type:"official",
-            priority:90,
-          },
-        ],
-        preserveInProductName:true,
-      },
-    },
+    ],
     categories: ["Grocery"],
   },
   "fresh-patch": {
@@ -20379,20 +20300,21 @@ export const PRODUCT_BRAND_METADATA = {
         strength: "strong",
       },
     ],
-    categories: ["Grocery"],
-  },
-  "fuji-electric": {
-    id: "fuji-electric",
-    name: "Fuji Electric",
-    aliases: [
-      {
-        value: "Fuji Electric",
-        type: "official",
-        priority: 100,
-        strength: "strong",
+    productLines: {
+      "electric":{
+        name:"Electric",
+        aliases:[
+          {
+            value:"Electric",
+            type:"official",
+            priority:90,
+          },
+        ],
+        categories:["Hardware"],
+        preserveInProductName:true,
       },
-    ],
-    categories: ["Hardware"],
+    },
+    categories: ["Grocery"],
   },
   "fujidenzo": {
     id: "fujidenzo",
@@ -20428,6 +20350,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["School Supplies"],
         preserveInProductName:true,
       },
     },
@@ -20471,19 +20394,6 @@ export const PRODUCT_BRAND_METADATA = {
       },
     ],
     categories: ["Hardware"],
-  },
-  "full-cream": {
-    id: "full-cream",
-    name: "Full Cream",
-    aliases: [
-      {
-        value: "Full Cream",
-        type: "official",
-        priority: 100,
-        strength: "strong",
-      },
-    ],
-    categories: ["Grocery"],
   },
   "fun-express": {
     id: "fun-express",
@@ -20626,46 +20536,45 @@ export const PRODUCT_BRAND_METADATA = {
         strength: "strong",
       },
     ],
+    productLines: {
+      "ankle-support":{
+        name:"Ankle Support",
+        aliases:[
+          {
+            value:"Ankle Support",
+            type:"official",
+            priority:90,
+          },
+        ],
+        categories:["Medicine"],
+        preserveInProductName:true,
+      },
+      "knee-support":{
+        name:"Knee Support",
+        aliases:[
+          {
+            value:"Knee Support",
+            type:"official",
+            priority:90,
+          },
+        ],
+        categories:["Medicine"],
+        preserveInProductName:true,
+      },
+      "wrist-brace":{
+        name:"Wrist Brace",
+        aliases:[
+          {
+            value:"Wrist Brace",
+            type:"official",
+            priority:90,
+          },
+        ],
+        categories:["Medicine"],
+        preserveInProductName:true,
+      },
+    },
     categories: ["Personal Care"],
-  },
-  "futuro-ankle-support": {
-    id: "futuro-ankle-support",
-    name: "Futuro Ankle Support",
-    aliases: [
-      {
-        value: "Futuro Ankle Support",
-        type: "official",
-        priority: 100,
-        strength: "strong",
-      },
-    ],
-    categories: ["Medicine"],
-  },
-  "futuro-knee-support": {
-    id: "futuro-knee-support",
-    name: "Futuro Knee Support",
-    aliases: [
-      {
-        value: "Futuro Knee Support",
-        type: "official",
-        priority: 100,
-        strength: "strong",
-      },
-    ],
-    categories: ["Medicine"],
-  },
-  "futuro-wrist-brace": {
-    id: "futuro-wrist-brace",
-    name: "Futuro Wrist Brace",
-    aliases: [
-      {
-        value: "Futuro Wrist Brace",
-        type: "official",
-        priority: 100,
-        strength: "strong",
-      },
-    ],
-    categories: ["Medicine"],
   },
   "fuze-tea": {
     id: "fuze-tea",
@@ -20909,6 +20818,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Grocery"],
         preserveInProductName:true,
       },
       "delicia":{
@@ -20920,6 +20830,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Grocery"],
         preserveInProductName:true,
       },
       "wheat":{
@@ -20931,6 +20842,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Grocery"],
         preserveInProductName:true,
       },
     },
@@ -21477,6 +21389,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Household"],
         preserveInProductName:true,
       },
     },
@@ -21997,6 +21910,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Grocery"],
         preserveInProductName:true,
       },
     },
@@ -22179,6 +22093,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Hardware","Household"],
         preserveInProductName:true,
       },
     },
@@ -22400,6 +22315,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Grocery"],
         preserveInProductName:true,
       },
       "white":{
@@ -22411,22 +22327,10 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Grocery"],
         preserveInProductName:true,
       },
     },
-    categories: ["Grocery"],
-  },
-  "great-value": {
-    id: "great-value",
-    name: "Great Value",
-    aliases: [
-      {
-        value: "Great Value",
-        type: "official",
-        priority: 100,
-        strength: "strong",
-      },
-    ],
     categories: ["Grocery"],
   },
   "gree": {
@@ -22453,59 +22357,57 @@ export const PRODUCT_BRAND_METADATA = {
         strength: "strong",
       },
     ],
+    productLines: {
+      "alcohol":{
+        name:"Alcohol",
+        aliases:[
+          {
+            value:"Alcohol",
+            type:"official",
+            priority:90,
+          },
+        ],
+        categories:["Medicine"],
+        preserveInProductName:true,
+      },
+      "antiseptic":{
+        name:"Antiseptic",
+        aliases:[
+          {
+            value:"Antiseptic",
+            type:"official",
+            priority:90,
+          },
+        ],
+        categories:["Medicine"],
+        preserveInProductName:true,
+      },
+      "hand-sanitizer":{
+        name:"Hand Sanitizer",
+        aliases:[
+          {
+            value:"Hand Sanitizer",
+            type:"official",
+            priority:90,
+          },
+        ],
+        categories:["Medicine"],
+        preserveInProductName:true,
+      },
+      "hydrogen-peroxide":{
+        name:"Hydrogen Peroxide",
+        aliases:[
+          {
+            value:"Hydrogen Peroxide",
+            type:"official",
+            priority:90,
+          },
+        ],
+        categories:["Medicine"],
+        preserveInProductName:true,
+      },
+    },
     categories: ["Grocery","Household","Personal Care","School Supplies"],
-  },
-  "green-cross-alcohol": {
-    id: "green-cross-alcohol",
-    name: "Green Cross Alcohol",
-    aliases: [
-      {
-        value: "Green Cross Alcohol",
-        type: "official",
-        priority: 100,
-        strength: "strong",
-      },
-    ],
-    categories: ["Medicine"],
-  },
-  "green-cross-antiseptic": {
-    id: "green-cross-antiseptic",
-    name: "Green Cross Antiseptic",
-    aliases: [
-      {
-        value: "Green Cross Antiseptic",
-        type: "official",
-        priority: 100,
-        strength: "strong",
-      },
-    ],
-    categories: ["Medicine"],
-  },
-  "green-cross-hand-sanitizer": {
-    id: "green-cross-hand-sanitizer",
-    name: "Green Cross Hand Sanitizer",
-    aliases: [
-      {
-        value: "Green Cross Hand Sanitizer",
-        type: "official",
-        priority: 100,
-        strength: "strong",
-      },
-    ],
-    categories: ["Medicine"],
-  },
-  "green-cross-hydrogen-peroxide": {
-    id: "green-cross-hydrogen-peroxide",
-    name: "Green Cross Hydrogen Peroxide",
-    aliases: [
-      {
-        value: "Green Cross Hydrogen Peroxide",
-        type: "official",
-        priority: 100,
-        strength: "strong",
-      },
-    ],
-    categories: ["Medicine"],
   },
   "green-giant": {
     id: "green-giant",
@@ -23260,6 +23162,18 @@ export const PRODUCT_BRAND_METADATA = {
       },
     ],
     productLines: {
+      "planner":{
+        name:"Planner",
+        aliases:[
+          {
+            value:"Planner",
+            type:"official",
+            priority:90,
+          },
+        ],
+        categories:["School Supplies"],
+        preserveInProductName:true,
+      },
       "price":{
         name:"Price",
         aliases:[
@@ -23269,36 +23183,23 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Grocery"],
+        preserveInProductName:true,
+      },
+      "skin":{
+        name:"Skin",
+        aliases:[
+          {
+            value:"Skin",
+            type:"official",
+            priority:90,
+          },
+        ],
+        categories:["Personal Care"],
         preserveInProductName:true,
       },
     },
     categories: ["Grocery"],
-  },
-  "happy-planner": {
-    id: "happy-planner",
-    name: "Happy Planner",
-    aliases: [
-      {
-        value: "Happy Planner",
-        type: "official",
-        priority: 100,
-        strength: "strong",
-      },
-    ],
-    categories: ["School Supplies"],
-  },
-  "happy-skin": {
-    id: "happy-skin",
-    name: "Happy Skin",
-    aliases: [
-      {
-        value: "Happy Skin",
-        type: "official",
-        priority: 100,
-        strength: "strong",
-      },
-    ],
-    categories: ["Personal Care"],
   },
   "happycall": {
     id: "happycall",
@@ -23428,20 +23329,21 @@ export const PRODUCT_BRAND_METADATA = {
         strength: "strong",
       },
     ],
-    categories: ["Hardware"],
-  },
-  "harris-farms": {
-    id: "harris-farms",
-    name: "Harris Farms",
-    aliases: [
-      {
-        value: "Harris Farms",
-        type: "official",
-        priority: 100,
-        strength: "strong",
+    productLines: {
+      "farms":{
+        name:"Farms",
+        aliases:[
+          {
+            value:"Farms",
+            type:"official",
+            priority:90,
+          },
+        ],
+        categories:["Pet Supplies"],
+        preserveInProductName:true,
       },
-    ],
-    categories: ["Pet Supplies"],
+    },
+    categories: ["Hardware"],
   },
   "hart-and-cooley": {
     id: "hart-and-cooley",
@@ -24626,19 +24528,6 @@ export const PRODUCT_BRAND_METADATA = {
     ],
     categories: ["Grocery"],
   },
-  "honey-can-do": {
-    id: "honey-can-do",
-    name: "Honey-Can-Do",
-    aliases: [
-      {
-        value: "Honey-Can-Do",
-        type: "official",
-        priority: 100,
-        strength: "strong",
-      },
-    ],
-    categories: ["Household"],
-  },
   "honeyguaridan": {
     id: "honeyguaridan",
     name: "HoneyGuaridan",
@@ -25014,20 +24903,21 @@ export const PRODUCT_BRAND_METADATA = {
         strength: "strong",
       },
     ],
-    categories: ["Personal Care"],
-  },
-  "human-nature-lip-balm": {
-    id: "human-nature-lip-balm",
-    name: "Human Nature Lip Balm",
-    aliases: [
-      {
-        value: "Human Nature Lip Balm",
-        type: "official",
-        priority: 100,
-        strength: "strong",
+    productLines: {
+      "lip-balm":{
+        name:"Lip Balm",
+        aliases:[
+          {
+            value:"Lip Balm",
+            type:"official",
+            priority:90,
+          },
+        ],
+        categories:["Medicine"],
+        preserveInProductName:true,
       },
-    ],
-    categories: ["Medicine"],
+    },
+    categories: ["Personal Care"],
   },
   "humboldt": {
     id: "humboldt",
@@ -25115,6 +25005,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Hardware","Household"],
         preserveInProductName:true,
       },
     },
@@ -25557,6 +25448,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Grocery"],
         preserveInProductName:true,
       },
       "shield":{
@@ -25568,6 +25460,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Hardware"],
         preserveInProductName:true,
       },
       "tridon":{
@@ -25579,6 +25472,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Hardware"],
         preserveInProductName:true,
       },
     },
@@ -25644,6 +25538,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["School Supplies"],
         preserveInProductName:true,
       },
     },
@@ -25868,20 +25763,21 @@ export const PRODUCT_BRAND_METADATA = {
         strength: "strong",
       },
     ],
-    categories: ["School Supplies"],
-  },
-  "indoplas-face-mask": {
-    id: "indoplas-face-mask",
-    name: "Indoplas Face Mask",
-    aliases: [
-      {
-        value: "Indoplas Face Mask",
-        type: "official",
-        priority: 100,
-        strength: "strong",
+    productLines: {
+      "face-mask":{
+        name:"Face Mask",
+        aliases:[
+          {
+            value:"Face Mask",
+            type:"official",
+            priority:90,
+          },
+        ],
+        categories:["Medicine"],
+        preserveInProductName:true,
       },
-    ],
-    categories: ["Medicine"],
+    },
+    categories: ["School Supplies"],
   },
   "indukey": {
     id: "indukey",
@@ -26273,19 +26169,6 @@ export const PRODUCT_BRAND_METADATA = {
     ],
     categories: ["Grocery"],
   },
-  "island-premium": {
-    id: "island-premium",
-    name: "Island Premium",
-    aliases: [
-      {
-        value: "Island Premium",
-        type: "official",
-        priority: 100,
-        strength: "strong",
-      },
-    ],
-    categories: ["Hardware"],
-  },
   "isntree": {
     id: "isntree",
     name: "Isntree",
@@ -26565,19 +26448,6 @@ export const PRODUCT_BRAND_METADATA = {
     ],
     categories: ["Medicine"],
   },
-  "japanese-style": {
-    id: "japanese-style",
-    name: "Japanese Style",
-    aliases: [
-      {
-        value: "Japanese Style",
-        type: "official",
-        priority: 100,
-        strength: "strong",
-      },
-    ],
-    categories: ["Grocery"],
-  },
   "jardiance": {
     id: "jardiance",
     name: "Jardiance",
@@ -26758,20 +26628,21 @@ export const PRODUCT_BRAND_METADATA = {
         strength: "strong",
       },
     ],
-    categories: ["Hardware"],
-  },
-  "jet-puffed": {
-    id: "jet-puffed",
-    name: "Jet-Puffed",
-    aliases: [
-      {
-        value: "Jet-Puffed",
-        type: "official",
-        priority: 100,
-        strength: "strong",
+    productLines: {
+      "jet-puffed":{
+        name:"Jet-Puffed",
+        aliases:[
+          {
+            value:"Jet-Puffed",
+            type:"official",
+            priority:90,
+          },
+        ],
+        categories:["Grocery"],
+        preserveInProductName:true,
       },
-    ],
-    categories: ["Grocery"],
+    },
+    categories: ["Grocery","Hardware"],
   },
   "jif": {
     id: "jif",
@@ -26888,20 +26759,21 @@ export const PRODUCT_BRAND_METADATA = {
         strength: "strong",
       },
     ],
-    categories: ["Hardware","Household","School Supplies"],
-  },
-  "johnson-and-johnson-first-aid-kit": {
-    id: "johnson-and-johnson-first-aid-kit",
-    name: "Johnson & Johnson First Aid Kit",
-    aliases: [
-      {
-        value: "Johnson & Johnson First Aid Kit",
-        type: "official",
-        priority: 100,
-        strength: "strong",
+    productLines: {
+      "first-aid-kit":{
+        name:"First Aid Kit",
+        aliases:[
+          {
+            value:"First Aid Kit",
+            type:"official",
+            priority:90,
+          },
+        ],
+        categories:["Medicine"],
+        preserveInProductName:true,
       },
-    ],
-    categories: ["Medicine"],
+    },
+    categories: ["Hardware","Household","School Supplies"],
   },
   "johnson-hardware": {
     id: "johnson-hardware",
@@ -26927,46 +26799,45 @@ export const PRODUCT_BRAND_METADATA = {
         strength: "strong",
       },
     ],
+    productLines: {
+      "cotton-balls":{
+        name:"Cotton Balls",
+        aliases:[
+          {
+            value:"Cotton Balls",
+            type:"official",
+            priority:90,
+          },
+        ],
+        categories:["Medicine"],
+        preserveInProductName:true,
+      },
+      "cotton-buds":{
+        name:"Cotton Buds",
+        aliases:[
+          {
+            value:"Cotton Buds",
+            type:"official",
+            priority:90,
+          },
+        ],
+        categories:["Medicine"],
+        preserveInProductName:true,
+      },
+      "medical-cotton":{
+        name:"Medical Cotton",
+        aliases:[
+          {
+            value:"Medical Cotton",
+            type:"official",
+            priority:90,
+          },
+        ],
+        categories:["Medicine"],
+        preserveInProductName:true,
+      },
+    },
     categories: ["Household","Personal Care"],
-  },
-  "johnson-s-cotton-balls": {
-    id: "johnson-s-cotton-balls",
-    name: "Johnson's Cotton Balls",
-    aliases: [
-      {
-        value: "Johnson's Cotton Balls",
-        type: "official",
-        priority: 100,
-        strength: "strong",
-      },
-    ],
-    categories: ["Medicine"],
-  },
-  "johnson-s-cotton-buds": {
-    id: "johnson-s-cotton-buds",
-    name: "Johnson's Cotton Buds",
-    aliases: [
-      {
-        value: "Johnson's Cotton Buds",
-        type: "official",
-        priority: 100,
-        strength: "strong",
-      },
-    ],
-    categories: ["Medicine"],
-  },
-  "johnson-s-medical-cotton": {
-    id: "johnson-s-medical-cotton",
-    name: "Johnson's Medical Cotton",
-    aliases: [
-      {
-        value: "Johnson's Medical Cotton",
-        type: "official",
-        priority: 100,
-        strength: "strong",
-      },
-    ],
-    categories: ["Medicine"],
   },
   "jolly": {
     id: "jolly",
@@ -26989,6 +26860,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Grocery"],
         preserveInProductName:true,
       },
       "spaghetti":{
@@ -27000,6 +26872,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Grocery"],
         preserveInProductName:true,
       },
       "time":{
@@ -27011,6 +26884,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Grocery"],
         preserveInProductName:true,
       },
     },
@@ -27154,6 +27028,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["School Supplies"],
         preserveInProductName:true,
       },
       "cone":{
@@ -27165,6 +27040,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Grocery"],
         preserveInProductName:true,
       },
     },
@@ -27397,19 +27273,6 @@ export const PRODUCT_BRAND_METADATA = {
     aliases: [
       {
         value: "JW Winco",
-        type: "official",
-        priority: 100,
-        strength: "strong",
-      },
-    ],
-    categories: ["Hardware"],
-  },
-  "k-flex": {
-    id: "k-flex",
-    name: "K-Flex",
-    aliases: [
-      {
-        value: "K-Flex",
         type: "official",
         priority: 100,
         strength: "strong",
@@ -27967,20 +27830,21 @@ export const PRODUCT_BRAND_METADATA = {
         strength: "strong",
       },
     ],
-    categories: ["Hardware","Personal Care"],
-  },
-  "kent-marine": {
-    id: "kent-marine",
-    name: "Kent Marine",
-    aliases: [
-      {
-        value: "Kent Marine",
-        type: "official",
-        priority: 100,
-        strength: "strong",
+    productLines: {
+      "marine":{
+        name:"Marine",
+        aliases:[
+          {
+            value:"Marine",
+            type:"official",
+            priority:90,
+          },
+        ],
+        categories:["Pet Supplies"],
+        preserveInProductName:true,
       },
-    ],
-    categories: ["Pet Supplies"],
+    },
+    categories: ["Hardware","Personal Care"],
   },
   "kentucky-kernel": {
     id: "kentucky-kernel",
@@ -28476,19 +28340,6 @@ export const PRODUCT_BRAND_METADATA = {
     ],
     categories: ["School Supplies"],
   },
-  "kitkat": {
-    id: "kitkat",
-    name: "KitKat",
-    aliases: [
-      {
-        value: "KitKat",
-        type: "official",
-        priority: 100,
-        strength: "strong",
-      },
-    ],
-    categories: ["Grocery"],
-  },
   "kitnipbox": {
     id: "kitnipbox",
     name: "KitNipBox",
@@ -28926,6 +28777,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Pet Supplies"],
         preserveInProductName:true,
       },
     },
@@ -28952,6 +28804,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Grocery"],
         preserveInProductName:true,
       },
       "blanca":{
@@ -28963,6 +28816,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Grocery"],
         preserveInProductName:true,
       },
       "brown":{
@@ -28974,6 +28828,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Grocery"],
         preserveInProductName:true,
       },
       "lucky-day":{
@@ -28985,6 +28840,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Grocery"],
         preserveInProductName:true,
       },
     },
@@ -29122,6 +28978,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Medicine"],
         preserveInProductName:true,
       },
     },
@@ -29317,6 +29174,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Medicine"],
         preserveInProductName:true,
       },
     },
@@ -30516,20 +30374,21 @@ export const PRODUCT_BRAND_METADATA = {
         strength: "strong",
       },
     ],
-    categories: ["Household"],
-  },
-  "lg-solar": {
-    id: "lg-solar",
-    name: "LG Solar",
-    aliases: [
-      {
-        value: "LG Solar",
-        type: "official",
-        priority: 100,
-        strength: "strong",
+    productLines: {
+      "solar":{
+        name:"Solar",
+        aliases:[
+          {
+            value:"Solar",
+            type:"official",
+            priority:90,
+          },
+        ],
+        categories:["Hardware"],
+        preserveInProductName:true,
       },
-    ],
-    categories: ["Hardware"],
+    },
+    categories: ["Household"],
   },
   "libby-s": {
     id: "libby-s",
@@ -30607,20 +30466,21 @@ export const PRODUCT_BRAND_METADATA = {
         strength: "strong",
       },
     ],
-    categories: ["Personal Care","School Supplies"],
-  },
-  "lifebuoy-hand-sanitizer": {
-    id: "lifebuoy-hand-sanitizer",
-    name: "Lifebuoy Hand Sanitizer",
-    aliases: [
-      {
-        value: "Lifebuoy Hand Sanitizer",
-        type: "official",
-        priority: 100,
-        strength: "strong",
+    productLines: {
+      "hand-sanitizer":{
+        name:"Hand Sanitizer",
+        aliases:[
+          {
+            value:"Hand Sanitizer",
+            type:"official",
+            priority:90,
+          },
+        ],
+        categories:["Medicine"],
+        preserveInProductName:true,
       },
-    ],
-    categories: ["Medicine"],
+    },
+    categories: ["Personal Care","School Supplies"],
   },
   "lifegard": {
     id: "lifegard",
@@ -30760,6 +30620,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Hardware"],
         preserveInProductName:true,
       },
     },
@@ -30815,20 +30676,21 @@ export const PRODUCT_BRAND_METADATA = {
         strength: "strong",
       },
     ],
-    categories: ["School Supplies"],
-  },
-  "lion-ivory": {
-    id: "lion-ivory",
-    name: "Lion Ivory",
-    aliases: [
-      {
-        value: "Lion Ivory",
-        type: "official",
-        priority: 100,
-        strength: "strong",
+    productLines: {
+      "ivory":{
+        name:"Ivory",
+        aliases:[
+          {
+            value:"Ivory",
+            type:"official",
+            priority:90,
+          },
+        ],
+        categories:["Grocery"],
+        preserveInProductName:true,
       },
-    ],
-    categories: ["Grocery"],
+    },
+    categories: ["School Supplies"],
   },
   "lipitor": {
     id: "lipitor",
@@ -30864,6 +30726,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Grocery"],
         preserveInProductName:true,
       },
     },
@@ -31423,6 +31286,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Grocery"],
         variants:[
           {
             name: "Chicken",
@@ -31440,6 +31304,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Grocery"],
         preserveInProductName:true,
       },
       "lomi":{
@@ -31451,6 +31316,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Grocery"],
         preserveInProductName:true,
       },
       "pancit-canton":{
@@ -31462,6 +31328,8 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Grocery"],
+        keywords:["canton","instant noodles","noodles","pancit","pancit canton"],
         variants:[
           {
             name: "Chilimansi",
@@ -31479,6 +31347,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Grocery"],
         preserveInProductName:true,
       },
       "supreme":{
@@ -31490,6 +31359,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Grocery"],
         variants:[
           {
             name: "Bulalo",
@@ -31858,19 +31728,6 @@ export const PRODUCT_BRAND_METADATA = {
     ],
     categories: ["Pet Supplies"],
   },
-  "maggi": {
-    id: "maggi",
-    name: "Maggi",
-    aliases: [
-      {
-        value: "Maggi",
-        type: "official",
-        priority: 100,
-        strength: "strong",
-      },
-    ],
-    categories: ["Grocery"],
-  },
   "magic-flakes": {
     id: "magic-flakes",
     name: "Magic Flakes",
@@ -31944,6 +31801,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Grocery"],
         preserveInProductName:true,
       },
       "gold":{
@@ -31955,6 +31813,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Grocery"],
         preserveInProductName:true,
       },
     },
@@ -32098,6 +31957,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Grocery"],
         preserveInProductName:true,
       },
       "sita-s":{
@@ -32109,6 +31969,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Grocery"],
         preserveInProductName:true,
       },
       "sita-s-instant-lugaw":{
@@ -32120,6 +31981,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Grocery"],
         preserveInProductName:true,
       },
     },
@@ -32309,6 +32171,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Grocery"],
         preserveInProductName:true,
       },
     },
@@ -32768,6 +32631,18 @@ export const PRODUCT_BRAND_METADATA = {
       },
     ],
     productLines: {
+      "equipment":{
+        name:"Equipment",
+        aliases:[
+          {
+            value:"Equipment",
+            type:"official",
+            priority:90,
+          },
+        ],
+        categories:["Pet Supplies"],
+        preserveInProductName:true,
+      },
       "flow":{
         name:"Flow",
         aliases:[
@@ -32777,6 +32652,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Hardware"],
         preserveInProductName:true,
       },
       "lock":{
@@ -32788,6 +32664,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Hardware","School Supplies"],
         preserveInProductName:true,
       },
       "magnetics":{
@@ -32799,6 +32676,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Hardware","School Supplies"],
         preserveInProductName:true,
       },
       "mark":{
@@ -32810,6 +32688,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Hardware"],
         preserveInProductName:true,
       },
       "rice":{
@@ -32821,6 +32700,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Grocery"],
         preserveInProductName:true,
       },
       "siomai":{
@@ -32832,23 +32712,11 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Grocery"],
         preserveInProductName:true,
       },
     },
     categories: ["Grocery","Hardware"],
-  },
-  "master-equipment": {
-    id: "master-equipment",
-    name: "Master Equipment",
-    aliases: [
-      {
-        value: "Master Equipment",
-        type: "official",
-        priority: 100,
-        strength: "strong",
-      },
-    ],
-    categories: ["Pet Supplies"],
   },
   "mastervision": {
     id: "mastervision",
@@ -33267,6 +33135,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Medicine"],
         preserveInProductName:true,
       },
     },
@@ -33309,228 +33178,213 @@ export const PRODUCT_BRAND_METADATA = {
         strength: "strong",
       },
     ],
+    productLines: {
+      "arm-sling":{
+        name:"Arm Sling",
+        aliases:[
+          {
+            value:"Arm Sling",
+            type:"official",
+            priority:90,
+          },
+        ],
+        categories:["Medicine"],
+        preserveInProductName:true,
+      },
+      "biohazard-bags":{
+        name:"Biohazard Bags",
+        aliases:[
+          {
+            value:"Biohazard Bags",
+            type:"official",
+            priority:90,
+          },
+        ],
+        categories:["Medicine"],
+        preserveInProductName:true,
+      },
+      "cane":{
+        name:"Cane",
+        aliases:[
+          {
+            value:"Cane",
+            type:"official",
+            priority:90,
+          },
+        ],
+        categories:["Medicine"],
+        preserveInProductName:true,
+      },
+      "crutches":{
+        name:"Crutches",
+        aliases:[
+          {
+            value:"Crutches",
+            type:"official",
+            priority:90,
+          },
+        ],
+        categories:["Medicine"],
+        preserveInProductName:true,
+      },
+      "first-aid-kit":{
+        name:"First Aid Kit",
+        aliases:[
+          {
+            value:"First Aid Kit",
+            type:"official",
+            priority:90,
+          },
+        ],
+        categories:["Medicine"],
+        preserveInProductName:true,
+      },
+      "forceps":{
+        name:"Forceps",
+        aliases:[
+          {
+            value:"Forceps",
+            type:"official",
+            priority:90,
+          },
+        ],
+        categories:["Medicine"],
+        preserveInProductName:true,
+      },
+      "gauze-pads":{
+        name:"Gauze Pads",
+        aliases:[
+          {
+            value:"Gauze Pads",
+            type:"official",
+            priority:90,
+          },
+        ],
+        categories:["Medicine"],
+        preserveInProductName:true,
+      },
+      "gauze-roll":{
+        name:"Gauze Roll",
+        aliases:[
+          {
+            value:"Gauze Roll",
+            type:"official",
+            priority:90,
+          },
+        ],
+        categories:["Medicine"],
+        preserveInProductName:true,
+      },
+      "medical-scissors":{
+        name:"Medical Scissors",
+        aliases:[
+          {
+            value:"Medical Scissors",
+            type:"official",
+            priority:90,
+          },
+        ],
+        categories:["Medicine"],
+        preserveInProductName:true,
+      },
+      "medicine-cup":{
+        name:"Medicine Cup",
+        aliases:[
+          {
+            value:"Medicine Cup",
+            type:"official",
+            priority:90,
+          },
+        ],
+        categories:["Medicine"],
+        preserveInProductName:true,
+      },
+      "pill-organizer":{
+        name:"Pill Organizer",
+        aliases:[
+          {
+            value:"Pill Organizer",
+            type:"official",
+            priority:90,
+          },
+        ],
+        categories:["Medicine"],
+        preserveInProductName:true,
+      },
+      "sharps-container":{
+        name:"Sharps Container",
+        aliases:[
+          {
+            value:"Sharps Container",
+            type:"official",
+            priority:90,
+          },
+        ],
+        categories:["Medicine"],
+        preserveInProductName:true,
+      },
+      "sterile-dressing":{
+        name:"Sterile Dressing",
+        aliases:[
+          {
+            value:"Sterile Dressing",
+            type:"official",
+            priority:90,
+          },
+        ],
+        categories:["Medicine"],
+        preserveInProductName:true,
+      },
+      "surgical-gloves":{
+        name:"Surgical Gloves",
+        aliases:[
+          {
+            value:"Surgical Gloves",
+            type:"official",
+            priority:90,
+          },
+        ],
+        categories:["Medicine"],
+        preserveInProductName:true,
+      },
+      "tweezers":{
+        name:"Tweezers",
+        aliases:[
+          {
+            value:"Tweezers",
+            type:"official",
+            priority:90,
+          },
+        ],
+        categories:["Medicine"],
+        preserveInProductName:true,
+      },
+      "walker":{
+        name:"Walker",
+        aliases:[
+          {
+            value:"Walker",
+            type:"official",
+            priority:90,
+          },
+        ],
+        categories:["Medicine"],
+        preserveInProductName:true,
+      },
+      "wheelchair":{
+        name:"Wheelchair",
+        aliases:[
+          {
+            value:"Wheelchair",
+            type:"official",
+            priority:90,
+          },
+        ],
+        categories:["Medicine"],
+        preserveInProductName:true,
+      },
+    },
     categories: ["Hardware","School Supplies"],
-  },
-  "medline-arm-sling": {
-    id: "medline-arm-sling",
-    name: "Medline Arm Sling",
-    aliases: [
-      {
-        value: "Medline Arm Sling",
-        type: "official",
-        priority: 100,
-        strength: "strong",
-      },
-    ],
-    categories: ["Medicine"],
-  },
-  "medline-biohazard-bags": {
-    id: "medline-biohazard-bags",
-    name: "Medline Biohazard Bags",
-    aliases: [
-      {
-        value: "Medline Biohazard Bags",
-        type: "official",
-        priority: 100,
-        strength: "strong",
-      },
-    ],
-    categories: ["Medicine"],
-  },
-  "medline-cane": {
-    id: "medline-cane",
-    name: "Medline Cane",
-    aliases: [
-      {
-        value: "Medline Cane",
-        type: "official",
-        priority: 100,
-        strength: "strong",
-      },
-    ],
-    categories: ["Medicine"],
-  },
-  "medline-crutches": {
-    id: "medline-crutches",
-    name: "Medline Crutches",
-    aliases: [
-      {
-        value: "Medline Crutches",
-        type: "official",
-        priority: 100,
-        strength: "strong",
-      },
-    ],
-    categories: ["Medicine"],
-  },
-  "medline-first-aid-kit": {
-    id: "medline-first-aid-kit",
-    name: "Medline First Aid Kit",
-    aliases: [
-      {
-        value: "Medline First Aid Kit",
-        type: "official",
-        priority: 100,
-        strength: "strong",
-      },
-    ],
-    categories: ["Medicine"],
-  },
-  "medline-forceps": {
-    id: "medline-forceps",
-    name: "Medline Forceps",
-    aliases: [
-      {
-        value: "Medline Forceps",
-        type: "official",
-        priority: 100,
-        strength: "strong",
-      },
-    ],
-    categories: ["Medicine"],
-  },
-  "medline-gauze-pads": {
-    id: "medline-gauze-pads",
-    name: "Medline Gauze Pads",
-    aliases: [
-      {
-        value: "Medline Gauze Pads",
-        type: "official",
-        priority: 100,
-        strength: "strong",
-      },
-    ],
-    categories: ["Medicine"],
-  },
-  "medline-gauze-roll": {
-    id: "medline-gauze-roll",
-    name: "Medline Gauze Roll",
-    aliases: [
-      {
-        value: "Medline Gauze Roll",
-        type: "official",
-        priority: 100,
-        strength: "strong",
-      },
-    ],
-    categories: ["Medicine"],
-  },
-  "medline-medical-scissors": {
-    id: "medline-medical-scissors",
-    name: "Medline Medical Scissors",
-    aliases: [
-      {
-        value: "Medline Medical Scissors",
-        type: "official",
-        priority: 100,
-        strength: "strong",
-      },
-    ],
-    categories: ["Medicine"],
-  },
-  "medline-medicine-cup": {
-    id: "medline-medicine-cup",
-    name: "Medline Medicine Cup",
-    aliases: [
-      {
-        value: "Medline Medicine Cup",
-        type: "official",
-        priority: 100,
-        strength: "strong",
-      },
-    ],
-    categories: ["Medicine"],
-  },
-  "medline-pill-organizer": {
-    id: "medline-pill-organizer",
-    name: "Medline Pill Organizer",
-    aliases: [
-      {
-        value: "Medline Pill Organizer",
-        type: "official",
-        priority: 100,
-        strength: "strong",
-      },
-    ],
-    categories: ["Medicine"],
-  },
-  "medline-sharps-container": {
-    id: "medline-sharps-container",
-    name: "Medline Sharps Container",
-    aliases: [
-      {
-        value: "Medline Sharps Container",
-        type: "official",
-        priority: 100,
-        strength: "strong",
-      },
-    ],
-    categories: ["Medicine"],
-  },
-  "medline-sterile-dressing": {
-    id: "medline-sterile-dressing",
-    name: "Medline Sterile Dressing",
-    aliases: [
-      {
-        value: "Medline Sterile Dressing",
-        type: "official",
-        priority: 100,
-        strength: "strong",
-      },
-    ],
-    categories: ["Medicine"],
-  },
-  "medline-surgical-gloves": {
-    id: "medline-surgical-gloves",
-    name: "Medline Surgical Gloves",
-    aliases: [
-      {
-        value: "Medline Surgical Gloves",
-        type: "official",
-        priority: 100,
-        strength: "strong",
-      },
-    ],
-    categories: ["Medicine"],
-  },
-  "medline-tweezers": {
-    id: "medline-tweezers",
-    name: "Medline Tweezers",
-    aliases: [
-      {
-        value: "Medline Tweezers",
-        type: "official",
-        priority: 100,
-        strength: "strong",
-      },
-    ],
-    categories: ["Medicine"],
-  },
-  "medline-walker": {
-    id: "medline-walker",
-    name: "Medline Walker",
-    aliases: [
-      {
-        value: "Medline Walker",
-        type: "official",
-        priority: 100,
-        strength: "strong",
-      },
-    ],
-    categories: ["Medicine"],
-  },
-  "medline-wheelchair": {
-    id: "medline-wheelchair",
-    name: "Medline Wheelchair",
-    aliases: [
-      {
-        value: "Medline Wheelchair",
-        type: "official",
-        priority: 100,
-        strength: "strong",
-      },
-    ],
-    categories: ["Medicine"],
   },
   "medtecs-face-mask": {
     id: "medtecs-face-mask",
@@ -33605,6 +33459,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Grocery"],
         preserveInProductName:true,
       },
       "marshmallow":{
@@ -33616,6 +33471,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Grocery"],
         preserveInProductName:true,
       },
       "prime":{
@@ -33627,6 +33483,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Grocery"],
         preserveInProductName:true,
       },
     },
@@ -34371,20 +34228,21 @@ export const PRODUCT_BRAND_METADATA = {
         strength: "strong",
       },
     ],
-    categories: ["Hardware"],
-  },
-  "miller-manufacturing": {
-    id: "miller-manufacturing",
-    name: "Miller Manufacturing",
-    aliases: [
-      {
-        value: "Miller Manufacturing",
-        type: "official",
-        priority: 100,
-        strength: "strong",
+    productLines: {
+      "manufacturing":{
+        name:"Manufacturing",
+        aliases:[
+          {
+            value:"Manufacturing",
+            type:"official",
+            priority:90,
+          },
+        ],
+        categories:["Pet Supplies"],
+        preserveInProductName:true,
       },
-    ],
-    categories: ["Pet Supplies"],
+    },
+    categories: ["Hardware"],
   },
   "milliken": {
     id: "milliken",
@@ -34420,6 +34278,19 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Grocery"],
+        preserveInProductName:true,
+      },
+      "maggi":{
+        name:"Maggi",
+        aliases:[
+          {
+            value:"Maggi",
+            type:"official",
+            priority:90,
+          },
+        ],
+        categories:["Grocery"],
         preserveInProductName:true,
       },
     },
@@ -34496,19 +34367,6 @@ export const PRODUCT_BRAND_METADATA = {
     aliases: [
       {
         value: "Minor Figures",
-        type: "official",
-        priority: 100,
-        strength: "strong",
-      },
-    ],
-    categories: ["Grocery"],
-  },
-  "mints": {
-    id: "mints",
-    name: "Mints",
-    aliases: [
-      {
-        value: "Mints",
         type: "official",
         priority: 100,
         strength: "strong",
@@ -34618,20 +34476,21 @@ export const PRODUCT_BRAND_METADATA = {
         strength: "strong",
       },
     ],
-    categories: ["Grocery","Hardware"],
-  },
-  "mission-urinalysis": {
-    id: "mission-urinalysis",
-    name: "Mission Urinalysis",
-    aliases: [
-      {
-        value: "Mission Urinalysis",
-        type: "official",
-        priority: 100,
-        strength: "strong",
+    productLines: {
+      "urinalysis":{
+        name:"Urinalysis",
+        aliases:[
+          {
+            value:"Urinalysis",
+            type:"official",
+            priority:90,
+          },
+        ],
+        categories:["Medicine"],
+        preserveInProductName:true,
       },
-    ],
-    categories: ["Medicine"],
+    },
+    categories: ["Grocery","Hardware"],
   },
   "mister-rui": {
     id: "mister-rui",
@@ -34657,20 +34516,21 @@ export const PRODUCT_BRAND_METADATA = {
         strength: "strong",
       },
     ],
-    categories: ["School Supplies"],
-  },
-  "mitsubishi-electric": {
-    id: "mitsubishi-electric",
-    name: "Mitsubishi Electric",
-    aliases: [
-      {
-        value: "Mitsubishi Electric",
-        type: "official",
-        priority: 100,
-        strength: "strong",
+    productLines: {
+      "electric":{
+        name:"Electric",
+        aliases:[
+          {
+            value:"Electric",
+            type:"official",
+            priority:90,
+          },
+        ],
+        categories:["Hardware"],
+        preserveInProductName:true,
       },
-    ],
-    categories: ["Hardware"],
+    },
+    categories: ["School Supplies"],
   },
   "mitsuboshi": {
     id: "mitsuboshi",
@@ -35414,6 +35274,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Grocery"],
         preserveInProductName:true,
       },
       "gulaman":{
@@ -35425,6 +35286,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Grocery"],
         preserveInProductName:true,
       },
     },
@@ -35532,20 +35394,21 @@ export const PRODUCT_BRAND_METADATA = {
         strength: "strong",
       },
     ],
-    categories: ["Hardware"],
-  },
-  "msa-publishing": {
-    id: "msa-publishing",
-    name: "MSA Publishing",
-    aliases: [
-      {
-        value: "MSA Publishing",
-        type: "official",
-        priority: 100,
-        strength: "strong",
+    productLines: {
+      "publishing":{
+        name:"Publishing",
+        aliases:[
+          {
+            value:"Publishing",
+            type:"official",
+            priority:90,
+          },
+        ],
+        categories:["School Supplies"],
+        preserveInProductName:true,
       },
-    ],
-    categories: ["School Supplies"],
+    },
+    categories: ["Hardware"],
   },
   "msi": {
     id: "msi",
@@ -35646,6 +35509,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Medicine"],
         preserveInProductName:true,
       },
       "wrist-brace":{
@@ -35657,6 +35521,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Medicine"],
         preserveInProductName:true,
       },
     },
@@ -36190,6 +36055,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["School Supplies"],
         preserveInProductName:true,
       },
       "fire":{
@@ -36201,6 +36067,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Hardware"],
         preserveInProductName:true,
       },
       "geographic":{
@@ -36212,21 +36079,24 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
-        preserveInProductName:true,
-      },
-      "hardware":{
-        name:"Hardware",
-        aliases:[
-          {
-            value:"Hardware",
-            type:"official",
-            priority:90,
-          },
-        ],
+        categories:["Pet Supplies","School Supplies"],
         preserveInProductName:true,
       },
     },
     categories: ["Hardware","School Supplies"],
+  },
+  "national-hardware": {
+    id: "national-hardware",
+    name: "National Hardware",
+    aliases: [
+      {
+        value: "National Hardware",
+        type: "official",
+        priority: 100,
+        strength: "strong",
+      },
+    ],
+    categories: ["Hardware"],
   },
   "nationwide": {
     id: "nationwide",
@@ -36600,6 +36470,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Medicine"],
         preserveInProductName:true,
       },
     },
@@ -36668,33 +36539,33 @@ export const PRODUCT_BRAND_METADATA = {
         strength: "strong",
       },
     ],
-    categories: ["Pet Supplies"],
-  },
-  "neo-g": {
-    id: "neo-g",
-    name: "Neo G",
-    aliases: [
-      {
-        value: "Neo G",
-        type: "official",
-        priority: 100,
-        strength: "strong",
-      },
-    ],
     productLines: {
-      "ankle-support":{
-        name:"Ankle Support",
+      "g":{
+        name:"G",
         aliases:[
           {
-            value:"Ankle Support",
+            value:"G",
             type:"official",
             priority:90,
           },
         ],
+        categories:["Medicine"],
+        preserveInProductName:true,
+      },
+      "g-ankle-support":{
+        name:"G Ankle Support",
+        aliases:[
+          {
+            value:"G Ankle Support",
+            type:"official",
+            priority:90,
+          },
+        ],
+        categories:["Medicine"],
         preserveInProductName:true,
       },
     },
-    categories: ["Medicine"],
+    categories: ["Pet Supplies"],
   },
   "neoflam": {
     id: "neoflam",
@@ -36743,6 +36614,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Medicine"],
         preserveInProductName:true,
       },
     },
@@ -36795,6 +36667,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Grocery"],
         preserveInProductName:true,
       },
       "gold":{
@@ -36806,6 +36679,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Grocery"],
         preserveInProductName:true,
       },
       "ready-to-drink":{
@@ -36817,16 +36691,10 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Grocery"],
         preserveInProductName:true,
       },
     },
-    variants: [
-      {
-        name: "Classic",
-        categories: ["Grocery"],
-        keywords: ["grocery"],
-      },
-    ],
     categories: ["Grocery"],
   },
   "nesco": {
@@ -36902,6 +36770,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Grocery"],
         preserveInProductName:true,
       },
       "coffee-mate":{
@@ -36913,6 +36782,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Grocery"],
         preserveInProductName:true,
       },
       "fitnesse":{
@@ -36924,6 +36794,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Grocery"],
         preserveInProductName:true,
       },
       "fresh-milk":{
@@ -36935,6 +36806,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Grocery"],
         preserveInProductName:true,
       },
       "gold":{
@@ -36946,6 +36818,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Grocery"],
         preserveInProductName:true,
       },
       "honey-stars":{
@@ -36957,6 +36830,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Grocery"],
         preserveInProductName:true,
       },
       "ice-cream":{
@@ -36968,6 +36842,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Grocery"],
         preserveInProductName:true,
       },
       "koko-krunch":{
@@ -36979,6 +36854,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Grocery"],
         preserveInProductName:true,
       },
       "toll-house":{
@@ -36990,6 +36866,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Grocery"],
         preserveInProductName:true,
       },
       "yogurt":{
@@ -37001,6 +36878,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Grocery"],
         preserveInProductName:true,
       },
     },
@@ -37095,59 +36973,57 @@ export const PRODUCT_BRAND_METADATA = {
         strength: "strong",
       },
     ],
+    productLines: {
+      "bandages":{
+        name:"Bandages",
+        aliases:[
+          {
+            value:"Bandages",
+            type:"official",
+            priority:90,
+          },
+        ],
+        categories:["Medicine"],
+        preserveInProductName:true,
+      },
+      "first-aid-kit":{
+        name:"First Aid Kit",
+        aliases:[
+          {
+            value:"First Aid Kit",
+            type:"official",
+            priority:90,
+          },
+        ],
+        categories:["Medicine"],
+        preserveInProductName:true,
+      },
+      "gauze-pads":{
+        name:"Gauze Pads",
+        aliases:[
+          {
+            value:"Gauze Pads",
+            type:"official",
+            priority:90,
+          },
+        ],
+        categories:["Medicine"],
+        preserveInProductName:true,
+      },
+      "medical-tape":{
+        name:"Medical Tape",
+        aliases:[
+          {
+            value:"Medical Tape",
+            type:"official",
+            priority:90,
+          },
+        ],
+        categories:["Medicine"],
+        preserveInProductName:true,
+      },
+    },
     categories: ["Personal Care"],
-  },
-  "nexcare-bandages": {
-    id: "nexcare-bandages",
-    name: "Nexcare Bandages",
-    aliases: [
-      {
-        value: "Nexcare Bandages",
-        type: "official",
-        priority: 100,
-        strength: "strong",
-      },
-    ],
-    categories: ["Medicine"],
-  },
-  "nexcare-first-aid-kit": {
-    id: "nexcare-first-aid-kit",
-    name: "Nexcare First Aid Kit",
-    aliases: [
-      {
-        value: "Nexcare First Aid Kit",
-        type: "official",
-        priority: 100,
-        strength: "strong",
-      },
-    ],
-    categories: ["Medicine"],
-  },
-  "nexcare-gauze-pads": {
-    id: "nexcare-gauze-pads",
-    name: "Nexcare Gauze Pads",
-    aliases: [
-      {
-        value: "Nexcare Gauze Pads",
-        type: "official",
-        priority: 100,
-        strength: "strong",
-      },
-    ],
-    categories: ["Medicine"],
-  },
-  "nexcare-medical-tape": {
-    id: "nexcare-medical-tape",
-    name: "Nexcare Medical Tape",
-    aliases: [
-      {
-        value: "Nexcare Medical Tape",
-        type: "official",
-        priority: 100,
-        strength: "strong",
-      },
-    ],
-    categories: ["Medicine"],
   },
   "nexgard": {
     id: "nexgard",
@@ -37170,6 +37046,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Pet Supplies"],
         preserveInProductName:true,
       },
     },
@@ -37300,6 +37177,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Medicine"],
         preserveInProductName:true,
       },
       "lozenges":{
@@ -37311,6 +37189,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Medicine"],
         preserveInProductName:true,
       },
       "patch":{
@@ -37322,6 +37201,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Medicine"],
         preserveInProductName:true,
       },
     },
@@ -37348,6 +37228,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Medicine"],
         preserveInProductName:true,
       },
     },
@@ -37481,33 +37362,33 @@ export const PRODUCT_BRAND_METADATA = {
         strength: "strong",
       },
     ],
+    productLines: {
+      "insulin-syringe":{
+        name:"Insulin Syringe",
+        aliases:[
+          {
+            value:"Insulin Syringe",
+            type:"official",
+            priority:90,
+          },
+        ],
+        categories:["Medicine"],
+        preserveInProductName:true,
+      },
+      "syringe":{
+        name:"Syringe",
+        aliases:[
+          {
+            value:"Syringe",
+            type:"official",
+            priority:90,
+          },
+        ],
+        categories:["Medicine"],
+        preserveInProductName:true,
+      },
+    },
     categories: ["Pet Supplies"],
-  },
-  "nipro-insulin-syringe": {
-    id: "nipro-insulin-syringe",
-    name: "Nipro Insulin Syringe",
-    aliases: [
-      {
-        value: "Nipro Insulin Syringe",
-        type: "official",
-        priority: 100,
-        strength: "strong",
-      },
-    ],
-    categories: ["Medicine"],
-  },
-  "nipro-syringe": {
-    id: "nipro-syringe",
-    name: "Nipro Syringe",
-    aliases: [
-      {
-        value: "Nipro Syringe",
-        type: "official",
-        priority: 100,
-        strength: "strong",
-      },
-    ],
-    categories: ["Medicine"],
   },
   "niro-granite": {
     id: "niro-granite",
@@ -37556,6 +37437,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Grocery"],
         preserveInProductName:true,
       },
     },
@@ -37638,6 +37520,18 @@ export const PRODUCT_BRAND_METADATA = {
       },
     ],
     productLines: {
+      "lip-care":{
+        name:"Lip Care",
+        aliases:[
+          {
+            value:"Lip Care",
+            type:"official",
+            priority:90,
+          },
+        ],
+        categories:["Medicine"],
+        preserveInProductName:true,
+      },
       "men":{
         name:"Men",
         aliases:[
@@ -37647,23 +37541,11 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Personal Care"],
         preserveInProductName:true,
       },
     },
     categories: ["Personal Care"],
-  },
-  "nivea-lip-care": {
-    id: "nivea-lip-care",
-    name: "Nivea Lip Care",
-    aliases: [
-      {
-        value: "Nivea Lip Care",
-        type: "official",
-        priority: 100,
-        strength: "strong",
-      },
-    ],
-    categories: ["Medicine"],
   },
   "nixit": {
     id: "nixit",
@@ -38185,19 +38067,6 @@ export const PRODUCT_BRAND_METADATA = {
     ],
     categories: ["Grocery"],
   },
-  "nutri-grain": {
-    id: "nutri-grain",
-    name: "Nutri-Grain",
-    aliases: [
-      {
-        value: "Nutri-Grain",
-        type: "official",
-        priority: 100,
-        strength: "strong",
-      },
-    ],
-    categories: ["Grocery"],
-  },
   "nutri-vet": {
     id: "nutri-vet",
     name: "Nutri-Vet",
@@ -38209,7 +38078,21 @@ export const PRODUCT_BRAND_METADATA = {
         strength: "strong",
       },
     ],
-    categories: ["Pet Supplies"],
+    productLines: {
+      "nutri-grain":{
+        name:"Nutri-Grain",
+        aliases:[
+          {
+            value:"Nutri-Grain",
+            type:"official",
+            priority:90,
+          },
+        ],
+        categories:["Grocery"],
+        preserveInProductName:true,
+      },
+    },
+    categories: ["Grocery","Pet Supplies"],
   },
   "nutriasia": {
     id: "nutriasia",
@@ -38456,46 +38339,45 @@ export const PRODUCT_BRAND_METADATA = {
         strength: "strong",
       },
     ],
+    productLines: {
+      "free":{
+        name:"Free",
+        aliases:[
+          {
+            value:"Free",
+            type:"official",
+            priority:90,
+          },
+        ],
+        categories:["Pet Supplies"],
+        preserveInProductName:true,
+      },
+      "nutrition":{
+        name:"Nutrition",
+        aliases:[
+          {
+            value:"Nutrition",
+            type:"official",
+            priority:90,
+          },
+        ],
+        categories:["Pet Supplies"],
+        preserveInProductName:true,
+      },
+      "spray":{
+        name:"Spray",
+        aliases:[
+          {
+            value:"Spray",
+            type:"official",
+            priority:90,
+          },
+        ],
+        categories:["Grocery"],
+        preserveInProductName:true,
+      },
+    },
     categories: ["Household"],
-  },
-  "ocean-free": {
-    id: "ocean-free",
-    name: "Ocean Free",
-    aliases: [
-      {
-        value: "Ocean Free",
-        type: "official",
-        priority: 100,
-        strength: "strong",
-      },
-    ],
-    categories: ["Pet Supplies"],
-  },
-  "ocean-nutrition": {
-    id: "ocean-nutrition",
-    name: "Ocean Nutrition",
-    aliases: [
-      {
-        value: "Ocean Nutrition",
-        type: "official",
-        priority: 100,
-        strength: "strong",
-      },
-    ],
-    categories: ["Pet Supplies"],
-  },
-  "ocean-spray": {
-    id: "ocean-spray",
-    name: "Ocean Spray",
-    aliases: [
-      {
-        value: "Ocean Spray",
-        type: "official",
-        priority: 100,
-        strength: "strong",
-      },
-    ],
-    categories: ["Grocery"],
   },
   "oclean": {
     id: "oclean",
@@ -38609,6 +38491,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Grocery"],
         preserveInProductName:true,
       },
       "prawn-crackers":{
@@ -38620,6 +38503,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Grocery"],
         preserveInProductName:true,
       },
       "ridges":{
@@ -38631,6 +38515,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Grocery"],
         preserveInProductName:true,
       },
       "tea":{
@@ -38642,6 +38527,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Grocery"],
         preserveInProductName:true,
       },
     },
@@ -38726,6 +38612,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Grocery"],
         preserveInProductName:true,
       },
     },
@@ -38820,33 +38707,33 @@ export const PRODUCT_BRAND_METADATA = {
         strength: "strong",
       },
     ],
+    productLines: {
+      "face-mask":{
+        name:"Face Mask",
+        aliases:[
+          {
+            value:"Face Mask",
+            type:"official",
+            priority:90,
+          },
+        ],
+        categories:["Medicine"],
+        preserveInProductName:true,
+      },
+      "saline-solution":{
+        name:"Saline Solution",
+        aliases:[
+          {
+            value:"Saline Solution",
+            type:"official",
+            priority:90,
+          },
+        ],
+        categories:["Medicine"],
+        preserveInProductName:true,
+      },
+    },
     categories: ["Hardware","Household","School Supplies"],
-  },
-  "omni-face-mask": {
-    id: "omni-face-mask",
-    name: "Omni Face Mask",
-    aliases: [
-      {
-        value: "Omni Face Mask",
-        type: "official",
-        priority: 100,
-        strength: "strong",
-      },
-    ],
-    categories: ["Medicine"],
-  },
-  "omni-saline-solution": {
-    id: "omni-saline-solution",
-    name: "Omni Saline Solution",
-    aliases: [
-      {
-        value: "Omni Saline Solution",
-        type: "official",
-        priority: 100,
-        strength: "strong",
-      },
-    ],
-    categories: ["Medicine"],
   },
   "omniguard": {
     id: "omniguard",
@@ -38872,85 +38759,81 @@ export const PRODUCT_BRAND_METADATA = {
         strength: "strong",
       },
     ],
+    productLines: {
+      "blood-pressure-monitor":{
+        name:"Blood Pressure Monitor",
+        aliases:[
+          {
+            value:"Blood Pressure Monitor",
+            type:"official",
+            priority:90,
+          },
+        ],
+        categories:["Medicine"],
+        preserveInProductName:true,
+      },
+      "infrared":{
+        name:"Infrared",
+        aliases:[
+          {
+            value:"Infrared",
+            type:"official",
+            priority:90,
+          },
+        ],
+        categories:["Medicine"],
+        preserveInProductName:true,
+      },
+      "nebulizer":{
+        name:"Nebulizer",
+        aliases:[
+          {
+            value:"Nebulizer",
+            type:"official",
+            priority:90,
+          },
+        ],
+        categories:["Medicine"],
+        preserveInProductName:true,
+      },
+      "peak-flow-meter":{
+        name:"Peak Flow Meter",
+        aliases:[
+          {
+            value:"Peak Flow Meter",
+            type:"official",
+            priority:90,
+          },
+        ],
+        categories:["Medicine"],
+        preserveInProductName:true,
+      },
+      "pulse-oximeter":{
+        name:"Pulse Oximeter",
+        aliases:[
+          {
+            value:"Pulse Oximeter",
+            type:"official",
+            priority:90,
+          },
+        ],
+        categories:["Medicine"],
+        preserveInProductName:true,
+      },
+      "thermometer":{
+        name:"Thermometer",
+        aliases:[
+          {
+            value:"Thermometer",
+            type:"official",
+            priority:90,
+          },
+        ],
+        categories:["Medicine"],
+        preserveInProductName:true,
+      },
+    },
     categories: ["Hardware","Household","Personal Care"],
-  },
-  "omron-blood-pressure-monitor": {
-    id: "omron-blood-pressure-monitor",
-    name: "Omron Blood Pressure Monitor",
-    aliases: [
-      {
-        value: "Omron Blood Pressure Monitor",
-        type: "official",
-        priority: 100,
-        strength: "strong",
-      },
-    ],
-    categories: ["Medicine"],
-  },
-  "omron-infrared": {
-    id: "omron-infrared",
-    name: "Omron Infrared",
-    aliases: [
-      {
-        value: "Omron Infrared",
-        type: "official",
-        priority: 100,
-        strength: "strong",
-      },
-    ],
-    categories: ["Medicine"],
-  },
-  "omron-nebulizer": {
-    id: "omron-nebulizer",
-    name: "Omron Nebulizer",
-    aliases: [
-      {
-        value: "Omron Nebulizer",
-        type: "official",
-        priority: 100,
-        strength: "strong",
-      },
-    ],
-    categories: ["Medicine"],
-  },
-  "omron-peak-flow-meter": {
-    id: "omron-peak-flow-meter",
-    name: "Omron Peak Flow Meter",
-    aliases: [
-      {
-        value: "Omron Peak Flow Meter",
-        type: "official",
-        priority: 100,
-        strength: "strong",
-      },
-    ],
-    categories: ["Medicine"],
-  },
-  "omron-pulse-oximeter": {
-    id: "omron-pulse-oximeter",
-    name: "Omron Pulse Oximeter",
-    aliases: [
-      {
-        value: "Omron Pulse Oximeter",
-        type: "official",
-        priority: 100,
-        strength: "strong",
-      },
-    ],
-    categories: ["Medicine"],
-  },
-  "omron-thermometer": {
-    id: "omron-thermometer",
-    name: "Omron Thermometer",
-    aliases: [
-      {
-        value: "Omron Thermometer",
-        type: "official",
-        priority: 100,
-        strength: "strong",
-      },
-    ],
-    categories: ["Medicine"],
   },
   "once-again": {
     id: "once-again",
@@ -39025,6 +38908,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Medicine"],
         preserveInProductName:true,
       },
       "test-strips":{
@@ -39036,6 +38920,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Medicine"],
         preserveInProductName:true,
       },
     },
@@ -39195,20 +39080,21 @@ export const PRODUCT_BRAND_METADATA = {
         strength: "strong",
       },
     ],
-    categories: ["Pet Supplies"],
-  },
-  "optimum-nutrition": {
-    id: "optimum-nutrition",
-    name: "Optimum Nutrition",
-    aliases: [
-      {
-        value: "Optimum Nutrition",
-        type: "official",
-        priority: 100,
-        strength: "strong",
+    productLines: {
+      "nutrition":{
+        name:"Nutrition",
+        aliases:[
+          {
+            value:"Nutrition",
+            type:"official",
+            priority:90,
+          },
+        ],
+        categories:["Grocery"],
+        preserveInProductName:true,
       },
-    ],
-    categories: ["Grocery"],
+    },
+    categories: ["Pet Supplies"],
   },
   "optoma": {
     id: "optoma",
@@ -39390,20 +39276,21 @@ export const PRODUCT_BRAND_METADATA = {
         strength: "strong",
       },
     ],
-    categories: ["Grocery"],
-  },
-  "oregon-scientific": {
-    id: "oregon-scientific",
-    name: "Oregon Scientific",
-    aliases: [
-      {
-        value: "Oregon Scientific",
-        type: "official",
-        priority: 100,
-        strength: "strong",
+    productLines: {
+      "scientific":{
+        name:"Scientific",
+        aliases:[
+          {
+            value:"Scientific",
+            type:"official",
+            priority:90,
+          },
+        ],
+        categories:["School Supplies"],
+        preserveInProductName:true,
       },
-    ],
-    categories: ["School Supplies"],
+    },
+    categories: ["Grocery"],
   },
   "oreo": {
     id: "oreo",
@@ -39972,6 +39859,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Grocery"],
         variants:[
           {
             name: "Beef",
@@ -40095,6 +39983,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Hardware"],
         preserveInProductName:true,
       },
     },
@@ -40112,19 +40001,6 @@ export const PRODUCT_BRAND_METADATA = {
       },
     ],
     categories: ["Hardware"],
-  },
-  "panko": {
-    id: "panko",
-    name: "Panko",
-    aliases: [
-      {
-        value: "Panko",
-        type: "official",
-        priority: 100,
-        strength: "strong",
-      },
-    ],
-    categories: ["Grocery"],
   },
   "pantai": {
     id: "pantai",
@@ -40355,6 +40231,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Medicine"],
         preserveInProductName:true,
       },
     },
@@ -40719,6 +40596,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Grocery"],
         preserveInProductName:true,
       },
     },
@@ -41291,6 +41169,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Medicine"],
         preserveInProductName:true,
       },
     },
@@ -41408,6 +41287,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Personal Care"],
         preserveInProductName:true,
       },
       "hue":{
@@ -41419,6 +41299,19 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Hardware","Household"],
+        preserveInProductName:true,
+      },
+      "respironics-spacer":{
+        name:"Respironics Spacer",
+        aliases:[
+          {
+            value:"Respironics Spacer",
+            type:"official",
+            priority:90,
+          },
+        ],
+        categories:["Medicine"],
         preserveInProductName:true,
       },
       "sonicare":{
@@ -41430,23 +41323,11 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Personal Care"],
         preserveInProductName:true,
       },
     },
     categories: ["Hardware","Household","Personal Care","Pet Supplies","School Supplies"],
-  },
-  "philips-respironics-spacer": {
-    id: "philips-respironics-spacer",
-    name: "Philips Respironics Spacer",
-    aliases: [
-      {
-        value: "Philips Respironics Spacer",
-        type: "official",
-        priority: 100,
-        strength: "strong",
-      },
-    ],
-    categories: ["Medicine"],
   },
   "philsteel": {
     id: "philsteel",
@@ -41473,6 +41354,18 @@ export const PRODUCT_BRAND_METADATA = {
       },
     ],
     productLines: {
+      "contact":{
+        name:"Contact",
+        aliases:[
+          {
+            value:"Contact",
+            type:"official",
+            priority:90,
+          },
+        ],
+        categories:["Hardware"],
+        preserveInProductName:true,
+      },
       "publishing-house":{
         name:"Publishing House",
         aliases:[
@@ -41482,36 +41375,23 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["School Supplies"],
+        preserveInProductName:true,
+      },
+      "safe":{
+        name:"Safe",
+        aliases:[
+          {
+            value:"Safe",
+            type:"official",
+            priority:90,
+          },
+        ],
+        categories:["Hardware"],
         preserveInProductName:true,
       },
     },
     categories: ["Household","School Supplies"],
-  },
-  "phoenix-contact": {
-    id: "phoenix-contact",
-    name: "Phoenix Contact",
-    aliases: [
-      {
-        value: "Phoenix Contact",
-        type: "official",
-        priority: 100,
-        strength: "strong",
-      },
-    ],
-    categories: ["Hardware"],
-  },
-  "phoenix-safe": {
-    id: "phoenix-safe",
-    name: "Phoenix Safe",
-    aliases: [
-      {
-        value: "Phoenix Safe",
-        type: "official",
-        priority: 100,
-        strength: "strong",
-      },
-    ],
-    categories: ["Hardware"],
   },
   "phomemo": {
     id: "phomemo",
@@ -41547,6 +41427,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Medicine"],
         preserveInProductName:true,
       },
     },
@@ -41950,6 +41831,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Grocery"],
         preserveInProductName:true,
       },
     },
@@ -42148,20 +42030,21 @@ export const PRODUCT_BRAND_METADATA = {
         strength: "strong",
       },
     ],
-    categories: ["Hardware"],
-  },
-  "pop-secret": {
-    id: "pop-secret",
-    name: "Pop Secret",
-    aliases: [
-      {
-        value: "Pop Secret",
-        type: "official",
-        priority: 100,
-        strength: "strong",
+    productLines: {
+      "secret":{
+        name:"Secret",
+        aliases:[
+          {
+            value:"Secret",
+            type:"official",
+            priority:90,
+          },
+        ],
+        categories:["Grocery"],
+        preserveInProductName:true,
       },
-    ],
-    categories: ["Grocery"],
+    },
+    categories: ["Hardware"],
   },
   "porter-cable": {
     id: "porter-cable",
@@ -42275,6 +42158,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Medicine"],
         preserveInProductName:true,
       },
     },
@@ -42470,6 +42354,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Grocery"],
         preserveInProductName:true,
       },
     },
@@ -42571,33 +42456,33 @@ export const PRODUCT_BRAND_METADATA = {
         strength: "strong",
       },
     ],
+    productLines: {
+      "medical":{
+        name:"Medical",
+        aliases:[
+          {
+            value:"Medical",
+            type:"official",
+            priority:90,
+          },
+        ],
+        categories:["Medicine"],
+        preserveInProductName:true,
+      },
+      "tweezers":{
+        name:"Tweezers",
+        aliases:[
+          {
+            value:"Tweezers",
+            type:"official",
+            priority:90,
+          },
+        ],
+        categories:["Medicine"],
+        preserveInProductName:true,
+      },
+    },
     categories: ["Household"],
-  },
-  "prestige-medical": {
-    id: "prestige-medical",
-    name: "Prestige Medical",
-    aliases: [
-      {
-        value: "Prestige Medical",
-        type: "official",
-        priority: 100,
-        strength: "strong",
-      },
-    ],
-    categories: ["Medicine"],
-  },
-  "prestige-tweezers": {
-    id: "prestige-tweezers",
-    name: "Prestige Tweezers",
-    aliases: [
-      {
-        value: "Prestige Tweezers",
-        type: "official",
-        priority: 100,
-        strength: "strong",
-      },
-    ],
-    categories: ["Medicine"],
   },
   "presto": {
     id: "presto",
@@ -42909,20 +42794,21 @@ export const PRODUCT_BRAND_METADATA = {
         strength: "strong",
       },
     ],
-    categories: ["Household"],
-  },
-  "progressive-automations": {
-    id: "progressive-automations",
-    name: "Progressive Automations",
-    aliases: [
-      {
-        value: "Progressive Automations",
-        type: "official",
-        priority: 100,
-        strength: "strong",
+    productLines: {
+      "automations":{
+        name:"Automations",
+        aliases:[
+          {
+            value:"Automations",
+            type:"official",
+            priority:90,
+          },
+        ],
+        categories:["Hardware"],
+        preserveInProductName:true,
       },
-    ],
-    categories: ["Hardware"],
+    },
+    categories: ["Household"],
   },
   "progynova": {
     id: "progynova",
@@ -43322,6 +43208,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Pet Supplies"],
         preserveInProductName:true,
       },
       "pro-plan-veterinary":{
@@ -43333,6 +43220,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Pet Supplies"],
         preserveInProductName:true,
       },
     },
@@ -43463,6 +43351,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Grocery"],
         preserveInProductName:true,
       },
     },
@@ -43544,19 +43433,20 @@ export const PRODUCT_BRAND_METADATA = {
         strength: "strong",
       },
     ],
-    categories: ["Hardware"],
-  },
-  "quick-step": {
-    id: "quick-step",
-    name: "Quick-Step",
-    aliases: [
-      {
-        value: "Quick-Step",
-        type: "official",
-        priority: 100,
-        strength: "strong",
+    productLines: {
+      "quick-step":{
+        name:"Quick-Step",
+        aliases:[
+          {
+            value:"Quick-Step",
+            type:"official",
+            priority:90,
+          },
+        ],
+        categories:["Hardware"],
+        preserveInProductName:true,
       },
-    ],
+    },
     categories: ["Hardware"],
   },
   "quickfx": {
@@ -43957,6 +43847,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Hardware"],
         preserveInProductName:true,
       },
     },
@@ -44064,20 +43955,21 @@ export const PRODUCT_BRAND_METADATA = {
         strength: "strong",
       },
     ],
-    categories: ["Pet Supplies"],
-  },
-  "redmond-real-salt": {
-    id: "redmond-real-salt",
-    name: "Redmond Real Salt",
-    aliases: [
-      {
-        value: "Redmond Real Salt",
-        type: "official",
-        priority: 100,
-        strength: "strong",
+    productLines: {
+      "real-salt":{
+        name:"Real Salt",
+        aliases:[
+          {
+            value:"Real Salt",
+            type:"official",
+            priority:90,
+          },
+        ],
+        categories:["Grocery"],
+        preserveInProductName:true,
       },
-    ],
-    categories: ["Grocery"],
+    },
+    categories: ["Pet Supplies"],
   },
   "reef-crystals": {
     id: "reef-crystals",
@@ -44156,19 +44048,6 @@ export const PRODUCT_BRAND_METADATA = {
       },
     ],
     categories: ["School Supplies"],
-  },
-  "refined-salt": {
-    id: "refined-salt",
-    name: "Refined Salt",
-    aliases: [
-      {
-        value: "Refined Salt",
-        type: "official",
-        priority: 100,
-        strength: "strong",
-      },
-    ],
-    categories: ["Grocery"],
   },
   "reflectix": {
     id: "reflectix",
@@ -44464,6 +44343,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Hardware"],
         preserveInProductName:true,
       },
     },
@@ -44722,19 +44602,6 @@ export const PRODUCT_BRAND_METADATA = {
     aliases: [
       {
         value: "Rice Dream",
-        type: "official",
-        priority: 100,
-        strength: "strong",
-      },
-    ],
-    categories: ["Grocery"],
-  },
-  "rice-in-a-box": {
-    id: "rice-in-a-box",
-    name: "Rice in a Box",
-    aliases: [
-      {
-        value: "Rice in a Box",
         type: "official",
         priority: 100,
         strength: "strong",
@@ -45145,19 +45012,6 @@ export const PRODUCT_BRAND_METADATA = {
     ],
     categories: ["Medicine"],
   },
-  "rock-salt": {
-    id: "rock-salt",
-    name: "Rock Salt",
-    aliases: [
-      {
-        value: "Rock Salt",
-        type: "official",
-        priority: 100,
-        strength: "strong",
-      },
-    ],
-    categories: ["Grocery"],
-  },
   "rockfon": {
     id: "rockfon",
     name: "Rockfon",
@@ -45294,19 +45148,6 @@ export const PRODUCT_BRAND_METADATA = {
     aliases: [
       {
         value: "Rold Gold",
-        type: "official",
-        priority: 100,
-        strength: "strong",
-      },
-    ],
-    categories: ["Grocery"],
-  },
-  "rolled-oats": {
-    id: "rolled-oats",
-    name: "Rolled Oats",
-    aliases: [
-      {
-        value: "Rolled Oats",
         type: "official",
         priority: 100,
         strength: "strong",
@@ -45560,6 +45401,54 @@ export const PRODUCT_BRAND_METADATA = {
       },
     ],
     productLines: {
+      "and-langnickel":{
+        name:"& Langnickel",
+        aliases:[
+          {
+            value:"& Langnickel",
+            type:"official",
+            priority:90,
+          },
+        ],
+        categories:["School Supplies"],
+        preserveInProductName:true,
+      },
+      "brites":{
+        name:"Brites",
+        aliases:[
+          {
+            value:"Brites",
+            type:"official",
+            priority:90,
+          },
+        ],
+        categories:["School Supplies"],
+        preserveInProductName:true,
+      },
+      "canin":{
+        name:"Canin",
+        aliases:[
+          {
+            value:"Canin",
+            type:"official",
+            priority:90,
+          },
+        ],
+        categories:["Pet Supplies"],
+        preserveInProductName:true,
+      },
+      "canin-veterinary":{
+        name:"Canin Veterinary",
+        aliases:[
+          {
+            value:"Canin Veterinary",
+            type:"official",
+            priority:90,
+          },
+        ],
+        categories:["Pet Supplies"],
+        preserveInProductName:true,
+      },
       "family":{
         name:"Family",
         aliases:[
@@ -45569,6 +45458,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Grocery"],
         preserveInProductName:true,
       },
       "quinoa":{
@@ -45580,6 +45470,19 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Grocery"],
+        preserveInProductName:true,
+      },
+      "talens":{
+        name:"Talens",
+        aliases:[
+          {
+            value:"Talens",
+            type:"official",
+            priority:90,
+          },
+        ],
+        categories:["School Supplies"],
         preserveInProductName:true,
       },
       "tru":{
@@ -45591,6 +45494,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Grocery"],
         variants:[
           {
             name: "Orange",
@@ -45608,75 +45512,11 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Grocery"],
         preserveInProductName:true,
       },
     },
     categories: ["Grocery"],
-  },
-  "royal-and-langnickel": {
-    id: "royal-and-langnickel",
-    name: "Royal & Langnickel",
-    aliases: [
-      {
-        value: "Royal & Langnickel",
-        type: "official",
-        priority: 100,
-        strength: "strong",
-      },
-    ],
-    categories: ["School Supplies"],
-  },
-  "royal-brites": {
-    id: "royal-brites",
-    name: "Royal Brites",
-    aliases: [
-      {
-        value: "Royal Brites",
-        type: "official",
-        priority: 100,
-        strength: "strong",
-      },
-    ],
-    categories: ["School Supplies"],
-  },
-  "royal-canin": {
-    id: "royal-canin",
-    name: "Royal Canin",
-    aliases: [
-      {
-        value: "Royal Canin",
-        type: "official",
-        priority: 100,
-        strength: "strong",
-      },
-    ],
-    productLines: {
-      "veterinary":{
-        name:"Veterinary",
-        aliases:[
-          {
-            value:"Veterinary",
-            type:"official",
-            priority:90,
-          },
-        ],
-        preserveInProductName:true,
-      },
-    },
-    categories: ["Pet Supplies"],
-  },
-  "royal-talens": {
-    id: "royal-talens",
-    name: "Royal Talens",
-    aliases: [
-      {
-        value: "Royal Talens",
-        type: "official",
-        priority: 100,
-        strength: "strong",
-      },
-    ],
-    categories: ["School Supplies"],
   },
   "royco": {
     id: "royco",
@@ -46297,6 +46137,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Medicine"],
         preserveInProductName:true,
       },
       "jet-spray":{
@@ -46308,6 +46149,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Medicine"],
         preserveInProductName:true,
       },
     },
@@ -46399,6 +46241,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Hardware"],
         preserveInProductName:true,
       },
     },
@@ -46532,20 +46375,21 @@ export const PRODUCT_BRAND_METADATA = {
         strength: "strong",
       },
     ],
-    categories: ["Personal Care","School Supplies"],
-  },
-  "sanicare-hand-sanitizer": {
-    id: "sanicare-hand-sanitizer",
-    name: "Sanicare Hand Sanitizer",
-    aliases: [
-      {
-        value: "Sanicare Hand Sanitizer",
-        type: "official",
-        priority: 100,
-        strength: "strong",
+    productLines: {
+      "hand-sanitizer":{
+        name:"Hand Sanitizer",
+        aliases:[
+          {
+            value:"Hand Sanitizer",
+            type:"official",
+            priority:90,
+          },
+        ],
+        categories:["Medicine"],
+        preserveInProductName:true,
       },
-    ],
-    categories: ["Medicine"],
+    },
+    categories: ["Personal Care","School Supplies"],
   },
   "sanko": {
     id: "sanko",
@@ -46974,20 +46818,21 @@ export const PRODUCT_BRAND_METADATA = {
         strength: "strong",
       },
     ],
-    categories: ["School Supplies"],
-  },
-  "schneider-electric": {
-    id: "schneider-electric",
-    name: "Schneider Electric",
-    aliases: [
-      {
-        value: "Schneider Electric",
-        type: "official",
-        priority: 100,
-        strength: "strong",
+    productLines: {
+      "electric":{
+        name:"Electric",
+        aliases:[
+          {
+            value:"Electric",
+            type:"official",
+            priority:90,
+          },
+        ],
+        categories:["Hardware"],
+        preserveInProductName:true,
       },
-    ],
-    categories: ["Hardware"],
+    },
+    categories: ["School Supplies"],
   },
   "scholastic": {
     id: "scholastic",
@@ -47117,20 +46962,21 @@ export const PRODUCT_BRAND_METADATA = {
         strength: "strong",
       },
     ],
-    categories: ["Hardware","Household","School Supplies"],
-  },
-  "scotch-brite": {
-    id: "scotch-brite",
-    name: "Scotch-Brite",
-    aliases: [
-      {
-        value: "Scotch-Brite",
-        type: "official",
-        priority: 100,
-        strength: "strong",
+    productLines: {
+      "scotch-brite":{
+        name:"Scotch-Brite",
+        aliases:[
+          {
+            value:"Scotch-Brite",
+            type:"official",
+            priority:90,
+          },
+        ],
+        categories:["Hardware","Household","Pet Supplies"],
+        preserveInProductName:true,
       },
-    ],
-    categories: ["Hardware","Household","Pet Supplies"],
+    },
+    categories: ["Hardware","Household","Pet Supplies","School Supplies"],
   },
   "scott": {
     id: "scott",
@@ -47260,20 +47106,21 @@ export const PRODUCT_BRAND_METADATA = {
         strength: "strong",
       },
     ],
-    categories: ["School Supplies"],
-  },
-  "seagate-skyhawk": {
-    id: "seagate-skyhawk",
-    name: "Seagate SkyHawk",
-    aliases: [
-      {
-        value: "Seagate SkyHawk",
-        type: "official",
-        priority: 100,
-        strength: "strong",
+    productLines: {
+      "skyhawk":{
+        name:"SkyHawk",
+        aliases:[
+          {
+            value:"SkyHawk",
+            type:"official",
+            priority:90,
+          },
+        ],
+        categories:["Hardware"],
+        preserveInProductName:true,
       },
-    ],
-    categories: ["Hardware"],
+    },
+    categories: ["School Supplies"],
   },
   "seaking": {
     id: "seaking",
@@ -47387,6 +47234,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Grocery"],
         preserveInProductName:true,
       },
     },
@@ -47910,20 +47758,21 @@ export const PRODUCT_BRAND_METADATA = {
         strength: "strong",
       },
     ],
-    categories: ["Pet Supplies"],
-  },
-  "sherpa-pink": {
-    id: "sherpa-pink",
-    name: "Sherpa Pink",
-    aliases: [
-      {
-        value: "Sherpa Pink",
-        type: "official",
-        priority: 100,
-        strength: "strong",
+    productLines: {
+      "pink":{
+        name:"Pink",
+        aliases:[
+          {
+            value:"Pink",
+            type:"official",
+            priority:90,
+          },
+        ],
+        categories:["Grocery"],
+        preserveInProductName:true,
       },
-    ],
-    categories: ["Grocery"],
+    },
+    categories: ["Pet Supplies"],
   },
   "sherwin-williams": {
     id: "sherwin-williams",
@@ -48456,33 +48305,33 @@ export const PRODUCT_BRAND_METADATA = {
         strength: "strong",
       },
     ],
+    productLines: {
+      "green":{
+        name:"Green",
+        aliases:[
+          {
+            value:"Green",
+            type:"official",
+            priority:90,
+          },
+        ],
+        categories:["Hardware"],
+        preserveInProductName:true,
+      },
+      "solution":{
+        name:"Solution",
+        aliases:[
+          {
+            value:"Solution",
+            type:"official",
+            priority:90,
+          },
+        ],
+        categories:["Pet Supplies"],
+        preserveInProductName:true,
+      },
+    },
     categories: ["Personal Care"],
-  },
-  "simple-green": {
-    id: "simple-green",
-    name: "Simple Green",
-    aliases: [
-      {
-        value: "Simple Green",
-        type: "official",
-        priority: 100,
-        strength: "strong",
-      },
-    ],
-    categories: ["Hardware"],
-  },
-  "simple-solution": {
-    id: "simple-solution",
-    name: "Simple Solution",
-    aliases: [
-      {
-        value: "Simple Solution",
-        type: "official",
-        priority: 100,
-        strength: "strong",
-      },
-    ],
-    categories: ["Pet Supplies"],
   },
   "simplehuman": {
     id: "simplehuman",
@@ -48791,6 +48640,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Grocery"],
         preserveInProductName:true,
       },
     },
@@ -49116,6 +48966,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Grocery"],
         preserveInProductName:true,
       },
     },
@@ -49184,20 +49035,21 @@ export const PRODUCT_BRAND_METADATA = {
         strength: "strong",
       },
     ],
-    categories: ["Personal Care"],
-  },
-  "snow-bear": {
-    id: "snow-bear",
-    name: "Snow Bear",
-    aliases: [
-      {
-        value: "Snow Bear",
-        type: "official",
-        priority: 100,
-        strength: "strong",
+    productLines: {
+      "bear":{
+        name:"Bear",
+        aliases:[
+          {
+            value:"Bear",
+            type:"official",
+            priority:90,
+          },
+        ],
+        categories:["Grocery"],
+        preserveInProductName:true,
       },
-    ],
-    categories: ["Grocery"],
+    },
+    categories: ["Personal Care"],
   },
   "snowman": {
     id: "snowman",
@@ -49717,20 +49569,21 @@ export const PRODUCT_BRAND_METADATA = {
         strength: "strong",
       },
     ],
-    categories: ["Grocery"],
-  },
-  "spectrum-noir": {
-    id: "spectrum-noir",
-    name: "Spectrum Noir",
-    aliases: [
-      {
-        value: "Spectrum Noir",
-        type: "official",
-        priority: 100,
-        strength: "strong",
+    productLines: {
+      "noir":{
+        name:"Noir",
+        aliases:[
+          {
+            value:"Noir",
+            type:"official",
+            priority:90,
+          },
+        ],
+        categories:["School Supplies"],
+        preserveInProductName:true,
       },
-    ],
-    categories: ["School Supplies"],
+    },
+    categories: ["Grocery"],
   },
   "spellbinders": {
     id: "spellbinders",
@@ -49861,19 +49714,6 @@ export const PRODUCT_BRAND_METADATA = {
       },
     ],
     categories: ["Pet Supplies"],
-  },
-  "sprinkles": {
-    id: "sprinkles",
-    name: "Sprinkles",
-    aliases: [
-      {
-        value: "Sprinkles",
-        type: "official",
-        priority: 100,
-        strength: "strong",
-      },
-    ],
-    categories: ["Grocery"],
   },
   "sprite": {
     id: "sprite",
@@ -50052,6 +49892,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Grocery"],
         preserveInProductName:true,
       },
     },
@@ -50147,19 +49988,6 @@ export const PRODUCT_BRAND_METADATA = {
       },
     ],
     categories: ["Hardware"],
-  },
-  "steel-cut-oats": {
-    id: "steel-cut-oats",
-    name: "Steel Cut Oats",
-    aliases: [
-      {
-        value: "Steel Cut Oats",
-        type: "official",
-        priority: 100,
-        strength: "strong",
-      },
-    ],
-    categories: ["Grocery"],
   },
   "steelasia": {
     id: "steelasia",
@@ -50338,6 +50166,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Medicine"],
         preserveInProductName:true,
       },
     },
@@ -50793,6 +50622,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Grocery"],
         preserveInProductName:true,
       },
     },
@@ -51456,6 +51286,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Medicine"],
         preserveInProductName:true,
       },
     },
@@ -51820,6 +51651,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Medicine"],
         preserveInProductName:true,
       },
     },
@@ -51963,6 +51795,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Medicine"],
         preserveInProductName:true,
       },
     },
@@ -52002,6 +51835,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Medicine"],
         preserveInProductName:true,
       },
     },
@@ -52122,46 +51956,45 @@ export const PRODUCT_BRAND_METADATA = {
         strength: "strong",
       },
     ],
+    productLines: {
+      "insulin-syringe":{
+        name:"Insulin Syringe",
+        aliases:[
+          {
+            value:"Insulin Syringe",
+            type:"official",
+            priority:90,
+          },
+        ],
+        categories:["Medicine"],
+        preserveInProductName:true,
+      },
+      "oral-syringe":{
+        name:"Oral Syringe",
+        aliases:[
+          {
+            value:"Oral Syringe",
+            type:"official",
+            priority:90,
+          },
+        ],
+        categories:["Medicine"],
+        preserveInProductName:true,
+      },
+      "syringe":{
+        name:"Syringe",
+        aliases:[
+          {
+            value:"Syringe",
+            type:"official",
+            priority:90,
+          },
+        ],
+        categories:["Medicine"],
+        preserveInProductName:true,
+      },
+    },
     categories: ["Pet Supplies"],
-  },
-  "terumo-insulin-syringe": {
-    id: "terumo-insulin-syringe",
-    name: "Terumo Insulin Syringe",
-    aliases: [
-      {
-        value: "Terumo Insulin Syringe",
-        type: "official",
-        priority: 100,
-        strength: "strong",
-      },
-    ],
-    categories: ["Medicine"],
-  },
-  "terumo-oral-syringe": {
-    id: "terumo-oral-syringe",
-    name: "Terumo Oral Syringe",
-    aliases: [
-      {
-        value: "Terumo Oral Syringe",
-        type: "official",
-        priority: 100,
-        strength: "strong",
-      },
-    ],
-    categories: ["Medicine"],
-  },
-  "terumo-syringe": {
-    id: "terumo-syringe",
-    name: "Terumo Syringe",
-    aliases: [
-      {
-        value: "Terumo Syringe",
-        type: "official",
-        priority: 100,
-        strength: "strong",
-      },
-    ],
-    categories: ["Medicine"],
   },
   "tesa": {
     id: "tesa",
@@ -52772,46 +52605,45 @@ export const PRODUCT_BRAND_METADATA = {
         strength: "strong",
       },
     ],
-    categories: ["Grocery","Household"],
-  },
-  "tiger-balm": {
-    id: "tiger-balm",
-    name: "Tiger Balm",
-    aliases: [
-      {
-        value: "Tiger Balm",
-        type: "official",
-        priority: 100,
-        strength: "strong",
-      },
-    ],
     productLines: {
-      "patch":{
-        name:"Patch",
+      "balm":{
+        name:"Balm",
         aliases:[
           {
-            value:"Patch",
+            value:"Balm",
             type:"official",
             priority:90,
           },
         ],
+        categories:["Medicine"],
+        preserveInProductName:true,
+      },
+      "balm-patch":{
+        name:"Balm Patch",
+        aliases:[
+          {
+            value:"Balm Patch",
+            type:"official",
+            priority:90,
+          },
+        ],
+        categories:["Medicine"],
+        preserveInProductName:true,
+      },
+      "head":{
+        name:"Head",
+        aliases:[
+          {
+            value:"Head",
+            type:"official",
+            priority:90,
+          },
+        ],
+        categories:["Hardware"],
         preserveInProductName:true,
       },
     },
-    categories: ["Medicine"],
-  },
-  "tiger-head": {
-    id: "tiger-head",
-    name: "Tiger Head",
-    aliases: [
-      {
-        value: "Tiger Head",
-        type: "official",
-        priority: 100,
-        strength: "strong",
-      },
-    ],
-    categories: ["Hardware"],
+    categories: ["Grocery","Household"],
   },
   "tigernu": {
     id: "tigernu",
@@ -52837,20 +52669,21 @@ export const PRODUCT_BRAND_METADATA = {
         strength: "strong",
       },
     ],
-    categories: ["Pet Supplies"],
-  },
-  "tile-rite": {
-    id: "tile-rite",
-    name: "Tile Rite",
-    aliases: [
-      {
-        value: "Tile Rite",
-        type: "official",
-        priority: 100,
-        strength: "strong",
+    productLines: {
+      "rite":{
+        name:"Rite",
+        aliases:[
+          {
+            value:"Rite",
+            type:"official",
+            priority:90,
+          },
+        ],
+        categories:["Hardware"],
+        preserveInProductName:true,
       },
-    ],
-    categories: ["Hardware"],
+    },
+    categories: ["Pet Supplies"],
   },
   "tillman": {
     id: "tillman",
@@ -52969,19 +52802,6 @@ export const PRODUCT_BRAND_METADATA = {
     ],
     categories: ["Hardware"],
   },
-  "toasted": {
-    id: "toasted",
-    name: "Toasted",
-    aliases: [
-      {
-        value: "Toasted",
-        type: "official",
-        priority: 100,
-        strength: "strong",
-      },
-    ],
-    categories: ["Grocery"],
-  },
   "toblerone": {
     id: "toblerone",
     name: "Toblerone",
@@ -53003,6 +52823,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Grocery"],
         preserveInProductName:true,
       },
       "white":{
@@ -53014,6 +52835,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Grocery"],
         preserveInProductName:true,
       },
     },
@@ -53394,20 +53216,21 @@ export const PRODUCT_BRAND_METADATA = {
         strength: "strong",
       },
     ],
-    categories: ["School Supplies"],
-  },
-  "toshiba-s300": {
-    id: "toshiba-s300",
-    name: "Toshiba S300",
-    aliases: [
-      {
-        value: "Toshiba S300",
-        type: "official",
-        priority: 100,
-        strength: "strong",
+    productLines: {
+      "s300":{
+        name:"S300",
+        aliases:[
+          {
+            value:"S300",
+            type:"official",
+            priority:90,
+          },
+        ],
+        categories:["Hardware"],
+        preserveInProductName:true,
       },
-    ],
-    categories: ["Hardware"],
+    },
+    categories: ["School Supplies"],
   },
   "tostitos": {
     id: "tostitos",
@@ -53641,20 +53464,21 @@ export const PRODUCT_BRAND_METADATA = {
         strength: "strong",
       },
     ],
-    categories: ["Hardware","Pet Supplies"],
-  },
-  "tp-link-tapo": {
-    id: "tp-link-tapo",
-    name: "TP-Link Tapo",
-    aliases: [
-      {
-        value: "TP-Link Tapo",
-        type: "official",
-        priority: 100,
-        strength: "strong",
+    productLines: {
+      "tapo":{
+        name:"Tapo",
+        aliases:[
+          {
+            value:"Tapo",
+            type:"official",
+            priority:90,
+          },
+        ],
+        categories:["Household"],
+        preserveInProductName:true,
       },
-    ],
-    categories: ["Household"],
+    },
+    categories: ["Hardware","Pet Supplies"],
   },
   "tractel": {
     id: "tractel",
@@ -54215,19 +54039,6 @@ export const PRODUCT_BRAND_METADATA = {
     ],
     categories: ["Hardware"],
   },
-  "true-value": {
-    id: "true-value",
-    name: "True Value",
-    aliases: [
-      {
-        value: "True Value",
-        type: "official",
-        priority: 100,
-        strength: "strong",
-      },
-    ],
-    categories: ["Hardware"],
-  },
   "trung-nguyen": {
     id: "trung-nguyen",
     name: "Trung Nguyen",
@@ -54382,20 +54193,21 @@ export const PRODUCT_BRAND_METADATA = {
         strength: "strong",
       },
     ],
-    categories: ["Household"],
-  },
-  "tuff-jon": {
-    id: "tuff-jon",
-    name: "Tuff Jon",
-    aliases: [
-      {
-        value: "Tuff Jon",
-        type: "official",
-        priority: 100,
-        strength: "strong",
+    productLines: {
+      "jon":{
+        name:"Jon",
+        aliases:[
+          {
+            value:"Jon",
+            type:"official",
+            priority:90,
+          },
+        ],
+        categories:["Hardware"],
+        preserveInProductName:true,
       },
-    ],
-    categories: ["Hardware"],
+    },
+    categories: ["Household"],
   },
   "tuffy": {
     id: "tuffy",
@@ -54561,6 +54373,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Grocery"],
         preserveInProductName:true,
       },
     },
@@ -54795,6 +54608,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Grocery"],
         preserveInProductName:true,
       },
     },
@@ -54838,19 +54652,6 @@ export const PRODUCT_BRAND_METADATA = {
       },
     ],
     categories: ["Household","School Supplies"],
-  },
-  "uht": {
-    id: "uht",
-    name: "UHT",
-    aliases: [
-      {
-        value: "UHT",
-        type: "official",
-        priority: 100,
-        strength: "strong",
-      },
-    ],
-    categories: ["Grocery"],
   },
   "uhu": {
     id: "uhu",
@@ -55071,85 +54872,45 @@ export const PRODUCT_BRAND_METADATA = {
         strength: "strong",
       },
     ],
-    categories: ["School Supplies"],
-  },
-  "uni-ball": {
-    id: "uni-ball",
-    name: "Uni-ball",
-    aliases: [
-      {
-        value: "Uni-ball",
-        type: "official",
-        priority: 100,
-        strength: "strong",
+    productLines: {
+      "uni-ball":{
+        name:"Uni-ball",
+        aliases:[
+          {
+            value:"Uni-ball",
+            type:"official",
+            priority:90,
+          },
+        ],
+        categories:["School Supplies"],
+        preserveInProductName:true,
       },
-    ],
-    categories: ["School Supplies"],
-  },
-  "uni-care": {
-    id: "uni-care",
-    name: "Uni-Care",
-    aliases: [
-      {
-        value: "Uni-Care",
-        type: "official",
-        priority: 100,
-        strength: "strong",
+      "uni-care":{
+        name:"Uni-Care",
+        aliases:[
+          {
+            value:"Uni-Care",
+            type:"official",
+            priority:90,
+          },
+        ],
+        categories:["School Supplies"],
+        preserveInProductName:true,
       },
-    ],
-    categories: ["School Supplies"],
-  },
-  "uni-eagle": {
-    id: "uni-eagle",
-    name: "Uni-Eagle",
-    aliases: [
-      {
-        value: "Uni-Eagle",
-        type: "official",
-        priority: 100,
-        strength: "strong",
+      "uni-t":{
+        name:"Uni-T",
+        aliases:[
+          {
+            value:"Uni-T",
+            type:"official",
+            priority:90,
+          },
+        ],
+        categories:["Grocery","Hardware"],
+        preserveInProductName:true,
       },
-    ],
-    categories: ["Grocery"],
-  },
-  "uni-pak": {
-    id: "uni-pak",
-    name: "Uni-Pak",
-    aliases: [
-      {
-        value: "Uni-Pak",
-        type: "official",
-        priority: 100,
-        strength: "strong",
-      },
-    ],
-    categories: ["Grocery"],
-  },
-  "uni-president": {
-    id: "uni-president",
-    name: "Uni-President",
-    aliases: [
-      {
-        value: "Uni-President",
-        type: "official",
-        priority: 100,
-        strength: "strong",
-      },
-    ],
-    categories: ["Grocery"],
-  },
-  "uni-t": {
-    id: "uni-t",
-    name: "Uni-T",
-    aliases: [
-      {
-        value: "Uni-T",
-        type: "official",
-        priority: 100,
-        strength: "strong",
-      },
-    ],
-    categories: ["Hardware"],
+    },
+    categories: ["Grocery","Hardware","School Supplies"],
   },
   "unicharm": {
     id: "unicharm",
@@ -55240,33 +55001,33 @@ export const PRODUCT_BRAND_METADATA = {
         strength: "strong",
       },
     ],
+    productLines: {
+      "cement":{
+        name:"Cement",
+        aliases:[
+          {
+            value:"Cement",
+            type:"official",
+            priority:90,
+          },
+        ],
+        categories:["Hardware"],
+        preserveInProductName:true,
+      },
+      "galvasteel":{
+        name:"Galvasteel",
+        aliases:[
+          {
+            value:"Galvasteel",
+            type:"official",
+            priority:90,
+          },
+        ],
+        categories:["Hardware"],
+        preserveInProductName:true,
+      },
+    },
     categories: ["Household"],
-  },
-  "union-cement": {
-    id: "union-cement",
-    name: "Union Cement",
-    aliases: [
-      {
-        value: "Union Cement",
-        type: "official",
-        priority: 100,
-        strength: "strong",
-      },
-    ],
-    categories: ["Hardware"],
-  },
-  "union-galvasteel": {
-    id: "union-galvasteel",
-    name: "Union Galvasteel",
-    aliases: [
-      {
-        value: "Union Galvasteel",
-        type: "official",
-        priority: 100,
-        strength: "strong",
-      },
-    ],
-    categories: ["Hardware"],
   },
   "unior": {
     id: "unior",
@@ -55484,6 +55245,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Hardware"],
         preserveInProductName:true,
       },
     },
@@ -55671,19 +55433,6 @@ export const PRODUCT_BRAND_METADATA = {
     ],
     categories: ["Medicine"],
   },
-  "value": {
-    id: "value",
-    name: "Value",
-    aliases: [
-      {
-        value: "Value",
-        type: "official",
-        priority: 100,
-        strength: "strong",
-      },
-    ],
-    categories: ["Hardware"],
-  },
   "van-beest": {
     id: "van-beest",
     name: "Van Beest",
@@ -55760,33 +55509,33 @@ export const PRODUCT_BRAND_METADATA = {
         strength: "strong",
       },
     ],
+    productLines: {
+      "lip-therapy":{
+        name:"Lip Therapy",
+        aliases:[
+          {
+            value:"Lip Therapy",
+            type:"official",
+            priority:90,
+          },
+        ],
+        categories:["Medicine"],
+        preserveInProductName:true,
+      },
+      "petroleum-jelly":{
+        name:"Petroleum Jelly",
+        aliases:[
+          {
+            value:"Petroleum Jelly",
+            type:"official",
+            priority:90,
+          },
+        ],
+        categories:["Medicine"],
+        preserveInProductName:true,
+      },
+    },
     categories: ["Personal Care"],
-  },
-  "vaseline-lip-therapy": {
-    id: "vaseline-lip-therapy",
-    name: "Vaseline Lip Therapy",
-    aliases: [
-      {
-        value: "Vaseline Lip Therapy",
-        type: "official",
-        priority: 100,
-        strength: "strong",
-      },
-    ],
-    categories: ["Medicine"],
-  },
-  "vaseline-petroleum-jelly": {
-    id: "vaseline-petroleum-jelly",
-    name: "Vaseline Petroleum Jelly",
-    aliases: [
-      {
-        value: "Vaseline Petroleum Jelly",
-        type: "official",
-        priority: 100,
-        strength: "strong",
-      },
-    ],
-    categories: ["Medicine"],
   },
   "vaughan": {
     id: "vaughan",
@@ -56163,19 +55912,20 @@ export const PRODUCT_BRAND_METADATA = {
         strength: "strong",
       },
     ],
-    categories: ["Hardware"],
-  },
-  "vibro-acoustics": {
-    id: "vibro-acoustics",
-    name: "Vibro-Acoustics",
-    aliases: [
-      {
-        value: "Vibro-Acoustics",
-        type: "official",
-        priority: 100,
-        strength: "strong",
+    productLines: {
+      "vibro-acoustics":{
+        name:"Vibro-Acoustics",
+        aliases:[
+          {
+            value:"Vibro-Acoustics",
+            type:"official",
+            priority:90,
+          },
+        ],
+        categories:["Hardware"],
+        preserveInProductName:true,
       },
-    ],
+    },
     categories: ["Hardware"],
   },
   "vice-cosmetics": {
@@ -56836,6 +56586,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Hardware"],
         preserveInProductName:true,
       },
     },
@@ -57005,6 +56756,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Grocery"],
         preserveInProductName:true,
       },
     },
@@ -57320,46 +57072,33 @@ export const PRODUCT_BRAND_METADATA = {
         strength: "strong",
       },
     ],
+    productLines: {
+      "cotton-balls":{
+        name:"Cotton Balls",
+        aliases:[
+          {
+            value:"Cotton Balls",
+            type:"official",
+            priority:90,
+          },
+        ],
+        categories:["Medicine"],
+        preserveInProductName:true,
+      },
+      "cotton-buds":{
+        name:"Cotton Buds",
+        aliases:[
+          {
+            value:"Cotton Buds",
+            type:"official",
+            priority:90,
+          },
+        ],
+        categories:["Medicine"],
+        preserveInProductName:true,
+      },
+    },
     categories: ["Personal Care"],
-  },
-  "watsons-cotton-balls": {
-    id: "watsons-cotton-balls",
-    name: "Watsons Cotton Balls",
-    aliases: [
-      {
-        value: "Watsons Cotton Balls",
-        type: "official",
-        priority: 100,
-        strength: "strong",
-      },
-    ],
-    categories: ["Medicine"],
-  },
-  "watsons-cotton-buds": {
-    id: "watsons-cotton-buds",
-    name: "Watsons Cotton Buds",
-    aliases: [
-      {
-        value: "Watsons Cotton Buds",
-        type: "official",
-        priority: 100,
-        strength: "strong",
-      },
-    ],
-    categories: ["Medicine"],
-  },
-  "watsons-medicine-box": {
-    id: "watsons-medicine-box",
-    name: "Watsons Medicine Box",
-    aliases: [
-      {
-        value: "Watsons Medicine Box",
-        type: "official",
-        priority: 100,
-        strength: "strong",
-      },
-    ],
-    categories: ["Medicine"],
   },
   "watts": {
     id: "watts",
@@ -58035,20 +57774,21 @@ export const PRODUCT_BRAND_METADATA = {
         strength: "strong",
       },
     ],
-    categories: ["Grocery"],
-  },
-  "whole-earth-farms": {
-    id: "whole-earth-farms",
-    name: "Whole Earth Farms",
-    aliases: [
-      {
-        value: "Whole Earth Farms",
-        type: "official",
-        priority: 100,
-        strength: "strong",
+    productLines: {
+      "farms":{
+        name:"Farms",
+        aliases:[
+          {
+            value:"Farms",
+            type:"official",
+            priority:90,
+          },
+        ],
+        categories:["Pet Supplies"],
+        preserveInProductName:true,
       },
-    ],
-    categories: ["Pet Supplies"],
+    },
+    categories: ["Grocery"],
   },
   "wholesome": {
     id: "wholesome",
@@ -58162,6 +57902,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Hardware"],
         preserveInProductName:true,
       },
     },
@@ -59098,6 +58839,7 @@ export const PRODUCT_BRAND_METADATA = {
             priority:90,
           },
         ],
+        categories:["Hardware"],
         preserveInProductName:true,
       },
     },
@@ -59738,20 +59480,21 @@ export const PRODUCT_BRAND_METADATA = {
         strength: "strong",
       },
     ],
-    categories: ["Household"],
-  },
-  "zonrox-germicidal": {
-    id: "zonrox-germicidal",
-    name: "Zonrox Germicidal",
-    aliases: [
-      {
-        value: "Zonrox Germicidal",
-        type: "official",
-        priority: 100,
-        strength: "strong",
+    productLines: {
+      "germicidal":{
+        name:"Germicidal",
+        aliases:[
+          {
+            value:"Germicidal",
+            type:"official",
+            priority:90,
+          },
+        ],
+        categories:["Medicine"],
+        preserveInProductName:true,
       },
-    ],
-    categories: ["Medicine"],
+    },
+    categories: ["Household"],
   },
   "zoo-med": {
     id: "zoo-med",

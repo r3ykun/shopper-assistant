@@ -1,3 +1,4 @@
+//shopper-assistant\src\utils\brand\boostBrandCandidate.ts
 import { BrandCandidate } from "../../types/BrandCandidate";
 
 export function boostBrandCandidate(

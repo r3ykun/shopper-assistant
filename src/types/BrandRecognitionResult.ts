@@ -1,3 +1,4 @@
+//shopper-assistant\src\types\BrandRecognitionResult.ts
 import { ProductBrandMetadata } from "../constants/productBrandMetadata.types";
 
 export interface ProductLineMatch {

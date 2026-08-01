@@ -1,3 +1,4 @@
+//shopper-assistant/src/utils/product/calculateProductConfidence.ts
 import {BrandCandidate} from "../../types/BrandCandidate";
 
 interface Args{

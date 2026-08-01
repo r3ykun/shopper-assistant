@@ -1,4 +1,4 @@
-//shopper-assistant\validateProductBrandMetadata.ts
+// shopper-assistant/src/validateProductBrandMetadata.ts
 import {
   normalizeBrandText,
 } from "../shopper-assistant/src/utils/buildProductBrandIndex";

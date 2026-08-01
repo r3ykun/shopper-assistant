@@ -1,3 +1,4 @@
+// shopper-assistant/src/utils/product/rankProductRecognition.ts
 import {ProductRecognitionResult} from "../../types/ProductRecognitionResult";
 
 export function rankProductRecognition(

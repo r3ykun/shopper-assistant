@@ -1,3 +1,4 @@
+//shopper-assistant/src/utils/brand/suggestBrands.ts
 import { PRODUCT_BRAND_METADATA } from "../../constants/productBrandMetadata";
 import { similarityScore } from "./similarityScore";
 

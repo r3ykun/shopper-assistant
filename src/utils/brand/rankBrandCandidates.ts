@@ -1,3 +1,4 @@
+//shopper-assistant/src/utils/brand/rankBrandCandidates.ts
 import { BrandCandidate } from "../../types/BrandCandidate";
 import { boostBrandCandidate } from "./boostBrandCandidate";
 

@@ -1,3 +1,4 @@
+//shopper-assistant\src\constants\productCategoryAliases.ts
 export interface ProductCategoryAlias {
   category: string;
   subcategory: string;

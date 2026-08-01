@@ -1,3 +1,4 @@
+// shopper-assistant\src\utils\brand\deduplicateBrandCandidates.ts
 import { BrandCandidate } from "../../types/BrandCandidate";
 
 export function deduplicateBrandCandidates(

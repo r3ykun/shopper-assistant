@@ -1,3 +1,4 @@
+//shopper-assistant/src/utils/brand/scoreBrandCandidate.ts
 import {BRAND_CONFIDENCE} from "../../constants/brandConfidence";
 import {ProductBrandAlias} from "../../constants/productBrandMetadata.types";
 import {normalize} from "../normalize";

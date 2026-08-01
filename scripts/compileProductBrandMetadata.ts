@@ -1,9 +1,12 @@
 //shopper-assistant\scripts\compileProductBrandMetadata.ts
-import { writeFileSync } from "fs";
+import {mkdirSync,writeFileSync} from "fs";
 import { resolve } from "path";
 import { PRODUCT_BRANDS } from "../src/constants/brands";
 import { enrichAliases } from "./enrich/enrichAliases";
-import strict from "assert/strict";
+import {inferBrandHierarchy} from "./inferBrandHierarchy";
+import {applyBrandHierarchy} from "./applyBrandHierarchy";
+import {writeBrandHierarchyReport} from "./writeBrandHierarchyReport";
+import{buildManufacturerGraph} from"./buildManufacturerGraph";
 
 interface LegacyBrand {
   category: string;
@@ -75,15 +78,119 @@ const OUTPUT = resolve(
   "../src/constants/productBrandMetadata.ts"
 );
 
+const REVIEW_OUTPUT=resolve(
+	__dirname,
+	"./reports/ambiguousBrandReview.json"
+);
+
+const KNOWN_NON_BRAND_ENTRIES=new Set([
+	"asparagus",
+	"australian",
+	"carabao",
+	"fresh",
+	"full cream",
+	"uht",
+	"rolled oats",
+	"steel cut oats",
+	"refined salt",
+	"rock salt",
+	"japanese style",
+	"panko",
+	"mints",
+	"sprinkles",
+	"toasted",
+	"powdered",
+	"evaporated milk",
+	"condensed milk",
+	"fresh milk",
+	"coconut milk",
+	"coconut cream",
+	"olive oil",
+	"canola oil",
+	"corn oil",
+	"sunflower oil",
+	"cooking wine",
+	"rice paper",
+	"tomato paste",
+	"tomato ketchup",
+	"banana ketchup",
+	"chili sauce",
+	"hot sauce",
+	"oyster sauce",
+	"hoisin sauce",
+	"sesame oil",
+	"curry paste",
+	"curry powder",
+	"miso paste",
+	"ramen base",
+	"bread crumbs",
+	"cornstarch",
+	"rice flour",
+	"bread flour",
+	"self-rising flour",
+	"pizza sauce",
+	"fruit cocktail",
+	"trail mix",
+	"mixed nuts",
+	"activated charcoal",
+]);
+
+const BRAND_BLACKLIST_PATTERNS=[
+	/\b\d+\s*(ml|l|g|kg|mg|oz|lb)\b/i,
+	/\b(pack|sachet|bottle|can|box|jar|tube|pouch|refill)\b/i,
+	/\b(original|classic|regular|premium|value)\b/i,
+];
+
+const AMBIGUOUS_BRAND_TERMS=new Set([
+	"fresh",
+	"premium",
+	"classic",
+	"original",
+	"regular",
+	"natural",
+	"organic",
+	"family",
+	"choice",
+	"value",
+	"select",
+	"signature",
+	"gold",
+	"white",
+	"black",
+	"green",
+	"red",
+	"daily",
+	"excellent",
+	"ideal",
+	"dream",
+	"master",
+	"special",
+	"supreme",
+	"delight",
+	"champion",
+	"fortune",
+	"diamond",
+	"crystal",
+	"sunny",
+	"happy",
+]);
+
+const AMBIGUOUS_BRAND_PATTERNS=[
+	/^\d+$/,
+	/^[a-z]$/i,
+	/^(fresh|natural|organic|premium|special|select)$/i,
+	/^(white|black|green|red|gold|silver)$/i,
+	/^(original|classic|regular|value|choice)$/i,
+];
+
 function scoreProductLineCandidate(
   parent: BrandMetadata,
   child: BrandMetadata,
   lineName: string
 ): ProductLineCandidate {
 
-  let confidence = 0;
-
-  const reasons: string[] = [];
+  let confidence=30;
+  const reasons=["parent-prefix"];
 
   if (sharesCategory(parent, child)) {
     confidence += 40;
@@ -183,6 +290,36 @@ function uniqueLegacyBrands(
     seen.add(key);
     return true;
   });
+}
+
+function removeKnownNonBrandEntries(
+	brands:LegacyBrand[]
+):LegacyBrand[]{
+	return brands.filter(item=>
+		!KNOWN_NON_BRAND_ENTRIES.has(
+			normalizeKeyword(item.brand)
+		)
+	);
+}
+
+function removeInvalidCanonicalBrands(
+	brands:LegacyBrand[]
+):LegacyBrand[]{
+	return brands.filter(item=>{
+		const name=normalizeKeyword(item.brand);
+
+		if(name.length<2){
+			return false;
+		}
+
+		for(const pattern of BRAND_BLACKLIST_PATTERNS){
+			if(pattern.test(name)){
+				return false;
+			}
+		}
+
+		return true;
+	});
 }
 
 function quote(value: string): string {
@@ -508,6 +645,49 @@ function writeMetadataFile(
   );
 
   console.log(`Generated: ${OUTPUT}`);
+}
+
+function writeAmbiguousBrandReview(
+	brands:Map<string,BrandMetadata>
+):number{
+	const review=collectAmbiguousBrands(
+		brands
+	);
+
+	mkdirSync(
+		resolve(__dirname,"./reports"),
+		{recursive:true}
+	);
+
+	writeFileSync(
+		REVIEW_OUTPUT,
+		JSON.stringify(review,null,2),
+		"utf8"
+	);
+
+	console.log(
+		`Ambiguous brands for review: ${review.length}`
+	);
+
+  if(review.length<=20){
+    console.log(
+      "Metadata quality: PASS"
+    );
+  }else if(review.length<=50){
+    console.log(
+      "Metadata quality: REVIEW"
+    );
+  }else{
+    console.log(
+      "Metadata quality: FAIL"
+    );
+  }
+
+	console.log(
+		`Review report: ${REVIEW_OUTPUT}`
+	);
+
+	return review.length;
 }
 
 function normalizeAliasValue(value: string): string {
@@ -938,31 +1118,28 @@ function mergeKnownProductLines(
 		);
 		if(!parent)continue;
 
-		for(const lineName of lineNames){
+    for(const lineName of lineNames){
       const child=allBrands.find(
-        b=>b.name.toLowerCase()===lineName.toLowerCase()
+        brand=>
+          brand.name.toLowerCase()===
+          lineName.toLowerCase()
+      );
+
+      upsertProductLine(
+        parent,
+        lineName,
+        {
+          aliases:[lineName],
+          categories:child?.categories??parent.categories,
+          subcategories:child?.subcategories??parent.subcategories,
+          preserveInProductName:true,
+        }
       );
 
       if(child){
-        parent.productLines[lineName]??=
-        {
-          name:lineName,
-          aliases:[lineName],
-          preserveInProductName:true,
-          variants:[],
-        }
         confirmedChildIds.add(child.id);
-        continue;
       }
-
-      parent.productLines[lineName]??=
-      {
-        name:lineName,
-        aliases:[lineName],
-        preserveInProductName:true,
-        variants:[],
-      }
-		}
+    }
 	}
 }
 
@@ -979,14 +1156,16 @@ function mergeKnownProductLineVariants(
 		if(!parent)continue;
 
 		for(const[lineName,variantNames]of Object.entries(productLines)){
-			const productLine=
-				parent.productLines[lineName]??=
-				{
-					name:lineName,
-					aliases:[lineName],
-					preserveInProductName:true,
-					variants:[],
-				};
+      const productLine=upsertProductLine(
+        parent,
+        lineName,
+        {
+          aliases:[lineName],
+          categories:parent.categories,
+          subcategories:parent.subcategories,
+          preserveInProductName:true,
+        }
+      );
 
 			for(const variantName of variantNames){
 				const wasAdded=addVariantMetadata(
@@ -1105,8 +1284,31 @@ function generateMetadataKeywords(
 }
 
 function main() {
-  const legacy = uniqueLegacyBrands(
+
+  const manufacturerGraph=
+    buildManufacturerGraph();
+
+  console.log(
+    `Manufacturer relations: ${
+      manufacturerGraph.length
+    }`
+  );
+
+  const sourceLegacy=uniqueLegacyBrands(
     buildLegacyBrands()
+  );
+
+  const legacy=
+    removeInvalidCanonicalBrands(
+      removeKnownNonBrandEntries(
+        sourceLegacy
+      )
+    );
+
+  console.log(
+    `Removed known non-brand entries: ${
+      sourceLegacy.length-legacy.length
+    }`
   );
 
   console.log(
@@ -1143,25 +1345,28 @@ function main() {
     `Known product-line variants added: ${knownVariantsAdded}`
   );
 
-  const luckyMe=brands.get("lucky-me");
+  const luckyMe=[...brands.values()].find(
+    brand=>brand.name.toLowerCase()==="lucky me!"
+  );
 
-if(luckyMe){
-	luckyMe.productLines??={};
-
-	luckyMe.productLines["pancit-canton"]??={
-		name:"Pancit Canton",
-		aliases:["Pancit Canton"],
-		categories:["Grocery"],
-		keywords:[
-			"pancit canton",
-			"pancit",
-			"canton",
-			"instant noodles",
-			"noodles",
-		],
-		preserveInProductName:true,
-	};
-}
+  if(luckyMe){
+    upsertProductLine(
+      luckyMe,
+      "Pancit Canton",
+      {
+        aliases:["Pancit Canton"],
+        categories:["Grocery"],
+        keywords:[
+          "pancit canton",
+          "pancit",
+          "canton",
+          "instant noodles",
+          "noodles",
+        ],
+        preserveInProductName:true,
+      }
+    );
+  }
 
   const confirmedChildIds=new Set<string>([
     ...variantExtraction.confirmedChildIds,
@@ -1181,8 +1386,78 @@ if(luckyMe){
     `Final canonical brands: ${brands.size}`
   );
 
+  const existingProductLineChildNames=new Set(
+    [...brands.values()].flatMap(
+      brand=>
+        Object.values(
+          brand.productLines
+        ).map(line=>
+          normalizeKeyword(
+            line.name
+          )
+        )
+    )
+  );
+
+  const hierarchy=inferBrandHierarchy(
+    [...brands.values()].map(brand=>({
+      id:brand.id,
+      name:brand.name,
+      categories:[...brand.categories],
+      subcategories:[...brand.subcategories],
+    }))
+  );
+
+  const safeHierarchyRelations=
+    hierarchy.confirmed.filter(
+      relation=>
+        !existingProductLineChildNames.has(
+          normalizeKeyword(
+            relation.childName
+          )
+        )
+    );
+
+  const inferredChildIds=applyBrandHierarchy(
+    brands,
+    safeHierarchyRelations
+  );
+
+  writeBrandHierarchyReport(
+    resolve(
+      __dirname,
+      "./reports/ambiguousBrandHierarchy.json"
+    ),
+    hierarchy.ambiguous
+  );
+
+  console.log(
+    `Hierarchy candidates: ${
+      hierarchy.confirmed.length+
+      hierarchy.ambiguous.length
+    }`
+  );
+
+  console.log(
+    `Automatically inferred product lines: ${inferredChildIds.size}`
+  );
+
+  console.log(
+    `Rejected existing product-line conflicts: ${
+      hierarchy.confirmed.length-
+      safeHierarchyRelations.length
+    }`
+  );
+
+  console.log(
+    `Ambiguous hierarchy candidates: ${hierarchy.ambiguous.length}`
+  );
+
   const mergedBrands =
     mergeEquivalentBrands(brands);
+    normalizeProductLineKeys(mergedBrands);
+    validateProductLineKeys(mergedBrands);
+    validateCanonicalBrands(mergedBrands);
 
   console.log(
     `Merged canonical brands: ${mergedBrands.size}`
@@ -1218,7 +1493,47 @@ if(luckyMe){
     `Generated aliases: ${generatedAliasCount}`
   );
 
+  const productLineCount=[
+    ...mergedBrands.values(),
+  ].reduce(
+    (total,brand)=>
+      total+
+      Object.keys(
+        brand.productLines
+      ).length,
+    0
+  );
+
+  console.log(
+    `Validated product lines: ${productLineCount}`
+  );
+
   writeMetadataFile(mergedBrands);
+
+  const ambiguousCount=
+    writeAmbiguousBrandReview(
+      mergedBrands
+    );
+
+  if(ambiguousCount>25){
+    throw new Error(
+      `Too many ambiguous brands (${ambiguousCount}). Review required before generating metadata.`
+    );
+  }
+
+  console.log(
+    `Validated canonical brands: ${
+      mergedBrands.size
+    }`
+  );
+
+  printCompilationSummary({
+    brands:mergedBrands.size,
+    productLines:productLineCount,
+    keywords:generatedKeywordCount,
+    aliases:generatedAliasCount,
+    ambiguous:ambiguousCount,
+  });
 }
 
 function createBrandMetadata(
@@ -1240,6 +1555,256 @@ function addUnique(target: string[], value: string) {
   if (!target.includes(value)) {
     target.push(value);
   }
+}
+
+function upsertProductLine(
+	brand:BrandMetadata,
+	lineName:string,
+	metadata:Partial<ProductLineMetadata>={}
+):ProductLineMetadata{
+	const key=slugify(lineName);
+	const existing=brand.productLines[key];
+
+	if(existing){
+		for(const alias of metadata.aliases??[]){
+			addUnique(existing.aliases,alias);
+		}
+		for(const category of metadata.categories??[]){
+			addUnique(existing.categories??=[],category);
+		}
+		for(const subcategory of metadata.subcategories??[]){
+			addUnique(existing.subcategories??=[],subcategory);
+		}
+		for(const keyword of metadata.keywords??[]){
+			addUnique(existing.keywords??=[],keyword);
+		}
+		existing.variants??=[];
+		return existing;
+	}
+
+	const productLine:ProductLineMetadata={
+		name:lineName,
+		aliases:[...(metadata.aliases??[])],
+		categories:[...(metadata.categories??[])],
+		subcategories:[...(metadata.subcategories??[])],
+		keywords:[...(metadata.keywords??[])],
+		variants:[...(metadata.variants??[])],
+		preserveInProductName:
+			metadata.preserveInProductName??true,
+	};
+
+	brand.productLines[key]=productLine;
+	return productLine;
+}
+
+function normalizeProductLineKeys(
+	brands:Map<string,BrandMetadata>
+):void{
+	for(const brand of brands.values()){
+		const normalized:Record<string,ProductLineMetadata>={};
+
+		for(const line of Object.values(brand.productLines)){
+			const key=slugify(line.name);
+			const existing=normalized[key];
+
+			if(!existing){
+				normalized[key]={
+					...line,
+					aliases:[...(line.aliases??[])],
+					categories:[...(line.categories??[])],
+					subcategories:[...(line.subcategories??[])],
+					keywords:[...(line.keywords??[])],
+					variants:[...(line.variants??[])],
+				};
+				continue;
+			}
+
+			for(const alias of line.aliases??[]){
+				addUnique(existing.aliases,alias);
+			}
+			for(const category of line.categories??[]){
+				addUnique(existing.categories??=[],category);
+			}
+			for(const subcategory of line.subcategories??[]){
+				addUnique(existing.subcategories??=[],subcategory);
+			}
+			for(const keyword of line.keywords??[]){
+				addUnique(existing.keywords??=[],keyword);
+			}
+
+			existing.variants??=[];
+
+			for(const variant of line.variants??[]){
+				if(
+					!existing.variants.some(
+						item=>
+							item.name.toLowerCase()===
+							variant.name.toLowerCase()
+					)
+				){
+					existing.variants.push(variant);
+				}
+			}
+		}
+
+		brand.productLines=normalized;
+	}
+}
+
+function validateProductLineKeys(
+	brands:Map<string,BrandMetadata>
+):void{
+	for(const brand of brands.values()){
+		const seenNames=new Map<string,string>();
+
+		for(const[key,line]of Object.entries(
+			brand.productLines
+		)){
+			const expectedKey=slugify(line.name);
+
+			if(key!==expectedKey){
+				throw new Error(
+					`Invalid product-line key "${key}" for "${brand.name} > ${line.name}". Expected "${expectedKey}".`
+				);
+			}
+
+			const normalizedName=normalizeKeyword(
+				line.name
+			);
+
+			const existingKey=seenNames.get(
+				normalizedName
+			);
+
+			if(existingKey){
+				throw new Error(
+					`Duplicate product line "${line.name}" under "${brand.name}" using keys "${existingKey}" and "${key}".`
+				);
+			}
+
+			seenNames.set(
+				normalizedName,
+				key
+			);
+		}
+	}
+}
+
+function validateCanonicalBrands(
+	brands:Map<string,BrandMetadata>
+):void{
+	const names=new Set<string>();
+
+	for(const brand of brands.values()){
+		const normalized=normalizeKeyword(
+			brand.name
+		);
+
+		if(names.has(normalized)){
+			throw new Error(
+				`Duplicate canonical brand "${brand.name}".`
+			);
+		}
+
+		names.add(normalized);
+
+		if(
+			KNOWN_NON_BRAND_ENTRIES.has(
+				normalized
+			)
+		){
+			throw new Error(
+				`Invalid canonical brand "${brand.name}".`
+			);
+		}
+	}
+}
+
+function printCompilationSummary(
+	stats:{
+		brands:number;
+		productLines:number;
+		keywords:number;
+		aliases:number;
+		ambiguous:number;
+	}
+){
+	console.log("");
+	console.log("========== Metadata Summary ==========");
+	console.log(`Brands          : ${stats.brands}`);
+	console.log(`Product Lines   : ${stats.productLines}`);
+	console.log(`Keywords        : ${stats.keywords}`);
+	console.log(`Aliases         : ${stats.aliases}`);
+	console.log(`Ambiguous       : ${stats.ambiguous}`);
+	console.log("======================================");
+}
+
+interface AmbiguousBrandReview{
+	id:string;
+	name:string;
+	categories:string[];
+	reasons:string[];
+}
+
+function collectAmbiguousBrands(
+	brands:Map<string,BrandMetadata>
+):AmbiguousBrandReview[]{
+	const review:AmbiguousBrandReview[]=[];
+
+	for(const brand of brands.values()){
+		const normalized=normalizeKeyword(
+			brand.name
+		);
+		const words=normalized
+			.split(" ")
+			.filter(Boolean);
+		const reasons:string[]=[];
+
+    if(
+      AMBIGUOUS_BRAND_PATTERNS.some(
+        pattern=>pattern.test(brand.name)
+      )
+    ){
+      reasons.push("generic-name-pattern");
+    }
+
+		if(words.length===1&&AMBIGUOUS_BRAND_TERMS.has(normalized)){
+			reasons.push("generic-single-word");
+		}
+
+    if(
+      brand.name.length<=2&&
+      !/^[A-Z0-9&]+$/.test(brand.name)
+    ){
+      reasons.push("short-non-acronym");
+    }
+
+    if(
+      brand.categories.length>3&&
+      brand.aliases.length===0&&
+      Object.keys(brand.productLines).length===0
+    ){
+      reasons.push("broad-category-coverage");
+    }
+
+		if(reasons.length===0)continue;
+
+		review.push({
+			id:brand.id,
+			name:brand.name,
+			categories:[...brand.categories].sort(
+				(a,b)=>a.localeCompare(b)
+			),
+			reasons,
+		});
+	}
+
+  return review.sort((a,b)=>{
+    if(b.reasons.length!==a.reasons.length){
+      return b.reasons.length-a.reasons.length;
+    }
+    return a.name.localeCompare(b.name);
+  });
 }
 
 function escapeRegExp(text: string): string {
@@ -1793,13 +2358,6 @@ function addVariantMetadata(
           continue;
         }
 
-        console.log({
-          parent:parent.name,
-          child:child.name,
-          remainder,
-          extracted,
-        });
-
         if(
           extracted.baseName &&
           extracted.baseName!==extracted.variantName &&
@@ -1808,19 +2366,21 @@ function addVariantMetadata(
             extracted.baseName
           )
         ){
-          parent.productLines[
-            extracted.baseName
-          ]??={
-            name:extracted.baseName,
-            aliases:[],
-            variants:[],
-          };
+          upsertProductLine(
+            parent,
+            extracted.baseName,
+            {
+              categories:child.categories,
+              subcategories:child.subcategories,
+              preserveInProductName:true,
+            }
+          );
         }
 
         const productLine=
           extracted.baseName
             ?parent.productLines[
-              extracted.baseName
+              slugify(extracted.baseName)
             ]
             :undefined;
 
@@ -1885,11 +2445,26 @@ function addVariantMetadata(
       }
 
       for (const child of candidates) {
-        const lineName = child.name
+        const lineName=child.name
           .slice(parent.name.length)
           .trim();
 
-        if (!lineName) {
+        if(!lineName)continue;
+
+        if(
+          REJECTED_PRODUCT_LINE_SUFFIXES.has(
+            lineName.toLowerCase()
+          )
+        ){
+          continue;
+        }
+
+        if(
+          isExcludedProductLine(
+            parent.name,
+            lineName
+          )
+        ){
           continue;
         }
 
@@ -1904,9 +2479,20 @@ function addVariantMetadata(
           continue;
         }
 
-        parent.productLines[lineName]={
-          name:lineName,
-          aliases:[],
+        const key=slugify(lineName);
+
+        if(parent.productLines[key]){
+            continue;
+        }
+
+        parent.productLines[key]={
+            name:lineName,
+            aliases:[],
+            categories:[...child.categories],
+            subcategories:[...child.subcategories],
+            keywords:[],
+            variants:[],
+            preserveInProductName:true,
         };
 
         confirmedChildIds.add(child.id);
@@ -1948,8 +2534,9 @@ function addVariantMetadata(
 
       addUnique(metadata.categories, item.category);
     }
-
+    
     return brands;
+    
   }
-
+  
 main();

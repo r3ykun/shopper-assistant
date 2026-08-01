@@ -1,3 +1,4 @@
+//shopper-assistant/src/utils/brand/similarityScore.ts
 import { damerauLevenshteinDistance } from "../damerauLevenshteinDistance";
 
 export function similarityScore(

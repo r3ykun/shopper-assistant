@@ -1,3 +1,4 @@
+//shopper-assistant\src\utils\brand\findBrandOwner.ts
 import {BrandCandidate} from "../../types/BrandCandidate";
 import {normalize} from "../normalize";
 

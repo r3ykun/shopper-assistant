@@ -504,7 +504,65 @@
 2. Remove unnecessary unit of measurements that will not be used like square meter, deciliter, etc...
 3. Make the measurement and unit to be side-by-side in the products form screen
 
+# Milestone 21.90.1 - Brands Metadata Cleanup — Product-Line Deduplication
+## ✅ Completed
+1. Removed 16 known non-brand entries
+2. Reduced legacy records to 4,937
+3. Extracted 17 variants
+4. Added 3 known product-line variants
+5. Confirmed 351 product-line relations
+6. Reduced canonical brands from 4,609 to 4,249
+7. Merged canonical brands to 4,237
+8. Generated 15,203 keywords
+9. Validated all 351 product lines
+10. No duplicate product-line keys reported
+
+# Milestone 21.90.2 - Brands Metadata Cleanup — Canonical Brand Filtering
+## ✅ Completed
+1. Invalid canonical brand filtering
+2. Pattern-based rejection
+3. Canonical brand validation
+4. Duplicate canonical validation
+5. Compiler integrity checks
+
+# Milestone 21.90.3 - Brands Metadata Cleanup — Ambiguous Brand Review
+## ✅ Completed
+1. Canonical brands validated: 4226
+2. Product lines validated: 347
+3. Keywords generated: 15151
+4. Aliases generated: 12
+5. Ambiguous brands reduced to: 16
+6. Metadata quality summary working
+7. Compiler output completed
+8. TypeScript validation completed
+
+# Milestone 21.90.4 — Metadata Enrichment
+## ✅ Completed
+1. Product-line deduplication
+2. Canonical-brand filtering
+3. Ambiguous-brand reporting
+4. Runtime product-line recognition
+
+
 ### 🚧 Ongoing
+
+# Milestone 21.90.5 — Automatic Brand Hierarchy Inference
+✅ Completed
+1. Automatic hierarchy inference engine
+2. Family bucket generation
+3. Automatic product-line insertion
+4. Conflict detection
+5. Ambiguous candidate reporting
+6. Compiler integration
+7. Metadata generation compatibility
+
+🔄 Ongoing
+8. Family-stem matching -current
+9. Descriptor-based classification
+10. Inference quality tuning
+11. Manufacturer ownership graph
+12. Confidence calibration
+13. Automatic product-line acceptance tuning
 
 # still need to fix
 - actually since there are already aliases for the units, lets integrate it with the name input just like the brand, to make it automatic
