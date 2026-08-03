@@ -510,11 +510,6 @@ export const PRODUCT_UNIT_METADATA: ProductUnitMetadata[] = [
   // =====================================================
 
   {
-    name:"Microgram",
-    group:"Weight",
-    aliases:["microgram","micrograms","mcg","μg","ug"],
-  },
-  {
     name:"Milligram",
     group:"Weight",
     aliases:["milligram","milligrams","mg"],
@@ -978,7 +973,10 @@ export function getProductUnitMetadata(
 
 export const PRODUCT_PACKAGING=
 	PRODUCT_UNIT_METADATA
-		.filter(unit=>unit.group==="Packaging")
+		.filter(unit=>
+      unit.group==="Packaging"&&
+      unit.name!=="Piece"
+    )
 		.map(unit=>unit.name);
 
 export const MEASUREMENT_UNITS=
@@ -1001,7 +999,6 @@ export const QUANTITY_UNITS=
 export const PRODUCT_UNIT_SYMBOLS:Partial<
 	Record<string,string>
 >={
-	Microgram:"μg",
 	Milligram:"mg",
 	Gram:"g",
 	Kilogram:"kg",
@@ -1018,9 +1015,9 @@ function formatUnitLabel(name:string):string{
 	return symbol?`${name} (${symbol})`:name;
 }
 
-export const PRODUCT_PACKAGING_DROPDOWN_ITEMS=
-	PRODUCT_UNIT_METADATA
-		.filter(unit=>unit.group==="Packaging")
+export const PRODUCT_PACKAGING_DROPDOWN_ITEMS=[
+	...PRODUCT_UNIT_METADATA
+		.filter(unit=>unit.name==="Piece")
 		.map(unit=>({
 			label:formatUnitLabel(unit.name),
 			value:unit.name,
@@ -1029,7 +1026,22 @@ export const PRODUCT_PACKAGING_DROPDOWN_ITEMS=
 				...unit.aliases,
 			],
 			section:unit.group,
-		}));
+		})),
+	...PRODUCT_UNIT_METADATA
+		.filter(unit=>
+			unit.group==="Packaging"&&
+			unit.name!=="Piece"
+		)
+		.map(unit=>({
+			label:formatUnitLabel(unit.name),
+			value:unit.name,
+			keywords:[
+				unit.name,
+				...unit.aliases,
+			],
+			section:unit.group,
+		})),
+];
 
 export const MEASUREMENT_UNIT_DROPDOWN_ITEMS=
 	PRODUCT_UNIT_METADATA

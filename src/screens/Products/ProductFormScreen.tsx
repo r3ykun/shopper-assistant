@@ -235,6 +235,29 @@ export default function ProductFormScreen() {
       setOpenDropdown,
     ] = useState<OpenDropdown>(null);
 
+    const formScrollRef=useRef<ScrollView>(null);
+
+    const dropdownPositions=useRef<
+      Partial<Record<Exclude<OpenDropdown,null>,number>>
+    >({});
+
+  function openFormDropdown(
+    dropdown:Exclude<OpenDropdown,null>
+  ){
+    const y=dropdownPositions.current[dropdown]??0;
+
+    setOpenDropdown(null);
+
+    formScrollRef.current?.scrollTo({
+      y:Math.max(0,y-20),
+      animated:false,
+    });
+
+    requestAnimationFrame(()=>{
+      setOpenDropdown(dropdown);
+    });
+  }
+
   useEffect(() => {
     const metadata =
       getSubcategoryMetadata(subcategory);
@@ -243,7 +266,12 @@ export default function ProductFormScreen() {
       return;
     }
 
-    if (metadata?.defaultUnit) {
+    if(
+      metadata?.defaultUnit&&
+      PRODUCT_PACKAGING.includes(
+        metadata.defaultUnit
+      )
+    ){
       setPackaging(metadata.defaultUnit);
       return;
     }
@@ -695,8 +723,10 @@ export default function ProductFormScreen() {
         }}
       />
         <ScrollView
+          ref={formScrollRef}
           contentContainerStyle={styles.container}
-          keyboardShouldPersistTaps="handled"
+          keyboardShouldPersistTaps="always"
+          nestedScrollEnabled
         >
 
             <AppTextInput
@@ -795,25 +825,17 @@ export default function ProductFormScreen() {
                       );
                     }
 
-                    if (
-                      detectedBrand && !brandLocked
-                    ) {
+                    if(detectedBrand&&!brandLocked){
                       setBrand(detectedBrand.brand);
+                    }
 
-                      if(
-                        detectedBrand.removeFromProductName||
-                        specification.productName!==formatted
-                      ){
-                        const cleanedName=specification.productName;
-                          if (
-                            normalizeProductName(cleanedName) !==
-                            normalizeProductName(formatted)
-                          ) {
-                            setName(cleanedName);
-                            manuallyEditedNameRef.current =
-                              normalizeProductName(cleanedName);
-                          }
-                        }
+                    if(
+                      normalizeProductName(cleanedProductName)!==
+                      normalizeProductName(formatted)
+                    ){
+                      setName(cleanedProductName);
+                      manuallyEditedNameRef.current=
+                        normalizeProductName(cleanedProductName);
                     }
 
                     setDetection(detected);
@@ -838,9 +860,14 @@ export default function ProductFormScreen() {
                         detected.subcategory
                       );
 
-                      if (metadata?.defaultUnit) {
-                        setPackaging(metadata.defaultUnit);
-                      }
+                    if(
+                      metadata?.defaultUnit&&
+                      PRODUCT_PACKAGING.includes(
+                        metadata.defaultUnit
+                      )
+                    ){
+                      setPackaging(metadata.defaultUnit);
+                    }
                     }
 
                     detectionTimeoutRef.current = null;
@@ -1022,141 +1049,165 @@ export default function ProductFormScreen() {
               }}
             />
 
-            <AppDropdown
-              label="Category"
-              selectedValue={category}
-              autofillState={
-                categoryLocked
-                  ? "locked"
-                  : detection
-                    ? "auto"
-                    : "manual"
-              }
-              autofillConfidence={
-                categoryLocked
-                  ? undefined
-                  : detection?.confidence
-              }
-              items={sortedCategories}
-              isOpen={openDropdown === "category"}
-              onOpen={() =>
-                setOpenDropdown("category")
-              }
-              onClose={() =>
-                setOpenDropdown(null)
-              }
-              onValueChange={(value) => {
-                resetSaveStatus();
-
-                if (detectionTimeoutRef.current) {
-                  clearTimeout(
-                    detectionTimeoutRef.current
-                  );
-
-                  detectionTimeoutRef.current = null;
+            <View
+              onLayout={event=>{
+                dropdownPositions.current.category=
+                  event.nativeEvent.layout.y;
+              }}
+            >
+              <AppDropdown
+                label="Category"
+                selectedValue={category}
+                autofillState={
+                  categoryLocked
+                    ?"locked"
+                    :detection
+                      ?"auto"
+                      :"manual"
                 }
+                autofillConfidence={
+                  categoryLocked
+                    ?undefined
+                    :detection?.confidence
+                }
+                items={sortedCategories}
+                isOpen={openDropdown==="category"}
+                onOpen={()=>openFormDropdown("category")}
+                onClose={()=>setOpenDropdown(null)}
+                onValueChange={value=>{
+                  resetSaveStatus();
 
-                setCategoryLocked(true);
-                setSubcategoryLocked(false);
-                setUnitLocked(false);
-
-                manuallyEditedNameRef.current =
-                  normalizeProductName(name);
-
-                setCategory(value);
-
-                const nextSubcategories =
-                  PRODUCT_SUBCATEGORIES[value] ?? [];
-
-                const sortedNextSubcategories =
-                  sortAlphabetically(
-                    nextSubcategories,
-                    subcategorySortDirection
-                  );
-
-                const firstSubcategory =
-                  sortedNextSubcategories[0] ?? "";
-
-                setSubcategory(firstSubcategory);
-
-                if (firstSubcategory) {
-                  const metadata =
-                    getSubcategoryMetadata(firstSubcategory);
-
-                  if (metadata?.defaultUnit) {
-                    setPackaging(metadata.defaultUnit);
+                  if(detectionTimeoutRef.current){
+                    clearTimeout(
+                      detectionTimeoutRef.current
+                    );
+                    detectionTimeoutRef.current=null;
                   }
+
+                  setCategoryLocked(true);
+                  setSubcategoryLocked(false);
+                  setUnitLocked(false);
+
+                  manuallyEditedNameRef.current=
+                    normalizeProductName(name);
+
+                  setCategory(value);
+
+                  const nextSubcategories=
+                    PRODUCT_SUBCATEGORIES[value]??[];
+
+                  const sortedNextSubcategories=
+                    sortAlphabetically(
+                      nextSubcategories,
+                      subcategorySortDirection
+                    );
+
+                  const firstSubcategory=
+                    sortedNextSubcategories[0]??"";
+
+                  setSubcategory(firstSubcategory);
+
+                  if(firstSubcategory){
+                    const metadata=
+                      getSubcategoryMetadata(
+                        firstSubcategory
+                      );
+
+                    if(
+                      metadata?.defaultUnit&&
+                      PRODUCT_PACKAGING.includes(
+                        metadata.defaultUnit
+                      )
+                    ){
+                      setPackaging(
+                        metadata.defaultUnit
+                      );
+                    }
+                  }
+
+                  setOpenDropdown(null);
+                }}
+              />
+            </View>
+
+            <View
+              onLayout={event=>{
+                dropdownPositions.current.subcategory=
+                  event.nativeEvent.layout.y;
+              }}
+            >
+              <AppDropdown
+                label="Subcategory"
+                selectedValue={subcategory}
+                autofillState={
+                  subcategoryLocked
+                    ?"locked"
+                    :detection
+                      ?"auto"
+                      :"manual"
                 }
-
-                setOpenDropdown(null);
-              }}
-            />
-
-            <AppDropdown
-              label="Subcategory"
-              selectedValue={subcategory}
-              autofillState={
-                subcategoryLocked
-                  ? "locked"
-                  : detection
-                    ? "auto"
-                    : "manual"
-              }
-              autofillConfidence={
-                subcategoryLocked
-                  ? undefined
-                  : detection?.confidence
-              }
-              items={sortedSubcategories}
-              isOpen={
-                openDropdown === "subcategory"
-              }
-              onOpen={() =>
-                setOpenDropdown("subcategory")
-              }
-              onClose={() =>
-                setOpenDropdown(null)
-              }
-              disabled={!category}
-              onValueChange={(value) => {
-                resetSaveStatus();
-
-                if (detectionTimeoutRef.current) {
-                  clearTimeout(
-                    detectionTimeoutRef.current
-                  );
-
-                  detectionTimeoutRef.current = null;
+                autofillConfidence={
+                  subcategoryLocked
+                    ?undefined
+                    :detection?.confidence
                 }
+                items={sortedSubcategories}
+                isOpen={openDropdown==="subcategory"}
+                onOpen={()=>openFormDropdown("subcategory")}
+                onClose={()=>setOpenDropdown(null)}
+                disabled={!category}
+                onValueChange={value=>{
+                  resetSaveStatus();
 
-                setCategoryLocked(true);
-                setSubcategoryLocked(true);
-                setUnitLocked(false);
+                  if(detectionTimeoutRef.current){
+                    clearTimeout(
+                      detectionTimeoutRef.current
+                    );
+                    detectionTimeoutRef.current=null;
+                  }
 
-                manuallyEditedNameRef.current =
-                  normalizeProductName(name);
+                  setCategoryLocked(true);
+                  setSubcategoryLocked(true);
+                  setUnitLocked(false);
 
-                setSubcategory(value);
-                setOpenDropdown(null);
+                  manuallyEditedNameRef.current=
+                    normalizeProductName(name);
+
+                  setSubcategory(value);
+                  setOpenDropdown(null);
+                }}
+              />
+            </View>
+
+            <View
+              onLayout={event=>{
+                dropdownPositions.current.packaging=
+                  event.nativeEvent.layout.y;
               }}
-            />
+            >
+              <AppDropdown
+                label="Packaging"
+                selectedValue={packaging}
+                items={PRODUCT_PACKAGING_DROPDOWN_ITEMS}
+                searchable
+                isOpen={openDropdown==="packaging"}
+                onOpen={()=>openFormDropdown("packaging")}
+                onClose={()=>setOpenDropdown(null)}
+                onValueChange={value=>{
+                  resetSaveStatus();
+                  setPackaging(value);
+                  setOpenDropdown(null);
+                }}
+              />
+            </View>
 
-            <AppDropdown
-              label="Packaging"
-              selectedValue={packaging}
-              items={PRODUCT_PACKAGING_DROPDOWN_ITEMS}
-              searchable
-              isOpen={openDropdown==="packaging"}
-              onOpen={()=>setOpenDropdown("packaging")}
-              onClose={()=>setOpenDropdown(null)}
-              onValueChange={value=>{
-                resetSaveStatus();
-                setPackaging(value);
-                setOpenDropdown(null);
+            <View
+              style={styles.measurementRow}
+              onLayout={event=>{
+                dropdownPositions.current.measurementUnit=
+                  event.nativeEvent.layout.y;
               }}
-            />
-
-            <View style={styles.measurementRow}>
+            >
               <View style={styles.measurementValue}>
                 <AppTextInput
                   label="Measurement"
@@ -1182,7 +1233,7 @@ export default function ProductFormScreen() {
                   items={MEASUREMENT_UNIT_DROPDOWN_ITEMS}
                   searchable
                   isOpen={openDropdown==="measurementUnit"}
-                  onOpen={()=>setOpenDropdown("measurementUnit")}
+                  onOpen={()=>openFormDropdown("measurementUnit")}
                   onClose={()=>setOpenDropdown(null)}
                   onValueChange={value=>{
                     resetSaveStatus();
@@ -1194,20 +1245,27 @@ export default function ProductFormScreen() {
             </View>
 
             {!shouldAddToCart&&(
-              <AppDropdown
-                label="Quantity Unit"
-                selectedValue={quantityUnit}
-                items={QUANTITY_UNIT_DROPDOWN_ITEMS}
-                searchable
-                isOpen={openDropdown==="quantityUnit"}
-                onOpen={()=>setOpenDropdown("quantityUnit")}
-                onClose={()=>setOpenDropdown(null)}
-                onValueChange={value=>{
-                  resetSaveStatus();
-                  setQuantityUnit(value);
-                  setOpenDropdown(null);
+              <View
+                onLayout={event=>{
+                  dropdownPositions.current.quantityUnit=
+                    event.nativeEvent.layout.y;
                 }}
-              />
+              >
+                <AppDropdown
+                  label="Quantity Unit"
+                  selectedValue={quantityUnit}
+                  items={QUANTITY_UNIT_DROPDOWN_ITEMS}
+                  searchable
+                  isOpen={openDropdown==="quantityUnit"}
+                  onOpen={()=>openFormDropdown("quantityUnit")}
+                  onClose={()=>setOpenDropdown(null)}
+                  onValueChange={value=>{
+                    resetSaveStatus();
+                    setQuantityUnit(value);
+                    setOpenDropdown(null);
+                  }}
+                />
+              </View>
             )}
 
             <View style={styles.priceSection}>

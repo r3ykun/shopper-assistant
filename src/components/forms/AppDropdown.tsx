@@ -20,6 +20,7 @@ import {
   Text,
   TextInput,
   View,
+  Modal,
 } from "react-native";
 
 import { Ionicons } from "@expo/vector-icons";
@@ -103,6 +104,15 @@ export default function AppDropdown({
   const arrowRotation =
     useRef(new Animated.Value(0)).current;
 
+  const fieldRef=useRef<View>(null);
+  const[fieldLayout,setFieldLayout]=useState({
+    x:0,
+    y:0,
+    width:0,
+    height:0,
+  });
+  const[fieldMeasured,setFieldMeasured]=useState(false);
+
   const shouldShowSearch =
     searchable ??
     normalizedItems.length > 10;
@@ -158,21 +168,28 @@ export default function AppDropdown({
     arrowRotation,
   ]);
 
-  useEffect(() => {
-    if (
-      dropdownOpen &&
-      selectedValue &&
-      !normalizedItems.some(
-        item => item.value === selectedValue
-      )
-    ) {
-      closeDropdown();
+  useEffect(()=>{
+    if(!dropdownOpen){
+      setFieldMeasured(false);
+      return;
     }
-  }, [
-    dropdownOpen,
-    normalizedItems,
-    selectedValue,
-  ]);
+
+    const frame=requestAnimationFrame(()=>{
+      fieldRef.current?.measureInWindow(
+        (x,y,width,height)=>{
+          setFieldLayout({
+            x,
+            y,
+            width,
+            height,
+          });
+          setFieldMeasured(true);
+        }
+      );
+    });
+
+    return()=>cancelAnimationFrame(frame);
+  },[dropdownOpen]);
 
   const rotateArrow =
     arrowRotation.interpolate({
@@ -180,10 +197,12 @@ export default function AppDropdown({
       outputRange: ["0deg", "180deg"],
     });
 
-  function openDropdown() {
-    if (onOpen) {
+  function openDropdown(){
+    setFieldMeasured(false);
+
+    if(onOpen){
       onOpen();
-    } else {
+    }else{
       setInternalOpen(true);
     }
   }
@@ -231,6 +250,7 @@ export default function AppDropdown({
       </View>
 
       <Pressable
+        ref={fieldRef}
         disabled={disabled}
         onPress={toggleDropdown}
         android_ripple={{
@@ -293,149 +313,146 @@ export default function AppDropdown({
         </Animated.View>
       </Pressable>
 
-      {dropdownOpen && (
-        <View style={styles.optionsContainer}>
-          {shouldShowSearch && (
-            <View style={styles.searchContainer}>
-              <Ionicons
-                name="search-outline"
-                size={19}
-                color={Colors.text}
-              />
-
-              <TextInput
-                value={searchText}
-                onChangeText={setSearchText}
-                placeholder={
-                  searchPlaceholder
-                }
-                placeholderTextColor={
-                  Colors.textLight ??
-                  Colors.text
-                }
-                autoCapitalize="none"
-                autoCorrect={false}
-                style={styles.searchInput}
-              />
-
-              {searchText.length > 0 && (
-                <Pressable
-                  onPress={() =>
-                    setSearchText("")
-                  }
-                  hitSlop={10}
-                >
-                  <Ionicons
-                    name="close-circle"
-                    size={19}
-                    color={Colors.text}
-                  />
-                </Pressable>
-              )}
-            </View>
-          )}
-
-          <ScrollView
-            nestedScrollEnabled
-            keyboardShouldPersistTaps="handled"
-            showsVerticalScrollIndicator
-            style={styles.optionsScroll}
-            contentContainerStyle={
-              styles.optionsContent
-            }
+      <Modal
+        visible={dropdownOpen&&fieldMeasured}
+        transparent
+        animationType="none"
+        statusBarTranslucent
+        onRequestClose={closeDropdown}
+      >
+        <Pressable
+          style={styles.modalBackdrop}
+          onPress={closeDropdown}
+        >
+          <Pressable
+            onPress={event=>event.stopPropagation()}
+            style={[
+              styles.optionsContainer,
+              {
+                top:fieldLayout.y+fieldLayout.height+6,
+                left:fieldLayout.x,
+                width:fieldLayout.width,
+              },
+            ]}
           >
-              {filteredItems.length > 0 ? (
-                filteredItems.map((item, index) => {
-                  const isSelected =
-                    item.value === selectedValue;
+            {shouldShowSearch&&(
+              <View style={styles.searchContainer}>
+                <Ionicons
+                  name="search-outline"
+                  size={19}
+                  color={Colors.text}
+                />
+                <TextInput
+                  value={searchText}
+                  onChangeText={setSearchText}
+                  placeholder={searchPlaceholder}
+                  placeholderTextColor={
+                    Colors.textLight??Colors.text
+                  }
+                  autoCapitalize="none"
+                  autoCorrect={false}
+                  style={styles.searchInput}
+                />
+                {searchText.length>0&&(
+                  <Pressable
+                    onPress={()=>setSearchText("")}
+                    hitSlop={10}
+                  >
+                    <Ionicons
+                      name="close-circle"
+                      size={19}
+                      color={Colors.text}
+                    />
+                  </Pressable>
+                )}
+              </View>
+            )}
 
-                  const previousItem =
-                    filteredItems[index - 1];
+            <ScrollView
+              nestedScrollEnabled
+              keyboardShouldPersistTaps="always"
+              showsVerticalScrollIndicator
+              style={styles.optionsScroll}
+              contentContainerStyle={styles.optionsContent}
+            >
+              {filteredItems.length>0?(
+                filteredItems.map((item,index)=>{
+                  const isSelected=
+                    item.value===selectedValue;
 
-                  const shouldShowSectionHeader =
-                    showSectionHeaders &&
-                    Boolean(item.section) &&
+                  const previousItem=
+                    filteredItems[index-1];
+
+                  const shouldShowSectionHeader=
+                    showSectionHeaders&&
+                    Boolean(item.section)&&
                     (
-                      index === 0 ||
-                      previousItem?.section !== item.section
+                      index===0||
+                      previousItem?.section!==item.section
                     );
 
-                  return (
+                  return(
                     <React.Fragment
-                      key={`${item.section ?? "default"}-${item.value}`}
+                      key={`${item.section??"default"}-${item.value}`}
                     >
-                      {shouldShowSectionHeader && (
+                      {shouldShowSectionHeader&&(
                         <View style={styles.sectionHeader}>
                           <Text style={styles.sectionHeaderText}>
                             {item.section}
                           </Text>
-
-                          <View style={styles.sectionDivider} />
+                          <View style={styles.sectionDivider}/>
                         </View>
                       )}
 
                       <Pressable
-                        onPress={() =>
-                          handleSelect(item.value)
-                        }
+                        onPress={()=>handleSelect(item.value)}
                         android_ripple={{
-                          color: Colors.border,
+                          color:Colors.border,
                         }}
-                        style={({ pressed }) => [
+                        style={({pressed})=>[
                           styles.option,
-
-                          isSelected &&
-                            styles.selectedOption,
-
-                          pressed &&
-                            styles.optionPressed,
+                          isSelected&&styles.selectedOption,
+                          pressed&&styles.optionPressed,
                         ]}
                       >
                         <Text
                           numberOfLines={2}
                           style={[
                             styles.optionText,
-
-                            isSelected &&
+                            isSelected&&
                               styles.selectedOptionText,
                           ]}
                         >
                           {item.label}
                         </Text>
 
-                        {isSelected && (
+                        {isSelected&&(
                           <Ionicons
                             name="checkmark"
                             size={21}
-                            color={
-                              isSelected
-                                ? "#FFFFFF"
-                                : Colors.primary
-                            }
+                            color="#FFFFFF"
                           />
                         )}
                       </Pressable>
                     </React.Fragment>
                   );
                 })
-              ) : (
-              <View style={styles.emptyContainer}>
-                <Ionicons
-                  name="search-outline"
-                  size={24}
-                  color={Colors.text}
-                />
-
-                <Text style={styles.emptyText}>
-                  No results found for
-                  {" "}
-                  “{searchText}”
-                </Text>
-              </View>
-            )}
-          </ScrollView>
-        </View>
-      )}
+              ):(
+                <View style={styles.emptyContainer}>
+                  <Ionicons
+                    name="search-outline"
+                    size={24}
+                    color={Colors.text}
+                  />
+                  <Text style={styles.emptyText}>
+                    No results found for “{searchText}”
+                  </Text>
+                </View>
+              )}
+            </ScrollView>
+          </Pressable>
+        </Pressable>
+      </Modal>
 
       {!!error && (
         <Text style={styles.errorText}>
@@ -447,8 +464,10 @@ export default function AppDropdown({
 }
 
 const styles = StyleSheet.create({
-  container: {
-    marginBottom: Spacing.md,
+  container:{
+    position:"relative",
+    marginBottom:Spacing.md,
+    zIndex:1,
   },
 
   label: {
@@ -531,25 +550,27 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
 
-  optionsContainer: {
-    marginTop: 6,
+  modalBackdrop:{
+    flex:1,
+    backgroundColor:"transparent",
+  },
 
-    borderWidth: 1,
-    borderColor: Colors.border,
-    borderRadius: 12,
-
-    backgroundColor: Colors.surface,
-
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 4,
+  optionsContainer:{
+    position:"absolute",
+    maxHeight:320,
+    borderWidth:1,
+    borderColor:Colors.border,
+    borderRadius:12,
+    backgroundColor:Colors.surface,
+    shadowColor:"#000",
+    shadowOffset:{
+      width:0,
+      height:4,
     },
-    shadowOpacity: 0.14,
-    shadowRadius: 8,
-
-    elevation: 5,
-    overflow: "hidden",
+    shadowOpacity:.14,
+    shadowRadius:8,
+    elevation:20,
+    overflow:"hidden",
   },
 
   searchContainer: {
@@ -575,8 +596,8 @@ const styles = StyleSheet.create({
     color: Colors.text,
   },
 
-  optionsScroll: {
-    maxHeight: 260,
+  optionsScroll:{
+    maxHeight:260,
   },
 
   optionsContent: {

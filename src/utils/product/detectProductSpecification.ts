@@ -1,3 +1,4 @@
+//shopper-assistant\src\utils\product\detectProductSpecification.ts
 import {PRODUCT_UNIT_METADATA} from "../../constants/units";
 
 export interface DetectedProductSpecification{

@@ -543,9 +543,6 @@
 3. Ambiguous-brand reporting
 4. Runtime product-line recognition
 
-
-### 🚧 Ongoing
-
 # Milestone 21.90.5 — Automatic Brand Hierarchy Inference
 ✅ Completed
 1. Automatic hierarchy inference engine
@@ -555,36 +552,30 @@
 5. Ambiguous candidate reporting
 6. Compiler integration
 7. Metadata generation compatibility
-
-🔄 Ongoing
 8. Family-stem matching -current
 9. Descriptor-based classification
 10. Inference quality tuning
-11. Manufacturer ownership graph
-12. Confidence calibration
-13. Automatic product-line acceptance tuning
+11. Confidence calibration
+12. Automatic product-line acceptance tuning
 
-# still need to fix
-- actually since there are already aliases for the units, lets integrate it with the name input just like the brand, to make it automatic
-- also display like: "mililiter (mL)", and not just the very name
+# Bugs and Fixes
+1. Measurement removal from Product Name
+2. Dropdown overlay
+3. Packaging dropdown stability
+4. Dropdown list scrolling
+5. Piece packaging option
+6. Automatic screen scrolling
+
+### 🚧 Ongoing
+
+
 ---
 
 # Upcoming Milestone
 
-## Milestone 22 – Smart Product Intelligence
-
-- Smart SRP Lookup
-- Automatic Product Metadata Lookup
-- Live Product Database Matching
-- Brand Suggestions
-- Product Suggestions
-- Duplicate Product Detection
-- Intelligent Product Validation
-- Product Image Support
-
 ---
 
-## Milestone 23 – Shopping Lists
+## Milestone 22 – Shopping Lists
 
 - Multiple Shopping Lists
 - Shopping List Management
@@ -597,7 +588,7 @@
 
 ---
 
-## Milestone 24 – Transaction History
+## Milestone 23 – Transaction History
 
 - Checkout Persistence
 - Purchase History
@@ -607,6 +598,19 @@
 - Purchase Statistics
 - Favorite Products
 - Frequently Purchased Items
+
+---
+
+## Milestone 24 – Smart Product Intelligence
+
+- Smart SRP Lookup
+- Automatic Product Metadata Lookup
+- Live Product Database Matching
+- Brand Suggestions
+- Product Suggestions
+- Duplicate Product Detection
+- Intelligent Product Validation
+- Product Image Support
 
 ---
 
@@ -634,3 +638,38 @@
 - Missing Product Detection
 - Cart vs. Receipt Comparison
 - Automatic Purchase Confirmation
+
+
+# IMPROVEMENTS
+## Improvement - Goal 1: Intelligent Product Knowledge Graph
+- Automatic Manufacturer Recognition
+- Automatic Brand Recognition
+- Automatic Product Line Recognition
+- Automatic Variant Recognition
+- Automatic Packaging Recognition
+- Automatic Measurement Recognition
+- Automatic Quantity Recognition
+- Automatic Product Name Reconstruction
+- Automatic Product Hierarchy Inference
+- Automatic Manufacturer Ownership Mapping
+- Automatic Brand Family Detection
+- Automatic Product Line Extraction
+- Automatic Variant Extraction
+- Automatic Alias Generation
+- Automatic Keyword Generation
+- Automatic Metadata Validation
+- Automatic Metadata Cleanup
+- Automatic Duplicate Brand Resolution
+- Automatic Product-Line Deduplication
+- Automatic Canonical Brand Generation
+- Automatic Confidence Scoring
+- Automatic Confidence Calibration
+- Automatic Brand Relationship Learning
+- Automatic Knowledge Graph Expansion
+- Automatic Metadata Compilation
+- Automatic Metadata Quality Assurance
+
+## Improvement - Goal 2: Intelligent Receipt Processing
+## Improvement - Goal 3: Smart Shopping Assistant
+## Improvement - Goal 4: Predictive Pricing & Analytics
+## Improvement - Goal 5: AI-Powered Product Recognition
