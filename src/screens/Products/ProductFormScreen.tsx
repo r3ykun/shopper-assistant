@@ -624,10 +624,21 @@ export default function ProductFormScreen() {
         return;
       }
 
-      const selectedQuantity =
-        Math.max(
-          1,
-          Number(quantity || 1)
+      const selectedQuantity=Math.max(
+        1,
+        Math.floor(Number(quantity||1))
+      );
+
+      const shoppingListMatch=
+        ShoppingListService.checkMatchingItemsWithQuantity(
+          {
+            id:savedProduct.id,
+            name:savedProduct.name,
+            brand:savedProduct.brand,
+            category:savedProduct.category,
+            subcategory:savedProduct.subcategory,
+          },
+          selectedQuantity
         );
 
       addItem({
@@ -650,17 +661,9 @@ export default function ProductFormScreen() {
           savedStorePrice * selectedQuantity,
       });
 
-    const checkedItems =
-      ShoppingListService.checkMatchingItems({
-        id: savedProduct.id,
-        name: savedProduct.name,
-        brand: savedProduct.brand,
-        category: savedProduct.category,
-      });
-
     showScannerSuccess(
-      checkedItems > 0
-        ? `${savedProduct.name} ×${selectedQuantity} added to cart. ${checkedItems} shopping list item(s) checked.`
+      shoppingListMatch.consumedQuantity > 0
+        ? `${savedProduct.name} ×${selectedQuantity} added to cart. ${shoppingListMatch.count} shopping list item(s) checked.`
         : `${savedProduct.name} ×${selectedQuantity} added to cart.`
     );
 

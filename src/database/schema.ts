@@ -109,6 +109,7 @@ export function createTables() {
       productId INTEGER,
       itemName TEXT,
       quantity INTEGER DEFAULT 1,
+      fulfilledQuantity INTEGER DEFAULT 0,
       checked INTEGER DEFAULT 0,
 
       FOREIGN KEY(shoppingListId)
@@ -229,6 +230,23 @@ export function createTables() {
     database.execSync(`
       ALTER TABLE Products
       ADD COLUMN srp REAL;
+    `);
+  }
+
+  const shoppingListItemColumns=
+    database.getAllSync<{name:string}>(
+      "PRAGMA table_info(ShoppingListItems);"
+    );
+
+  const hasFulfilledQuantity=
+    shoppingListItemColumns.some(
+      column=>column.name==="fulfilledQuantity"
+    );
+
+  if(!hasFulfilledQuantity){
+    database.execSync(`
+      ALTER TABLE ShoppingListItems
+      ADD COLUMN fulfilledQuantity INTEGER DEFAULT 0;
     `);
   }
 }

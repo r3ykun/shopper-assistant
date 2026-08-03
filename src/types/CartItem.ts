@@ -1,3 +1,4 @@
+//shopper-assistant/src/types/CartItem.ts
 export interface CartItem{
 	productId:number;
 	barcode:string;

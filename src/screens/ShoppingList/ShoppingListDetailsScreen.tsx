@@ -1,9 +1,9 @@
+//shopper-assistant/src/screens/ShoppingList/ShoppingListDetailsScreen.tsx
 import React, {
   useCallback,
   useMemo,
   useState,
 } from "react";
-
 import {
   Alert,
   FlatList,
@@ -16,43 +16,25 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-
-import {
-  useSafeAreaInsets,
-} from "react-native-safe-area-context";
-
-import {
-  useFocusEffect,
-} from "@react-navigation/native";
-
-import {
-  NativeStackScreenProps,
-} from "@react-navigation/native-stack";
-
-import {
-  RootStackParamList,
-} from "../../navigation/RootStack";
-
-import Screen from "../../components/layout/Screen";
-import AppHeader from "../../components/layout/AppHeader";
-import AppTextInput from "../../components/forms/AppTextInput";
-import QuantitySelector from "../../components/forms/QuantitySelector";
-
 import {
   ProductService,
   ShoppingListItemRecord,
   ShoppingListRecord,
   ShoppingListService,
 } from "../../services";
-
-import {
-  Product,
-} from "../../database/entities/Product";
-
 import {
   Colors,
   Spacing,
 } from "../../theme";
+import {useSafeAreaInsets} from "react-native-safe-area-context";
+import {useFocusEffect} from "@react-navigation/native";
+import {NativeStackScreenProps} from "@react-navigation/native-stack";
+import {RootStackParamList} from "../../navigation/RootStack";
+import Screen from "../../components/layout/Screen";
+import AppHeader from "../../components/layout/AppHeader";
+import AppTextInput from "../../components/forms/AppTextInput";
+import QuantitySelector from "../../components/forms/QuantitySelector";
+import {Product} from "../../database/entities/Product";
 
 type Props =
   NativeStackScreenProps<
@@ -549,13 +531,14 @@ export default function ShoppingListDetailsScreen({
                     </Text>
                   </TouchableOpacity>
 
-                  <Text
-                    style={
-                      styles.quantityValue
-                    }
-                  >
-                    {item.quantity}
-                  </Text>
+                  <View style={styles.quantityProgress}>
+                    <Text style={styles.quantityValue}>
+                      {item.fulfilledQuantity??0}/{item.quantity}
+                    </Text>
+                    <Text style={styles.quantityProgressLabel}>
+                      In Cart
+                    </Text>
+                  </View>
 
                   <TouchableOpacity
                     style={
@@ -972,6 +955,15 @@ quantityValue: {
     fontWeight: "700",
     color: Colors.text,
 },
+quantityProgress:{
+	minWidth:46,
+	alignItems:"center",
+},
+quantityProgressLabel:{
+	marginTop:1,
+	fontSize:8,
+	color:Colors.textLight,
+},
 deleteButton: {
     marginLeft: Spacing.sm,
     padding: 5,
@@ -1124,19 +1116,5 @@ formError: {
     fontWeight: "600",
     color: "#C62828",
     backgroundColor: "#FFEBEE",
-},
-startShoppingButton: {
-    marginTop: Spacing.md,
-    marginBottom: Spacing.sm,
-    paddingVertical: 14,
-    borderRadius: 12,
-    alignItems: "center",
-    backgroundColor:
-        "#2E7D32",
-},
-startShoppingText: {
-    color: "white",
-    fontSize: 16,
-    fontWeight: "700",
 },
 });

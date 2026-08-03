@@ -1,3 +1,4 @@
+//shopper-assistant/src/services/StorePriceService.ts
 import { StorePriceRepository } from "../database/repositories/StorePriceRepository";
 
 export class StorePriceService {

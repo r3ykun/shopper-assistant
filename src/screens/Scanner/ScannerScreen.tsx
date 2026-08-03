@@ -318,76 +318,75 @@ export default function ScannerScreen() {
     });
   }
 
-  function handleAddToCart() {
-    if (!product) return;
+  function handleAddToCart(){
+    if(!product)return;
 
-    const selectedQuantity =
-      Math.max(
-        1,
-        Number(quantity || 1)
-      );
+    const selectedQuantity=Math.max(
+      1,
+      Math.floor(Number(quantity||1))
+    );
 
-    const storePrice =
-      selectedStore
-        ? StorePriceService.getPrice(
-            selectedStore.id,
-            product.id
-          )
-        : null;
-    
-    if (storePrice === null) {
+    const storePrice=selectedStore
+      ?StorePriceService.getPrice(
+        selectedStore.id,
+        product.id
+      )
+      :null;
+
+    if(storePrice===null){
       setCartMessageType("error");
-
       setCartMessage(
         "No store price is available for this product."
       );
-
       return;
     }
 
-    const price = storePrice;
+    const shoppingListMatch=
+      ShoppingListService.checkMatchingItemsWithQuantity(
+        {
+          id:product.id,
+          name:product.name,
+          brand:product.brand,
+          category:product.category,
+          subcategory:product.subcategory,
+        },
+        selectedQuantity
+      );
 
-  addItem({
-    productId: product.id,
-    barcode: product.barcode,
-    name: product.name,
-    brand: product.brand ?? "",
-    category:
-      product.category ??
-      "Uncategorized",
-    packaging: product.packaging,
-    measurement: product.measurement,
-    measurementUnit: product.measurementUnit,
-    productQuantity: product.quantity,
-    quantityUnit: product.quantityUnit,  
-    srp: product.srp ?? 0,
-    price,
-    quantity: selectedQuantity,
-    subtotal:
-      price * selectedQuantity,
-  });
-
-  const checkedItems =
-    ShoppingListService.checkMatchingItems({
-      id: product.id,
-      name: product.name,
-      brand: product.brand,
-      category: product.category,
+    addItem({
+      productId:product.id,
+      barcode:product.barcode,
+      name:product.name,
+      brand:product.brand??"",
+      category:
+        product.category??
+        "Uncategorized",
+      packaging:product.packaging,
+      measurement:product.measurement,
+      measurementUnit:product.measurementUnit,
+      productQuantity:product.quantity,
+      quantityUnit:product.quantityUnit,
+      srp:product.srp??0,
+      price:storePrice,
+      quantity:selectedQuantity,
+      subtotal:
+        storePrice*selectedQuantity,
     });
 
-  setCartMessageType("success");
+    setCartMessageType("success");
 
-  const message =
-    checkedItems > 0
-      ? `${product.name} ×${selectedQuantity} added to cart. ${checkedItems} shopping list item(s) checked.`
-      : `${product.name} ×${selectedQuantity} added to cart.`;
+    setCartMessage(
+      shoppingListMatch.consumedQuantity>0
+        ?shoppingListMatch.remainingQuantity>0
+          ?`${product.name} ×${selectedQuantity} added to cart. ${shoppingListMatch.remainingQuantity} still needed.`
+          :`${product.name} ×${selectedQuantity} added to cart. Shopping-list item completed.`
+        :`${product.name} ×${selectedQuantity} added to cart.`
+    );
 
-  setCartMessage(message);
-
-    setTimeout(() => {
+    setTimeout(()=>{
       setCartMessage("");
       resumeScanning();
-    }, 700);
+    },700);
   }
 
   return (

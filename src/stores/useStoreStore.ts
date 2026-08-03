@@ -1,3 +1,4 @@
+//shopper-assistant/src/stores/useStoreStore.ts
 import { create } from "zustand";
 import { Store } from "../database/entities/Store";
 

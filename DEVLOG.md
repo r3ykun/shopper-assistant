@@ -559,21 +559,13 @@
 12. Automatic product-line acceptance tuning
 
 # Bugs and Fixes
+✅ Completed
 1. Measurement removal from Product Name
 2. Dropdown overlay
 3. Packaging dropdown stability
 4. Dropdown list scrolling
 5. Piece packaging option
 6. Automatic screen scrolling
-
-### 🚧 Ongoing
-
-
----
-
-# Upcoming Milestone
-
----
 
 ## Milestone 22 – Shopping Lists
 
@@ -584,9 +576,21 @@
 - Intelligent Shopping List Parser
 - Automatic Quantity Detection
 - Automatic Product Matching
-- Shopping List Import / Export
+
+
 
 ---
+
+### 🚧 Ongoing
+
+
+---
+
+# Upcoming Milestone
+
+
+---
+
 
 ## Milestone 23 – Transaction History
 
