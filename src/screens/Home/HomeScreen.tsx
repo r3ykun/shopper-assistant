@@ -17,6 +17,7 @@ import {
   ShoppingListItemRecord,
   ShoppingListRecord,
   ShoppingListService,
+  TransactionService,
 } from "../../services";
 import Screen from "../../components/layout/Screen";
 import {
@@ -152,19 +153,59 @@ export default function HomeScreen() {
     );
   }
 
-  function handleConfirm() {
-    if (items.length === 0) {
+  function handleConfirm(){
+    if(items.length===0){
       Alert.alert(
         "Empty Cart",
         "Add at least one product before confirming."
       );
+      return;
+    }
 
+    if(!selectedStore){
+      Alert.alert(
+        "No Store Selected",
+        "Select a store before confirming the purchase."
+      );
       return;
     }
 
     Alert.alert(
-      "Confirm Cart",
-      `${totalItems()} item(s) are ready for checkout.`
+      "Confirm Purchase",
+      `Confirm ${totalItems()} item(s) totaling ₱${totalPrice().toFixed(2)}?`,
+      [
+        {
+          text:"Cancel",
+          style:"cancel",
+        },
+        {
+          text:"Confirm",
+          onPress:()=>{
+            try{
+              const transactionId=
+                TransactionService.checkout({
+                  storeId:selectedStore.id,
+                  items,
+                });
+
+              clearCart();
+              loadDashboardList();
+
+              Alert.alert(
+                "Purchase Saved",
+                `Transaction #${transactionId} was saved successfully.`
+              );
+            }catch(error){
+              Alert.alert(
+                "Checkout Failed",
+                error instanceof Error
+                  ?error.message
+                  :"The transaction could not be saved."
+              );
+            }
+          },
+        },
+      ]
     );
   }
 

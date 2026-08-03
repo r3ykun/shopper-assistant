@@ -1,3 +1,4 @@
+//shopper-assistant\src\navigation\MainDrawer.tsx
 import React from "react";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 

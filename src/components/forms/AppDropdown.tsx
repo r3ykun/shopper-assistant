@@ -92,6 +92,16 @@ export default function AppDropdown({
     });
   }, [items]);
 
+  const selectedItem=useMemo(
+    ()=>normalizedItems.find(
+      item=>item.value===selectedValue
+    ),
+    [
+      normalizedItems,
+      selectedValue,
+    ]
+  );
+
   const [internalOpen, setInternalOpen] =
   useState(false);
 
@@ -285,7 +295,7 @@ export default function AppDropdown({
               styles.disabledText,
           ]}
         >
-          {selectedValue || placeholder}
+          {selectedItem?.label||placeholder}
         </Text>
 
         <Animated.View

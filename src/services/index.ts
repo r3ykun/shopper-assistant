@@ -1,5 +1,6 @@
+//shopper-assistant\src\services\index.ts
 export * from "./ProductService";
 export * from "./ShoppingService";
-export * from "./TransactionService";
+export{TransactionService}from"./TransactionService";
 export * from "./ShoppingListService";
 export * from "./StorePriceService";

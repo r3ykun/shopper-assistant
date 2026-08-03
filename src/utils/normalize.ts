@@ -1,3 +1,4 @@
+//shopper-assistant\src\utils\normalize.ts
 export function normalize(value:string){
   return value
     .normalize("NFD")

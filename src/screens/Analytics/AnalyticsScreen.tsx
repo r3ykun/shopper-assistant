@@ -1,36 +1,93 @@
+//shopper-assistant\src\screens\Analytics\AnalyticsScreen.tsx
 import React, {
+	useCallback,
   useEffect,
   useState,
 } from "react";
-
 import {
   ScrollView,
   StyleSheet,
   Text,
   View,
 } from "react-native";
-
 import AppHeader from "../../components/layout/AppHeader";
 import Screen from "../../components/layout/Screen";
 import AppDropdown from "../../components/forms/AppDropdown";
 import { Store } from "../../database/entities/Store";
 import { database } from "../../database/database";
-import { StorePriceService } from "../../services";
-
+import{
+	StorePriceService,
+	TransactionService,
+}from"../../services";
 import {
   useCartStore,
   useStoreStore,
 } from "../../stores";
-
 import {
   Colors,
   Spacing,
   Typography,
 } from "../../theme";
+import{useFocusEffect}from"@react-navigation/native";
+import{
+	PurchaseStatistics,
+}from"../../database/repositories/TransactionRepository";
+
+function formatPurchaseDate(
+	value:string|null
+){
+	if(!value)return"No purchases yet";
+
+	const date=new Date(value);
+
+	if(Number.isNaN(date.getTime())){
+		return value;
+	}
+
+	return date.toLocaleString(
+		"en-PH",
+		{
+			year:"numeric",
+			month:"short",
+			day:"numeric",
+			hour:"numeric",
+			minute:"2-digit",
+		}
+	);
+}
 
 export default function AnalyticsScreen() {
   const { selectedStore } =
     useStoreStore();
+
+  const[
+    purchaseStatistics,
+    setPurchaseStatistics,
+  ]=useState<PurchaseStatistics>({
+    totalTransactions:0,
+    totalSpent:0,
+    averageTransaction:0,
+    totalItemsPurchased:0,
+    uniqueProductsPurchased:0,
+    firstPurchaseAt:null,
+    lastPurchaseAt:null,
+  });
+
+  const loadPurchaseStatistics=
+    useCallback(()=>{
+      setPurchaseStatistics(
+        TransactionService
+          .getPurchaseStatistics()
+      );
+    },[]);
+
+  useFocusEffect(
+    useCallback(()=>{
+      loadPurchaseStatistics();
+    },[
+      loadPurchaseStatistics,
+    ])
+  );
 
   const [stores, setStores] =
     useState<Store[]>([]);
@@ -503,6 +560,94 @@ export default function AnalyticsScreen() {
             {selectedStore?.name ??
               "No store selected"}
           </Text>
+        </View>
+
+        <Text style={styles.sectionTitle}>
+          Purchase Statistics
+        </Text>
+
+        <View style={styles.purchaseStatisticsGrid}>
+          <View style={styles.purchaseStatisticCard}>
+            <Text style={styles.purchaseStatisticValue}>
+              {purchaseStatistics.totalTransactions}
+            </Text>
+
+            <Text style={styles.purchaseStatisticLabel}>
+              Transactions
+            </Text>
+          </View>
+
+          <View style={styles.purchaseStatisticCard}>
+            <Text style={styles.purchaseStatisticValue}>
+              ₱{Number(
+                purchaseStatistics.totalSpent
+              ).toFixed(2)}
+            </Text>
+
+            <Text style={styles.purchaseStatisticLabel}>
+              Total Spent
+            </Text>
+          </View>
+
+          <View style={styles.purchaseStatisticCard}>
+            <Text style={styles.purchaseStatisticValue}>
+              ₱{Number(
+                purchaseStatistics.averageTransaction
+              ).toFixed(2)}
+            </Text>
+
+            <Text style={styles.purchaseStatisticLabel}>
+              Average Purchase
+            </Text>
+          </View>
+
+          <View style={styles.purchaseStatisticCard}>
+            <Text style={styles.purchaseStatisticValue}>
+              {purchaseStatistics.totalItemsPurchased}
+            </Text>
+
+            <Text style={styles.purchaseStatisticLabel}>
+              Items Purchased
+            </Text>
+          </View>
+
+          <View style={styles.purchaseStatisticCard}>
+            <Text style={styles.purchaseStatisticValue}>
+              {purchaseStatistics.uniqueProductsPurchased}
+            </Text>
+
+            <Text style={styles.purchaseStatisticLabel}>
+              Unique Products
+            </Text>
+          </View>
+        </View>
+
+        <View style={styles.purchaseDateCard}>
+          <View style={styles.purchaseDateRow}>
+            <Text style={styles.purchaseDateLabel}>
+              First Purchase
+            </Text>
+
+            <Text style={styles.purchaseDateValue}>
+              {formatPurchaseDate(
+                purchaseStatistics.firstPurchaseAt
+              )}
+            </Text>
+          </View>
+
+          <View style={styles.purchaseDateDivider}/>
+
+          <View style={styles.purchaseDateRow}>
+            <Text style={styles.purchaseDateLabel}>
+              Latest Purchase
+            </Text>
+
+            <Text style={styles.purchaseDateValue}>
+              {formatPurchaseDate(
+                purchaseStatistics.lastPurchaseAt
+              )}
+            </Text>
+          </View>
         </View>
 
         <Text style={styles.sectionTitle}>
@@ -1740,5 +1885,65 @@ const styles = StyleSheet.create({
   incompleteStoreCount: {
     fontSize: 10,
     color: "#C62828",
+  },
+
+  purchaseStatisticsGrid:{
+	flexDirection:"row",
+	flexWrap:"wrap",
+	gap:Spacing.md,
+	marginBottom:Spacing.md,
+  },
+  purchaseStatisticCard:{
+    width:"47%",
+    minHeight:100,
+    justifyContent:"center",
+    alignItems:"center",
+    padding:Spacing.md,
+    borderWidth:1,
+    borderColor:Colors.border,
+    borderRadius:14,
+    backgroundColor:Colors.surface,
+  },
+  purchaseStatisticValue:{
+    textAlign:"center",
+    fontSize:21,
+    fontWeight:"800",
+    color:Colors.primary,
+  },
+  purchaseStatisticLabel:{
+    marginTop:6,
+    textAlign:"center",
+    fontSize:12,
+    color:Colors.textLight,
+  },
+  purchaseDateCard:{
+    marginBottom:Spacing.xl,
+    padding:Spacing.lg,
+    borderWidth:1,
+    borderColor:Colors.border,
+    borderRadius:14,
+    backgroundColor:Colors.surface,
+  },
+  purchaseDateRow:{
+    flexDirection:"row",
+    justifyContent:"space-between",
+    alignItems:"center",
+  },
+  purchaseDateLabel:{
+    fontSize:12,
+    fontWeight:"700",
+    color:Colors.text,
+  },
+  purchaseDateValue:{
+    flex:1,
+    marginLeft:Spacing.md,
+    textAlign:"right",
+    fontSize:11,
+    color:Colors.textLight,
+  },
+  purchaseDateDivider:{
+    height:1,
+    marginVertical:Spacing.md,
+    backgroundColor:Colors.border,
   },
 });
