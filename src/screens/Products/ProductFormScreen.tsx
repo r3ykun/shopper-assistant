@@ -10,7 +10,12 @@ import {
   View,
   StyleSheet,
   ScrollView,
+  Image,
+  TextInput,
+  TouchableOpacity,
+  Alert,
 } from "react-native";
+import { useProductRecognitionStore } from "../../stores";
 import { 
   RouteProp, 
   useRoute, 
@@ -64,6 +69,9 @@ import {
   type BrandDetectionResult,
  } from "../../utils/brand/detectProductBrand";
 import {detectProductSpecification} from "../../utils/product/detectProductSpecification";
+import{
+  productRecognitionCorrectionService,
+}from"../../services/productRecognitionCorrection.service";
 
 type SortDirection = "asc" | "desc";
 
@@ -131,6 +139,10 @@ export default function ProductFormScreen() {
     const [barcodeError, setBarcodeError] = useState("");
     const [nameError, setNameError] = useState("");
     const [successMessage, setSuccessMessage] = useState("");
+    const[
+      recognitionOverrideDuplicate,
+      setRecognitionOverrideDuplicate,
+    ]=useState(false);
     const [
       detection,
       setDetection,
@@ -181,6 +193,20 @@ export default function ProductFormScreen() {
           : "Save Product"
       );
 
+  const recognitionDraft=
+    useProductRecognitionStore(state=>state.draft);
+  const recognitionResult=
+    useProductRecognitionStore(state=>state.result);
+  const clearRecognition=
+    useProductRecognitionStore(state=>state.clearRecognition);
+
+  const duplicate=
+    recognitionResult?.duplicate;
+  const duplicateCandidate=
+    duplicate?.candidate;
+  const duplicateRisk=
+    duplicate?.risk;
+
     const categorySortDirection:
       SortDirection = "asc";
 
@@ -221,6 +247,8 @@ export default function ProductFormScreen() {
       useState("");
     const [storePriceError, setStorePriceError] =
       useState("");
+    const[rawOcrText,setRawOcrText]=useState("");
+    const[rawOcrExpanded,setRawOcrExpanded]=useState(false);
 
     type OpenDropdown=
       |"category"
@@ -320,11 +348,6 @@ export default function ProductFormScreen() {
           ]?.[0] ??
           ""
       );
-      setCategoryLocked(true);
-      setSubcategoryLocked(true);
-      setUnitLocked(true);
-      setBrandLocked(true);
-
       manuallyEditedNameRef.current =
         normalizeProductName(existingProduct.name);  
 
@@ -433,6 +456,43 @@ export default function ProductFormScreen() {
     );
   }, [productId, scannedBarcode, selectedStore?.id,]);
 
+  useEffect(()=>{
+    if(!recognitionDraft||productId)return;
+    setCategoryLocked(false);
+    setSubcategoryLocked(false);
+    setUnitLocked(false);
+    setBrandLocked(false);
+    setBarcode(recognitionDraft.barcode);
+    setName(recognitionDraft.name);
+    setBrand(recognitionDraft.brand);
+    if(recognitionDraft.category){
+      setCategory(recognitionDraft.category);
+    }
+    if(recognitionDraft.subcategory){
+      setSubcategory(recognitionDraft.subcategory);
+    }
+    if(recognitionDraft.measurement){
+      setMeasurement(recognitionDraft.measurement);
+    }
+    if(recognitionDraft.measurementUnit){
+      setMeasurementUnit(recognitionDraft.measurementUnit);
+    }
+  },[
+    recognitionDraft,
+    productId,
+  ]);
+
+  useEffect(()=>{
+    const text=
+      recognitionResult?.ocr.rawText||
+      recognitionResult?.ocr.normalizedText||
+      "";
+    setRawOcrText(text);
+    if(!recognitionResult){
+      setRawOcrExpanded(false);
+    }
+  },[recognitionResult]);
+
   useFocusEffect(
     useCallback(() => {
       return () => {
@@ -475,8 +535,12 @@ export default function ProductFormScreen() {
         setNameError("");
         setStorePriceError("");
         setSuccessMessage("");
+        setRawOcrText("");
+        setRawOcrExpanded(false);
+        setRecognitionOverrideDuplicate(false);
+        clearRecognition();
       };
-    }, [shouldAddToCart])
+    },[shouldAddToCart,clearRecognition])
   );
 
   function validate() {
@@ -508,6 +572,46 @@ export default function ProductFormScreen() {
 
     setStorePriceError("");
     setSuccessMessage("");
+
+  if(
+    duplicateRisk==="high"&&
+    !productId&&
+    !recognitionOverrideDuplicate
+  ){
+    Alert.alert(
+      "Duplicate Product",
+      "A highly similar product already exists.",
+    );
+    return;
+  }
+
+  const correctionLog=
+  recognitionDraft
+  ?productRecognitionCorrectionService.createLog(
+      recognitionDraft.recognitionId,
+      {
+        barcode:recognitionDraft.barcode,
+        name:recognitionDraft.name,
+        brand:recognitionDraft.brand,
+        category:recognitionDraft.category,
+        subcategory:
+          recognitionDraft.subcategory,
+        measurement:
+          recognitionDraft.measurement,
+        measurementUnit:
+          recognitionDraft.measurementUnit,
+      },
+      {
+        barcode,
+        name,
+        brand,
+        category,
+        subcategory,
+        measurement,
+        measurementUnit,
+      },
+    )
+  :null;
 
     const numericStorePrice =
       storePrice.trim() === ""
@@ -583,6 +687,16 @@ export default function ProductFormScreen() {
       );
 
       return;
+    }
+
+    if(
+      correctionLog&&
+      correctionLog.corrections.length>0
+    ){
+      console.log(
+        "Recognition Corrections",
+        correctionLog,
+      );
     }
 
     if (
@@ -667,16 +781,27 @@ export default function ProductFormScreen() {
         : `${savedProduct.name} ×${selectedQuantity} added to cart.`
     );
 
-    navigation.goBack();
-
-      return;
+    if(recognitionDraft){
+      clearRecognition();
     }
 
-    if (productId) {
+    navigation.goBack();
+    return;
+    }
+
+    if(productId){
+      if(recognitionDraft){
+        clearRecognition();
+      }
       navigation.goBack();
       return;
     }
 
+    if(recognitionDraft){
+      clearRecognition();
+    }
+
+    setRecognitionOverrideDuplicate(false);
     setSuccessMessage(
       "Product saved successfully."
     );
@@ -731,6 +856,123 @@ export default function ProductFormScreen() {
           keyboardShouldPersistTaps="always"
           nestedScrollEnabled
         >
+
+          {recognitionDraft?.image?.uri?(
+            <View style={styles.recognitionImageSection}>
+              <Text style={styles.recognitionImageLabel}>
+                Product Image
+              </Text>
+              <Image
+                source={{uri:recognitionDraft.image.uri}}
+                style={styles.recognitionImage}
+                resizeMode="contain"
+              />
+              <Text style={styles.recognitionImageHint}>
+                Cropped from the captured product photo
+              </Text>
+            </View>
+          ):null}
+
+          {recognitionResult?(
+            <View style={styles.rawOcrSection}>
+              <TouchableOpacity
+                style={styles.rawOcrHeader}
+                onPress={()=>
+                  setRawOcrExpanded(value=>!value)
+                }
+              >
+                <View>
+                  <Text style={styles.rawOcrTitle}>
+                    Raw OCR Text
+                  </Text>
+                  <Text style={styles.rawOcrSubtitle}>
+                    Review the text detected from the image
+                  </Text>
+                </View>
+
+                <Text style={styles.rawOcrToggle}>
+                  {rawOcrExpanded?"▲":"▼"}
+                </Text>
+              </TouchableOpacity>
+
+              {rawOcrExpanded?(
+                <>
+                  <TextInput
+                    value={rawOcrText}
+                    onChangeText={setRawOcrText}
+                    multiline
+                    textAlignVertical="top"
+                    autoCapitalize="characters"
+                    style={styles.rawOcrInput}
+                    placeholder={
+                      recognitionResult
+                        ?"OCR completed but no readable text was detected."
+                        :"No OCR result available."
+                    }
+                    placeholderTextColor="#888888"
+                  />
+
+                  <Text style={styles.rawOcrHint}>
+                    Editing this text does not automatically replace the form fields.
+                  </Text>
+                </>
+              ):null}
+            </View>
+          ):null}
+
+          {duplicateCandidate&&duplicateRisk!=="none"?(
+          <View
+            style={[
+              styles.duplicateCard,
+              duplicateRisk==="high"
+                ?styles.duplicateCardHigh
+                :styles.duplicateCardPossible,
+            ]}
+          >
+            <Text style={styles.duplicateTitle}>
+              {duplicateRisk==="high"
+                ?"Possible Duplicate Found"
+                :"Similar Product Found"}
+            </Text>
+
+            <Text style={styles.duplicateName}>
+              {duplicateCandidate.productName}
+            </Text>
+
+            <Text style={styles.duplicateDetail}>
+              Brand: {duplicateCandidate.brand}
+            </Text>
+
+            <Text style={styles.duplicateDetail}>
+              Barcode: {duplicateCandidate.barcode}
+            </Text>
+
+            <Text style={styles.duplicateDetail}>
+              Similarity: {duplicateCandidate.score}%
+            </Text>
+
+            <PrimaryButton
+              title="Open Existing Product"
+              onPress={()=>{
+                navigation.navigate(
+                  "ProductForm",
+                  {
+                    productId:Number(
+                      duplicateCandidate.productId,
+                    ),
+                  },
+                );
+              }}
+            />
+
+            <PrimaryButton
+              title="Save As New Product"
+              onPress={()=>{
+                setRecognitionOverrideDuplicate(true);
+              }}
+            />
+          </View>
+          ):null}
 
             <AppTextInput
                 label="Barcode"
@@ -1474,4 +1716,104 @@ const styles = StyleSheet.create({
     lineHeight: 17,
     color: Colors.textLight,
   },
+
+recognitionImageSection:{
+  marginBottom:Spacing.lg,
+},
+recognitionImageLabel:{
+  marginBottom:8,
+  fontSize:14,
+  fontWeight:"700",
+  color:Colors.text,
+},
+recognitionImage:{
+  width:"100%",
+  height:260,
+  borderRadius:14,
+  backgroundColor:"#111111",
+},
+recognitionImageHint:{
+  marginTop:6,
+  fontSize:12,
+  color:Colors.textLight,
+},
+
+rawOcrSection:{
+  marginBottom:Spacing.lg,
+  borderWidth:1,
+  borderColor:"#D7D7D7",
+  borderRadius:12,
+  backgroundColor:"#FFFFFF",
+  overflow:"hidden",
+},
+rawOcrHeader:{
+  minHeight:64,
+  flexDirection:"row",
+  justifyContent:"space-between",
+  alignItems:"center",
+  paddingHorizontal:14,
+  paddingVertical:12,
+},
+rawOcrTitle:{
+  fontSize:15,
+  fontWeight:"700",
+  color:Colors.text,
+},
+rawOcrSubtitle:{
+  marginTop:3,
+  fontSize:12,
+  color:"#777777",
+},
+rawOcrToggle:{
+  marginLeft:12,
+  fontSize:14,
+  color:"#555555",
+},
+rawOcrInput:{
+  minHeight:160,
+  maxHeight:280,
+  marginHorizontal:14,
+  padding:12,
+  borderWidth:1,
+  borderColor:"#CCCCCC",
+  borderRadius:10,
+  fontSize:14,
+  lineHeight:20,
+  color:Colors.text,
+  backgroundColor:"#F8F8F8",
+},
+rawOcrHint:{
+  marginHorizontal:14,
+  marginTop:8,
+  marginBottom:14,
+  fontSize:12,
+  color:"#777777",
+},
+duplicateCard:{
+  marginBottom:16,
+  padding:14,
+  borderRadius:12,
+  borderWidth:1,
+},
+duplicateCardHigh:{
+  backgroundColor:"#FFF3F3",
+  borderColor:"#E53935",
+},
+duplicateCardPossible:{
+  backgroundColor:"#FFFBEA",
+  borderColor:"#F9A825",
+},
+duplicateTitle:{
+  fontSize:15,
+  fontWeight:"700",
+  marginBottom:8,
+},
+duplicateName:{
+  fontSize:16,
+  fontWeight:"700",
+},
+duplicateDetail:{
+  marginTop:4,
+  fontSize:13,
+},
 });

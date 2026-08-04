@@ -1,3 +1,4 @@
+//shopper-assistant\App.tsx
 import { NavigationContainer } from "@react-navigation/native";
 import RootStack from "./src/navigation/RootStack";
 import React, { useEffect } from "react";

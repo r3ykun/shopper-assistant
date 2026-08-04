@@ -615,12 +615,42 @@
 
 ## Milestone 25 – Smart Product Intelligence
 
-1. Barcode Recognition
+1. Barcode Recognition ✅
+
 2. Camera Product Recognition
-3. AI Metadata Extraction
-4. Smart Product Matching
+   2.1 Camera capture ✅
+   2.2 Image preview ✅
+   2.3 Retake and confirmation ✅
+   2.4 OCR processing ✅
+   2.5 Raw text review ⏳
+
+3. AI Metadata Extraction ✅
+
+4. Smart Product Matching ✅
+
 5. Duplicate Detection
+   5.1 Exact barcode duplicate ✅
+   5.2 Normalized metadata duplicate ✅
+   5.3 Similar-product warning 🔄
+   5.4 Duplicate resolution logic ✅
+   5.5 Duplicate resolution UI ⏳
+
 6. Product Images
+   6.1 Local-storage service ✅
+   6.2 Database repository ✅
+   6.3 Primary-image support ✅
+   6.4 Multiple image types ✅
+   6.5 Deletion and replacement services ✅
+   6.6 Product Form persistence integration ⏳
+   6.7 Image management UI ⏳
+
+7. User Confirmation
+   7.1 Editable recognition results ✅
+   7.2 Confidence indicators 🔄
+   7.3 Existing-product selection ⏳
+   7.4 Save as new product ✅
+   7.5 Correction tracking ⏳
+
 
 ---
 

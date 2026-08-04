@@ -1,5 +1,6 @@
 //shopper-assistant\src\database\schema.ts
 import { database } from "./database";
+import{createProductImagesTable}from "./createProductImagesTable";
 
 export function createTables() {
   database.execSync(`
@@ -171,6 +172,8 @@ export function createTables() {
     CREATE INDEX IF NOT EXISTS idx_pricehistory_product
     ON PriceHistory(productId);
   `);
+
+   createProductImagesTable();
 
   try {
     database.execSync(`
