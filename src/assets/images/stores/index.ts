@@ -7,5 +7,5 @@ export const StoreLogos = {
   MERCURY: require("./mercury.png"),
   ACE: require("./ace.png"),
   HANDYMAN: require("./handyman.png"),
-  DIY: require("./DIY.jpg"),
+  "MR. D.I.Y.": require("./DIY.jpg"),
 };

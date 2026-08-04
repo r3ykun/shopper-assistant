@@ -590,6 +590,19 @@
 9. Transaction Analytics Integration
 10. History User Interface Enhancements
 
+## Milestone 24 – Checkout & Transaction Workflow
+✅ Completed
+1. Checkout Confirmation
+2. Payment Method Selection
+3. Payment Method Management
+4. Transaction Completion
+5. Checkout Recovery
+6. Store Switching
+7. Confirmation Feedback
+8. Checkout Success Screen
+9. Transaction Persistence
+10. Modes of Payment (MOP) Management
+
 ---
 
 ### 🚧 Ongoing
@@ -600,44 +613,45 @@
 
 ---
 
-## Milestone 24 – Smart Product Intelligence
+## Milestone 25 – Smart Product Intelligence
 
-- Smart SRP Lookup
-- Automatic Product Metadata Lookup
-- Live Product Database Matching
-- Brand Suggestions
-- Product Suggestions
-- Duplicate Product Detection
-- Intelligent Product Validation
-- Product Image Support
+1. Barcode Recognition
+2. Camera Product Recognition
+3. AI Metadata Extraction
+4. Smart Product Matching
+5. Duplicate Detection
+6. Product Images
 
 ---
 
-## Milestone 25 – SRP Synchronization
+## Milestone 26 – Price Intelligence & Synchronization
 
-- Internet Connectivity Detection
-- Automatic SRP Updates
-- Store Price Synchronization
-- Offline Caching
-- Version Checking
-- Manual Synchronization
-- Conflict Resolution
-- Background Synchronization
-- Live Product Database Synchronization
+1. Smart SRP Lookup
+2. Store Price Database
+3. Missing Price Popup
+4. Manual Price Updates
+5. Scanner Price Updates
+6. Synchronization
+7. Offline Cache
+8. Background Updates
 
 ---
 
-## Milestone 26 – Receipt & OCR
+## Milestone 27 – App Polish & User Experience
+1. Performance Optimization
+2. Image Caching
+3. Database Optimization
+4. Search Optimization
+5. Barcode Scan Speed Improvements
+6. Offline Reliability
+7. Accessibility Improvements
+8. UI/UX Polish
+9. Animations & Transitions
+10. Final Testing
+11. Bug Fixes
 
-- Receipt Scanning
-- OCR Text Extraction
-- Automatic Product Recognition
-- Price Verification
-- Store Price Updates
-- Missing Product Detection
-- Cart vs. Receipt Comparison
-- Automatic Purchase Confirmation
 
+---
 
 # IMPROVEMENTS
 ## Improvement - Goal 1: Intelligent Product Knowledge Graph

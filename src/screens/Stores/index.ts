@@ -1,3 +1,4 @@
+//shopper-assistant\src\screens\Stores\index.ts
 export { default } from "./StoresScreen";
 
 export {

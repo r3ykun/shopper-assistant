@@ -11,11 +11,17 @@ import type {
   NavigatorScreenParams,
 } from "@react-navigation/native";
 import ScannerScreen from "../screens/Scanner";
-import { ShoppingListDetailsScreen } from "../screens/ShoppingList";  
+import { ShoppingListDetailsScreen } from "../screens/ShoppingList"; 
+import CheckoutSuccessScreen from"../screens/CheckoutSuccess";
+
 export type RootStackParamList = {
   Home: undefined;
   Splash: undefined;
-  StoreSelection: undefined;
+  StoreSelection:
+    |{
+      returnToHome?:boolean;
+    }
+    |undefined;
   MainDrawer:
     NavigatorScreenParams<
     DrawerParamList
@@ -33,6 +39,9 @@ export type RootStackParamList = {
   Scanner: undefined;
   StoreDetails: {
     storeId: number;
+  };
+  CheckoutSuccess:{
+    transactionId:number;
   };
 }; 
 
@@ -70,6 +79,11 @@ export default function RootStack() {
       <Stack.Screen
         name="Scanner"
         component={ScannerScreen}
+      />
+
+      <Stack.Screen
+        name="CheckoutSuccess"
+        component={CheckoutSuccessScreen}
       />
 
       <Stack.Screen

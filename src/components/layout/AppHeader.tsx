@@ -1,3 +1,4 @@
+//shopper-assistant\src\components\layout\AppHeader.tsx
 import React from "react";
 import {
   StyleSheet,
@@ -20,17 +21,19 @@ import {
   Typography,
 } from "../../theme";
 
-type Props = {
-  title?: string;
-  showBack?: boolean;
-  showMenu?: boolean;
-  onBackPress?: () => void;
+type Props={
+	title?:string;
+	showBack?:boolean;
+	showMenu?:boolean;
+	showStoreSwitch?:boolean;
+	onBackPress?:()=>void;
 };
 
 export default function AppHeader({
   title,
   showBack = false,
   showMenu = false,
+  showStoreSwitch = false,
   onBackPress,
 }: Props) {
   const navigation =
@@ -92,7 +95,29 @@ export default function AppHeader({
         </Text>
       </View>
 
-      <View style={styles.rightSpace} />
+      {showStoreSwitch?(
+        <TouchableOpacity
+          style={styles.rightButton}
+          onPress={()=>{
+            const rootNavigation=
+              navigation.getParent()??
+              navigation;
+
+            rootNavigation.navigate(
+              "StoreSelection",
+              {
+                returnToHome:true,
+              }
+            );
+          }}
+        >
+          <Text style={styles.switchIcon}>
+            ⇄
+          </Text>
+        </TouchableOpacity>
+      ):(
+        <View style={styles.rightSpace}/>
+      )}
     </View>
   );
 }
@@ -133,5 +158,18 @@ const styles = StyleSheet.create({
 
   rightSpace: {
     width: 62,
+  },
+
+  rightButton:{
+    width:62,
+    height:"100%",
+    justifyContent:"center",
+    alignItems:"center",
+  },
+
+  switchIcon:{
+    fontSize:27,
+    fontWeight:"700",
+    color:Colors.primary,
   },
 });

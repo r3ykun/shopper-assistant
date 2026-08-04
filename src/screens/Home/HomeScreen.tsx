@@ -7,9 +7,13 @@ import {
   Text,
   TouchableOpacity,
   View,
+  Modal,
+  Pressable,
+  ScrollView,
 } from "react-native";
 import SearchBar from "../../components/inputs/SearchBar";
 import {
+  StackActions,
   useNavigation,
   useFocusEffect
 } from "@react-navigation/native";
@@ -31,12 +35,36 @@ import {
 } from "../../theme";
 import AppHeader from "../../components/layout/AppHeader";
 import HighlightedText from "../../components/text/HighlightedText";
+import{
+	PaymentMethod,
+}from"../../database/entities/PaymentMethod";
+import{
+	PaymentMethodService,
+}from"../../services";
 
 export default function HomeScreen() {
   const navigation = useNavigation<any>();
   
   const [cartSearch, setCartSearch] =
     React.useState("");
+
+  const[
+    checkoutVisible,
+    setCheckoutVisible,
+  ]=React.useState(false);
+
+  const[
+    paymentMethods,
+    setPaymentMethods,
+  ]=React.useState<PaymentMethod[]>([]);
+
+  const[
+    selectedPaymentMethodId,
+    setSelectedPaymentMethodId,
+  ]=React.useState<number|null>(null);
+
+  const[checkoutSaving,setCheckoutSaving]=
+    React.useState(false);
 
   const [dashboardList, setDashboardList] =
     React.useState<ShoppingListRecord | null>(
@@ -56,6 +84,8 @@ export default function HomeScreen() {
     clearCart,
     totalItems,
     totalPrice,
+    checkoutInProgress,
+    setCheckoutInProgress,
   } = useCartStore();
 
   const filteredItems = items.filter(item => {
@@ -107,6 +137,17 @@ export default function HomeScreen() {
   useFocusEffect(
     React.useCallback(() => {
       loadDashboardList();
+      if(
+        checkoutInProgress&&
+        items.length>0
+      ){
+        Alert.alert(
+          "Incomplete Checkout",
+          "Your shopping cart was recovered."
+        );
+
+        setCheckoutInProgress(false);
+      }
     }, [loadDashboardList])
   );
 
@@ -170,43 +211,86 @@ export default function HomeScreen() {
       return;
     }
 
-    Alert.alert(
-      "Confirm Purchase",
-      `Confirm ${totalItems()} item(s) totaling ₱${totalPrice().toFixed(2)}?`,
-      [
-        {
-          text:"Cancel",
-          style:"cancel",
-        },
-        {
-          text:"Confirm",
-          onPress:()=>{
-            try{
-              const transactionId=
-                TransactionService.checkout({
-                  storeId:selectedStore.id,
-                  items,
-                });
+    const enabledMethods=
+      PaymentMethodService.getEnabled();
 
-              clearCart();
-              loadDashboardList();
+    if(enabledMethods.length===0){
+      Alert.alert(
+        "No Payment Methods",
+        "Enable or add a payment method before checkout."
+      );
+      return;
+    }
 
-              Alert.alert(
-                "Purchase Saved",
-                `Transaction #${transactionId} was saved successfully.`
-              );
-            }catch(error){
-              Alert.alert(
-                "Checkout Failed",
-                error instanceof Error
-                  ?error.message
-                  :"The transaction could not be saved."
-              );
-            }
-          },
-        },
-      ]
+    setPaymentMethods(enabledMethods);
+    setSelectedPaymentMethodId(
+      enabledMethods[0].id
     );
+    setCheckoutVisible(true);
+  }
+
+  function closeCheckout(){
+    if(checkoutSaving)return;
+
+    setCheckoutVisible(false);
+    setSelectedPaymentMethodId(null);
+  }
+
+  function completeCheckout(){
+    if(!selectedStore)return;
+
+    const paymentMethod=
+      paymentMethods.find(
+        method=>
+          method.id===
+          selectedPaymentMethodId
+      );
+
+    if(!paymentMethod){
+      Alert.alert(
+        "Payment Method",
+        "Select a payment method."
+      );
+      return;
+    }
+
+    try{
+      setCheckoutSaving(true);
+      setCheckoutInProgress(true);
+
+      const transactionId=
+        TransactionService.checkout({
+          storeId:selectedStore.id,
+          paymentMethod:paymentMethod.name,
+          items,
+        });
+
+      clearCart();
+      setCheckoutInProgress(false);
+      loadDashboardList();
+      setCheckoutVisible(false);
+      setSelectedPaymentMethodId(null);
+
+      navigation.getParent()?.dispatch(
+        StackActions.replace(
+          "CheckoutSuccess",
+          {
+            transactionId,
+          }
+        )
+      );
+
+    }catch(error){
+      Alert.alert(
+        "Checkout Failed",
+        error instanceof Error
+          ?error.message
+          :"The transaction could not be saved."
+      );
+    }finally{
+      setCheckoutSaving(false);
+      setCheckoutInProgress(false);
+    }
   }
 
   return (
@@ -214,8 +298,9 @@ export default function HomeScreen() {
       <View style={styles.container}>
         <AppHeader
           showMenu
+          showStoreSwitch
           title={
-            selectedStore?.name ??
+            selectedStore?.name??
             "Select Store"
           }
         />
@@ -534,11 +619,15 @@ export default function HomeScreen() {
               style={[
                 styles.bottomButton,
                 styles.confirmButton,
+                checkoutSaving&&styles.checkoutButtonDisabled,
               ]}
               onPress={handleConfirm}
+              disabled={checkoutSaving}
             >
               <Text style={styles.confirmText}>
-                CONFIRM
+                {checkoutSaving
+                  ?"SAVING..."
+                  :"CONFIRM"}
               </Text>
 
               <Text style={styles.confirmIcon}>
@@ -548,6 +637,148 @@ export default function HomeScreen() {
           </View>
         </View>
       </View>
+
+      <Modal
+        visible={checkoutVisible}
+        transparent
+        animationType="fade"
+        statusBarTranslucent
+        onRequestClose={closeCheckout}
+      >
+        <Pressable
+          style={styles.checkoutBackdrop}
+          onPress={closeCheckout}
+        >
+          <Pressable
+            style={styles.checkoutModal}
+            onPress={event=>
+              event.stopPropagation()
+            }
+          >
+            <View style={styles.checkoutHeader}>
+              <View>
+                <Text style={styles.checkoutModalTitle}>
+                  Confirm Purchase
+                </Text>
+
+                <Text style={styles.checkoutStore}>
+                  {selectedStore?.name}
+                </Text>
+              </View>
+
+              <TouchableOpacity
+                onPress={closeCheckout}
+                disabled={checkoutSaving}
+              >
+                <Text style={styles.checkoutClose}>
+                  ×
+                </Text>
+              </TouchableOpacity>
+            </View>
+
+            <View style={styles.checkoutAmountCard}>
+              <Text style={styles.checkoutAmountLabel}>
+                Total
+              </Text>
+
+              <Text style={styles.checkoutAmount}>
+                ₱{totalPrice().toFixed(2)}
+              </Text>
+
+              <Text style={styles.checkoutItemCount}>
+                {totalItems()} item(s)
+              </Text>
+            </View>
+
+            <Text style={styles.paymentTitle}>
+              Select Payment Method
+            </Text>
+
+            <ScrollView
+              style={styles.paymentList}
+              showsVerticalScrollIndicator={false}
+            >
+              {paymentMethods.map(method=>{
+                const selected=
+                  method.id===
+                  selectedPaymentMethodId;
+
+                return(
+                  <TouchableOpacity
+                    key={method.id}
+                    style={[
+                      styles.paymentOption,
+                      selected&&
+                        styles.selectedPaymentOption,
+                    ]}
+                    onPress={()=>
+                      setSelectedPaymentMethodId(
+                        method.id
+                      )
+                    }
+                  >
+                    <View style={styles.paymentOptionInfo}>
+                      <Text
+                        style={[
+                          styles.paymentOptionName,
+                          selected&&
+                            styles.selectedPaymentText,
+                        ]}
+                      >
+                        {method.name}
+                      </Text>
+
+                      <Text style={styles.paymentOptionType}>
+                        {method.type}
+                      </Text>
+                    </View>
+
+                    <View
+                      style={[
+                        styles.paymentRadio,
+                        selected&&
+                          styles.selectedPaymentRadio,
+                      ]}
+                    >
+                      {selected&&(
+                        <View style={styles.paymentRadioDot}/>
+                      )}
+                    </View>
+                  </TouchableOpacity>
+                );
+              })}
+            </ScrollView>
+
+            <View style={styles.checkoutActions}>
+              <TouchableOpacity
+                style={styles.checkoutCancelButton}
+                onPress={closeCheckout}
+                disabled={checkoutSaving}
+              >
+                <Text style={styles.checkoutCancelText}>
+                  Cancel
+                </Text>
+              </TouchableOpacity>
+
+              <TouchableOpacity
+                style={[
+                  styles.checkoutConfirmButton,
+                  checkoutSaving&&
+                    styles.checkoutButtonDisabled,
+                ]}
+                onPress={completeCheckout}
+                disabled={checkoutSaving}
+              >
+                <Text style={styles.checkoutConfirmText}>
+                  {checkoutSaving
+                    ?"Saving..."
+                    :"Confirm Purchase"}
+                </Text>
+              </TouchableOpacity>
+            </View>
+          </Pressable>
+        </Pressable>
+      </Modal>
     </Screen>
   );
 }
@@ -932,5 +1163,158 @@ const styles = StyleSheet.create({
       fontWeight: "700",
       color: Colors.primary,
       marginBottom: 1,
+  },
+
+  checkoutBackdrop:{
+    flex:1,
+    justifyContent:"center",
+    padding:Spacing.lg,
+    backgroundColor:"rgba(0,0,0,.55)",
+  },
+  checkoutModal:{
+    maxHeight:"88%",
+    borderRadius:20,
+    backgroundColor:Colors.surface,
+    overflow:"hidden",
+  },
+  checkoutHeader:{
+    flexDirection:"row",
+    justifyContent:"space-between",
+    alignItems:"center",
+    padding:Spacing.lg,
+    borderBottomWidth:1,
+    borderBottomColor:Colors.border,
+  },
+  checkoutModalTitle:{
+    fontSize:20,
+    fontWeight:"800",
+    color:Colors.text,
+  },
+  checkoutStore:{
+    marginTop:3,
+    fontSize:12,
+    color:Colors.textLight,
+  },
+  checkoutClose:{
+    fontSize:32,
+    lineHeight:34,
+    color:Colors.textLight,
+  },
+  checkoutAmountCard:{
+    alignItems:"center",
+    margin:Spacing.lg,
+    padding:Spacing.lg,
+    borderRadius:16,
+    backgroundColor:Colors.background,
+  },
+  checkoutAmountLabel:{
+    fontSize:12,
+    color:Colors.textLight,
+  },
+  checkoutAmount:{
+    marginTop:4,
+    fontSize:30,
+    fontWeight:"800",
+    color:Colors.primary,
+  },
+  checkoutItemCount:{
+    marginTop:4,
+    fontSize:12,
+    color:Colors.textLight,
+  },
+  paymentTitle:{
+    paddingHorizontal:Spacing.lg,
+    marginBottom:Spacing.sm,
+    fontSize:14,
+    fontWeight:"700",
+    color:Colors.text,
+  },
+  paymentList:{
+    maxHeight:260,
+    paddingHorizontal:Spacing.lg,
+  },
+  paymentOption:{
+    flexDirection:"row",
+    alignItems:"center",
+    marginBottom:Spacing.sm,
+    padding:Spacing.md,
+    borderWidth:1,
+    borderColor:Colors.border,
+    borderRadius:12,
+    backgroundColor:Colors.surface,
+  },
+  selectedPaymentOption:{
+    borderColor:Colors.primary,
+    backgroundColor:Colors.background,
+  },
+  paymentOptionInfo:{
+    flex:1,
+  },
+  paymentOptionName:{
+    fontSize:15,
+    fontWeight:"700",
+    color:Colors.text,
+  },
+  selectedPaymentText:{
+    color:Colors.primary,
+  },
+  paymentOptionType:{
+    marginTop:2,
+    fontSize:11,
+    color:Colors.textLight,
+    textTransform:"capitalize",
+  },
+  paymentRadio:{
+    width:22,
+    height:22,
+    justifyContent:"center",
+    alignItems:"center",
+    borderWidth:2,
+    borderColor:Colors.border,
+    borderRadius:11,
+  },
+  selectedPaymentRadio:{
+    borderColor:Colors.primary,
+  },
+  paymentRadioDot:{
+    width:10,
+    height:10,
+    borderRadius:5,
+    backgroundColor:Colors.primary,
+  },
+  checkoutActions:{
+    flexDirection:"row",
+    gap:Spacing.sm,
+    padding:Spacing.lg,
+    borderTopWidth:1,
+    borderTopColor:Colors.border,
+  },
+  checkoutCancelButton:{
+    minHeight:50,
+    justifyContent:"center",
+    alignItems:"center",
+    paddingHorizontal:Spacing.lg,
+    borderWidth:1,
+    borderColor:"#D32F2F",
+    borderRadius:12,
+  },
+  checkoutCancelText:{
+    fontWeight:"700",
+    color:"#D32F2F",
+  },
+  checkoutConfirmButton:{
+    flex:1,
+    minHeight:50,
+    justifyContent:"center",
+    alignItems:"center",
+    borderRadius:12,
+    backgroundColor:Colors.primary,
+  },
+  checkoutConfirmText:{
+    fontWeight:"700",
+    color:"#fff",
+  },
+  checkoutButtonDisabled:{
+    opacity:.55,
   },
 });

@@ -3,33 +3,38 @@ import { create } from "zustand";
 import { CartItem } from "../types/CartItem";
 
 type CartStore = {
-
   items: CartItem[];
-
   addItem: (item: CartItem) => void;
-
   removeItem: (productId: number) => void;
-
   updateQuantity: (
     productId: number,
     quantity: number
   ) => void;
-
   updatePrice: (
     productId: number,
     price: number
   ) => void;
-
   clearCart: () => void;
-
   totalItems: () => number;
-
   totalPrice: () => number;
-
+  checkoutInProgress:boolean;
+  setCheckoutInProgress:(
+    value:boolean
+  )=>void;
 };
 
 export const useCartStore =
 create<CartStore>((set, get) => ({
+
+  checkoutInProgress:false,
+
+  setCheckoutInProgress(
+    value
+  ){
+    set({
+      checkoutInProgress:value,
+    });
+  },
 
   items: [],
 

@@ -72,6 +72,18 @@ export function createTables() {
     );
 
     ----------------------------------------------------
+    -- PAYMENT METHODS
+    ----------------------------------------------------
+
+    CREATE TABLE IF NOT EXISTS PaymentMethods(
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      name TEXT UNIQUE NOT NULL,
+      type TEXT NOT NULL,
+      enabled INTEGER NOT NULL DEFAULT 1,
+      createdAt TEXT DEFAULT CURRENT_TIMESTAMP
+    );
+
+    ----------------------------------------------------
     -- TRANSACTION ITEMS
     ----------------------------------------------------
 
@@ -173,6 +185,40 @@ export function createTables() {
       ADD COLUMN subcategory TEXT;
     `);
   } catch {
+  }
+
+const paymentMethodCount=
+	database.getFirstSync<{
+		count:number;
+	}>(
+		`
+		SELECT COUNT(*)AS count
+		FROM PaymentMethods;
+		`
+	)?.count??0;
+
+  if(paymentMethodCount===0){
+    database.withTransactionSync(()=>{
+      const defaults=[
+        ["Cash","cash"],
+        ["Debit Card","card"],
+        ["Credit Card","card"],
+        ["GCash","e-wallet"],
+        ["Maya","e-wallet"],
+        ["Bank Transfer","bank"],
+      ];
+
+      for(const[name,type]of defaults){
+        database.runSync(
+          `
+          INSERT INTO PaymentMethods
+          (name,type,enabled)
+          VALUES(?,?,1);
+          `,
+          [name,type]
+        );
+      }
+    });
   }
 
   const productColumns =

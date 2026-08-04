@@ -18,10 +18,17 @@ import {
   Typography,
 } from "../../theme";
 
-export default function StoreSelectionScreen({ navigation }: any) {
+export default function StoreSelectionScreen({ navigation, route }: any) {
   const [search, setSearch] = useState("");
-  const [selectedStore, setSelectedStore] = useState<Store | null>(null);
-  const { setSelectedStore: saveSelectedStore } = useStoreStore();
+  const{
+    selectedStore:activeStore,
+    setSelectedStore:saveSelectedStore,
+  }=useStoreStore();
+
+  const[selectedStore,setSelectedStore]=
+    useState<Store|null>(
+      activeStore
+    );
 
   const filteredStores = useMemo(() => {
     const keyword = search.trim().toLowerCase();
@@ -66,13 +73,24 @@ export default function StoreSelectionScreen({ navigation }: any) {
           </Text>
 
           <PrimaryButton
-            title="Start Shopping"
-            onPress={() => {
-              if (!selectedStore) return;
+            title={
+              route.params?.returnToHome
+                ?"Change Store"
+                :"Start Shopping"
+            }
+            onPress={()=>{
+              if(!selectedStore)return;
 
               saveSelectedStore(selectedStore);
 
-              navigation.replace("MainDrawer");
+              if(route.params?.returnToHome){
+                navigation.goBack();
+                return;
+              }
+
+              navigation.replace(
+                "MainDrawer"
+              );
             }}
           />
         </View>

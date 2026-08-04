@@ -9,12 +9,14 @@ import HistoryScreen from "../screens/History/HistoryScreen";
 import AnalyticsScreen from "../screens/Analytics/AnalyticsScreen";
 import SettingsScreen from "../screens/Settings/SettingsScreen";
 import StoresScreen from "../screens/Stores";
+import PaymentMethodsScreen from "../screens/PaymentMethods";
 
 export type DrawerParamList = {
   Home: undefined;
   Products: undefined;
   "Shopping List": undefined;
   Stores: undefined;
+  "Payment Methods":undefined;
   History: undefined;
   Analytics: undefined;
   Settings: undefined;
@@ -48,6 +50,11 @@ export default function MainDrawer() {
       <Drawer.Screen
         name="Stores"
         component={StoresScreen}
+      />
+
+      <Drawer.Screen
+        name="Payment Methods"
+        component={PaymentMethodsScreen}
       />
 
       <Drawer.Screen

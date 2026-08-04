@@ -32,7 +32,7 @@ export const STORE_LOGOS: Record<
     "../assets/images/stores/handyman.png"
   ),
 
-  DIY: require(
+  "MR. D.I.Y.": require(
     "../assets/images/stores/DIY.jpg"
   ),
 
